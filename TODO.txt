@@ -1,0 +1,9 @@
+TODO
+==================================================
+- How are the downloading from/to and seeding to numbers calculated? (peers_from, peers_downloading, peers_uploading, peers_total)
+- Fix up <UL> scrolling - seems to be a little wacky on different browsers.
+- Last change seems to have broken Safari - figure out why.
+- Multi-GB torrents can have greater than 2147483647 bytes, making them hit 100% early.
+
+DONE
+==================================================

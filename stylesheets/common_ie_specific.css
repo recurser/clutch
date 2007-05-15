@@ -1,0 +1,16 @@
+
+
+
+div.torrent_global_menu ul li#open a,
+div.torrent_global_menu ul li#remove a,
+div.torrent_global_menu ul li#pause_all a,
+div.torrent_global_menu ul li#resume_all a,
+div.torrent_global_menu ul li#filter a,
+div.torrent_global_menu ul li#inspector a {
+	behavior: url(iepngfix.htc);
+	
+	}
+	
+img, a {
+	behavior: url(iepngfix.htc);
+	}

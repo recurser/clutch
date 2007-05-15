@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>Transmission</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="cache-control" content="Private" />
+	<link href="./images/favicon.ico" rel="SHORTCUT ICON" />
+	<link rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
+	<!--[if lt IE 7]>
+	<link rel="stylesheet" type="text/css" href="./stylesheets/common_ie_specific.css"/>
+	<![endif]-->
+	<script type="text/javascript" src="./javascript/scriptaculous/prototype.js"></script>
+	<script type="text/javascript" src="./javascript/scriptaculous/scriptaculous.js?load=effects,dragdrop"></script>
+	<script type="text/javascript" src="./javascript/extended_insertion.js"></script>
+	<script type="text/javascript" src="./javascript/common.js"></script>
+	<script type="text/javascript" src="./javascript/transmission.js"></script>
+	<script type="text/javascript" src="./javascript/torrent.js"></script>
+</head>
+
+<body>
+
+<div class="torrent_global_menu">
+     <ul>    
+         <li id="open"><a href="#open">Open</a></li>
+         <li id="remove"><a href="#remove">Remove</a></li>
+         <li id="divider">&nbsp;</li>
+         <li id="pause_all"><a href="#pause_all">Pause All</a></li>
+         <li id="resume_all"><a href="#resume_all">Resume All</a></li>
+         <li id="inspector"><a href="#inspector">Inspector</a></li>
+         <li id="filter"><a href="#filter">Filter</a></li>
+     </ul>
+</div>
+
+<div class="torrent_global_details">
+	<div class="torrent_global_transfer">5/5 Transfers</div>
+	<div class="torrent_global_upload">Total UL: 126.9 KB/s</div>
+	<div class="torrent_global_download">Total DL: 194 KB/s</div>
+</div>
+
+<div class="torrent_filter_bar">
+	<a href="#all">All</a>
+	<a href="#downloading" class="active">Downloading</a>
+	<a href="#seeding">Seeding</a>
+	<a href="#paused">Paused</a>
+	<input type="search" placeholder="Filter" class="torrent_search" />
+
+</div>
+		
+<ul class="torrent_container" id="torrent_container"></ul>
+
+<div class="torrent_footer">
+	<a href="#global_settings" id="global_settings">
+		<img src="images/graphics/footer_action_button.png" alt="Adjust global settings." />
+	</a>
+	<a href="#speed_limit" id="speed_limit">
+		<img src="images/graphics/footer_speed_limit_button.png" alt="Speed limit overrides the total bandwidth limits with it's own limits." />
+	</a>
+</div>
+
+</body>
+</html>
