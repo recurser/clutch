@@ -71,7 +71,7 @@
 		private function _decode_int()
 		{
 			$pos_e  = strpos($this->_source, 'e', $this->_position);
-			$return = intval(substr($this->_source, $this->_position, $pos_e - $this->_position));
+			$return = floatval(substr($this->_source, $this->_position, $pos_e - $this->_position));
 			$this->_position = $pos_e + 1;
 			return $return;
 		}
