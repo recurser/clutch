@@ -67,10 +67,10 @@ Math.formatSeconds = function(seconds) {
  * Round a float to a specified number of decimal 
  * places, stripping trailing zeroes
  */
-Math.roundWithPrecision = function(float, precision) {
+Math.roundWithPrecision = function(floatnum, precision) {
     
     // Round float to desired precision and
-    var result = float.toFixed(precision).toString();
+    var result = floatnum.toFixed(precision).toString();
     
     // Strip trailing zeros
     var last_char = result.substr(result.length-1, 1);
