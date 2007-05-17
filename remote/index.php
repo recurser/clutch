@@ -11,62 +11,43 @@ $TControl = new TransmissionController('/Users/dave/Library/Application Support/
 $MControl = new MessageController($TControl);
 $Instance = new BigBlueHouse($MControl);
 
-if (isset($_GET['action'])) :
+if (isset($_GET['action']) && isset($_GET['param'])) 
+{
 	
 	$function = '';
 	$arg_list = '';
 	
-	switch($_GET['action']) :
+	switch($_GET['action']) 
+	{
 	
 		case 'getTorrentList' :
 			$function = 'addTorrents';
-			$arg_list = getTorrentList();
+			$arg_list = $Instance->getTorrentData();
+			break;
+
+		case 'reloadTorrents' :
+			$function = 'refreshTorrents';
+			$arg_list = $Instance->getTorrentData();
+			break;
+
+		case 'pauseTorrents' :
+			$function = 'refreshTorrents';
+			$arg_list = $Instance->pauseTorrents($_GET['param']);
+			break;
+
+		case 'resumeTorrents' :
+			$function = 'refreshTorrents';
+			$arg_list = $Instance->resumeTorrents($_GET['param']);
 			break;
 	
-	endswitch;
+	}
 
 	// Set the mime type (causes prototype to auto-eval())
 	header('Content-type: text/javascript');
 
 	// Encode and output the response
-	$json = new Services_JSON();
-	echo 'transmission.' . $function . '(' . $json->encode($arg_list) . ');';
+	echo 'transmission.' . $function . '(' . $arg_list . ');';
 
-
-endif;
-
-
-
-
-function getTorrentList() {
-	global $Instance;
-	$result = array();
-	
-	$torrent_list_data = $Instance->M->GetInfoAll('id', 'name', 'hash', 'date', 'size');
-
-	foreach ($torrent_list_data[1] as $torrent) :
-		$result[$torrent['id']] = array();
-		foreach ($torrent as $key => $value) :
-			$key = str_replace('-', '_', $key);
-			$result[$torrent['id']][$key] = $value;
-		endforeach;
-	endforeach;
-	
-	$torrent_status_data = $Instance->M->GetStatusAll(
-		'id', 'completed', 'download-total', 'upload-total', 
-		'download-speed', 'upload-speed', 'peers-downloading', 
-		'peers-from', 'peers-total', 'peers-uploading', 'error', 
-		'error-message', 'eta', 'running', 'state');
-
-	foreach ($torrent_status_data[1] as $torrent) :
-		foreach ($torrent as $key => $value) :
-			$key = str_replace('-', '_', $key);
-			$result[$torrent['id']][$key] = $value;
-		endforeach;
-	endforeach;
-	
-	// Not interested in the keys anymore - only needed them for mapping
-	return array_values($result);
 }
 
 

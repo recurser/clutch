@@ -229,7 +229,7 @@ ul.torrent_container li {
 	
 ul.torrent_container li.torrent {
 	border-top: 1px solid #ccc;
-	padding: 3px 35px 3px 10px; /* Make space for buttons on the right */
+	padding: 3px 16px 3px 10px; /* Make space for buttons on the right */
 	margin: 0;	
 	}
 
@@ -293,7 +293,7 @@ ul.torrent_container li.torrent div.torrent_progress_bar {
 ul.torrent_container li.torrent a {
 	float: right;
 	position: relative;
-	right: -31px;
+	right: -12px;
 	top: -16px;
 	padding: 0 2px 0 2px;
 	}

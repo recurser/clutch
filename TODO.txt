@@ -1,9 +1,15 @@
 TODO
 ==================================================
-- How are the downloading from/to and seeding to numbers calculated? (peers_from, peers_downloading, peers_uploading, peers_total)
-- Fix up <UL> scrolling - seems to be a little wacky on different browsers.
-- Last change seems to have broken Safari - figure out why.
-- Multi-GB torrents can have greater than 2147483647 bytes, making them hit 100% early.
+- How are the downloading from/to and seeding to numbers calculated? (peers_from, peers_downloading, peers_uploading, peers_total) Is the way it's being displayed at the moment correct?
+- Fix up <UL> scrolling - seems to be a little wacky on different browsers. Ideally only have a scrollbar for the <ul>.
+- Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
+- Figure out a way to convert an array into something that can be accepted by func_get_args(), as this is used all over the place. Passing an array seems to result in just one argument (the array) instead of lots (the strings in the array). Tried using a combo of eval & implode but doesn't seem to work.
+- Pausing torrents works ok but resuming seems to timeout, comes back eventually with the message 'This program has encountered an error and will now exit.'. The torrent gets restarted almost straight away so it's working at some level.
+- Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
+- The per-torrent reveal-in-finder button doesn't make much sense in a browser - should this be dropped or changed to something else (maybe a torrent details button?). Would be good to try & keep the interface buttons consistent between the desktop & web if at all possible.
+
 
 DONE
 ==================================================
+- Last change seems to have broken Safari - figure out why (gimp - float is a reserved word)
+- Multi-GB torrents can have greater than 2147483647 bytes, making them hit 100% early (gimp - changed from int to float).

@@ -11,12 +11,14 @@
 	require_once('IPCProtocol.class.php');
 	require_once('MessageController.class.php');
 	require_once('TransmissionController.class.php');
+	require_once('JSON.php');
 
 	class BigBlueHouse
 	{
 		public $Torrents;
 		public $M;
 		private $LastError;
+		private $json;
 
 		public function __construct($MessageController = null)
 		{
@@ -24,6 +26,8 @@
 				$this->M = $MessageController;
 			else
 				$M = new MessageController(new TransmissionController);
+				
+			$this->json = new Services_JSON();
 		}
 
 		private function Error($ErrorString)
@@ -112,6 +116,124 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				else
 					return $this->M->AddFileDetailed($_FILES[$formname]['tmp_name'], $directory, $autostart);
 			}
+		}
+
+		/* public function resumeTorrents([(string) $json_array])
+		 * Starts a list of torrents, and returns an JSON array of torrent data
+		 * Ex. resumeTorrents([1,2,3])
+		 *
+		 * @access public
+		 * @param string $json_array Array of torrent IDs to start
+		 * @return string $result Array of torrent data after they've started
+		 */
+		public function resumeTorrents($json_array = "[]")
+		{
+			$torrent_id_list =  $this->json->decode($json_array);
+			
+			// TODO - shouldn't pass these one at a time - need to figure out
+			// how to convert an array into something that can be read by 
+			// func_get_args() as more than 1 argument (an array). This
+			// can also be used to streamline the getTorrentData() function.
+			// Tried using a combo of eval & implode but doesn't seem to work.
+			foreach ($torrent_id_list as $torrent_id) {
+				$this->M->StartTorrents($torrent_id);
+			}
+			
+			return $this->getTorrentData($torrent_id_list);
+		}
+
+		/* public function pauseTorrents([(string) $json_array])
+		 * Pauses a list of torrents, and returns an JSON array of torrent data
+		 * Ex. pauseTorrents([1,2,3])
+		 *
+		 * @access public
+		 * @param string $json_array Array of torrent IDs to pause
+		 * @return string $result Array of torrent data after the pause
+		 */
+		public function pauseTorrents($json_array = "[]")
+		{
+			$torrent_id_list =  $this->json->decode($json_array);
+			
+			// TODO - shouldn't pass these one at a time - need to figure out
+			// how to convert an array into something that can be read by 
+			// func_get_args() as more than 1 argument (an array). This
+			// can also be used to streamline the getTorrentData() function.
+			// Tried using a combo of eval & implode but doesn't seem to work.
+			foreach ($torrent_id_list as $torrent_id) {
+				$this->M->StopTorrents($torrent_id);
+			}
+			
+			return $this->getTorrentData($torrent_id_list);
+		}
+
+		/* 	public function getTorrentData([(array)$id_list])
+		 * Returns a JSON array of torrent data for the specified torrent-ids
+		 * Ex. getTorrentData(array(1,2,3))
+		 *
+		 * @access public
+		 * @param array $id_list Array of torrent IDs to get data about
+		 * @return string $result JSON array of torrent data
+		 */
+		public function getTorrentData($id_list = array())
+		{
+			$torrent_list_data = array();
+			$torrent_status_data = array();
+			
+			// If no ids are specified, return data for all torrents
+			if (count($id_list) == 0) {
+				//$torrent_list_data = $this->M->GetInfoAll('id', 'name', 'hash', 'date', 'size');
+				$torrent_list_data = $this->M->GetInfoAll('id', 'name', 'hash', 'date', 'size');
+				$torrent_status_data = $this->M->GetStatusAll(
+					'id', 'completed', 'download-total', 'upload-total', 
+					'download-speed', 'upload-speed', 'peers-downloading', 
+					'peers-from', 'peers-total', 'peers-uploading', 'error', 
+					'error-message', 'eta', 'running', 'state');				
+			
+			// Otherwise, only get data for the specified torrents	
+			} else {
+				$torrent_list_data = $this->M->GetInfo($id_list, array('id', 'name', 'hash', 'date', 'size'));
+				$torrent_status_data = $this->M->GetStatus($id_list, array(
+					'id', 'completed', 'download-total', 'upload-total', 
+					'download-speed', 'upload-speed', 'peers-downloading', 
+					'peers-from', 'peers-total', 'peers-uploading', 'error', 
+					'error-message', 'eta', 'running', 'state'));				
+			}
+			
+			$result = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);
+			
+			return $this->json->encode($result);
+		}
+
+		/* 	private function mergeTorrentData((array) $torrent_list_data, (array) $torrent_status_data)
+		 * Merge the contents of the torrent data and status arrays by torrent-id into a single array
+		 * Ex. getTorrentData(array(1,2,3))
+		 *
+		 * @access private
+		 * @param array $torrent_list_data Array of basic torrent data
+		 * @param array $torrent_status_data Array of torrent status data
+		 * @return array $result merged torrent data
+		 */
+		private function mergeTorrentData($torrent_list_data, $torrent_status_data) 
+		{
+			$result = array();
+	
+			foreach ($torrent_list_data[1] as $torrent) :
+				$result[$torrent['id']] = array();
+				foreach ($torrent as $key => $value) :
+					$key = str_replace('-', '_', $key);
+					$result[$torrent['id']][$key] = $value;
+				endforeach;
+			endforeach;
+
+			foreach ($torrent_status_data[1] as $torrent) :
+				foreach ($torrent as $key => $value) :
+					$key = str_replace('-', '_', $key);
+					$result[$torrent['id']][$key] = $value;
+				endforeach;
+			endforeach;
+	
+			// Not interested in the keys anymore - only needed them for mapping
+			return array_values($result);
 		}
 	}
 ?>

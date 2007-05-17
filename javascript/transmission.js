@@ -13,6 +13,13 @@ Transmission.prototype = {
      * Constructor
      */
     initialize: function() {
+    
+		/*
+		 * Private Constants
+		 */
+		var _RefreshInterval;
+		this._RefreshInterval = 5;
+		
         /*
          * Private Variables
          */
@@ -21,13 +28,16 @@ Transmission.prototype = {
         var _highest_selected;
         var _lowest_selected;
         
-        this._torrent_list = [];
+        this._torrent_list = new Hash({});
         
         // Get the initial list of torrents from the remote app
         this.getTorrentList();
         
         // Observe key presses
         document.addEventListener("keydown",this.keyDown.bindAsEventListener(this),false);
+
+		// Create a periodical executer to refresh the list
+		new PeriodicalExecuter(this.reloadTorrents, this._RefreshInterval);
     },
     
 
@@ -127,14 +137,14 @@ Transmission.prototype = {
      * Select all torrents in the list
      */
     selectAll: function() {
-        this._torrent_list.invoke('select');
+        this._torrent_list.values().invoke('select');
     },
     
     /*
      * De-select all torrents in the list
      */
     deselectAll: function() {
-        this._torrent_list.invoke('deselect');
+        this._torrent_list.values().invoke('deselect');
         
         // reset the highest and lowest selected
         this._highest_selected = null;
@@ -200,9 +210,21 @@ Transmission.prototype = {
             }
             
             // Add to the collection
-            this._torrent_list.push(torrent);
+            this._torrent_list[torrent_data.id] = torrent;
             
             previous_torrent = torrent;
+        }
+    },
+    
+    /*
+     * Load a list of torrents into the application
+     */
+    refreshTorrents: function(torrent_list) {
+        var torrent_data;
+        
+        for (i=0; i<torrent_list.length; i++) {
+            torrent_data = torrent_list[i];
+			this._torrent_list[torrent_data.id].refresh(torrent_data);
         }
     },
 
@@ -217,7 +239,10 @@ Transmission.prototype = {
      * Perform a generic remote request
      */
     remoteRequest: function(action, param) {
-        new Ajax.Request('remote/?action=' + action, {method: 'get'	});
+		if (param == null) {
+			param = '[]';
+		}
+        new Ajax.Request('remote/?action=' + action + '&param=' + param, {method: 'get'	});
     },
     
     /*
@@ -225,7 +250,16 @@ Transmission.prototype = {
      */
     getTorrentList: function() {
         this.remoteRequest('getTorrentList');	
+    },
+    
+    /*
+     * Refrsh the torrent data
+     */
+    reloadTorrents: function() {
+        transmission.remoteRequest('reloadTorrents');	
     }
+
+
 
 }
 
