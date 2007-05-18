@@ -392,11 +392,13 @@
 		 */
 		public function StartTorrents()
 		{
+			$Torrents = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args();
+		
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('start', func_get_args())
+					array('start', $Torrents)
 				),
-				true
+				false
 			);
 
 		}
@@ -422,9 +424,11 @@
 		 */
 		public function StopTorrents()
 		{
+			$Torrents = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args();
+	
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('stop', func_get_args())
+					array('stop', $Torrents)
 				),
 				false
 			);

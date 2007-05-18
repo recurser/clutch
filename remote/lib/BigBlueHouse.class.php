@@ -130,14 +130,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 			
-			// TODO - shouldn't pass these one at a time - need to figure out
-			// how to convert an array into something that can be read by 
-			// func_get_args() as more than 1 argument (an array). This
-			// can also be used to streamline the getTorrentData() function.
-			// Tried using a combo of eval & implode but doesn't seem to work.
-			foreach ($torrent_id_list as $torrent_id) {
-				$this->M->StartTorrents($torrent_id);
-			}
+			$this->M->StartTorrents($torrent_id_list);
 			
 			return $this->getTorrentData($torrent_id_list);
 		}
@@ -154,14 +147,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 			
-			// TODO - shouldn't pass these one at a time - need to figure out
-			// how to convert an array into something that can be read by 
-			// func_get_args() as more than 1 argument (an array). This
-			// can also be used to streamline the getTorrentData() function.
-			// Tried using a combo of eval & implode but doesn't seem to work.
-			foreach ($torrent_id_list as $torrent_id) {
-				$this->M->StopTorrents($torrent_id);
-			}
+			$this->M->StopTorrents($torrent_id_list);
 			
 			return $this->getTorrentData($torrent_id_list);
 		}
