@@ -1,5 +1,5 @@
 /*
- *	Copyright © Malcolm Jarvis and Kendall Hopkins
+ *	Copyright © Dave Perrett and Malcolm Jarvis
  *	This code is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license.
  *	For more details, see http://creativecommons.org/licenses/by-nc-sa/3.0/
  *
@@ -34,7 +34,14 @@ Transmission.prototype = {
         this.getTorrentList();
         
         // Observe key presses
-        document.addEventListener("keydown",this.keyDown.bindAsEventListener(this),false);
+        document.addEventListener("keydown", this.keyDown.bindAsEventListener(this),false);
+
+		// Buttons
+		Event.observe($('pause_all'), 'mousedown', this.click_pause_all_button.bindAsEventListener(this));
+		Event.observe($('pause_all'), 'mouseup', this.release_pause_all_button.bindAsEventListener(this));
+		Event.observe($('resume_all'), 'mousedown', this.click_resume_all_button.bindAsEventListener(this));
+		Event.observe($('resume_all'), 'mouseup', this.release_resume_all_button.bindAsEventListener(this));
+		
 
 		// Create a periodical executer to refresh the list
 		new PeriodicalExecuter(this.reloadTorrents, this._RefreshInterval);
@@ -124,6 +131,56 @@ Transmission.prototype = {
             this._last_torrent_clicked = selected_torrent;
         }
     },
+
+	/*
+	 * Process a mouse-down event on the 'pause all' button
+	// TODO : need mousedown images for this
+	 */
+	click_pause_all_button: function(event) {
+
+		Event.stop(event);
+			
+		//$('pause_all').src = 'images/buttons/pause_all_on.png';
+	},
+
+	/*
+	 * Process a mouse-up event on the 'pause all' button
+	 */
+	release_pause_all_button: function(event) {
+
+		Event.stop(event);
+			
+		//$('pause_all').src = 'images/buttons/pause_all_off.png';
+		
+		// Send an ajax request to perform the action
+		this.remoteRequest('pauseTorrents');
+	},
+
+	/*
+	 * Process a mouse-down event on the 'resume all' button
+	// TODO : need mousedown images for this
+	 */
+	click_resume_all_button: function(event) {
+
+		Event.stop(event);
+			
+		//$('resume_all').src = 'images/buttons/resume_all_on.png';
+	},
+
+	/*
+	 * Process a mouse-up event on the 'resume all' button
+	 */
+	release_resume_all_button: function(event) {
+
+		Event.stop(event);
+			
+		//$('resume_all').src = 'images/buttons/resume_all_off.png';
+		
+		// Send an ajax request to perform the action
+		this.remoteRequest('resumeTorrents');
+	},
+
+
 
 
 

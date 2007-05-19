@@ -1,5 +1,5 @@
 /*
- *	Copyright © Malcolm Jarvis and Kendall Hopkins
+ *	Copyright © Dave Perrett and Malcolm Jarvis
  *	This code is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license.
  *	For more details, see http://creativecommons.org/licenses/by-nc-sa/3.0/
  *
@@ -87,7 +87,6 @@ Torrent.prototype = {
 		this._progress_details_container = document.createElement('div');
 		Element.extend(this._progress_details_container);
 		this._progress_details_container.addClassName('torrent_progress_details');
-		this._progress_details_container.innerHTML= '&nbsp;'; // need this to push the rest down
 		element.appendChild(this._progress_details_container);
 			
 		// Create the 'in progress' bar
@@ -122,7 +121,6 @@ Torrent.prototype = {
 		this._peer_details_container = document.createElement('div');
 		Element.extend(this._peer_details_container);
 		this._peer_details_container.addClassName('torrent_peer_details');
-		this._peer_details_container.innerHTML= '&nbsp;'; // need this to push the rest down
 		element.appendChild(this._peer_details_container);
 			
 		// Set the torrent click observer
@@ -207,7 +205,7 @@ Torrent.prototype = {
 	},
 	
 	/*
-	 * Set the position of this torrent in the list
+	 * Return the state of this torrent
 	 */
 	isActive: function() {
 		return !(!this._running || this._state == this._StatusStopping || this._state == this._StatusPaused);
@@ -360,7 +358,7 @@ Torrent.prototype = {
 			this._progress_complete_container.addClassName(class_name);
 			this._progress_complete_container.style.width = int_percent_complete + '%';
 			
-			// Update the 'in progress' bar
+			// Update the 'incomplete' bar
 			if (! this._progress_incomplete_container.hasClassName('incomplete')) {
 				this._progress_incomplete_container.className = 'torrent_progress_bar';
 				this._progress_incomplete_container.addClassName('in_progress');

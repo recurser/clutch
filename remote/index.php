@@ -1,7 +1,7 @@
 <?php
 
 /*
- *	Copyright © Malcolm Jarvis and Kendall Hopkins
+ *	Copyright © Dave Perrett and Malcolm Jarvis
  *	This code is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license.
  *	For more details, see http://creativecommons.org/licenses/by-nc-sa/3.0/
  */

@@ -1,16 +1,18 @@
 TODO
 ==================================================
-- How are the downloading from/to and seeding to numbers calculated? (peers_from, peers_downloading, peers_uploading, peers_total) Is the way it's being displayed at the moment correct?
 - Fix up <UL> scrolling - seems to be a little wacky on different browsers. Ideally only have a scrollbar for the <ul>.
 - Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
-- The per-torrent reveal-in-finder button doesn't make much sense in a browser - should this be dropped or changed to something else (maybe a torrent details button?). Would be good to try & keep the interface buttons consistent between the desktop & web if at all possible.
 - Arrow-Key still doesnt't work 100% - click an element near the bottom and then apple-click the first torrent in the list and press up. Same for the down key.
 - Is there a set 'remaining time unknown' time in transmission? currently set to 999 hours with jscript.
+- sqlite db for prefs - refresh frequency, user login details etc.
+- OnClick image change for all buttons
 
 
 DONE
 ==================================================
+- The per-torrent reveal-in-finder button doesn't make much sense in a browser - should this be dropped or changed to something else (maybe a torrent details button?). Would be good to try & keep the interface buttons consistent between the desktop & web if at all possible. (Just the pause/resume button for now)
+- How are the downloading from/to and seeding to numbers calculated? (peers_from, peers_downloading, peers_uploading, peers_total) Is the way it's being displayed at the moment correct? (Looks OK)
 - Last change seems to have broken Safari - figure out why (gimp - float is a reserved word)
 - Multi-GB torrents can have greater than 2147483647 bytes, making them hit 100% early (gimp - changed from int to float).
 - Figure out a way to convert an array into something that can be accepted by func_get_args(), as this is used all over the place. Passing an array seems to result in just one argument (the array) instead of lots (the strings in the array). Tried using a combo of eval & implode but doesn't seem to work. (gimp - fixed messageclass to accept an array argument instead of list)

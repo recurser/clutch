@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	 *	Copyright © Malcolm Jarvis and Kendall Hopkins
+	 *	Copyright © Malcolm Jarvis and Dave Perrett
 	 *	This code is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license.
 	 *	For more details, see http://creativecommons.org/licenses/by-nc-sa/3.0/
 	 */
@@ -130,7 +130,11 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 			
-			$this->M->StartTorrents($torrent_id_list);
+			if (count($torrent_id_list) == 0) {
+				$this->M->StartAllTorrents();
+			} else {
+				$this->M->StartTorrents($torrent_id_list);
+			}
 			
 			return $this->getTorrentData($torrent_id_list);
 		}
@@ -147,7 +151,11 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 			
-			$this->M->StopTorrents($torrent_id_list);
+			if (count($torrent_id_list) == 0) {
+				$this->M->StopAllTorrents();
+			} else {
+				$this->M->StopTorrents($torrent_id_list);
+			}
 			
 			return $this->getTorrentData($torrent_id_list);
 		}
@@ -167,7 +175,6 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			
 			// If no ids are specified, return data for all torrents
 			if (count($id_list) == 0) {
-				//$torrent_list_data = $this->M->GetInfoAll('id', 'name', 'hash', 'date', 'size');
 				$torrent_list_data = $this->M->GetInfoAll('id', 'name', 'hash', 'date', 'size');
 				$torrent_status_data = $this->M->GetStatusAll(
 					'id', 'completed', 'download-total', 'upload-total', 
