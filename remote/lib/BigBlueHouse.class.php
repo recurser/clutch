@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	 *	Copyright © Malcolm Jarvis and Dave Perrett
+	 *	Copyright © Malcolm Jarvis, Dave Perrett and Kendall Hopkins
 	 *	This code is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license.
 	 *	For more details, see http://creativecommons.org/licenses/by-nc-sa/3.0/
 	 */
@@ -26,7 +26,7 @@
 				$this->M = $MessageController;
 			else
 				$M = new MessageController(new TransmissionController);
-				
+
 			$this->json = new Services_JSON();
 		}
 
@@ -53,7 +53,7 @@
 			foreach ($Torrents as $TorrentID => $TorrentInfo)
 				foreach (array_keys($Torrents[$TorrentID]) as $TorrentKey)
 					${$TorrentKey}[$TorrentID] = $TorrentInfo[$TorrentKey];
-	
+
 			array_multisort($$SortMethod, $SortOrder, $Torrents);
 		}
 
@@ -129,13 +129,12 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		public function resumeTorrents($json_array = "[]")
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
-			
-			if (count($torrent_id_list) == 0) {
+
+			if (count($torrent_id_list) == 0)
 				$this->M->StartAllTorrents();
-			} else {
+			else
 				$this->M->StartTorrents($torrent_id_list);
-			}
-			
+
 			return $this->getTorrentData($torrent_id_list);
 		}
 
@@ -150,13 +149,12 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		public function pauseTorrents($json_array = "[]")
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
-			
-			if (count($torrent_id_list) == 0) {
+
+			if (count($torrent_id_list) == 0)
 				$this->M->StopAllTorrents();
-			} else {
+			else
 				$this->M->StopTorrents($torrent_id_list);
-			}
-			
+
 			return $this->getTorrentData($torrent_id_list);
 		}
 
@@ -172,7 +170,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		{
 			$torrent_list_data = array();
 			$torrent_status_data = array();
-			
+
 			// If no ids are specified, return data for all torrents
 			if (count($id_list) == 0) {
 				$torrent_list_data = $this->M->GetInfoAll('id', 'name', 'hash', 'date', 'size');
@@ -181,9 +179,11 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 					'download-speed', 'upload-speed', 'peers-downloading', 
 					'peers-from', 'peers-total', 'peers-uploading', 'error', 
 					'error-message', 'eta', 'running', 'state');				
-			
+
 			// Otherwise, only get data for the specified torrents	
-			} else {
+			}
+			else
+			{
 				$torrent_list_data = $this->M->GetInfo($id_list, array('id', 'name', 'hash', 'date', 'size'));
 				$torrent_status_data = $this->M->GetStatus($id_list, array(
 					'id', 'completed', 'download-total', 'upload-total', 
@@ -191,9 +191,9 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 					'peers-from', 'peers-total', 'peers-uploading', 'error', 
 					'error-message', 'eta', 'running', 'state'));				
 			}
-			
+
 			$result = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);
-			
+
 			return $this->json->encode($result);
 		}
 
@@ -209,7 +209,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		private function mergeTorrentData($torrent_list_data, $torrent_status_data) 
 		{
 			$result = array();
-	
+
 			foreach ($torrent_list_data[1] as $torrent) :
 				$result[$torrent['id']] = array();
 				foreach ($torrent as $key => $value) :
@@ -224,7 +224,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 					$result[$torrent['id']][$key] = $value;
 				endforeach;
 			endforeach;
-	
+
 			// Not interested in the keys anymore - only needed them for mapping
 			return array_values($result);
 		}
