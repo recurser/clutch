@@ -206,15 +206,23 @@ div.torrent_filter_bar input.torrent_search {
  * T O R R E N T   C O N T A I N E R
  *
  *--------------------------------------*/
+div.torrent_container {
+	position: fixed;
+	top: 123px;
+	bottom: 22px;
+	overflow: auto;
+	padding: 0px;
+	margin: 0px;
+	overflow: auto; 
+	width: 100%;
+}
+
 ul.torrent_container {
 	width: 100%;
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	overflow: auto; 
-	margin-top: 122px; 
-	margin-bottom: -7px;
-	}
+}
 
 ul.torrent_container li {
 	list-style-type: none;
@@ -288,8 +296,9 @@ ul.torrent_container li.torrent div.torrent_progress_bar {
 	float:left;
 	line-height: 1px;
 	font-size:1px;
+	width: 100%;
 	}	
-	
+
 ul.torrent_container li.torrent a {
 	float: right;
 	position: relative;
