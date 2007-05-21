@@ -8,6 +8,7 @@ TODO
 - sqlite db for prefs - refresh frequency, user login details etc.
 - OnClick image change for all buttons
 
+- Cache'ing system? Like un-changing values, such as a torrents total size, or files.
 
 DONE
 ==================================================
