@@ -14,7 +14,7 @@ html {
 	}
 
 body {
-	font: 62.5% Tahoma, Verdana, Arial, Helvetica, sans-serif; /* Resets 1em to 10px */
+	font: 62.5% "lucida grande", Tahoma, Verdana, Arial, Helvetica, sans-serif; /* Resets 1em to 10px */
 	color: #323232 !important;
 	background: #FFF;
 	text-align: center;
@@ -81,7 +81,6 @@ div.torrent_global_menu ul li#inspector {
 div.torrent_global_menu ul li a {
 	color: #030303;
 	font-size: 1.1em;
-	font-weight: bold;
 	text-decoration: none;
 	padding: 36px 10px 0 10px;
 	display: block;
@@ -137,6 +136,7 @@ div.torrent_global_details {
 	right: 0; 
 	top: 75px; 
 	z-index: 99999;
+	color: #222;
 	}	
 
 div.torrent_global_details div {
@@ -165,16 +165,15 @@ div.torrent_global_details div.torrent_global_upload {
  *
  *--------------------------------------*/
 div.torrent_filter_bar {
-	width:100%;
 	margin: 0;
 	height: 24px;
 	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
 	border-bottom: 1px solid #979797;
 	position: fixed; 
 	left: 0; 
-	right: 0; 
+	right: 300px; 
 	top: 98px; 
-	z-index: 99999;
+	z-index: 10;
 	}
 	
 div.torrent_filter_bar a {
@@ -185,7 +184,7 @@ div.torrent_filter_bar a {
 	text-decoration: none;
 	font-weight: bold;
 	padding: 0 5px 0 10px;
-	margin: 4px 0 0 0;
+	margin: 5px 0 0 0;
 	}
 	
 div.torrent_filter_bar a.active {
@@ -208,13 +207,14 @@ div.torrent_filter_bar input.torrent_search {
  *--------------------------------------*/
 div.torrent_container {
 	position: fixed;
-	top: 123px;
+	top: 122px;
 	bottom: 22px;
+	right: 300px;
+	left: 0px;
 	overflow: auto;
 	padding: 0px;
 	margin: 0px;
-	overflow: auto; 
-	width: 100%;
+	overflow: auto;
 }
 
 ul.torrent_container {
@@ -304,10 +304,28 @@ ul.torrent_container li.torrent a {
 	position: relative;
 	right: -12px;
 	top: -16px;
-	padding: 0 2px 0 2px;
+	padding: 0 0px 0 2px;
 	}
   
   
+/*--------------------------------------
+ *
+ * T O R R E N T   I N S P E C T O R
+ *
+ *--------------------------------------*/
+
+div.torrent_inspector {
+	position: fixed;
+	top: 98px;
+	right: 0px;
+	bottom: 22px;
+	width: 300px;
+	background-color: #ddd;
+	border-left: #aaa 1px solid;
+	z-index: 11;
+	}
+
+
 /*--------------------------------------
  *
  * T O R R E N T   F O O T E R
@@ -326,6 +344,7 @@ ul.torrent_container li.torrent a {
 	left: 0px; 
 	right: 0px;	
 	bottom: -1px; 
+	z-index: 12;
  	}
  
  div.torrent_footer a {
