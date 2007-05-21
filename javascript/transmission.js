@@ -42,6 +42,11 @@ Transmission.prototype = {
 		Event.observe($('resume_all_link'), 'mousedown', this.click_resume_all_button.bindAsEventListener(this));
 		Event.observe($('resume_all_link'), 'mouseup', this.release_resume_all_button.bindAsEventListener(this));
 
+		Event.observe($('pause_selected_link'), 'mousedown', this.click_pause_selected_button.bindAsEventListener(this));
+		Event.observe($('pause_selected_link'), 'mouseup', this.release_pause_selected_button.bindAsEventListener(this));
+		Event.observe($('resume_selected_link'), 'mousedown', this.click_resume_selected_button.bindAsEventListener(this));
+		Event.observe($('resume_selected_link'), 'mouseup', this.release_resume_selected_button.bindAsEventListener(this));
+
 		Event.observe($('open_link'), 'mousedown', this.click_open_button.bindAsEventListener(this));
 		Event.observe($('open_link'), 'mouseup', this.release_open_button.bindAsEventListener(this));
 		Event.observe($('remove_link'), 'mousedown', this.click_remove_button.bindAsEventListener(this));
@@ -187,6 +192,53 @@ Transmission.prototype = {
 		// Send an ajax request to perform the action
 		this.remoteRequest('resumeTorrents');
 	},
+
+	/*
+	 * Process a mouse-down event on the 'pause selected' button
+	 */
+	click_pause_selected_button: function(event) {
+
+		Event.stop(event);
+			
+		document.getElementById('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected_on.png)';
+	},
+
+	/*
+	 * Process a mouse-up event on the 'pause selected' button
+	 */
+	release_pause_selected_button: function(event) {
+
+		Event.stop(event);
+			
+		document.getElementById('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
+		
+		// Send an ajax request to perform the action
+		//this.remoteRequest('pauseTorrents');
+	},
+
+	/*
+	 * Process a mouse-down event on the 'resume selected' button
+	 */
+	click_resume_selected_button: function(event) {
+
+		Event.stop(event);
+
+		document.getElementById('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected_on.png)';
+	},
+
+	/*
+	 * Process a mouse-up event on the 'resume selected' button
+	 */
+	release_resume_selected_button: function(event) {
+
+		Event.stop(event);
+			
+		document.getElementById('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
+		
+		// Send an ajax request to perform the action
+		//this.remoteRequest('resumeTorrents');
+	},
+
 
 	/*
 	 * Process a mouse-down event on the 'open' button

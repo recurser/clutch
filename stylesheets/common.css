@@ -95,6 +95,14 @@ div.torrent_global_menu ul li#remove a {
 	background: transparent url('../images/buttons/remove.png') no-repeat 16px 0px ;
 	}
 
+div.torrent_global_menu ul li#resume_selected a {
+	background: transparent url('../images/buttons/resume_selected.png') no-repeat 19px 0px ;
+	}
+
+div.torrent_global_menu ul li#pause_selected a {
+	background: transparent url('../images/buttons/pause_selected.png') no-repeat 10px 0px ;
+	}
+
 div.torrent_global_menu ul li#pause_all a {
 	background: transparent url('../images/buttons/pause_all.png') no-repeat 19px 0px ;
 	}
