@@ -133,7 +133,7 @@ Torrent.prototype = {
 		}
 		
 		// insert the element
-		$('torrent_container').appendChild(element);
+		$('torrent_list').appendChild(element);
 		
 		// Update all the labels etc
 		this.refresh(data);

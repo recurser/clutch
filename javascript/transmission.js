@@ -326,11 +326,16 @@ Transmission.prototype = {
 		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
 		
 		// Perform the toggle
+		var container_top;
 		if (this._filter_visible) {
-			Effect.BlindUp('torrent_filter_bar');
+			container_top = parseInt($('torrent_container').getStyle('top')) - parseInt($('torrent_filter_bar').getHeight()) + 1;
+			$('torrent_container').style.top = container_top + "px";
+			$('torrent_filter_bar').hide();
 			this._filter_visible = false;
 		} else {
-			Effect.BlindDown('torrent_filter_bar');
+			container_top = parseInt($('torrent_container').getStyle('top')) + parseInt($('torrent_filter_bar').getHeight());
+			$('torrent_container').style.top = container_top + "px";
+			$('torrent_filter_bar').show();
 			this._filter_visible = true;
 		}
 	},
@@ -444,7 +449,6 @@ Transmission.prototype = {
 		$('torrent_global_upload').innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed) + '/s';
 		$('torrent_global_download').innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed) + '/s';
 		$('torrent_global_transfer').innerHTML = torrent_list.length + ' Transfers';
-		console.log(222)
     },
 
 

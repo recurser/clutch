@@ -213,26 +213,25 @@ div#torrent_filter_bar input.torrent_search {
  * T O R R E N T   C O N T A I N E R
  *
  *--------------------------------------*/
-div.torrent_container {
+div#torrent_container {
 	position: fixed;
 	top: 122px;
 	bottom: 22px;
 	right: 300px;
 	left: 0px;
-	overflow: auto;
-	padding: 0px;
+	padding:0px;
 	margin: 0px;
 	overflow: auto;
 }
 
-ul.torrent_container {
+ul.torrent_list {
 	width: 100%;
 	margin: 0;
 	padding: 0;
 	text-align: left;
 }
 
-ul.torrent_container li {
+ul.torrent_list li {
 	list-style-type: none;
 	list-style-image: none;
 	clear: both;
@@ -243,62 +242,62 @@ ul.torrent_container li {
 	-moz-user-select: none;
 	}
 	
-ul.torrent_container li.torrent {
+ul.torrent_list li.torrent {
 	border-top: 1px solid #ccc;
 	padding: 3px 16px 3px 10px; /* Make space for buttons on the right */
 	margin: 0;	
 	}
 
 	
-ul.torrent_container li.torrent.even {
+ul.torrent_list li.torrent.even {
 	background-color: #EDF3FE;
 	}
 
 	
-ul.torrent_container li.torrent.selected {
+ul.torrent_list li.torrent.selected {
 	background-color: #3875D7;
 	color: #FFF;
 	}
 	
-ul.torrent_container li.torrent div.torrent_name {
+ul.torrent_list li.torrent div.torrent_name {
 	font-size: 1.3em;
 	font-weight: bold;
 	}
 	
-ul.torrent_container li.torrent div.torrent_progress_details,
-ul.torrent_container li.torrent div.torrent_peer_details {
+ul.torrent_list li.torrent div.torrent_progress_details,
+ul.torrent_list li.torrent div.torrent_peer_details {
 	font-size: 1.1em;
 	}
 	
-ul.torrent_container li.torrent div.torrent_progress_bar.complete {
+ul.torrent_list li.torrent div.torrent_progress_bar.complete {
 	background: transparent url('../images/progress/complete.png') repeat-x;
 	border: 1px solid #29AD35;
 	}
 	
-ul.torrent_container li.torrent div.torrent_progress_bar.in_progress {
+ul.torrent_list li.torrent div.torrent_progress_bar.in_progress {
 	background: transparent url('../images/progress/in_progress.png') repeat-x;
 	border: 1px solid #3F79EE;
 	border-right: transparent;
 	}
 	
-ul.torrent_container li.torrent div.torrent_progress_bar.incomplete {
+ul.torrent_list li.torrent div.torrent_progress_bar.incomplete {
 	background: transparent url('../images/progress/incomplete.png') repeat-x;
 	border: 1px solid #C8CACD;
 	border-left: transparent;
 	}
 	
-ul.torrent_container li.torrent div.torrent_progress_bar.incomplete_stopped {
+ul.torrent_list li.torrent div.torrent_progress_bar.incomplete_stopped {
 	background: transparent url('../images/progress/incomplete_stopped.png') repeat-x;
 	border: 1px solid #939393;
 	border-right: transparent;
 	}
 	
-ul.torrent_container li.torrent div.torrent_progress_bar.complete_stopped {
+ul.torrent_list li.torrent div.torrent_progress_bar.complete_stopped {
 	background: transparent url('../images/progress/complete_stopped.png') repeat-x;
 	border: 1px solid #939393;
 	}
 	
-ul.torrent_container li.torrent div.torrent_progress_bar {
+ul.torrent_list li.torrent div.torrent_progress_bar {
 	height: 10px;
 	margin: 3px 0 3px 0;
 	float:left;
@@ -307,7 +306,7 @@ ul.torrent_container li.torrent div.torrent_progress_bar {
 	width: 100%;
 	}	
 
-ul.torrent_container li.torrent a {
+ul.torrent_list li.torrent a {
 	float: right;
 	position: relative;
 	right: -12px;
