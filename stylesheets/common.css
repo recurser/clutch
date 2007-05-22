@@ -152,17 +152,17 @@ div.torrent_global_details div {
 	margin: 2px 0 0 0;
 	}	
 
-div.torrent_global_details div.torrent_global_transfer {
+div.torrent_global_details div#torrent_global_transfer {
 	clear: left;
 	float: left;
 	}
 
-div.torrent_global_details div.torrent_global_upload, 
-div.torrent_global_details div.torrent_global_download {
+div.torrent_global_details div#torrent_global_upload, 
+div.torrent_global_details div#torrent_global_download {
 	float: right;
 	}	
 
-div.torrent_global_details div.torrent_global_upload {
+div.torrent_global_details div#torrent_global_upload {
 	background: transparent url('../images/graphics/status_bar_divider.png') no-repeat 0px 2px;
 	}
   
@@ -172,7 +172,7 @@ div.torrent_global_details div.torrent_global_upload {
  * T O R R E N T   F I L T E R   B A R
  *
  *--------------------------------------*/
-div.torrent_filter_bar {
+div#torrent_filter_bar {
 	margin: 0;
 	height: 24px;
 	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
@@ -184,7 +184,7 @@ div.torrent_filter_bar {
 	z-index: 10;
 	}
 	
-div.torrent_filter_bar a {
+div#torrent_filter_bar a {
 	float: left;
 	font-size: 1.2em;
 	/*color: #65789A;*/
@@ -195,11 +195,11 @@ div.torrent_filter_bar a {
 	margin: 5px 0 0 0;
 	}
 	
-div.torrent_filter_bar a.active {
+div#torrent_filter_bar a.active {
 	color: #4E4E4F;
 	}
 	
-div.torrent_filter_bar input.torrent_search {
+div#torrent_filter_bar input.torrent_search {
 	float: right;
 	height: 15px;
 	width: 100px;

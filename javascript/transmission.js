@@ -18,15 +18,17 @@ Transmission.prototype = {
 		 * Private Constants
 		 */
 		var _RefreshInterval;
-		this._RefreshInterval = 5;
+		this._RefreshInterval = 10;
 		
         /*
          * Private Variables
          */
+		var _filter_visible;
         var _torrent_list;
         var _last_torrent_clicked;
         var _highest_selected;
         var _lowest_selected;
+		this._filter_visible = true;
         
         this._torrent_list = new Hash({});
         
@@ -41,6 +43,9 @@ Transmission.prototype = {
 		Event.observe($('pause_all_link'), 'mouseup', this.release_pause_all_button.bindAsEventListener(this));
 		Event.observe($('resume_all_link'), 'mousedown', this.click_resume_all_button.bindAsEventListener(this));
 		Event.observe($('resume_all_link'), 'mouseup', this.release_resume_all_button.bindAsEventListener(this));
+		
+		Event.observe($('filter'), 'mousedown', this.click_filter_button.bindAsEventListener(this));
+		Event.observe($('filter'), 'mouseup', this.release_filter_button.bindAsEventListener(this));
 
 		Event.observe($('pause_selected_link'), 'mousedown', this.click_pause_selected_button.bindAsEventListener(this));
 		Event.observe($('pause_selected_link'), 'mouseup', this.release_pause_selected_button.bindAsEventListener(this));
@@ -154,7 +159,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 			
-		document.getElementById('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all_on.png)';
+		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all_on.png)';
 	},
 
 	/*
@@ -164,7 +169,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 			
-		document.getElementById('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';
+		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';
 		
 		// Send an ajax request to perform the action
 		this.remoteRequest('pauseTorrents');
@@ -177,7 +182,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 
-		document.getElementById('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all_on.png)';
+		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all_on.png)';
 	},
 
 	/*
@@ -187,7 +192,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 			
-		document.getElementById('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';
+		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';
 		
 		// Send an ajax request to perform the action
 		this.remoteRequest('resumeTorrents');
@@ -200,7 +205,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 			
-		document.getElementById('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected_on.png)';
+		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected_on.png)';
 	},
 
 	/*
@@ -210,7 +215,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 			
-		document.getElementById('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
+		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
 		
 		// Send an ajax request to perform the action
 		//this.remoteRequest('pauseTorrents');
@@ -223,7 +228,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 
-		document.getElementById('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected_on.png)';
+		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected_on.png)';
 	},
 
 	/*
@@ -233,7 +238,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 			
-		document.getElementById('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
+		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
 		
 		// Send an ajax request to perform the action
 		//this.remoteRequest('resumeTorrents');
@@ -247,7 +252,7 @@ Transmission.prototype = {
 	
 		Event.stop(event);
 
-		document.getElementById('open_link').style.backgroundImage = 'url(images/buttons/open_on.png)';	
+		$('open_link').style.backgroundImage = 'url(images/buttons/open_on.png)';	
 	},
 
 	/*
@@ -257,7 +262,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 		
-		document.getElementById('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
+		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
 	},
 
 
@@ -268,7 +273,7 @@ Transmission.prototype = {
 	
 		Event.stop(event);
 
-		document.getElementById('remove_link').style.backgroundImage = 'url(images/buttons/remove_on.png)';	
+		$('remove_link').style.backgroundImage = 'url(images/buttons/remove_on.png)';	
 	},
 
 	/*
@@ -278,27 +283,7 @@ Transmission.prototype = {
 
 		Event.stop(event);
 		
-		document.getElementById('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
-	},
-
-	/*
-	 * Process a mouse-down event on the 'filter' button
-	 */
-	click_filter_button: function(event) {
-
-		Event.stop(event);
-
-		document.getElementById('filter_link').style.backgroundImage = 'url(images/buttons/filter_on.png)';	
-	},
-
-	/*
-	 * Process a mouse-up event on the 'filter' button
-	 */
-	release_filter_button: function(event) {
-
-		Event.stop(event);
-		
-		document.getElementById('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
+		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 	},
 
 	/*
@@ -308,7 +293,7 @@ Transmission.prototype = {
 	
 		Event.stop(event);
 
-		document.getElementById('inspector_link').style.backgroundImage = 'url(images/buttons/info_toolbar_on.png)';	
+		$('inspector_link').style.backgroundImage = 'url(images/buttons/info_toolbar_on.png)';	
 	},
 
 	/*
@@ -318,7 +303,36 @@ Transmission.prototype = {
 
 		Event.stop(event);
 		
-		document.getElementById('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
+		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
+	},
+    
+    /*
+     * Change the state of the filter button when clicked
+     */
+	click_filter_button: function(event) {
+
+		Event.stop(event);
+
+		$('filter_link').style.backgroundImage = 'url(images/buttons/filter_on.png)';	
+	},
+    
+    /*
+     * Show/hide the filter button
+     */
+	release_filter_button: function(event) {
+
+		Event.stop(event);
+		
+		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
+		
+		// Perform the toggle
+		if (this._filter_visible) {
+			Effect.BlindUp('torrent_filter_bar');
+			this._filter_visible = false;
+		} else {
+			Effect.BlindDown('torrent_filter_bar');
+			this._filter_visible = true;
+		}
 	},
 
     /*--------------------------------------------
@@ -414,12 +428,23 @@ Transmission.prototype = {
      * Load a list of torrents into the application
      */
     refreshTorrents: function(torrent_list) {
+		var global_up_speed = 0;
+		var global_down_speed = 0;
+		var global_down_speed = 0;
         var torrent_data;
         
         for (i=0; i<torrent_list.length; i++) {
             torrent_data = torrent_list[i];
 			this._torrent_list[torrent_data.id].refresh(torrent_data);
+			global_up_speed += torrent_data.upload_speed;
+			global_down_speed += torrent_data.download_speed;
         }
+
+		// Update global upload and download speed display
+		$('torrent_global_upload').innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed) + '/s';
+		$('torrent_global_download').innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed) + '/s';
+		$('torrent_global_transfer').innerHTML = torrent_list.length + ' Transfers';
+		console.log(222)
     },
 
 

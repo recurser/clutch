@@ -5,13 +5,16 @@ TODO
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - Arrow-Key still doesnt't work 100% - click an element near the bottom and then apple-click the first torrent in the list and press up. Same for the down key.
 - Is there a set 'remaining time unknown' time in transmission? currently set to 999 hours with jscript.
-- sqlite db for prefs - refresh frequency, user login details etc.
-- OnClick image change for all buttons
+- Sqlite db for prefs - refresh frequency, user login details, filter etc etc.
+- Total up/down should show 'x.0' instead of just 'x' if it's an integer to match the desktop app.
+- Implement filter buttons.
+- Implement torrent inspector.
 
 - Cache'ing system? Like un-changing values, such as a torrents total size, or files.
 
 DONE
 ==================================================
+- OnClick image change for all buttons (surrently don't have the graphics).
 - The per-torrent reveal-in-finder button doesn't make much sense in a browser - should this be dropped or changed to something else (maybe a torrent details button?). Would be good to try & keep the interface buttons consistent between the desktop & web if at all possible. (Just the pause/resume button for now)
 - How are the downloading from/to and seeding to numbers calculated? (peers_from, peers_downloading, peers_uploading, peers_total) Is the way it's being displayed at the moment correct? (Looks OK)
 - Last change seems to have broken Safari - figure out why (gimp - float is a reserved word)

@@ -6,7 +6,7 @@ window.onload=function() {
 
 	// Hack to move the torrent view to the right spot in safari
 	if (BrowserDetect.browser == 'Safari')
-		document.getElementById('torrent_container').style.marginTop = '-7px';
+		$('torrent_container').style.marginTop = '-7px';
 }
 
 
