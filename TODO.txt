@@ -9,6 +9,12 @@ TODO
 - Total up/down should show 'x.0' instead of just 'x' if it's an integer to match the desktop app.
 - Implement filter buttons.
 - Implement torrent inspector.
+- A lot of work to do on the context menu
+	- Hook up the links
+	- Allow click event through to the torrent so it behaves correctly when you right-click on unselected torrents
+	- Figure out which torrent is underneath the click position
+	- constrain the menu so it doesn't go outside the borders of the screen or under the scrollbar
+	- enable/disable menu options dynamically instead of all enabled
 
 - Cache'ing system? Like un-changing values, such as a torrents total size, or files.
 

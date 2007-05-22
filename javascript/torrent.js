@@ -124,7 +124,7 @@ Torrent.prototype = {
 		element.appendChild(this._peer_details_container);
 			
 		// Set the torrent click observer
-		Event.observe(this._element, 'mousedown', this.click_torrent.bindAsEventListener(this));
+		Event.observe(this._element, 'mouseup', this.click_torrent.bindAsEventListener(this));
 		
 		// Safari hack - first torrent needs to be moved down for some reason. Seems to be ok when
 		// using <li>'s in straight html, but adding through the DOM gets a bit odd.
@@ -138,6 +138,11 @@ Torrent.prototype = {
 		// Update all the labels etc
 		this.refresh(data);
 	},
+	
+	isRightClick: function(event) {
+		return (((event.which) && (event.which == 3)) ||
+			((event.button) && (event.button == 2)));
+	}, 
 
 
 
@@ -263,6 +268,7 @@ Torrent.prototype = {
 		
 		this._controller.setLastTorrentClicked(this);
 	},
+	
 
 	/*
 	 * Process a click event on the pause/resume button
