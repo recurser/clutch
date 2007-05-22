@@ -28,7 +28,10 @@ Transmission.prototype = {
         var _last_torrent_clicked;
         var _highest_selected;
         var _lowest_selected;
+        var _inspector_visible;
 		this._filter_visible = true;
+		this._inspector_visible = true;
+		
         
         this._torrent_list = new Hash({});
         
@@ -304,6 +307,22 @@ Transmission.prototype = {
 		Event.stop(event);
 		
 		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
+		
+		// Perform the toggle
+		var container_right;
+		if (this._inspector_visible) {
+			container_right = parseInt($('torrent_container').getStyle('right')) - parseInt($('torrent_inspector').getWidth()) + 1;
+			$('torrent_container').style.right = container_right + "px";
+			$('torrent_filter_bar').style.right = container_right + "px";
+			$('torrent_inspector').hide();
+			this._inspector_visible = false;
+		} else {
+			container_right = parseInt($('torrent_container').getStyle('right')) + parseInt($('torrent_inspector').getWidth());
+			$('torrent_container').style.right = container_right + "px";
+			$('torrent_filter_bar').style.right = container_right + "px";
+			$('torrent_inspector').show();
+			this._inspector_visible = true;
+		}
 	},
     
     /*

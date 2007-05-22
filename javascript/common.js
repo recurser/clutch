@@ -4,9 +4,14 @@ var transmission;
 window.onload=function() { 
 	transmission = new Transmission();
 
-	// Hack to move the torrent view to the right spot in safari
-	if (BrowserDetect.browser == 'Safari')
+	if (BrowserDetect.browser == 'Safari') {
+		// Hack to move the torrent view to the right spot in safari
 		$('torrent_list').style.marginTop = '-7px';
+		
+		// Fix div height problem - causes scrollbar flash in
+		// firefox so have to be safari-specific
+		$('torrent_inspector').style.height = '100%';
+	}
 }
 
 
