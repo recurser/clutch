@@ -310,8 +310,9 @@ Transmission.prototype = {
 			
 		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
 		
-		// Send an ajax request to perform the action
-		//this.remoteRequest('pauseTorrents');
+		// Send an ajax request to perform the action (have to convert key strings to integers)
+		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+		this.remoteRequest('pauseTorrents', torrent_id_list);
 	},
 
 	mouseOutPauseSelectedButton: function(event) {
@@ -338,8 +339,9 @@ Transmission.prototype = {
 			
 		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
 		
-		// Send an ajax request to perform the action
-		//this.remoteRequest('resumeTorrents');
+		// Send an ajax request to perform the action (have to convert key strings to integers)
+		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+		this.remoteRequest('resumeTorrents', torrent_id_list);
 	},
 
 	mouseOutResumeSelectedButton: function(event) {
@@ -437,6 +439,7 @@ Transmission.prototype = {
 		Event.stop(event);
 		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
 	},
+	
     /*
      * Change the state of the filter button when clicked
      */

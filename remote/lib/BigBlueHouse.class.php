@@ -128,16 +128,17 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 * @param array $status_fields Array of torrent status fields to return
 		 * @return string $result Array of torrent data after they've started
 		 */
-		public function resumeTorrents($json_array = "[]", $info_fields, $status_fields)
+		public function resumeTorrents($json_array = "[]", $info_fields = array(), $status_fields=array())
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 
-			if (count($torrent_id_list) == 0)
+			if (count($torrent_id_list) == 0) {
 				$this->M->StartAllTorrents();
-			else
+			} else {
 				$this->M->StartTorrents($torrent_id_list);
+			}
 
-			return $this->getTorrentData($torrent_id_list, $info_fields, $status_fields);
+			return $this->getTorrentData($info_fields, $status_fields, $torrent_id_list);
 		}
 
 		/* public function pauseTorrents([(string) $json_array], [(array)$info_fields], [(array)$status_fields])
@@ -150,16 +151,17 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 * @param array $status_fields Array of torrent status fields to return
 		 * @return string $result Array of torrent data after the pause
 		 */
-		public function pauseTorrents($json_array = "[]", $info_fields, $status_fields)
+		public function pauseTorrents($json_array = "[]", $info_fields = array(), $status_fields=array())
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 
-			if (count($torrent_id_list) == 0)
+			if (count($torrent_id_list) == 0) {
 				$this->M->StopAllTorrents();
-			else
+			} else {
 				$this->M->StopTorrents($torrent_id_list);
+			}
 
-			return $this->getTorrentData($torrent_id_list, $info_fields, $status_fields);
+			return $this->getTorrentData($info_fields, $status_fields, $torrent_id_list);
 		}
 
 		/* 	public function getTorrentData([(array)$info_fields], [(array)$status_fields], [(array)$id_list])

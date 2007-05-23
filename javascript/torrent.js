@@ -164,7 +164,7 @@ Torrent.prototype = {
 	 * Return the id of this torrent
 	 */
 	id: function() {
-		return this._id;
+		return parseInt(this._id);
 	},
 	
 	/*

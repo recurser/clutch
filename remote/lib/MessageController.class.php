@@ -191,6 +191,7 @@
 		public function GetInfoAll()
 		{
 			$field_list = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args(); 
+			
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-info-all', $field_list)
