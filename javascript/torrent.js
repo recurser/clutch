@@ -114,8 +114,8 @@ Torrent.prototype = {
 		element.appendChild(this._pause_resume_button);
 			
 		// Set the pause button click observer
-		Event.observe(this._pause_resume_button, 'mousedown', this.click_pause_resume_button.bindAsEventListener(this));
-		Event.observe(this._pause_resume_button, 'mouseup', this.release_pause_resume_button.bindAsEventListener(this));
+		Event.observe(this._pause_resume_button, 'mousedown', this.clickPauseResumeButton.bindAsEventListener(this));
+		Event.observe(this._pause_resume_button, 'mouseup', this.releasePauseResumeButton.bindAsEventListener(this));
 		
 		// Create the 'peer details' <div>
 		this._peer_details_container = document.createElement('div');
@@ -124,7 +124,7 @@ Torrent.prototype = {
 		element.appendChild(this._peer_details_container);
 			
 		// Set the torrent click observer
-		Event.observe(this._element, 'mouseup', this.click_torrent.bindAsEventListener(this));
+		Event.observe(this._element, 'mouseup', this.clickTorrent.bindAsEventListener(this));
 		
 		// Safari hack - first torrent needs to be moved down for some reason. Seems to be ok when
 		// using <li>'s in straight html, but adding through the DOM gets a bit odd.
@@ -158,6 +158,13 @@ Torrent.prototype = {
 	 */
 	setController: function(controller) {
 		this._controller = controller;
+	},
+	
+	/*
+	 * Return the id of this torrent
+	 */
+	id: function() {
+		return this._id;
 	},
 	
 	/*
@@ -227,7 +234,7 @@ Torrent.prototype = {
 	/*
 	 * Process a click event on this torrent
 	 */
-	click_torrent: function(event) {
+	clickTorrent: function(event) {
 		
 		Event.stop(event);
 		// console.log($H(event).keys());
@@ -273,7 +280,7 @@ Torrent.prototype = {
 	/*
 	 * Process a click event on the pause/resume button
 	 */
-	click_pause_resume_button: function(event) {
+	clickPauseResumeButton: function(event) {
 
 		Event.stop(event);
 			
@@ -287,7 +294,7 @@ Torrent.prototype = {
 	/*
 	 * Process a mouse-up event on the pause/resume button
 	 */
-	release_pause_resume_button: function(event) {	
+	releasePauseResumeButton: function(event) {	
 		
 		Event.stop(event);
 		
@@ -434,17 +441,8 @@ Torrent.prototype = {
 	select: function() {
 		this._element.addClassName('selected');
 		
-		// Figure out if this is the highest selected torrent
-		if (this._controller.highestSelected() == null || 
-			this._controller.highestSelected().position() > this._position) {
-			this._controller.setHighestSelected(this);
-		}
-		
-		// Figure out if this is the lowest selected torrent
-		if (this._controller.lowestSelected() == null || 
-			this._controller.lowestSelected().position() < this._position) {
-			this._controller.setLowestSelected(this);
-		}
+		// Inform the controller
+		this._controller.selectTorrent(this);
 	},
 	
 	/*
@@ -453,33 +451,8 @@ Torrent.prototype = {
 	deselect: function() {
 		this._element.removeClassName('selected');
 		
-		// May need to re-calculate the controllers highest selected torrent :
-		// work down the list until the next selected torrent
-		if (this == this._controller.highestSelected()) {
-			var torrent = this._next_torrent;
-			var found = false;
-			while (found == false && torrent != null) {
-				if 	(torrent.isSelected()) {
-					found = true;
-					this._controller.setHighestSelected(torrent)
-				}
-				torrent = torrent.nextTorrent();
-			}
-		}
-		
-		// May need to re-calculate the controllers lowest selected torrent :
-		// work down the list until the next selected torrent
-		if (this == this._controller.lowestSelected()) {
-			torrent = this._previous_torrent;
-			found = false;
-			while (found == false && torrent != null) {
-				if 	(torrent.isSelected()) {
-					found = true;
-					this._controller.setLowestSelected(torrent)
-				}
-				torrent = torrent.previousTorrent();
-			}
-		}
+		// Inform the controller
+		this._controller.deselectTorrent(this);
 	},
 	
 	/*

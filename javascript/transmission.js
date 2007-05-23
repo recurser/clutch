@@ -24,7 +24,8 @@ Transmission.prototype = {
          * Private Variables
          */
 		var _filter_visible;
-        var _torrent_list;
+        var _torrents;
+        var _selected_torrents;
         var _last_torrent_clicked;
         var _highest_selected;
         var _lowest_selected;
@@ -32,8 +33,9 @@ Transmission.prototype = {
 		this._filter_visible = true;
 		this._inspector_visible = true;
 		
-        
-        this._torrent_list = new Hash({});
+		// Initialise the torrent lists
+        this._torrents = new Hash({});
+        this._selected_torrents = new Hash({});
         
         // Get the initial list of torrents from the remote app
         this.getTorrentList();
@@ -130,6 +132,72 @@ Transmission.prototype = {
     setLowestSelected: function(torrent) {
         this._lowest_selected = torrent;
     },
+    
+    /*
+     * Register the specified torrent as selected
+     */
+    selectTorrent: function(torrent) {
+		
+		// Figure out if this is the highest selected torrent
+		if (this._highestSelected == null || 
+			this._highestSelected.position() > torrent.position()) {
+			this.setHighestSelected(torrent);
+		}
+		
+		// Figure out if this is the lowest selected torrent
+		if (this._lowestSelected == null || 
+			this._lowestSelected.position() < torrent.position()) {
+			this.setLowestSelected(torrent);
+		}	
+		
+		// Store this in the list of selected torrents	
+        if (!this._selected_torrents[torrent.id()]) {
+			this._selected_torrents[torrent.id()] = torrent;
+		}
+    },
+    
+    /*
+     * Register the specified torrent as de-selected
+     */
+    deselectTorrent: function(torrent) {
+		var temp_torrent;
+		var found;
+		
+		// May need to re-calculate the controllers highest selected torrent :
+		// work down the list until the next selected torrent
+		if (torrent == this._highestSelected) {
+			temp_torrent = torrent._next_torrent;
+			found = false;
+			while (found == false && temp_torrent != null) {
+				if 	(temp_torrent.isSelected()) {
+					found = true;
+					this._highestSelected = temp_torrent;
+				}
+				temp_torrent = temp_torrent.nextTorrent();
+			}
+		}
+		
+		// May need to re-calculate the controllers lowest selected torrent :
+		// work down the list until the next selected torrent
+		if (torrent == this._lowestSelected) {
+			temp_torrent = torrent._previous_torrent;
+			found = false;
+			while (found == false && temp_torrent != null) {
+				if 	(temp_torrent.isSelected()) {
+					found = true;
+					this._lowestSelected = temp_torrent;
+				}
+				temp_torrent = temp_torrent.previousTorrent();
+			}
+		}
+		
+		// Remove this from the list of selected torrents	
+        if (this._selected_torrents[torrent.id()]) {
+			this._selected_torrents.remove(torrent.id());
+		}		
+    },
+
+
 
 
     
@@ -418,14 +486,14 @@ Transmission.prototype = {
      * Select all torrents in the list
      */
     selectAll: function() {
-        this._torrent_list.values().invoke('select');
+        this._torrents.values().invoke('select');
     },
     
     /*
      * De-select all torrents in the list
      */
     deselectAll: function() {
-        this._torrent_list.values().invoke('deselect');
+        this._torrents.values().invoke('deselect');
         
         // reset the highest and lowest selected
         this._highest_selected = null;
@@ -499,7 +567,7 @@ Transmission.prototype = {
             }
             
             // Add to the collection
-            this._torrent_list[torrent_data.id] = torrent;
+            this._torrents[torrent_data.id] = torrent;
             
             previous_torrent = torrent;
         }
@@ -518,7 +586,7 @@ Transmission.prototype = {
         
         for (i=0; i<torrent_list.length; i++) {
             torrent_data = torrent_list[i];
-			this._torrent_list[torrent_data.id].refresh(torrent_data);
+			this._torrents[torrent_data.id].refresh(torrent_data);
 			global_up_speed += torrent_data.upload_speed;
 			global_down_speed += torrent_data.download_speed;
         }
