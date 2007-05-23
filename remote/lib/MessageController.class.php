@@ -190,9 +190,10 @@
 		 */
 		public function GetInfoAll()
 		{
+			$field_list = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args(); 
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('get-info-all', func_get_args())
+					array('get-info-all', $field_list)
 				)
 			);
 		}
@@ -251,9 +252,11 @@
 		 */
 		public function GetStatusAll()
 		{
+			$field_list = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args(); 
+			
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('get-status-all', func_get_args())
+					array('get-status-all', $field_list)
 				)
 			);
 		}

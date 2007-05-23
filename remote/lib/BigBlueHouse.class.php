@@ -158,38 +158,32 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			return $this->getTorrentData($torrent_id_list);
 		}
 
-		/* 	public function getTorrentData([(array)$id_list])
+		/* 	public function getTorrentData([(array)$info_fields], [(array)$status_fields], [(array)$id_list])
 		 * Returns a JSON array of torrent data for the specified torrent-ids
 		 * Ex. getTorrentData(array(1,2,3))
 		 *
 		 * @access public
+		 * @param array $info_fields Array of torrent info fields to return
+		 * @param array $status_fields Array of torrent status fields to return
 		 * @param array $id_list Array of torrent IDs to get data about
 		 * @return string $result JSON array of torrent data
 		 */
-		public function getTorrentData($id_list = array())
+		public function getTorrentData($info_fields = array(), $status_fields = array(), $id_list = array())
 		{
 			$torrent_list_data = array();
 			$torrent_status_data = array();
 
 			// If no ids are specified, return data for all torrents
 			if (count($id_list) == 0) {
-				$torrent_list_data = $this->M->GetInfoAll('id', 'name', 'hash', 'date', 'size');
-				$torrent_status_data = $this->M->GetStatusAll(
-					'id', 'completed', 'download-total', 'upload-total', 
-					'download-speed', 'upload-speed', 'peers-downloading', 
-					'peers-from', 'peers-total', 'peers-uploading', 'error', 
-					'error-message', 'eta', 'running', 'state');				
+				$torrent_list_data = $this->M->GetInfoAll($info_fields);
+				$torrent_status_data = $this->M->GetStatusAll($status_fields);				
 
 			// Otherwise, only get data for the specified torrents	
 			}
 			else
 			{
-				$torrent_list_data = $this->M->GetInfo($id_list, array('id', 'name', 'hash', 'date', 'size'));
-				$torrent_status_data = $this->M->GetStatus($id_list, array(
-					'id', 'completed', 'download-total', 'upload-total', 
-					'download-speed', 'upload-speed', 'peers-downloading', 
-					'peers-from', 'peers-total', 'peers-uploading', 'error', 
-					'error-message', 'eta', 'running', 'state'));				
+				$torrent_list_data = $this->M->GetInfo($id_list, $info_fields);
+				$torrent_status_data = $this->M->GetStatus($id_list, $status_fields);				
 			}
 
 			$result = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);

@@ -18,7 +18,7 @@ Transmission.prototype = {
 		 * Private Constants
 		 */
 		var _RefreshInterval;
-		this._RefreshInterval = 10;
+		this._RefreshInterval = 5;
 		
         /*
          * Private Variables

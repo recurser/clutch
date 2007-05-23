@@ -318,27 +318,30 @@ Torrent.prototype = {
 	refresh: function(data) {
 		var progress_details;
 		var peer_details;
-			
-		// Set the torrent variables
-		this._position          = data.position;
-		this._id                = data.id;
-		this._name              = data.name;
-		this._hash              = data.hash;
-		this._date              = data.date;
-		this._size              = data.size;
-		this._completed         = data.completed;
-		this._download_total    = data.download_total;
-		this._upload_total      = data.upload_total;
-		this._download_speed    = data.download_speed;
-		this._upload_speed      = data.upload_speed;
-		this._peers_downloading = data.peers_downloading;
-		this._peers_uploading   = data.peers_uploading;
-		this._peers_from        = data.peers_from;
-		this._peers_total       = data.peers_total;
-		this._error             = data.error;
-		this._state             = data.state;
-		this._eta               = data.eta;
-		this._running           = data.running;	
+		
+		// These variables never change after the inital load	
+		if (data.name) this._name   = data.name;
+		if (data.hash) this._hash   = data.hash;
+		if (data.date) this._date   = data.date;
+		if (data.size) this._size   = data.size;
+		
+		// Set the regularly-changing torrent variables
+		this._position              = data.position;
+		this._id               	    = data.id;
+		this._completed             = data.completed;
+		this._download_total        = data.download_total;
+		this._upload_total          = data.upload_total;
+		this._download_speed        = data.download_speed;
+		this._upload_speed          = data.upload_speed;
+		this._peers_downloading     = data.peers_downloading;
+		this._peers_uploading       = data.peers_uploading;
+		// Don't *think* we need this anywhere
+		//this._peers_from            = data.peers_from; 
+		this._peers_total           = data.peers_total;
+		this._error                 = data.error;
+		this._state                 = data.state;
+		this._eta                   = data.eta;
+		this._running               = data.running;	
 		
 		// Figure out the percent completed
 		var float_percent_complete = this._completed / this._size * this._MaxDownloadPercent;
