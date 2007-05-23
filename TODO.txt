@@ -18,6 +18,10 @@ TODO
 
 - Cache'ing system? Like un-changing values, such as a torrents total size, or files.
 
+- Optimizations
+	- Only grab new information (speeds / peers)
+	- Don't update paused torrents (unless we integrate the socket stuff into libT, Then maybe update paused torrents every couple updates or such? [probably shouldn't bother])
+
 DONE
 ==================================================
 - OnClick image change for all buttons (surrently don't have the graphics).
