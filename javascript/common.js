@@ -13,7 +13,7 @@ window.onload=function() {
 		$('torrent_inspector').style.height = '100%';
 
 		
-		// Set Filter input to type search (nicely styled input feild)
+		// Set Filter input to type search (nicely styled input field)
 		$('torrent_search').type = 'search';
 		$('torrent_search').setAttribute('placeholder','Filter');
 	}
