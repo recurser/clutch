@@ -118,15 +118,17 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			}
 		}
 
-		/* public function resumeTorrents([(string) $json_array])
+		/* public function resumeTorrents([(string) $json_array], [(array)$info_fields], [(array)$status_fields])
 		 * Starts a list of torrents, and returns an JSON array of torrent data
 		 * Ex. resumeTorrents([1,2,3])
 		 *
 		 * @access public
 		 * @param string $json_array Array of torrent IDs to start
+		 * @param array $info_fields Array of torrent info fields to return
+		 * @param array $status_fields Array of torrent status fields to return
 		 * @return string $result Array of torrent data after they've started
 		 */
-		public function resumeTorrents($json_array = "[]")
+		public function resumeTorrents($json_array = "[]", $info_fields, $status_fields)
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 
@@ -135,18 +137,20 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			else
 				$this->M->StartTorrents($torrent_id_list);
 
-			return $this->getTorrentData($torrent_id_list);
+			return $this->getTorrentData($torrent_id_list, $info_fields, $status_fields);
 		}
 
-		/* public function pauseTorrents([(string) $json_array])
+		/* public function pauseTorrents([(string) $json_array], [(array)$info_fields], [(array)$status_fields])
 		 * Pauses a list of torrents, and returns an JSON array of torrent data
 		 * Ex. pauseTorrents([1,2,3])
 		 *
 		 * @access public
 		 * @param string $json_array Array of torrent IDs to pause
+		 * @param array $info_fields Array of torrent info fields to return
+		 * @param array $status_fields Array of torrent status fields to return
 		 * @return string $result Array of torrent data after the pause
 		 */
-		public function pauseTorrents($json_array = "[]")
+		public function pauseTorrents($json_array = "[]", $info_fields, $status_fields)
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 
@@ -155,7 +159,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			else
 				$this->M->StopTorrents($torrent_id_list);
 
-			return $this->getTorrentData($torrent_id_list);
+			return $this->getTorrentData($torrent_id_list, $info_fields, $status_fields);
 		}
 
 		/* 	public function getTorrentData([(array)$info_fields], [(array)$status_fields], [(array)$id_list])

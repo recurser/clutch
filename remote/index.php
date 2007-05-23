@@ -43,12 +43,22 @@ if (isset($_GET['action']) && isset($_GET['param']))
 
 		case 'pauseTorrents' :
 			$function = 'refreshTorrents';
-			$arg_list = $Instance->pauseTorrents($_GET['param']);
+			$status_fields = array(
+					'id', 'completed', 'download-total', 'upload-total', 
+					'download-speed', 'upload-speed', 'peers-downloading', 
+					'peers-from', 'peers-total', 'peers-uploading', 'error', 
+					'error-message', 'eta', 'running', 'state');
+			$arg_list = $Instance->pauseTorrents($_GET['param'], $info_fields, $status_fields);
 			break;
 
 		case 'resumeTorrents' :
 			$function = 'refreshTorrents';
-			$arg_list = $Instance->resumeTorrents($_GET['param']);
+			$status_fields = array(
+					'id', 'completed', 'download-total', 'upload-total', 
+					'download-speed', 'upload-speed', 'peers-downloading', 
+					'peers-from', 'peers-total', 'peers-uploading', 'error', 
+					'error-message', 'eta', 'running', 'state');
+			$arg_list = $Instance->resumeTorrents($_GET['param'], $info_fields, $status_fields);
 			break;
 	
 	}

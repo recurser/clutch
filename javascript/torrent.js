@@ -320,13 +320,13 @@ Torrent.prototype = {
 		var peer_details;
 		
 		// These variables never change after the inital load	
-		if (data.name) this._name   = data.name;
-		if (data.hash) this._hash   = data.hash;
-		if (data.date) this._date   = data.date;
-		if (data.size) this._size   = data.size;
+		if (data.name)     this._name     = data.name;
+		if (data.hash)     this._hash     = data.hash;
+		if (data.date)     this._date     = data.date;
+		if (data.size)     this._size     = data.size;
+		if (data.position) this._position = data.position;
 		
 		// Set the regularly-changing torrent variables
-		this._position              = data.position;
 		this._id               	    = data.id;
 		this._completed             = data.completed;
 		this._download_total        = data.download_total;
@@ -336,7 +336,7 @@ Torrent.prototype = {
 		this._peers_downloading     = data.peers_downloading;
 		this._peers_uploading       = data.peers_uploading;
 		// Don't *think* we need this anywhere
-		//this._peers_from            = data.peers_from; 
+		this._peers_from            = data.peers_from; 
 		this._peers_total           = data.peers_total;
 		this._error                 = data.error;
 		this._state                 = data.state;

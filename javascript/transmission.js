@@ -42,41 +42,41 @@ Transmission.prototype = {
         document.addEventListener("keydown", this.keyDown.bindAsEventListener(this),false);
 
 		// Buttons
-		Event.observe($('pause_all_link'), 'mousedown', this.click_pause_all_button.bindAsEventListener(this));
-		Event.observe($('pause_all_link'), 'mouseup', this.release_pause_all_button.bindAsEventListener(this));
-		Event.observe($('pause_all_link'), 'mouseout', this.mouseout_pause_all_button.bindAsEventListener(this));
+		Event.observe($('pause_all_link'), 'mousedown', this.clickPauseAllButton.bindAsEventListener(this));
+		Event.observe($('pause_all_link'), 'mouseup', this.releasePauseAllButton.bindAsEventListener(this));
+		Event.observe($('pause_all_link'), 'mouseout', this.mouseOutPauseAllButton.bindAsEventListener(this));
 
-		Event.observe($('resume_all_link'), 'mousedown', this.click_resume_all_button.bindAsEventListener(this));
-		Event.observe($('resume_all_link'), 'mouseup', this.release_resume_all_button.bindAsEventListener(this));
-		Event.observe($('resume_all_link'), 'mouseout', this.mouseout_resume_all_button.bindAsEventListener(this));
+		Event.observe($('resume_all_link'), 'mousedown', this.clickResumeAllButton.bindAsEventListener(this));
+		Event.observe($('resume_all_link'), 'mouseup', this.releaseResumeAllButton.bindAsEventListener(this));
+		Event.observe($('resume_all_link'), 'mouseout', this.mouseOutResumeAllButton.bindAsEventListener(this));
 		
-		Event.observe($('filter'), 'mousedown', this.click_filter_button.bindAsEventListener(this));
-		Event.observe($('filter'), 'mouseup', this.release_filter_button.bindAsEventListener(this));
-		Event.observe($('filter'), 'mouseout', this.mouseout_filter_button.bindAsEventListener(this));
+		Event.observe($('filter'), 'mousedown', this.clickFilterButton.bindAsEventListener(this));
+		Event.observe($('filter'), 'mouseup', this.releaseFilterButton.bindAsEventListener(this));
+		Event.observe($('filter'), 'mouseout', this.mouseOutFilterButton.bindAsEventListener(this));
 
-		Event.observe($('pause_selected_link'), 'mousedown', this.click_pause_selected_button.bindAsEventListener(this));
-		Event.observe($('pause_selected_link'), 'mouseup', this.release_pause_selected_button.bindAsEventListener(this));
-		Event.observe($('pause_selected_link'), 'mouseout', this.mouseout_pause_selected_button.bindAsEventListener(this));
+		Event.observe($('pause_selected_link'), 'mousedown', this.clickPauseSelectedButton.bindAsEventListener(this));
+		Event.observe($('pause_selected_link'), 'mouseup', this.releasePauseSelectedButton.bindAsEventListener(this));
+		Event.observe($('pause_selected_link'), 'mouseout', this.mouseOutPauseSelectedButton.bindAsEventListener(this));
 
-		Event.observe($('resume_selected_link'), 'mousedown', this.click_resume_selected_button.bindAsEventListener(this));
-		Event.observe($('resume_selected_link'), 'mouseup', this.release_resume_selected_button.bindAsEventListener(this));
-		Event.observe($('resume_selected_link'), 'mouseout', this.mouseout_resume_selected_button.bindAsEventListener(this));
+		Event.observe($('resume_selected_link'), 'mousedown', this.clickResumeSelectedButton.bindAsEventListener(this));
+		Event.observe($('resume_selected_link'), 'mouseup', this.releaseResumeSelectedButton.bindAsEventListener(this));
+		Event.observe($('resume_selected_link'), 'mouseout', this.mouseOutResumeSelectedButton.bindAsEventListener(this));
 
-		Event.observe($('open_link'), 'mousedown', this.click_open_button.bindAsEventListener(this));
-		Event.observe($('open_link'), 'mouseup', this.release_open_button.bindAsEventListener(this));
-		Event.observe($('open_link'), 'mouseout', this.mouseout_open_button.bindAsEventListener(this));
+		Event.observe($('open_link'), 'mousedown', this.clickOpenButton.bindAsEventListener(this));
+		Event.observe($('open_link'), 'mouseup', this.releaseOpenButton.bindAsEventListener(this));
+		Event.observe($('open_link'), 'mouseout', this.mouseOutOpenButton.bindAsEventListener(this));
 
-		Event.observe($('remove_link'), 'mousedown', this.click_remove_button.bindAsEventListener(this));
-		Event.observe($('remove_link'), 'mouseup', this.release_remove_button.bindAsEventListener(this));
-		Event.observe($('remove_link'), 'mouseout', this.mouseout_remove_button.bindAsEventListener(this));
+		Event.observe($('remove_link'), 'mousedown', this.clickRemoveButton.bindAsEventListener(this));
+		Event.observe($('remove_link'), 'mouseup', this.releaseRemoveButton.bindAsEventListener(this));
+		Event.observe($('remove_link'), 'mouseout', this.mouseOutRemoveButton.bindAsEventListener(this));
 
-		Event.observe($('filter_link'), 'mousedown', this.click_filter_button.bindAsEventListener(this));
-		Event.observe($('filter_link'), 'mouseup', this.release_filter_button.bindAsEventListener(this));
-		Event.observe($('filter_link'), 'mouseout', this.mouseout_filter_button.bindAsEventListener(this));
+		Event.observe($('filter_link'), 'mousedown', this.clickFilterButton.bindAsEventListener(this));
+		Event.observe($('filter_link'), 'mouseup', this.releaseFilterButton.bindAsEventListener(this));
+		Event.observe($('filter_link'), 'mouseout', this.mouseOutFilterButton.bindAsEventListener(this));
 
-		Event.observe($('inspector_link'), 'mousedown', this.click_inspector_button.bindAsEventListener(this));
-		Event.observe($('inspector_link'), 'mouseup', this.release_inspector_button.bindAsEventListener(this));
-		Event.observe($('inspector_link'), 'mouseout', this.mouseout_inspector_button.bindAsEventListener(this));
+		Event.observe($('inspector_link'), 'mousedown', this.clickInspectorButton.bindAsEventListener(this));
+		Event.observe($('inspector_link'), 'mouseup', this.releaseInspectorButton.bindAsEventListener(this));
+		Event.observe($('inspector_link'), 'mouseout', this.mouseOutInspectorButton.bindAsEventListener(this));
 
 		// Create a periodical executer to refresh the list
 		new PeriodicalExecuter(this.reloadTorrents, this._RefreshInterval);
@@ -170,7 +170,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'pause all' button
 	 */
-	click_pause_all_button: function(event) {
+	clickPauseAllButton: function(event) {
 
 		Event.stop(event);
 			
@@ -180,7 +180,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-up event on the 'pause all' button
 	 */
-	release_pause_all_button: function(event) {
+	releasePauseAllButton: function(event) {
 
 		Event.stop(event);
 			
@@ -190,7 +190,7 @@ Transmission.prototype = {
 		this.remoteRequest('pauseTorrents');
 	},
 
-	mouseout_pause_all_button: function(event) {
+	mouseOutPauseAllButton: function(event) {
 		Event.stop(event);
 		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';
 	},
@@ -198,7 +198,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'resume all' button
 	 */
-	click_resume_all_button: function(event) {
+	clickResumeAllButton: function(event) {
 
 		Event.stop(event);
 
@@ -208,7 +208,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-up event on the 'resume all' button
 	 */
-	release_resume_all_button: function(event) {
+	releaseResumeAllButton: function(event) {
 
 		Event.stop(event);
 			
@@ -218,7 +218,7 @@ Transmission.prototype = {
 		this.remoteRequest('resumeTorrents');
 	},
 
-	mouseout_resume_all_button: function(event) {
+	mouseOutResumeAllButton: function(event) {
 		Event.stop(event);
 		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';
 	},
@@ -226,7 +226,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'pause selected' button
 	 */
-	click_pause_selected_button: function(event) {
+	clickPauseSelectedButton: function(event) {
 
 		Event.stop(event);
 			
@@ -236,7 +236,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-up event on the 'pause selected' button
 	 */
-	release_pause_selected_button: function(event) {
+	releasePauseSelectedButton: function(event) {
 
 		Event.stop(event);
 			
@@ -246,7 +246,7 @@ Transmission.prototype = {
 		//this.remoteRequest('pauseTorrents');
 	},
 
-	mouseout_pause_selected_button: function(event) {
+	mouseOutPauseSelectedButton: function(event) {
 		Event.stop(event);
 		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
 	},
@@ -254,7 +254,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'resume selected' button
 	 */
-	click_resume_selected_button: function(event) {
+	clickResumeSelectedButton: function(event) {
 
 		Event.stop(event);
 
@@ -264,7 +264,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-up event on the 'resume selected' button
 	 */
-	release_resume_selected_button: function(event) {
+	releaseResumeSelectedButton: function(event) {
 
 		Event.stop(event);
 			
@@ -274,7 +274,7 @@ Transmission.prototype = {
 		//this.remoteRequest('resumeTorrents');
 	},
 
-	mouseout_resume_selected_button: function(event) {
+	mouseOutResumeSelectedButton: function(event) {
 		Event.stop(event);
 		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
 	},
@@ -282,7 +282,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'open' button
 	 */
-	click_open_button: function(event) {
+	clickOpenButton: function(event) {
 	
 		Event.stop(event);
 
@@ -292,14 +292,14 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-up event on the 'open' button
 	 */
-	release_open_button: function(event) {
+	releaseOpenButton: function(event) {
 
 		Event.stop(event);
 		
 		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
 	},
 
-	mouseout_open_button: function(event) {
+	mouseOutOpenButton: function(event) {
 		Event.stop(event);
 		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
 	},
@@ -307,7 +307,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'remove' button
 	 */
-	click_remove_button: function(event) {
+	clickRemoveButton: function(event) {
 	
 		Event.stop(event);
 
@@ -317,14 +317,14 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-up event on the 'remove' button
 	 */
-	release_remove_button: function(event) {
+	releaseRemoveButton: function(event) {
 
 		Event.stop(event);
 		
 		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 	},
 
-	mouseout_remove_button: function(event) {
+	mouseOutRemoveButton: function(event) {
 		Event.stop(event);
 		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 	},
@@ -332,7 +332,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'inspector' button
 	 */
-	click_inspector_button: function(event) {
+	clickInspectorButton: function(event) {
 	
 		Event.stop(event);
 
@@ -342,7 +342,7 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-up event on the 'inspector' button
 	 */
-	release_inspector_button: function(event) {
+	releaseInspectorButton: function(event) {
 
 		Event.stop(event);
 		
@@ -365,14 +365,14 @@ Transmission.prototype = {
 		}
 	},
 
-	mouseout_inspector_button: function(event) {
+	mouseOutInspectorButton: function(event) {
 		Event.stop(event);
 		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
 	},
     /*
      * Change the state of the filter button when clicked
      */
-	click_filter_button: function(event) {
+	clickFilterButton: function(event) {
 
 		Event.stop(event);
 
@@ -382,7 +382,7 @@ Transmission.prototype = {
     /*
      * Show/hide the filter button
      */
-	release_filter_button: function(event) {
+	releaseFilterButton: function(event) {
 
 		Event.stop(event);
 		
@@ -403,7 +403,7 @@ Transmission.prototype = {
 		}
 	},
 
-	mouseout_filter_button: function(event) {
+	mouseOutFilterButton: function(event) {
 		Event.stop(event);
 		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
 	},
@@ -436,10 +436,12 @@ Transmission.prototype = {
      * Select a range from this torrent to the last clicked torrent
      */
     selectRange: function(torrent) {
-        var torrent;
         
+		if (!this._last_torrent_clicked) {
+			torrent.select();
+			
         // The last clicked torrent is above this one in the list
-        if (this._last_torrent_clicked.position() < torrent.position()) {
+        } else if (this._last_torrent_clicked.position() < torrent.position()) {
             // if the last clicked torrent is not selected, walk down the
             // list until we find one that is
             while (!this._last_torrent_clicked.isSelected() && 
@@ -475,12 +477,18 @@ Transmission.prototype = {
         var torrent_data;
         var torrent;
         var previous_torrent;
+		var global_up_speed = 0;
+		var global_down_speed = 0;
         
         for (i=0; i<torrent_list.length; i++) {
             torrent_data = torrent_list[i];
             torrent_data.position = i+1;
             torrent = new Torrent(torrent_data);
             
+			// Set the global up and down speeds 
+			global_up_speed += torrent_data.upload_speed;
+			global_down_speed += torrent_data.download_speed;
+			
             // Set the controller
             torrent.setController(this);
             
@@ -495,6 +503,9 @@ Transmission.prototype = {
             
             previous_torrent = torrent;
         }
+
+		// Update global upload and download speed display
+		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
     },
     
     /*
@@ -502,7 +513,6 @@ Transmission.prototype = {
      */
     refreshTorrents: function(torrent_list) {
 		var global_up_speed = 0;
-		var global_down_speed = 0;
 		var global_down_speed = 0;
         var torrent_data;
         
@@ -514,10 +524,21 @@ Transmission.prototype = {
         }
 
 		// Update global upload and download speed display
+		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
+    },
+    
+    /*
+     * Set the global up and down speed in the interface
+     */
+    setGlobalSpeeds: function(num_torrents, global_up_speed, global_down_speed) {
+	
+		// Update global upload and download speed display
 		$('torrent_global_upload').innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed) + '/s';
 		$('torrent_global_download').innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed) + '/s';
-		$('torrent_global_transfer').innerHTML = torrent_list.length + ' Transfers';
+		$('torrent_global_transfer').innerHTML = num_torrents + ' Transfers';
     },
+
+
 
 
     /*--------------------------------------------
