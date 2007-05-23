@@ -11,6 +11,11 @@ window.onload=function() {
 		// Fix div height problem - causes scrollbar flash in
 		// firefox so have to be safari-specific
 		$('torrent_inspector').style.height = '100%';
+
+		
+		// Set Filter input to type search (nicely styled input feild)
+		$('torrent_search').type = 'search';
+		$('torrent_search').setAttribute('placeholder','Filter');
 	}
 }
 

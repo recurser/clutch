@@ -119,7 +119,7 @@ div.torrent_global_menu ul li#inspector a {
 	background: transparent url('../images/buttons/info.png') no-repeat 18px 0px ;
 	}
 
-div.torrent_global_menu ul li#divider {
+div.torrent_global_menu ul li.divider {
 	background: transparent url('../images/graphics/menu_divider.png') no-repeat top right;
 	margin: 17px 0 0 0;
 	}
@@ -199,7 +199,7 @@ div#torrent_filter_bar a.active {
 	color: #4E4E4F;
 	}
 	
-div#torrent_filter_bar input.torrent_search {
+div#torrent_filter_bar input#torrent_search {
 	float: right;
 	height: 15px;
 	width: 100px;
