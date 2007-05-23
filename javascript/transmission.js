@@ -44,27 +44,39 @@ Transmission.prototype = {
 		// Buttons
 		Event.observe($('pause_all_link'), 'mousedown', this.click_pause_all_button.bindAsEventListener(this));
 		Event.observe($('pause_all_link'), 'mouseup', this.release_pause_all_button.bindAsEventListener(this));
+		Event.observe($('pause_all_link'), 'mouseout', this.mouseout_pause_all_button.bindAsEventListener(this));
+
 		Event.observe($('resume_all_link'), 'mousedown', this.click_resume_all_button.bindAsEventListener(this));
 		Event.observe($('resume_all_link'), 'mouseup', this.release_resume_all_button.bindAsEventListener(this));
+		Event.observe($('resume_all_link'), 'mouseout', this.mouseout_resume_all_button.bindAsEventListener(this));
 		
 		Event.observe($('filter'), 'mousedown', this.click_filter_button.bindAsEventListener(this));
 		Event.observe($('filter'), 'mouseup', this.release_filter_button.bindAsEventListener(this));
+		Event.observe($('filter'), 'mouseout', this.mouseout_filter_button.bindAsEventListener(this));
 
 		Event.observe($('pause_selected_link'), 'mousedown', this.click_pause_selected_button.bindAsEventListener(this));
 		Event.observe($('pause_selected_link'), 'mouseup', this.release_pause_selected_button.bindAsEventListener(this));
+		Event.observe($('pause_selected_link'), 'mouseout', this.mouseout_pause_selected_button.bindAsEventListener(this));
+
 		Event.observe($('resume_selected_link'), 'mousedown', this.click_resume_selected_button.bindAsEventListener(this));
 		Event.observe($('resume_selected_link'), 'mouseup', this.release_resume_selected_button.bindAsEventListener(this));
+		Event.observe($('resume_selected_link'), 'mouseout', this.mouseout_resume_selected_button.bindAsEventListener(this));
 
 		Event.observe($('open_link'), 'mousedown', this.click_open_button.bindAsEventListener(this));
 		Event.observe($('open_link'), 'mouseup', this.release_open_button.bindAsEventListener(this));
+		Event.observe($('open_link'), 'mouseout', this.mouseout_open_button.bindAsEventListener(this));
+
 		Event.observe($('remove_link'), 'mousedown', this.click_remove_button.bindAsEventListener(this));
 		Event.observe($('remove_link'), 'mouseup', this.release_remove_button.bindAsEventListener(this));
+		Event.observe($('remove_link'), 'mouseout', this.mouseout_remove_button.bindAsEventListener(this));
 
 		Event.observe($('filter_link'), 'mousedown', this.click_filter_button.bindAsEventListener(this));
 		Event.observe($('filter_link'), 'mouseup', this.release_filter_button.bindAsEventListener(this));
+		Event.observe($('filter_link'), 'mouseout', this.mouseout_filter_button.bindAsEventListener(this));
 
 		Event.observe($('inspector_link'), 'mousedown', this.click_inspector_button.bindAsEventListener(this));
 		Event.observe($('inspector_link'), 'mouseup', this.release_inspector_button.bindAsEventListener(this));
+		Event.observe($('inspector_link'), 'mouseout', this.mouseout_inspector_button.bindAsEventListener(this));
 
 		// Create a periodical executer to refresh the list
 		new PeriodicalExecuter(this.reloadTorrents, this._RefreshInterval);
@@ -178,6 +190,11 @@ Transmission.prototype = {
 		this.remoteRequest('pauseTorrents');
 	},
 
+	mouseout_pause_all_button: function(event) {
+		Event.stop(event);
+		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';
+	},
+
 	/*
 	 * Process a mouse-down event on the 'resume all' button
 	 */
@@ -199,6 +216,11 @@ Transmission.prototype = {
 		
 		// Send an ajax request to perform the action
 		this.remoteRequest('resumeTorrents');
+	},
+
+	mouseout_resume_all_button: function(event) {
+		Event.stop(event);
+		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';
 	},
 
 	/*
@@ -224,6 +246,11 @@ Transmission.prototype = {
 		//this.remoteRequest('pauseTorrents');
 	},
 
+	mouseout_pause_selected_button: function(event) {
+		Event.stop(event);
+		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
+	},
+
 	/*
 	 * Process a mouse-down event on the 'resume selected' button
 	 */
@@ -247,6 +274,10 @@ Transmission.prototype = {
 		//this.remoteRequest('resumeTorrents');
 	},
 
+	mouseout_resume_selected_button: function(event) {
+		Event.stop(event);
+		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
+	},
 
 	/*
 	 * Process a mouse-down event on the 'open' button
@@ -268,6 +299,10 @@ Transmission.prototype = {
 		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
 	},
 
+	mouseout_open_button: function(event) {
+		Event.stop(event);
+		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
+	},
 
 	/*
 	 * Process a mouse-down event on the 'remove' button
@@ -286,6 +321,11 @@ Transmission.prototype = {
 
 		Event.stop(event);
 		
+		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
+	},
+
+	mouseout_remove_button: function(event) {
+		Event.stop(event);
 		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 	},
 
@@ -324,7 +364,11 @@ Transmission.prototype = {
 			this._inspector_visible = true;
 		}
 	},
-    
+
+	mouseout_inspector_button: function(event) {
+		Event.stop(event);
+		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
+	},
     /*
      * Change the state of the filter button when clicked
      */
@@ -357,6 +401,11 @@ Transmission.prototype = {
 			$('torrent_filter_bar').show();
 			this._filter_visible = true;
 		}
+	},
+
+	mouseout_filter_button: function(event) {
+		Event.stop(event);
+		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
 	},
 
     /*--------------------------------------------
