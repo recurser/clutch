@@ -228,5 +228,33 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			// Not interested in the keys anymore - only needed them for mapping
 			return array_values($result);
 		}
+
+		/* public FindPossibleSockets()
+		 * Look for the transmission socket under each home directory
+		 * Use for *AID* in finding the socket by the end user
+		 * IE, these are some of the things it *COULD* be.
+		 * Note: Will not work if the users home dir has been moved
+		 */
+		public function FindPossibleSockets()
+		{
+			$Find = 'daemon/socket';
+			$placesToLook = array
+			(
+				'/Users/'	=> '/Library/Application Support/Transmission/',
+				'/home/'	=> '/.transmission/',
+			);
+	
+			foreach ($placesToLook as $home => $loc)
+				if (is_dir($home))
+				{
+					$h = opendir($home);
+					while (($file = readdir($h)) !== false)
+						if (file_exists($home.$file.$loc.$Find)) 
+							$Results[] = $home.$file.$loc.$Find;
+					closedir($h);
+				}
+	
+			return $Results;
+		}
 	}
 ?>
