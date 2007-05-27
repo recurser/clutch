@@ -81,7 +81,8 @@ Math.formatSeconds = function(seconds) {
  * Converts a unix timestamp to a human readable value
  */
 Math.formatTimestamp = function(seconds) {
-	return seconds;
+	var myDate = new Date(seconds*1000);
+	return myDate.toGMTString();
 }
 
 /*

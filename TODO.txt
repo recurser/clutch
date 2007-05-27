@@ -24,9 +24,6 @@ TODO
 	- Layout should be aligned better (would a table be best here? it *is* a table of values...)
 	- Needs tabs (Info - Activity - Files)
 
-- Math.formatTimestamp must be writen
-
-
 OPTIMIZATIONS
 ==================================================
 - Caching system? Don't refresh un-changing values, such as a torrents total size, or files (semi-done, need to handle unchanging values specifically in torrent.js->refresh() - keep in mind for future optimization).
