@@ -200,7 +200,7 @@ Transmission.prototype = {
 		}
 
 		// Destroy inspector
-		this.destroyInspector();
+		//this.destroyInspector();
 
     },
 
@@ -611,6 +611,10 @@ Transmission.prototype = {
 		$('torrent_inspector_tracker').innerHTML = 'N/A';
 		$('torrent_inspector_hash').innerHTML = 'N/A';
 		$('torrent_inspector_secure').innerHTML = 'N/A';
+
+		$('torrent_inspector_creator').innerHTML = 'N/A';
+		$('torrent_inspector_creator_date').innerHTML = 'N/A';
+		$('torrent_inspector_torrent_file').value = 'N/A';
 	},
 
     /*

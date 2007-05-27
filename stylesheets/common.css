@@ -380,6 +380,7 @@ div#torrent_inspector div.files {
 
 input#torrent_inspector_torrent_file {
 	width: 220px;
+	background-color: #ddd;
 	}
 
 /*--------------------------------------
