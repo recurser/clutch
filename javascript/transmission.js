@@ -154,6 +154,9 @@ Transmission.prototype = {
         if (!this._selected_torrents[torrent.id()]) {
 			this._selected_torrents[torrent.id()] = torrent;
 		}
+
+		// Display in Inspector
+		this.setInspector(torrent);
     },
     
     /*
@@ -194,7 +197,11 @@ Transmission.prototype = {
 		// Remove this from the list of selected torrents	
         if (this._selected_torrents[torrent.id()]) {
 			this._selected_torrents.remove(torrent.id());
-		}		
+		}
+
+		// Destroy inspector
+		this.destroyInspector();
+
     },
 
 
@@ -578,7 +585,34 @@ Transmission.prototype = {
 		// Update global upload and download speed display
 		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
     },
-    
+
+	setInspector: function(torrent) {
+		$('torrent_inspector_name').innerHTML		= torrent._name;
+		$('torrent_inspector_size').innerHTML		= Math.formatBytes(torrent._size);
+		$('torrent_inspector_tracker').innerHTML	= torrent._tracker['address']+
+													  ':'+torrent._tracker['port']+
+													  torrent._tracker['announce'];
+
+		$('torrent_inspector_hash').innerHTML		= torrent._hash;
+
+		if (torrent._private == 1)
+			$('torrent_inspector_secure').innerHTML = 'Private Torrent';
+		else
+			$('torrent_inspector_secure').innerHTML	= 'Public Torrent';
+
+		$('torrent_inspector_creator').innerHTML	= torrent._creator;
+		$('torrent_inspector_creator_date').innerHTML	= Math.formatTimestamp(torrent._creator_date);
+		$('torrent_inspector_torrent_file').value		= torrent._torrent_file;
+	},
+
+	destroyInspector: function() {
+		$('torrent_inspector_name').innerHTML = 'No Torrent Selected';
+		$('torrent_inspector_size').innerHTML = '';
+		$('torrent_inspector_tracker').innerHTML = 'N/A';
+		$('torrent_inspector_hash').innerHTML = 'N/A';
+		$('torrent_inspector_secure').innerHTML = 'N/A';
+	},
+
     /*
      * Load a list of torrents into the application
      */

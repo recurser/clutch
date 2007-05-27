@@ -68,6 +68,13 @@ Torrent.prototype = {
 		var _state;
 		var _eta;
 		var _running;
+
+		var _tracker;
+		var _private;
+		var _comment;
+		var _creator;
+		var _creator_date;
+		var _torrent_file;
 		
 		// Create a new <li> element
 		var element = document.createElement('li');
@@ -327,11 +334,17 @@ Torrent.prototype = {
 		var peer_details;
 		
 		// These variables never change after the inital load	
-		if (data.name)     this._name     = data.name;
-		if (data.hash)     this._hash     = data.hash;
-		if (data.date)     this._date     = data.date;
-		if (data.size)     this._size     = data.size;
-		if (data.position) this._position = data.position;
+		if (data.name)		this._name			= data.name;
+		if (data.hash)		this._hash			= data.hash;
+		if (data.date)		this._date			= data.date;
+		if (data.size)		this._size			= data.size;
+		if (data.position)	this._position		= data.position;
+		if (data.tracker)	this._tracker		= data.tracker;
+//		if (data.private)	this._private		= data.private;
+		if (data.comment)	this._comment		= data.comment;
+		if (data.creator)	this._creator		= data.creator;
+		if (data.date)		this._creator_date	= data.date;
+		if (data.path)		this._torrent_file	= data.path;
 		
 		// Set the regularly-changing torrent variables
 		this._id               	    = data.id;

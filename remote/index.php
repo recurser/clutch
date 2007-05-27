@@ -7,7 +7,7 @@
  */
 
 require_once('inc/trans_main.inc');
-$TControl = new TransmissionController('/Users/dave/Library/Application Support/Transmission/daemon/socket');
+$TControl = new TransmissionController('/Users/malcolm/Library/Application Support/Transmission/daemon/socket');
 $MControl = new MessageController($TControl);
 $Instance = new BigBlueHouse($MControl);
 
@@ -22,12 +22,15 @@ if (isset($_GET['action']) && isset($_GET['param']))
 	
 		case 'getTorrentList' :
 			$function = 'addTorrents';
-			$info_fields = array('id', 'name', 'hash', 'date', 'size');
+			$info_fields = array(
+					"id", "hash", "name", "path", "saved", "private", 
+					"trackers", "comment", "creator", "date", "size", "files");
 			$status_fields = array(
-					'id', 'completed', 'download-total', 'upload-total', 
-					'download-speed', 'upload-speed', 'peers-downloading', 
-					'peers-from', 'peers-total', 'peers-uploading', 'error', 
-					'error-message', 'eta', 'running', 'state');
+					"completed", "download-speed", "download-total", "error", 
+					"error-message", "eta", "id", "peers-downloading", 
+					"peers-from", "peers-total", "peers-uploading", "running", 
+					"state", "swarm-speed", "tracker", "scrape-completed", 
+					"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
 			$arg_list = $Instance->getTorrentData($info_fields, $status_fields);
 			break;
 

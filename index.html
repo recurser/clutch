@@ -54,47 +54,28 @@
 </div>
 
 <div id="torrent_inspector">
-	<h2>No Torrent Selected</h2>
-	<span class="size">&nbsp;5.5 GB</span>
+	<h2 id="torrent_inspector_name">No Torrent Selected</h2>
+	<span id="torrent_inspector_size">&nbsp;5.5 GB</span>
 	<hr />
 	<div class="info">
 		<h1>Torrent Information</h1>
-			<div class="left">
-				Tracker:<br />
-				Peices:<br />
-				Hash:<br />
-				Secure:<br />
-				Comment:<br />
-			</div>
-			<div class="right">
-				N/A<br />
-				N/A<br />
-				N/A<br />
-				N/A<br />
-				N/A<br />
-			</div>
+			Tracker: <span id="torrent_inspector_tracker"></span><br />
+			Hash: <span id="torrent_inspector_hash"></span><br />
+			Secure: <span id="torrent_inspector_secure"></span><br />
+			Comment: <span id="torrent_inspector_comment"></span><br />
+	</div>
 		<hr />
+	<div class="info">
 		<h1>Created By</h1>
-			<div class="left">
-				Creator:<br />
-				Date:<br />
-			</div>
-			<div class="right">
-				N/A<br />
-				N/A<br />
-			</div>
+			Creator: <span id="torrent_inspector_creator"></span><br />
+			Date: <span id="torrent_inspector_creator_date"></span><br />
+	</div>
 		<hr />
+	<div class="info">
 		<h1>Where</h1>
-			<div class="left">
-				Data File:<br />
-				Torrent File:<br />
-				Date Added:<br />
-			</div>
-			<div class="right">
-				N/A<br />
-				N/A<br />
-				N/A<br />
-			</div>
+			Data File: <span class="data_file"></span><br />
+			Torrent File: <input type="text" id="torrent_inspector_torrent_file" readonly /><br />
+			Date Added: <span class="date_added"></span><br />
 	</div>
 	<div class="activity">
 		<h1>Activity</h1>

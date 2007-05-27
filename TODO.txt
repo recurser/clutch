@@ -13,7 +13,18 @@ TODO
 	- Allow click event through to the torrent so it behaves correctly when you right-click on unselected torrents
 	- Figure out which torrent is underneath the click position
 	- constrain the menu so it doesn't go outside the borders of the screen or under the scrollbar
-	- enable/disable menu options dynamically instead of all enabled
+	- enable/disable menu options dynamically instead of all enable
+
+- why does the following line of torrent.js erroring if uncommented? (SyntaxError - Parse Error)
+	if (data.private)	this._private		= data.private;
+
+- Inspector
+	- when multiple torrents are selected, deselecting one destroys the inspector, multiple torrents should instead show "multiple torrents selected", and the total filesize of the torrents
+	- A lot of the values can be stripped out (unnecessary stuff)
+	- Layout should be aligned better (would a table be best here? it *is* a table of values...)
+	- Needs tabs (Info - Activity - Files)
+
+- Math.formatTimestamp must be writen
 
 
 OPTIMIZATIONS

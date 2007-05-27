@@ -78,6 +78,13 @@ Math.formatSeconds = function(seconds) {
 
 
 /*
+ * Converts a unix timestamp to a human readable value
+ */
+Math.formatTimestamp = function(seconds) {
+	return seconds;
+}
+
+/*
  * Round a float to a specified number of decimal 
  * places, stripping trailing zeroes
  */

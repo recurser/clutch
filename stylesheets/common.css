@@ -341,29 +341,16 @@ div#torrent_inspector h2 {
 
 div#torrent_inspector h1 {
 	font-size: 1em;
-	margin: 0;
-	padding: 0 0 0 10px;
+	margin: 0 0 0 -5px;
+	padding: 0 0 0 0;
 }
 
 div#torrent_inspector div {
 	line-height: 1.7em;
 	}
 
-div#torrent_inspector span.size {
+span#torrent_inspector_size {
 	padding-left: 10px;
-	}
-
-div#torrent_inspector div.left {
-	float: left;
-	text-align: right;
-	width: 100px;
-	}
-
-div#torrent_inspector div.right {
-	float: right;
-	text-align: left;
-	width: 195px;
-	padding-left: 5px;
 	}
 
 div#torrent_inspector hr {
@@ -378,14 +365,21 @@ div#torrent_inspector hr {
 
 div#torrent_inspector div.info {
 	display: block;
+	padding-left: 10px;
 	}
 
 div#torrent_inspector div.activity {
 	display: none;
+	padding-left: 5px;
 	}
 
 div#torrent_inspector div.files {
 	display: none;
+	padding-left: 5px;
+	}
+
+input#torrent_inspector_torrent_file {
+	width: 220px;
 	}
 
 /*--------------------------------------
