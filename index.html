@@ -54,61 +54,71 @@
 </div>
 
 <div id="torrent_inspector">
-	<h2 id="torrent_inspector_name">No Torrent Selected</h2>
-	<span id="torrent_inspector_size">&nbsp;5.5 GB</span>
-	<hr />
-	<div class="info">
-		<h1>Torrent Information</h1>
-			Tracker: <span id="torrent_inspector_tracker"></span><br />
-			Hash: <span id="torrent_inspector_hash"></span><br />
-			Secure: <span id="torrent_inspector_secure"></span><br />
-			Comment: <span id="torrent_inspector_comment"></span><br />
+	<div class="torrent_inspector_header">
+		<h1 id="torrent_inspector_name">No Torrent Selected</h1>
+		<span id="torrent_inspector_size">0 B</span>
 	</div>
-		<hr />
-	<div class="info">
-		<h1>Created By</h1>
-			Creator: <span id="torrent_inspector_creator"></span><br />
-			Date: <span id="torrent_inspector_creator_date"></span><br />
+	
+	<div class="torrent_inspector_section info">
+		<h2>Torrent Information</h2>
+		<label>Tracker:</label>
+		<div id="torrent_inspector_tracker">N/A</div>
+		<label>Hash:</label>
+		<div id="torrent_inspector_hash">N/A</div>
+		<label>Secure:</label>
+		<div id="torrent_inspector_secure">N/A</div>
+		<label>Comment:</label>
+		<div id="torrent_inspector_comment">N/A</div>
+		
+		<h2>Created By</h2>
+		<label>Creator:</label>
+		<div id="torrent_inspector_creator">N/A</div>
+		<label>Date:</label>
+		<div id="torrent_inspector_creator_date">N/A</div>
+		
+		<h2>Where</h2>
+		<label>Data File:</label>
+		<div id="torrent_inspector_data_file">N/A</div>
+		<label>Torrent File:</label>
+		<div id="torrent_inspector_torrent_file">N/A</div>
+		<label>Date Added:</label>
+		<div id="torrent_inspector_date_added">N/A</div>
 	</div>
-		<hr />
-	<div class="info">
-		<h1>Where</h1>
-			Data File: <span class="data_file"></span><br />
-			Torrent File: <input type="text" id="torrent_inspector_torrent_file" readonly /><br />
-			Date Added: <span class="date_added"></span><br />
+	
+	<div class="torrent_inspector_section activity">
+		<h2>Activity</h2>
+		<label>State:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Valid DL:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Downloaded:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Uploaded:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Ratio:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Swarm Rate:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Error:</label>
+		<div id="torrent_inspector_">N/A</div>
+		
+		<h2>Peers</h2>
+		<label>UL To:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>DL From:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Total Seeders:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Total Leechers:</label>
+		<div id="torrent_inspector_">N/A</div>
+		<label>Total DL:</label>
+		<div id="torrent_inspector_">N/A</div>
 	</div>
-	<div class="activity">
-		<h1>Activity</h1>
-			<div class="left">
-				State:<br />
-				Valid DL:<br />
-				Downloaded:<br />
-				Uploaded:<br />
-				Ratio:<br />
-				Swarm Rate:<br />
-				Error:<br />
-			</div>
-			<div class="right">
-				N/A<br />
-				N/A<br />
-				N/A<br />
-				N/A<br />
-				N/A<br />
-				N/A<br />
-				N/A<br />
-			</div>
-		<hr />
-		<h1>Peers</h1>
-			<div class="left">
-				UL To:<br />
-				DL From:<br />
-				Total Seeders:<br />
-				Total Leechers:<br />
-				Total Downloaded:<br />
-			</div>
-	</div>
-	<div class="files">
-		N/A
+	
+	<div class="torrent_inspector_section files">
+		<h2>Files</h2>
+		<label>N/A</label>
+		<div></div>
 	</div>
 </div>
 

@@ -332,56 +332,53 @@ div#torrent_inspector {
 	z-index: 2;
 	text-align: left;
 	}
-
-div#torrent_inspector h2 {
+	
+div#torrent_inspector h1#torrent_inspector_name {
 	font-size: 1.4em;
 	margin: 0;
-	padding: 5px 0 0 10px;
+	padding: 5px 0 0 5px;
 	}
-
-div#torrent_inspector h1 {
-	font-size: 1em;
-	margin: 0 0 0 -5px;
-	padding: 0 0 0 0;
-}
-
-div#torrent_inspector div {
-	line-height: 1.7em;
+	
+div#torrent_inspector span#torrent_inspector_size {
+	font-size: 1.2em;
+	margin: 0;
+	padding: 5px 0 0 5px;
 	}
-
-span#torrent_inspector_size {
-	padding-left: 10px;
+	
+div#torrent_inspector div.torrent_inspector_section h2 {
+	border-top: 1px solid #888;
+	font-size: 1.1em;
+	margin: 5px 5px 0 5px;
+	padding: 2px 0 2px 0;
 	}
-
-div#torrent_inspector hr {
-	margin-left: 5px;
-	margin-right: 5px;
-	width: 290px;
+	
+div#torrent_inspector div.torrent_inspector_section label {
+	margin: 0px 3px 0 10px;
+	width: 75px;
+	display: block;
 	float: left;
-	height: 1px;
-	border: 0px;
-	background-color: #888;
+	}
+	
+div#torrent_inspector div.torrent_inspector_section div {
+	height: 17px;
+	width: 210px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 	}
 
 div#torrent_inspector div.info {
 	display: block;
-	padding-left: 10px;
 	}
 
 div#torrent_inspector div.activity {
 	display: none;
-	padding-left: 5px;
 	}
 
 div#torrent_inspector div.files {
 	display: none;
-	padding-left: 5px;
 	}
-
-input#torrent_inspector_torrent_file {
-	width: 220px;
-	background-color: #ddd;
-	}
+	
 
 /*--------------------------------------
  *

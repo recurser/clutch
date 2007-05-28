@@ -8,6 +8,7 @@ TODO
 - Total up/down should show 'x.0' instead of just 'x' if it's an integer to match the desktop app.
 - Implement filter buttons.
 - Implement torrent inspector.
+- There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - A lot of work to do on the context menu
 	- Hook up the links
 	- Allow click event through to the torrent so it behaves correctly when you right-click on unselected torrents
@@ -21,8 +22,9 @@ TODO
 - Inspector
 	- when multiple torrents are selected, deselecting one destroys the inspector, multiple torrents should instead show "multiple torrents selected", and the total filesize of the torrents
 	- A lot of the values can be stripped out (unnecessary stuff)
-	- Layout should be aligned better (would a table be best here? it *is* a table of values...)
+	- Layout should be aligned better (would a table be best here? it *is* a table of values...) - Tried table layout but couldn't get all the widths to line up properly, plus couldn't get overflow ellipsis to work properly - label/div for now but maybe tables later
 	- Needs tabs (Info - Activity - Files)
+	- Make the whole inspector wider? Hash currently clipped
 
 OPTIMIZATIONS
 ==================================================
