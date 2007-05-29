@@ -10,6 +10,7 @@ TODO
 - Implement torrent inspector.
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Had a torrent wth ratio '.1' instead of '0.1' (although another one with '0.08' was working ok) - prob with the ratio formatting?
+- 'Pause Selected' and 'Resume Selected' affect every torrent if nothing is selected.
 - A lot of work to do on the context menu
 	- Hook up the links
 	- Allow click event through to the torrent so it behaves correctly when you right-click on unselected torrents
