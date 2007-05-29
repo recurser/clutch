@@ -54,12 +54,19 @@
 </div>
 
 <div id="torrent_inspector">
+	
+	<ul class="torrent_inspector_tabs">
+		<li><a href="#info" id="inspector_tab_info" class="inspector_tab selected">Info</a></li>
+		<li><a href="#activity" id="inspector_tab_activity" class="inspector_tab">Activity</a></li>
+		<li><a href="#files" id="inspector_tab_files" class="inspector_tab">Files</a></li>
+	</ul>
+	
 	<div class="torrent_inspector_header">
 		<h1 id="torrent_inspector_name">No Torrent Selected</h1>
 		<span id="torrent_inspector_size">0 B</span>
 	</div>
 	
-	<div class="torrent_inspector_section info">
+	<div class="torrent_inspector_section" id="inspector_tab_info_container">
 		<h2>Torrent Information</h2>
 		<label>Tracker:</label>
 		<div id="torrent_inspector_tracker">N/A</div>
@@ -85,7 +92,7 @@
 		<div id="torrent_inspector_date_added">N/A</div>
 	</div>
 	
-	<div class="torrent_inspector_section activity">
+	<div class="torrent_inspector_section" style="display:none;" id="inspector_tab_activity_container">
 		<h2>Activity</h2>
 		<label>State:</label>
 		<div id="torrent_inspector_">N/A</div>
@@ -115,7 +122,7 @@
 		<div id="torrent_inspector_">N/A</div>
 	</div>
 	
-	<div class="torrent_inspector_section files">
+	<div class="torrent_inspector_section" style="display:none;" id="inspector_tab_files_container">
 		<h2>Files</h2>
 		<label>N/A</label>
 		<div></div>

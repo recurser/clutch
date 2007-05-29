@@ -79,6 +79,11 @@ Transmission.prototype = {
 		Event.observe($('inspector_link'), 'mousedown', this.clickInspectorButton.bindAsEventListener(this));
 		Event.observe($('inspector_link'), 'mouseup', this.releaseInspectorButton.bindAsEventListener(this));
 		Event.observe($('inspector_link'), 'mouseout', this.mouseOutInspectorButton.bindAsEventListener(this));
+		
+		// Inspector tabs
+		Event.observe($('inspector_tab_info'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
+		Event.observe($('inspector_tab_activity'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
+		Event.observe($('inspector_tab_files'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
 
 		// Create a periodical executer to refresh the list
 		new PeriodicalExecuter(this.reloadTorrents, this._RefreshInterval);
@@ -265,6 +270,9 @@ Transmission.prototype = {
 		this.remoteRequest('pauseTorrents');
 	},
 
+	/*
+	 * Process a mouse-out event on the 'pause all' button
+	 */
 	mouseOutPauseAllButton: function(event) {
 		Event.stop(event);
 		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';
@@ -293,6 +301,9 @@ Transmission.prototype = {
 		this.remoteRequest('resumeTorrents');
 	},
 
+	/*
+	 * Process a mouse-out event on the 'resume all' button
+	 */
 	mouseOutResumeAllButton: function(event) {
 		Event.stop(event);
 		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';
@@ -322,6 +333,9 @@ Transmission.prototype = {
 		this.remoteRequest('pauseTorrents', torrent_id_list);
 	},
 
+	/*
+	 * Process a mouse-out event on the 'pause selected' button
+	 */
 	mouseOutPauseSelectedButton: function(event) {
 		Event.stop(event);
 		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
@@ -351,6 +365,9 @@ Transmission.prototype = {
 		this.remoteRequest('resumeTorrents', torrent_id_list);
 	},
 
+	/*
+	 * Process a mouse-out event on the 'resume selected' button
+	 */
 	mouseOutResumeSelectedButton: function(event) {
 		Event.stop(event);
 		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
@@ -376,6 +393,9 @@ Transmission.prototype = {
 		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
 	},
 
+	/*
+	 * Process a mouse-out event on the 'open' button
+	 */
 	mouseOutOpenButton: function(event) {
 		Event.stop(event);
 		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
@@ -401,6 +421,9 @@ Transmission.prototype = {
 		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 	},
 
+	/*
+	 * Process a mouse-out event on the 'remove' button
+	 */
 	mouseOutRemoveButton: function(event) {
 		Event.stop(event);
 		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
@@ -442,9 +465,32 @@ Transmission.prototype = {
 		}
 	},
 
+	/*
+	 * Process a mouse-out event on the 'inspector' button
+	 */
 	mouseOutInspectorButton: function(event) {
 		Event.stop(event);
 		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
+	},
+
+	/*
+	 * Process a mouse-up event on an 'inspector' tab
+	 */
+	releaseInspectorTab: function(event) {
+
+		Event.stop(event);
+		
+		// Unselect all the tabs, select the clicked tab, and display the appropriate info
+		var tab_ids = ['inspector_tab_info', 'inspector_tab_activity', 'inspector_tab_files'];
+        for (i=0; i<tab_ids.length; i++) {
+			if (Event.element(event).id == tab_ids[i]) {
+				$(tab_ids[i]).addClassName('selected');
+				$(tab_ids[i] + '_container').show();
+			} else {
+				$(tab_ids[i]).removeClassName('selected');
+				$(tab_ids[i] + '_container').hide();
+			}
+		}
 	},
 	
     /*

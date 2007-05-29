@@ -22,9 +22,8 @@ TODO
 - Inspector
 	- when multiple torrents are selected, deselecting one destroys the inspector, multiple torrents should instead show "multiple torrents selected", and the total filesize of the torrents
 	- A lot of the values can be stripped out (unnecessary stuff)
-	- Layout should be aligned better (would a table be best here? it *is* a table of values...) - Tried table layout but couldn't get all the widths to line up properly, plus couldn't get overflow ellipsis to work properly - label/div for now but maybe tables later
-	- Needs tabs (Info - Activity - Files)
 	- Make the whole inspector wider? Hash currently clipped
+	- css cursor:pointer doesn't work on safari after a tab has been clicked for some reason.
 
 OPTIMIZATIONS
 ==================================================
@@ -36,10 +35,12 @@ IN THE FUTURE (?)
 ==================================================
 - IE support if possible.
 - Fix up <UL> scrolling - seems to be a little wacky on different browsers. Ideally only have a scrollbar for the <ul> - (gimp's stuff is working great so far for the browsers we care about. Would be nice to have the list floating to the top so we can animate the filter bar open/close but no-one anywhere seems to have figured a top-floating 3-row layout yet - keep an eye out for new techniques but not a big deal).
+- Inspector layout should be aligned better (would a table be best here? it *is* a table of values...) - Tried table layout but couldn't get all the widths to line up properly, plus couldn't get overflow ellipsis to work properly - label/div for now but maybe tables later
 
 
 DONE
 ==================================================
+- Inspector needs tabs (Info - Activity - Files)
 - Only grab new information (speeds / peers)
 - OnClick image change for all buttons (surrently don't have the graphics).
 - The per-torrent reveal-in-finder button doesn't make much sense in a browser - should this be dropped or changed to something else (maybe a torrent details button?). Would be good to try & keep the interface buttons consistent between the desktop & web if at all possible. (Just the pause/resume button for now)

@@ -345,6 +345,45 @@ div#torrent_inspector span#torrent_inspector_size {
 	padding: 5px 0 0 5px;
 	}
 	
+div#torrent_inspector ul.torrent_inspector_tabs {
+	margin: 0 0 0 58px; /* Center tabs */
+	padding: 0;
+	}
+	
+/* Force anything after the menu to display on a new line -
+   looks like overkill, maybe an easier way to do this */
+div#torrent_inspector ul.torrent_inspector_tabs:after {
+	content: ".";
+	display: block;
+	height: 0;
+	font-size:0;
+	clear: both;
+	visibility:hidden;
+	}
+	
+div#torrent_inspector ul.torrent_inspector_tabs li {
+	float: left;
+	list-style-type: none;
+	}
+	
+div#torrent_inspector ul.torrent_inspector_tabs li a {
+	display: block;
+	margin: 10px -1px 3px 0; /* Collapse horizontal borders */
+	padding: 5px;
+	background-color: #EEE;
+	border: 1px solid #787878;
+	width: 50px;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	color: #323232;
+	cursor: pointer;
+	}
+	
+div#torrent_inspector ul.torrent_inspector_tabs li a.selected {
+	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
+	}
+	
 div#torrent_inspector div.torrent_inspector_section h2 {
 	border-top: 1px solid #888;
 	font-size: 1.1em;
@@ -365,18 +404,6 @@ div#torrent_inspector div.torrent_inspector_section div {
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	}
-
-div#torrent_inspector div.info {
-	display: block;
-	}
-
-div#torrent_inspector div.activity {
-	display: none;
-	}
-
-div#torrent_inspector div.files {
-	display: none;
 	}
 	
 
