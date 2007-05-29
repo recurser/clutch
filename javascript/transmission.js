@@ -251,9 +251,7 @@ Transmission.prototype = {
 	 * Process a mouse-down event on the 'pause all' button
 	 */
 	clickPauseAllButton: function(event) {
-
-		Event.stop(event);
-			
+		Event.stop(event);			
 		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all_on.png)';
 	},
 
@@ -261,13 +259,9 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause all' button
 	 */
 	releasePauseAllButton: function(event) {
-
-		Event.stop(event);
-			
-		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';
-		
-		// Send an ajax request to perform the action
-		this.remoteRequest('pauseTorrents');
+		Event.stop(event);			
+		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';	
+		this.pauseAllTorrents();
 	},
 
 	/*
@@ -282,9 +276,7 @@ Transmission.prototype = {
 	 * Process a mouse-down event on the 'resume all' button
 	 */
 	clickResumeAllButton: function(event) {
-
 		Event.stop(event);
-
 		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all_on.png)';
 	},
 
@@ -292,13 +284,9 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'resume all' button
 	 */
 	releaseResumeAllButton: function(event) {
-
-		Event.stop(event);
-			
-		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';
-		
-		// Send an ajax request to perform the action
-		this.remoteRequest('resumeTorrents');
+		Event.stop(event);			
+		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';	
+		this.resumeAllTorrents();
 	},
 
 	/*
@@ -313,9 +301,7 @@ Transmission.prototype = {
 	 * Process a mouse-down event on the 'pause selected' button
 	 */
 	clickPauseSelectedButton: function(event) {
-
-		Event.stop(event);
-			
+		Event.stop(event);			
 		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected_on.png)';
 	},
 
@@ -323,14 +309,9 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause selected' button
 	 */
 	releasePauseSelectedButton: function(event) {
-
-		Event.stop(event);
-			
-		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
-		
-		// Send an ajax request to perform the action (have to convert key strings to integers)
-		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
-		this.remoteRequest('pauseTorrents', torrent_id_list);
+		Event.stop(event);			
+		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';		
+		this.pauseSelectedTorrents();
 	},
 
 	/*
@@ -345,9 +326,7 @@ Transmission.prototype = {
 	 * Process a mouse-down event on the 'resume selected' button
 	 */
 	clickResumeSelectedButton: function(event) {
-
 		Event.stop(event);
-
 		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected_on.png)';
 	},
 
@@ -355,9 +334,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'resume selected' button
 	 */
 	releaseResumeSelectedButton: function(event) {
-
-		Event.stop(event);
-			
+		Event.stop(event);			
 		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
 		
 		// Send an ajax request to perform the action (have to convert key strings to integers)
@@ -376,10 +353,8 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'open' button
 	 */
-	clickOpenButton: function(event) {
-	
+	clickOpenButton: function(event) {	
 		Event.stop(event);
-
 		$('open_link').style.backgroundImage = 'url(images/buttons/open_on.png)';	
 	},
 
@@ -387,9 +362,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'open' button
 	 */
 	releaseOpenButton: function(event) {
-
-		Event.stop(event);
-		
+		Event.stop(event);		
 		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
 	},
 
@@ -404,10 +377,8 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'remove' button
 	 */
-	clickRemoveButton: function(event) {
-	
+	clickRemoveButton: function(event) {	
 		Event.stop(event);
-
 		$('remove_link').style.backgroundImage = 'url(images/buttons/remove_on.png)';	
 	},
 
@@ -415,9 +386,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'remove' button
 	 */
 	releaseRemoveButton: function(event) {
-
-		Event.stop(event);
-		
+		Event.stop(event);		
 		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 	},
 
@@ -432,10 +401,8 @@ Transmission.prototype = {
 	/*
 	 * Process a mouse-down event on the 'inspector' button
 	 */
-	clickInspectorButton: function(event) {
-	
+	clickInspectorButton: function(event) {	
 		Event.stop(event);
-
 		$('inspector_link').style.backgroundImage = 'url(images/buttons/info_toolbar_on.png)';	
 	},
 
@@ -443,9 +410,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'inspector' button
 	 */
 	releaseInspectorButton: function(event) {
-
-		Event.stop(event);
-		
+		Event.stop(event);		
 		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
 		
 		// Perform the toggle
@@ -477,7 +442,6 @@ Transmission.prototype = {
 	 * Process a mouse-up event on an 'inspector' tab
 	 */
 	releaseInspectorTab: function(event) {
-
 		Event.stop(event);
 		
 		// Unselect all the tabs, select the clicked tab, and display the appropriate info
@@ -494,22 +458,18 @@ Transmission.prototype = {
 	},
 	
     /*
-     * Change the state of the filter button when clicked
+     * Process a mouse-down event on the 'filter' button
      */
 	clickFilterButton: function(event) {
-
 		Event.stop(event);
-
 		$('filter_link').style.backgroundImage = 'url(images/buttons/filter_on.png)';	
 	},
-    
+	
     /*
-     * Show/hide the filter button
+     * Process a mouse-up event on the 'filter' button
      */
 	releaseFilterButton: function(event) {
-
-		Event.stop(event);
-		
+		Event.stop(event);		
 		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
 		
 		// Perform the toggle
@@ -526,11 +486,35 @@ Transmission.prototype = {
 			this._filter_visible = true;
 		}
 	},
-
+	
+    /*
+     * Process a mouse-out event on the 'filter' button
+     */
 	mouseOutFilterButton: function(event) {
 		Event.stop(event);
 		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
 	},
+	
+    /*
+     * Process a torrent right-click-menu event
+     */
+	releaseTorrentRightClickMenu: function(event) {		
+		Event.stop(event);
+		
+		// Lower-case and replace spaces with underscores to keep the args regular
+		var command = Event.element(event).innerHTML.toLowerCase().replace(/ /,'_');
+		
+		switch (command) {
+			case 'pause_selected':
+				this.pauseSelectedTorrents();
+				break;				
+			case 'resume_selected':
+				this.resumeSelectedTorrents();
+				break;			
+		}
+	},
+	
+	
 
     /*--------------------------------------------
      * 
@@ -720,11 +704,46 @@ Transmission.prototype = {
     },
     
     /*
-     * Refrsh the torrent data
+     * Refresh the torrent data
      */
     reloadTorrents: function() {
         transmission.remoteRequest('reloadTorrents');	
+    },
+    
+    /*
+     * Pause selected torrents
+     */
+    pauseSelectedTorrents: function() {		
+		// Send an ajax request to perform the action (have to convert key strings to integers)
+		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+		this.remoteRequest('pauseTorrents', torrent_id_list);
+    },
+    
+    /*
+     * Resume selected torrents
+     */
+    resumeSelectedTorrents: function() {		
+		// Send an ajax request to perform the action (have to convert key strings to integers)
+		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+		this.remoteRequest('resumeTorrents', torrent_id_list);
+    },
+    
+    /*
+     * Pause all torrents
+     */
+    pauseAllTorrents: function() {	
+		// Send an ajax request to perform the action
+		this.remoteRequest('pauseTorrents');
+    },
+    
+    /*
+     * Resume all torrents
+     */
+    resumeAllTorrents: function() {
+		// Send an ajax request to perform the action
+		this.remoteRequest('resumeTorrents');
     }
+		
 
 
 

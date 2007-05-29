@@ -38,8 +38,9 @@ Menu.prototype = {
 				link.title = links[i];
 				link.onclick = function(e){
 					this.container.hide();
-					alert(Event.element(e).innerHTML);
-					Event.stop(e);
+					if (transmission) {
+						transmission.releaseTorrentRightClickMenu(e);
+					}
 				}.bindAsEventListener(this);
 				link.appendChild(document.createTextNode(links[i]));
 				this.container.appendChild(link);

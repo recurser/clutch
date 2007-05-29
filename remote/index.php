@@ -7,7 +7,7 @@
  */
 
 require_once('inc/trans_main.inc');
-$TControl = new TransmissionController('/Users/malcolm/Library/Application Support/Transmission/daemon/socket');
+$TControl = new TransmissionController('/Users/dave/Library/Application Support/Transmission/daemon/socket');
 $MControl = new MessageController($TControl);
 $Instance = new BigBlueHouse($MControl);
 
