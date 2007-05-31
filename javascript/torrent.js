@@ -132,6 +132,7 @@ Torrent.prototype = {
 			
 		// Set the torrent click observer
 		Event.observe(this._element, 'mouseup', this.clickTorrent.bindAsEventListener(this));
+		Event.observe(this._element, 'contextmenu', this.rightClickTorrent.bindAsEventListener(this));		
 		
 		// Safari hack - first torrent needs to be moved down for some reason. Seems to be ok when
 		// using <li>'s in straight html, but adding through the DOM gets a bit odd.
@@ -145,11 +146,6 @@ Torrent.prototype = {
 		// Update all the labels etc
 		this.refresh(data);
 	},
-	
-	isRightClick: function(event) {
-		return (((event.which) && (event.which == 3)) ||
-			((event.button) && (event.button == 2)));
-	}, 
 
 
 
@@ -236,7 +232,18 @@ Torrent.prototype = {
 	 * 
 	 *  E V E N T   F U N C T I O N S
 	 * 
-	 *--------------------------------------------*/
+	 *--------------------------------------------*/	
+	
+	/*
+	 * Process a right-click event on this torrent
+	 */
+	rightClickTorrent: function(event) {
+		// Don't stop the event! need it for the right-click menu
+		if (!this.isSelected()) {
+			this._controller.deselectAll();
+			this.select();
+		}
+	},
 	
 	/*
 	 * Process a click event on this torrent

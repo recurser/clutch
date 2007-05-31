@@ -15,17 +15,20 @@
 var Menu = Class.create();
 Menu.prototype = {
 	initialize: function (selector, menuClassName, links) {
-		$$(selector).each(function(el){
-			el.observe('contextmenu', function(e){
+		if ($$(selector).first()) {
+			this.bounding_element = $$(selector).first();
+			this.bounding_element.observe('contextmenu', function(e){
 				this.show(e);
 				Event.stop(e);
 			}.bindAsEventListener(this));
-		}.bind(this));
+		}
 		Event.observe(document, 'click', function(){
 			this.hide();
 		}.bindAsEventListener(this), false);
 		this.container = document.createElement('div');
 		Element.addClassName(this.container, menuClassName);
+		this.container.id = menuClassName;
+		menuClassName
 		for (var i=0, len=links.length; i<len; i++){
 			if (links[i]=='.') {
 				var link = document.createElement('div');
@@ -50,11 +53,32 @@ Menu.prototype = {
 		document.body.appendChild(this.container);
 	},
 	
-	show: function(e){
-		this.container.style.left = Event.pointerX(e)+'px';
-		this.container.style.top = Event.pointerY(e)+'px';
+	show: function(e){		
+		// Constrain to within the boundaries of the torrent box
+		var padding_x = 16; 
+		var padding_y = 5;
+		var bounding_element_right = this.bounding_element.getDimensions().width;
+		var bounding_element_bottom = parseInt($$('.torrent_footer').first().getStyle('top'));		
+		var menu_width = this.container.getDimensions().width
+		var menu_height = this.container.getDimensions().height
+		var menu_right = Event.pointerX(e) + menu_width;
+		var menu_bottom = Event.pointerY(e) + menu_height;
+			
+		if (menu_right > bounding_element_right) {
+			var left_position = bounding_element_right - menu_width - padding_x;
+			this.container.style.left = left_position + 'px';
+		} else {
+			this.container.style.left = Event.pointerX(e)+'px';
+		}
 		
-		// Dave added for transmission to force display
+		if (menu_bottom > bounding_element_bottom) {
+			var bottom_position = bounding_element_bottom - menu_height - padding_y;
+			this.container.style.top = bottom_position + 'px';
+		} else {
+			this.container.style.top = Event.pointerY(e)+'px';
+		}
+		
+		// Added to force transmission to display
 		this.container.style.position = 'absolute';
 		this.container.style.display = 'block';
 		this.container.style.zIndex = 3;
@@ -73,6 +97,6 @@ Menu.prototype = {
 Event.observe(window, 'load', function() {
 	var links = ['Pause Selected','Resume Selected','Resume Selected Without Wait',
 				'.','Remove From List...','Remove Downloaded File...',
-				'Remove Torrent File...','Remove All Files...','.','Show Inspector'];
+				'Remove Torrent File...','Remove All Files...','.','Hide Inspector'];
 	var menuObj = new Menu('div#torrent_container', 'torrent_context_menu', links);
 }, false);

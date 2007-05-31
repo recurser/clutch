@@ -335,11 +335,8 @@ Transmission.prototype = {
 	 */
 	releaseResumeSelectedButton: function(event) {
 		Event.stop(event);			
-		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
-		
-		// Send an ajax request to perform the action (have to convert key strings to integers)
-		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
-		this.remoteRequest('resumeTorrents', torrent_id_list);
+		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';	
+		this.resumeSelectedTorrents();
 	},
 
 	/*
@@ -414,19 +411,10 @@ Transmission.prototype = {
 		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
 		
 		// Perform the toggle
-		var container_right;
 		if (this._inspector_visible) {
-			container_right = parseInt($('torrent_container').getStyle('right')) - parseInt($('torrent_inspector').getWidth()) + 1;
-			$('torrent_container').style.right = container_right + "px";
-			$('torrent_filter_bar').style.right = container_right + "px";
-			$('torrent_inspector').hide();
-			this._inspector_visible = false;
+			this.hideInspector();
 		} else {
-			container_right = parseInt($('torrent_container').getStyle('right')) + parseInt($('torrent_inspector').getWidth());
-			$('torrent_container').style.right = container_right + "px";
-			$('torrent_filter_bar').style.right = container_right + "px";
-			$('torrent_inspector').show();
-			this._inspector_visible = true;
+			this.showInspector();
 		}
 	},
 
@@ -511,6 +499,17 @@ Transmission.prototype = {
 			case 'resume_selected':
 				this.resumeSelectedTorrents();
 				break;			
+			case 'show_inspector':	
+			case 'hide_inspector':
+				if (this._inspector_visible) {
+					this.hideInspector();
+				} else {
+					this.showInspector();
+				}
+				break;
+			default:
+				//console.log(command);
+				break;
 		}
 	},
 	
@@ -646,6 +645,32 @@ Transmission.prototype = {
 		$('torrent_inspector_creator_date').innerHTML = 'N/A';
 		$('torrent_inspector_torrent_file').value = 'N/A';
 	},
+    
+    /*
+     * Show the inspector
+     */
+	showInspector: function() {
+		var container_right;
+		container_right = parseInt($('torrent_container').getStyle('right')) + parseInt($('torrent_inspector').getWidth());
+		$('torrent_container').style.right = container_right + "px";
+		$('torrent_filter_bar').style.right = container_right + "px";
+		$('torrent_inspector').show();
+		this._inspector_visible = true;
+		$('torrent_context_menu').descendants().last().innerHTML = 'Hide Inspector';
+	},
+    
+    /*
+     * Hide the inspector
+     */
+	hideInspector: function() {
+		var container_right;
+		container_right = parseInt($('torrent_container').getStyle('right')) - parseInt($('torrent_inspector').getWidth()) + 1;
+		$('torrent_container').style.right = container_right + "px";
+		$('torrent_filter_bar').style.right = container_right + "px";
+		$('torrent_inspector').hide();
+		this._inspector_visible = false;
+		$('torrent_context_menu').descendants().last().innerHTML = 'Show Inspector';
+	},
 
     /*
      * Load a list of torrents into the application
@@ -713,19 +738,23 @@ Transmission.prototype = {
     /*
      * Pause selected torrents
      */
-    pauseSelectedTorrents: function() {		
-		// Send an ajax request to perform the action (have to convert key strings to integers)
-		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
-		this.remoteRequest('pauseTorrents', torrent_id_list);
+    pauseSelectedTorrents: function() {
+		if (this._selected_torrents.keys().length > 0) {
+			// Send an ajax request to perform the action (	have to convert key strings to integers)
+			var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+			this.remoteRequest('pauseTorrents', torrent_id_list);
+		}
     },
     
     /*
      * Resume selected torrents
      */
-    resumeSelectedTorrents: function() {		
-		// Send an ajax request to perform the action (have to convert key strings to integers)
-		var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
-		this.remoteRequest('resumeTorrents', torrent_id_list);
+    resumeSelectedTorrents: function() {
+		if (this._selected_torrents.keys().length > 0) {	
+			// Send an ajax request to perform the action (have to convert key strings to integers)
+			var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+			this.remoteRequest('resumeTorrents', torrent_id_list);
+		}
     },
     
     /*
