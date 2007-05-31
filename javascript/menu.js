@@ -28,7 +28,6 @@ Menu.prototype = {
 		this.container = document.createElement('div');
 		Element.addClassName(this.container, menuClassName);
 		this.container.id = menuClassName;
-		menuClassName
 		for (var i=0, len=links.length; i<len; i++){
 			if (links[i]=='.') {
 				var link = document.createElement('div');
