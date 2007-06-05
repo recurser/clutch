@@ -263,58 +263,5 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 	
 			return $Results;
 		}
-
-		public function LoadTorrents()
-		{
-			$idList = file_get_contents($this->CacheFiles[1]);
-
-			if (empty($idList))
-			{
-				$IDs = $this->M->GetInfoAll('id');
-				$oldIDs = $IDs[1];
-				unset($IDs);
-				foreach ($oldIDs as $value)
-					$IDs[] = (int) $value['id'];
-			}
-			else
-				$IDs = (array) unserialize($idList);
-
-			// take first item off list, get info for it, then go onto next item
-			$info_fields = array(
-					"id", "hash", "name", "path", "saved", "private", 
-					"trackers", "comment", "creator", "date", "size");
-			$status_fields = array(
-					"completed", "download-speed", "download-total", "error", 
-					"error-message", "eta", "id", "peers-downloading", 
-					"peers-from", "peers-total", "peers-uploading", "running", 
-					"state", "swarm-speed", "tracker", "scrape-completed", 
-					"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
-
-			$torrent_list_data = $this->M->GetInfo($IDs[0], $info_fields);
-			$torrent_status_data = $this->M->GetStatus($IDs[0], $status_fields);				
-
-			$result = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);
-
-			array_shift($IDs);
-
-			if (file_exists($this->CacheFiles[0]))
-			{
-				$CurrentTorrents = unserialize(file_get_contents($this->CacheFiles[0]));
-				$data = (!empty($CurrentTorrents)) ? array_merge($CurrentTorrents, $result) : $result;
-				file_put_contents($this->CacheFiles[0], serialize($data));
-			}
-
-			if (!empty($IDs))
-			{
-				file_put_contents($this->CacheFiles[1], serialize($IDs));
-				header('location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'?action=getTorrentList&param=[]');
-			}
-			else
-			{
-				file_put_contents($this->CacheFiles[0], '');
-				file_put_contents($this->CacheFiles[1], '');
-				return $this->json->encode($data);
-			}
-		}
 	}
 ?>
