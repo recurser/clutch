@@ -237,10 +237,12 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function FindPossibleSockets()
 		{
-			$Find = 'daemon/socket';
+			$Find = 'socket';
 			$placesToLook = array
 			(
+				'/Users/'	=> '/Library/Application Support/Transmission/daemon/',
 				'/Users/'	=> '/Library/Application Support/Transmission/',
+				'/home/'	=> '/.transmission/daemon/',
 				'/home/'	=> '/.transmission/',
 			);
 	

@@ -1,5 +1,10 @@
 TODO
 ==================================================
+- Major issues!!! <-- READ
+	- BEncode classes run out of memory with large numbers of torrents (5+)
+	- We need it to not ask for all data at once, but instead first get info all and *just* grab the torrent ids, then from there, make a request for each id's data. Asking for all at once either gives problems with the socket, or php runs out of memory.
+
+
 - Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - Arrow-Key still doesnt't work 100% - click an element near the bottom and then apple-click the first torrent in the list and press up. Same for the down key.
