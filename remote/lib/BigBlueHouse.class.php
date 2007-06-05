@@ -12,6 +12,7 @@
 	require_once('MessageController.class.php');
 	require_once('TransmissionController.class.php');
 	require_once('JSON.php');
+	require_once('SQlite.class.php');
 
 	class BigBlueHouse
 	{
