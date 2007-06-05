@@ -130,7 +130,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 * @param array $status_fields Array of torrent status fields to return
 		 * @return string $result Array of torrent data after they've started
 		 */
-		public function resumeTorrents($json_array = "[]", $info_fields = array(), $status_fields=array())
+		public function resumeTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 
@@ -153,7 +153,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 * @param array $status_fields Array of torrent status fields to return
 		 * @return string $result Array of torrent data after the pause
 		 */
-		public function pauseTorrents($json_array = "[]", $info_fields = array(), $status_fields=array())
+		public function pauseTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")
 		{
 			$torrent_id_list =  $this->json->decode($json_array);
 
@@ -181,20 +181,23 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			$torrent_list_data = array();
 			$torrent_status_data = array();
 
-			// If no ids are specified, return data for all torrents
+			// If no ids are specified, get a list of all torrent IDs
 			if (count($id_list) == 0) {
-				$torrent_list_data = $this->M->GetInfoAll($info_fields);
-				$torrent_status_data = $this->M->GetStatusAll($status_fields);				
-
-			// Otherwise, only get data for the specified torrents	
+				$temp_id_list = $this->M->GetInfoAll('id');
+				$temp_id_list = $temp_id_list[1];
+				$id_list = array();
+				foreach ($temp_id_list as $row) {
+					$id_list[] = (int) $row['id'];
+				}
 			}
-			else
-			{
-				$torrent_list_data = $this->M->GetInfo($id_list, $info_fields);
-				$torrent_status_data = $this->M->GetStatus($id_list, $status_fields);				
-			}
-
-			$result = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);
+			
+			$result = array();
+			foreach ($id_list as $id) {
+				$torrent_list_data = $this->M->GetInfo($id, $info_fields);
+				$torrent_status_data = $this->M->GetStatus($id, $status_fields);
+				$torrent_data = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);
+				array_push($result, $torrent_data[0]);
+			}		
 
 			return $this->json->encode($result);
 		}

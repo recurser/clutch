@@ -20,8 +20,17 @@ if (isset($_GET['action']) && isset($_GET['param']))
 	switch($_GET['action']) 
 	{
 		case 'getTorrentList' :
-			$function = 'addTorrents';
-			$arg_list = $Instance->LoadTorrents($_GET['ids']);
+			$function = 'addTorrents';			
+			$info_fields = array(
+					"id", "hash", "name", "path", "saved", "private", 
+					"trackers", "comment", "creator", "date", "size");
+			$status_fields = array(
+					"completed", "download-speed", "download-total", "error", 
+					"error-message", "eta", "id", "peers-downloading", 
+					"peers-from", "peers-total", "peers-uploading", "running", 
+					"state", "swarm-speed", "tracker", "scrape-completed", 
+					"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
+			$arg_list = $Instance->getTorrentData($info_fields, $status_fields);
 			break;
 
 		case 'reloadTorrents' :
@@ -41,7 +50,7 @@ if (isset($_GET['action']) && isset($_GET['param']))
 					'download-speed', 'upload-speed', 'peers-downloading', 
 					'peers-from', 'peers-total', 'peers-uploading', 'error', 
 					'error-message', 'eta', 'running', 'state');
-			$arg_list = $Instance->pauseTorrents($_GET['param'], $info_fields, $status_fields);
+			$arg_list = $Instance->pauseTorrents($info_fields, $status_fields, $_GET['param']);
 			break;
 
 		case 'resumeTorrents' :
@@ -51,7 +60,7 @@ if (isset($_GET['action']) && isset($_GET['param']))
 					'download-speed', 'upload-speed', 'peers-downloading', 
 					'peers-from', 'peers-total', 'peers-uploading', 'error', 
 					'error-message', 'eta', 'running', 'state');
-			$arg_list = $Instance->resumeTorrents($_GET['param'], $info_fields, $status_fields);
+			$arg_list = $Instance->resumeTorrents($info_fields, $status_fields, $_GET['param']);
 			break;
 	
 	}
