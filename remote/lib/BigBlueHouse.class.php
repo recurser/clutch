@@ -12,7 +12,7 @@
 	require_once('MessageController.class.php');
 	require_once('TransmissionController.class.php');
 	require_once('JSON.php');
-	require_once('SQlite.class.php');
+//	require_once('SQlite.class.php');
 
 	class BigBlueHouse
 	{
@@ -20,6 +20,7 @@
 		public $M;
 		private $LastError;
 		private $json;
+		private $CacheFile = 'data/torrentCache';
 
 		public function __construct($MessageController = null)
 		{
@@ -258,6 +259,53 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				}
 	
 			return $Results;
+		}
+
+		public function LoadTorrents($idList)
+		{
+			if (empty($idList))
+			{
+				$IDs = $this->M->GetInfoAll('id');
+				$oldIDs = $IDs[1];
+				unset($IDs);
+				foreach ($oldIDs as $value)
+					$IDs[] = (int) $value['id'];
+			}
+			else
+				$IDs = (array) unserialize(base64_decode($idList));
+
+			// take first item off list, get info for it, then go onto next item
+			$info_fields = array(
+					"id", "hash", "name", "path", "saved", "private", 
+					"trackers", "comment", "creator", "date", "size");
+			$status_fields = array(
+					"completed", "download-speed", "download-total", "error", 
+					"error-message", "eta", "id", "peers-downloading", 
+					"peers-from", "peers-total", "peers-uploading", "running", 
+					"state", "swarm-speed", "tracker", "scrape-completed", 
+					"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
+
+			$torrent_list_data = $this->M->GetInfo($IDs[0], $info_fields);
+			$torrent_status_data = $this->M->GetStatus($IDs[0], $status_fields);				
+
+			$result = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);
+
+			array_shift($IDs);
+
+			if (file_exists($this->CacheFile))
+			{
+				$CurrentTorrents = unserialize(file_get_contents($this->CacheFile));
+				$data = (!empty($CurrentTorrents)) ? array_merge($CurrentTorrents, $result) : $result;
+				file_put_contents($this->CacheFile, serialize($data));
+			}
+
+			if (!empty($IDs))
+				header('location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'?action=getTorrentList&param=[]&ids='. base64_encode(serialize($IDs)));
+			else
+			{
+				file_put_contents($this->CacheFile, '');
+				return $this->json->encode($data);
+			}
 		}
 	}
 ?>
