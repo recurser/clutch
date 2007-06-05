@@ -1,7 +1,12 @@
 TODO
 ==================================================
 - Major issues!!! <-- READ
-	- BEncode classes run out of memory with large numbers of torrents (5+)
+	- BEncode classes run out of memory with large numbers of torrents (5+) :
+	  Pretty sure this is a memory prob, getting :
+	  	"httpd(14838) malloc: ***  Deallocation of a pointer not malloced: 0x3482f0; 
+		This could be a double free(), or free() called with the middle of an allocated block; 
+		Try setting environment variable MallocHelp to see tools to help debug"
+	  possibly garbage collection clearing stuff we're using because everything is taking so long (random guess)?
 	- We need it to not ask for all data at once, but instead first get info all and *just* grab the torrent ids, then from there, make a request for each id's data. Asking for all at once either gives problems with the socket, or php runs out of memory.
 
 
