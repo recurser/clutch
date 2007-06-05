@@ -20,7 +20,7 @@
 		public $M;
 		private $LastError;
 		private $json;
-		private $CacheFile = 'data/torrentCache';
+		private $CacheFiles = array('data/torrentCache', 'data/torrentCache.1');
 
 		public function __construct($MessageController = null)
 		{
@@ -261,8 +261,10 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			return $Results;
 		}
 
-		public function LoadTorrents($idList)
+		public function LoadTorrents()
 		{
+			$idList = file_get_contents($this->CacheFiles[1]);
+
 			if (empty($idList))
 			{
 				$IDs = $this->M->GetInfoAll('id');
@@ -272,7 +274,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 					$IDs[] = (int) $value['id'];
 			}
 			else
-				$IDs = (array) unserialize(base64_decode($idList));
+				$IDs = (array) unserialize($idList);
 
 			// take first item off list, get info for it, then go onto next item
 			$info_fields = array(
@@ -292,18 +294,22 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 
 			array_shift($IDs);
 
-			if (file_exists($this->CacheFile))
+			if (file_exists($this->CacheFiles[0]))
 			{
-				$CurrentTorrents = unserialize(file_get_contents($this->CacheFile));
+				$CurrentTorrents = unserialize(file_get_contents($this->CacheFiles[0]));
 				$data = (!empty($CurrentTorrents)) ? array_merge($CurrentTorrents, $result) : $result;
-				file_put_contents($this->CacheFile, serialize($data));
+				file_put_contents($this->CacheFiles[0], serialize($data));
 			}
 
 			if (!empty($IDs))
-				header('location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'?action=getTorrentList&param=[]&ids='. base64_encode(serialize($IDs)));
+			{
+				file_put_contents($this->CacheFiles[1], serialize($IDs));
+				header('location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['REQUEST_URI']).'?action=getTorrentList&param=[]');
+			}
 			else
 			{
-				file_put_contents($this->CacheFile, '');
+				file_put_contents($this->CacheFiles[0], '');
+				file_put_contents($this->CacheFiles[1], '');
 				return $this->json->encode($data);
 			}
 		}
