@@ -366,9 +366,11 @@
 		 */
 		public function RemoveTorrents()
 		{
+			$Torrents = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args();
+			
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('remove', func_get_args())
+					array('remove', $Torrents)
 				),
 				false
 			);

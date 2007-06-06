@@ -115,14 +115,35 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			}
 		}
 
-		/* public function resumeTorrents([(string) $json_array], [(array)$info_fields], [(array)$status_fields])
+		/* public function removeTorrents([(string) $json_array], [(array)$info_fields], [(array)$status_fields])
+		 * Removes a list of torrents, and returns an JSON array of torrent ids for the interface to remove
+		 * Ex. removeTorrents([1,2,3])
+		 *
+		 * @access public
+		 * @param string $json_array Array of torrent IDs to remove
+		 * @return string $result Array of torrent IDs for the interface to remove
+		 */
+		public function removeTorrents($json_array = "[]")
+		{
+			$torrent_id_list =  json_decode($json_array);
+
+			if (count($torrent_id_list) == 0) {
+				$this->M->RemoveAllTorrents();
+			} else {
+				$this->M->RemoveTorrents($torrent_id_list);
+			}
+
+			return $json_array;
+		}
+
+		/* public function resumeTorrents([(array)$info_fields], [(array)$status_fields], [(string) $json_array])
 		 * Starts a list of torrents, and returns an JSON array of torrent data
 		 * Ex. resumeTorrents([1,2,3])
 		 *
 		 * @access public
-		 * @param string $json_array Array of torrent IDs to start
 		 * @param array $info_fields Array of torrent info fields to return
 		 * @param array $status_fields Array of torrent status fields to return
+		 * @param string $json_array Array of torrent IDs to start
 		 * @return string $result Array of torrent data after they've started
 		 */
 		public function resumeTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")
@@ -138,14 +159,14 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			return $this->getTorrentData($info_fields, $status_fields, $torrent_id_list);
 		}
 
-		/* public function pauseTorrents([(string) $json_array], [(array)$info_fields], [(array)$status_fields])
+		/* public function pauseTorrents([(array)$info_fields], [(array)$status_fields], [(string) $json_array])
 		 * Pauses a list of torrents, and returns an JSON array of torrent data
 		 * Ex. pauseTorrents([1,2,3])
 		 *
 		 * @access public
-		 * @param string $json_array Array of torrent IDs to pause
 		 * @param array $info_fields Array of torrent info fields to return
 		 * @param array $status_fields Array of torrent status fields to return
+		 * @param string $json_array Array of torrent IDs to pause
 		 * @return string $result Array of torrent data after the pause
 		 */
 		public function pauseTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")

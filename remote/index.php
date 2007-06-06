@@ -61,6 +61,11 @@
 						'error-message', 'eta', 'running', 'state');
 				$arg_list = $Instance->resumeTorrents($info_fields, $status_fields, $_GET['param']);
 				break;
+	
+			case 'removeTorrents' :
+				$function = 'removeTorrents';
+				$arg_list = $Instance->removeTorrents($_GET['param']);
+				break;
 		
 		}
 	

@@ -18,7 +18,7 @@ Transmission.prototype = {
 		 * Private Constants
 		 */
 		var _RefreshInterval;
-		this._RefreshInterval = 1;
+		this._RefreshInterval = 5;
 		
         /*
          * Private Variables
@@ -384,7 +384,8 @@ Transmission.prototype = {
 	 */
 	releaseRemoveButton: function(event) {
 		Event.stop(event);		
-		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
+		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';	
+		this.removeSelectedTorrents();
 	},
 
 	/*
@@ -489,8 +490,9 @@ Transmission.prototype = {
 	releaseTorrentRightClickMenu: function(event) {		
 		Event.stop(event);
 		
-		// Lower-case and replace spaces with underscores to keep the args regular
-		var command = Event.element(event).innerHTML.toLowerCase().replace(/ /,'_');
+		// Lower-case and replace spaces with underscores and delete periods to keep the args regular
+		var command = Event.element(event).innerHTML.toLowerCase().replace(/ /g,'_');
+		var command = command.replace(/\./g,'');
 		
 		switch (command) {
 			case 'pause_selected':
@@ -498,7 +500,10 @@ Transmission.prototype = {
 				break;				
 			case 'resume_selected':
 				this.resumeSelectedTorrents();
-				break;			
+				break;	
+			case 'remove_from_list':
+				this.removeSelectedTorrents();
+				break;				
 			case 'show_inspector':	
 			case 'hide_inspector':
 				if (this._inspector_visible) {
@@ -508,7 +513,7 @@ Transmission.prototype = {
 				}
 				break;
 			default:
-				//console.log(command);
+				console.log(command);
 				break;
 		}
 	},
@@ -690,6 +695,19 @@ Transmission.prototype = {
 		// Update global upload and download speed display
 		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
     },
+
+    /*
+     * Load a list of torrents into the application
+     */
+    removeTorrents: function(torrent_list) {
+		if (torrent_list.length == 0) {
+			torrent_list = this._torrents.values().collect(function(s) {return parseInt(s)});
+		}
+		
+        for (i=0; i<torrent_list.length; i++) {	
+			Element.remove(this._torrents[torrent_list[i]].element());
+        }
+    },
     
     /*
      * Set the global up and down speed in the interface
@@ -756,6 +774,18 @@ Transmission.prototype = {
 			this.remoteRequest('resumeTorrents', torrent_id_list);
 		}
     },
+    
+    /*
+     * Remove selected torrents
+     */
+    removeSelectedTorrents: function() {
+		if (this._selected_torrents.keys().length > 0) {	
+			// Send an ajax request to perform the action (have to convert key strings to integers)
+			var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+			this.remoteRequest('removeTorrents', torrent_id_list);
+		}
+    },
+
     
     /*
      * Pause all torrents
