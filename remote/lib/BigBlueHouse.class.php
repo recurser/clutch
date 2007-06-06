@@ -11,15 +11,12 @@
 	require_once('IPCProtocol.class.php');
 	require_once('MessageController.class.php');
 	require_once('TransmissionController.class.php');
-	require_once('JSON.php');
-//	require_once('SQlite.class.php');
 
 	class BigBlueHouse
 	{
 		public $Torrents;
 		public $M;
 		private $LastError;
-		private $json;
 		private $CacheFiles = array('data/torrentCache', 'data/torrentCache.1');
 
 		public function __construct($MessageController = null)
@@ -28,8 +25,6 @@
 				$this->M = $MessageController;
 			else
 				$M = new MessageController(new TransmissionController);
-
-			$this->json = new Services_JSON();
 		}
 
 		private function Error($ErrorString)
@@ -132,7 +127,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function resumeTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")
 		{
-			$torrent_id_list =  $this->json->decode($json_array);
+			$torrent_id_list =  json_decode($json_array);
 
 			if (count($torrent_id_list) == 0) {
 				$this->M->StartAllTorrents();
@@ -155,7 +150,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function pauseTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")
 		{
-			$torrent_id_list =  $this->json->decode($json_array);
+			$torrent_id_list =  json_decode($json_array);
 
 			if (count($torrent_id_list) == 0) {
 				$this->M->StopAllTorrents();
@@ -199,7 +194,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				array_push($result, $torrent_data[0]);
 			}		
 
-			return $this->json->encode($result);
+			return json_encode($result);
 		}
 
 		/* 	private function mergeTorrentData((array) $torrent_list_data, (array) $torrent_status_data)
