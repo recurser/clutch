@@ -1,145 +1,142 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<title>Transmission</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta http-equiv="cache-control" content="Private" />
-	<link href="./images/favicon.ico" rel="SHORTCUT ICON" />
-	<link rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
-	<!--[if lt IE 7]>
-	<link rel="stylesheet" type="text/css" href="./stylesheets/common_ie_specific.css"/>
-	<![endif]-->
-	<script type="text/javascript" src="./javascript/scriptaculous/prototype.js"></script>
-	<script type="text/javascript" src="./javascript/scriptaculous/scriptaculous.js?load=effects,dragdrop"></script>
-	<script type="text/javascript" src="./javascript/extended_insertion.js"></script>
-	<script type="text/javascript" src="./javascript/menu.js"></script>
-	<script type="text/javascript" src="./javascript/common.js"></script>
-	<script type="text/javascript" src="./javascript/transmission.js"></script>
-	<script type="text/javascript" src="./javascript/torrent.js"></script>
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>Transmission</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="cache-control" content="Private" />
+		<link href="./images/favicon.ico" rel="SHORTCUT ICON" />
+		<link rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
+		<!--[if lt IE 7]>
+		<link rel="stylesheet" type="text/css" href="./stylesheets/common_ie_specific.css"/>
+		<![endif]-->
+		<script type="text/javascript" src="./javascript/scriptaculous/prototype.js"></script>
+		<script type="text/javascript" src="./javascript/scriptaculous/scriptaculous.js?load=effects,dragdrop"></script>
+		<script type="text/javascript" src="./javascript/extended_insertion.js"></script>
+		<script type="text/javascript" src="./javascript/menu.js"></script>
+		<script type="text/javascript" src="./javascript/common.js"></script>
+		<script type="text/javascript" src="./javascript/transmission.js"></script>
+		<script type="text/javascript" src="./javascript/torrent.js"></script>
+	</head>
+	<body>
 
-<body>
-
-<div class="torrent_global_menu">
-     <ul>    
-         <li id="open"><a href="#open" id="open_link">Open</a></li>
-         <li id="remove"><a href="#remove" id="remove_link">Remove</a></li>
-         <li class="divider">&nbsp;</li>
-         <li id="pause_selected"><a href="#pause_selected" id="pause_selected_link">Pause</a></li>
-         <li id="resume_selected"><a href="#resume_selected" id="resume_selected_link">Resume</a></li>
-         <li class="divider">&nbsp;</li>
-         <li id="pause_all"><a href="#pause_all" id="pause_all_link">Pause All</a></li>
-         <li id="resume_all"><a href="#resume_all" id="resume_all_link">Resume All</a></li>
-         <li id="inspector"><a href="#inspector" id="inspector_link">Inspector</a></li>
-         <li id="filter"><a href="#filter" id="filter_link">Filter</a></li>
-     </ul>
-</div>
-
-<div class="torrent_global_details">
-	<div id="torrent_global_transfer">0 Transfers</div>
-	<div id="torrent_global_upload">Total UL: 0 B/s</div>
-	<div id="torrent_global_download">Total DL: 0 B/s</div>
-</div>
-
-<div id="torrent_filter_bar">
-	<a href="#all">All</a>
-	<a href="#downloading" class="active">Downloading</a>
-	<a href="#seeding">Seeding</a>
-	<a href="#paused">Paused</a>
-	<input type="text" id="torrent_search" />
-
-</div>
-
-<div id="torrent_container">
-	<ul class="torrent_list" id="torrent_list"><li></li></ul>
-</div>
-
-<div id="torrent_inspector">
-	
-	<ul class="torrent_inspector_tabs">
-		<li><a href="#info" id="inspector_tab_info" class="inspector_tab selected">Info</a></li>
-		<li><a href="#activity" id="inspector_tab_activity" class="inspector_tab">Activity</a></li>
-		<li><a href="#files" id="inspector_tab_files" class="inspector_tab">Files</a></li>
-	</ul>
-	
-	<div class="torrent_inspector_header">
-		<h1 id="torrent_inspector_name">No Torrent Selected</h1>
-		<span id="torrent_inspector_size">0 B</span>
-	</div>
-	
-	<div class="torrent_inspector_section" id="inspector_tab_info_container">
-		<h2>Torrent Information</h2>
-		<label>Tracker:</label>
-		<div id="torrent_inspector_tracker">N/A</div>
-		<label>Hash:</label>
-		<div id="torrent_inspector_hash">N/A</div>
-		<label>Secure:</label>
-		<div id="torrent_inspector_secure">N/A</div>
-		<label>Comment:</label>
-		<div id="torrent_inspector_comment">N/A</div>
+		<div class="torrent_global_menu">
+			 <ul>    
+				 <li id="open"><a href="#open" id="open_link">Open</a></li>
+				 <li id="remove"><a href="#remove" id="remove_link">Remove</a></li>
+				 <li class="divider">&nbsp;</li>
+				 <li id="pause_selected"><a href="#pause_selected" id="pause_selected_link">Pause</a></li>
+				 <li id="resume_selected"><a href="#resume_selected" id="resume_selected_link">Resume</a></li>
+				 <li class="divider">&nbsp;</li>
+				 <li id="pause_all"><a href="#pause_all" id="pause_all_link">Pause All</a></li>
+				 <li id="resume_all"><a href="#resume_all" id="resume_all_link">Resume All</a></li>
+				 <li id="inspector"><a href="#inspector" id="inspector_link">Inspector</a></li>
+				 <li id="filter"><a href="#filter" id="filter_link">Filter</a></li>
+			 </ul>
+		</div>
 		
-		<h2>Created By</h2>
-		<label>Creator:</label>
-		<div id="torrent_inspector_creator">N/A</div>
-		<label>Date:</label>
-		<div id="torrent_inspector_creator_date">N/A</div>
+		<div class="torrent_global_details">
+			<div id="torrent_global_transfer">0 Transfers</div>
+			<div id="torrent_global_upload">Total UL: 0 B/s</div>
+			<div id="torrent_global_download">Total DL: 0 B/s</div>
+		</div>
 		
-		<h2>Where</h2>
-		<label>Data File:</label>
-		<div id="torrent_inspector_data_file">N/A</div>
-		<label>Torrent File:</label>
-		<div id="torrent_inspector_torrent_file">N/A</div>
-		<label>Date Added:</label>
-		<div id="torrent_inspector_date_added">N/A</div>
-	</div>
-	
-	<div class="torrent_inspector_section" style="display:none;" id="inspector_tab_activity_container">
-		<h2>Activity</h2>
-		<label>State:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Valid DL:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Downloaded:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Uploaded:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Ratio:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Swarm Rate:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Error:</label>
-		<div id="torrent_inspector_">N/A</div>
+		<div id="torrent_filter_bar">
+			<a href="#all">All</a>
+			<a href="#downloading" class="active">Downloading</a>
+			<a href="#seeding">Seeding</a>
+			<a href="#paused">Paused</a>
+			<input type="text" id="torrent_search" />
 		
-		<h2>Peers</h2>
-		<label>UL To:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>DL From:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Total Seeders:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Total Leechers:</label>
-		<div id="torrent_inspector_">N/A</div>
-		<label>Total DL:</label>
-		<div id="torrent_inspector_">N/A</div>
-	</div>
-	
-	<div class="torrent_inspector_section" style="display:none;" id="inspector_tab_files_container">
-		<h2>Files</h2>
-		<label>N/A</label>
-		<div></div>
-	</div>
-</div>
-
-<div class="torrent_footer">
-	<a href="#global_settings" id="global_settings">
-		<img src="images/graphics/footer_action_button.png" alt="Adjust global settings." />
-	</a>
-	<a href="#speed_limit" id="speed_limit">
-		<img src="images/graphics/footer_speed_limit_button.png" alt="Speed limit overrides the total bandwidth limits with it's own limits." />
-	</a>
-</div>
-
-
-	
+		</div>
 		
-</body>
+		<div id="torrent_container">
+			<ul class="torrent_list" id="torrent_list"><li></li></ul>
+		</div>
+		
+		<div id="torrent_inspector">
+			
+			<ul class="torrent_inspector_tabs">
+				<li><a href="#info" id="inspector_tab_info" class="inspector_tab selected">Info</a></li>
+				<li><a href="#activity" id="inspector_tab_activity" class="inspector_tab">Activity</a></li>
+				<li><a href="#files" id="inspector_tab_files" class="inspector_tab">Files</a></li>
+			</ul>
+			
+			<div class="torrent_inspector_header">
+				<h1 id="torrent_inspector_name">No Torrent Selected</h1>
+				<span id="torrent_inspector_size">0 B</span>
+			</div>
+			
+			<div class="torrent_inspector_section" id="inspector_tab_info_container">
+				<h2>Torrent Information</h2>
+				<label>Tracker:</label>
+				<div id="torrent_inspector_tracker">N/A</div>
+				<label>Hash:</label>
+				<div id="torrent_inspector_hash">N/A</div>
+				<label>Secure:</label>
+				<div id="torrent_inspector_secure">N/A</div>
+				<label>Comment:</label>
+				<div id="torrent_inspector_comment">N/A</div>
+				
+				<h2>Created By</h2>
+				<label>Creator:</label>
+				<div id="torrent_inspector_creator">N/A</div>
+				<label>Date:</label>
+				<div id="torrent_inspector_creator_date">N/A</div>
+				
+				<h2>Where</h2>
+				<label>Data File:</label>
+				<div id="torrent_inspector_data_file">N/A</div>
+				<label>Torrent File:</label>
+				<div id="torrent_inspector_torrent_file">N/A</div>
+				<label>Date Added:</label>
+				<div id="torrent_inspector_date_added">N/A</div>
+			</div>
+			
+			<div class="torrent_inspector_section" style="display:none;" id="inspector_tab_activity_container">
+				<h2>Activity</h2>
+				<label>State:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Valid DL:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Downloaded:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Uploaded:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Ratio:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Swarm Rate:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Error:</label>
+				<div id="torrent_inspector_">N/A</div>
+				
+				<h2>Peers</h2>
+				<label>UL To:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>DL From:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Total Seeders:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Total Leechers:</label>
+				<div id="torrent_inspector_">N/A</div>
+				<label>Total DL:</label>
+				<div id="torrent_inspector_">N/A</div>
+			</div>
+			
+			<div class="torrent_inspector_section" style="display:none;" id="inspector_tab_files_container">
+				<h2>Files</h2>
+				<label>N/A</label>
+				<div></div>
+			</div>
+		</div>
+		
+		<div class="torrent_footer">
+			<a href="#global_settings" id="global_settings">
+				<img src="images/graphics/footer_action_button.png" alt="Adjust global settings." />
+			</a>
+			<a href="#speed_limit" id="speed_limit">
+				<img src="images/graphics/footer_speed_limit_button.png" alt="Speed limit overrides the total bandwidth limits with it's own limits." />
+			</a>
+		</div>
+
+	</body>
 </html>
