@@ -24,17 +24,9 @@
 		 * __construct()
 		 * Constructer for class. runs initial setup
 		 */
-		public function __construct($SocketURL = false)
+		public function __construct($SocketURL)
 		{
-			if ($SocketURL === false)
-			{
-				if (PHP_OS == 'Darwin')
-					$this->SocketURL = '/Users/malcolm/Library/Application Support/Transmission/daemon/socket';
-				else
-					$this->SocketURL = '~/.transmission/daemon/socket';
-			}
-			else
-				$this->SocketURL = $SocketURL;
+			$this->SocketURL = trim($SocketURL);
 
 			$this->IPCProtocol = new IPCProtocol;
 			$this->Connect();
