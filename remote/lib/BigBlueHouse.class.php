@@ -17,7 +17,6 @@
 		public $Torrents;
 		public $M;
 		private $LastError;
-		private $CacheFiles = array('data/torrentCache', 'data/torrentCache.1');
 
 		public function __construct($MessageController = null)
 		{
