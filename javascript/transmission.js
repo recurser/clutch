@@ -83,7 +83,6 @@ Transmission.prototype = {
 		// Inspector tabs
 		Event.observe($('inspector_tab_info'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
 		Event.observe($('inspector_tab_activity'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
-		Event.observe($('inspector_tab_files'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
 
 		// Create a periodical executer to refresh the list
 		new PeriodicalExecuter(this.reloadTorrents, this._RefreshInterval);
@@ -434,7 +433,7 @@ Transmission.prototype = {
 		Event.stop(event);
 		
 		// Unselect all the tabs, select the clicked tab, and display the appropriate info
-		var tab_ids = ['inspector_tab_info', 'inspector_tab_activity', 'inspector_tab_files'];
+		var tab_ids = ['inspector_tab_info', 'inspector_tab_activity'];
         for (i=0; i<tab_ids.length; i++) {
 			if (Event.element(event).id == tab_ids[i]) {
 				$(tab_ids[i]).addClassName('selected');
