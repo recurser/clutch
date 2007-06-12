@@ -1,8 +1,21 @@
+/*
+ *	Copyright © Dave Perrett and Malcolm Jarvis
+ *	This code is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 license.
+ *	For more details, see http://creativecommons.org/licenses/by-nc-sa/3.0/
+ *
+ * Common javascript
+ */
 
-// Initialise a torrent controller to handle events
 var transmission;
+var dialog;
+
 window.onload=function() { 
+	
+	// Initialise a torrent controller to handle events
 	transmission = new Transmission();
+	
+	// Initialise the dialog controller
+	dialog = new Dialog();
 
 	if (BrowserDetect.browser == 'Safari') {
 		// Hack to move the torrent view to the right spot in safari

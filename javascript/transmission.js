@@ -383,7 +383,7 @@ Transmission.prototype = {
 	 */
 	releaseRemoveButton: function(event) {
 		Event.stop(event);		
-		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';	
+		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 		this.removeSelectedTorrents();
 	},
 
@@ -777,11 +777,25 @@ Transmission.prototype = {
     /*
      * Remove selected torrents
      */
-    removeSelectedTorrents: function() {
-		if (this._selected_torrents.keys().length > 0) {	
-			// Send an ajax request to perform the action (have to convert key strings to integers)
-			var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
-			this.remoteRequest('removeTorrents', torrent_id_list);
+    removeSelectedTorrents: function(confirmed) {
+		var num_torrents = this._selected_torrents.keys().length;
+		if (num_torrents > 0) {
+			
+			if (! confirmed) {
+				// TODO - proper calculation of active torrents
+				var num_active_torrents  = num_torrents;
+				var confirm_button_label = 'Remove';
+				var dialog_heading       = 'Confirm Removal of ' + num_torrents + ' Transfers';
+				var dialog_message = 'There are ' + num_torrents + ' transfers (' + num_active_torrents;
+				dialog_message    += ' active). Once Removed,<br />continuing the transfers will require the torrent files.';
+				dialog_message    += '<br />Do you really want to remove them?';
+				dialog.confirm(dialog_heading, dialog_message, confirm_button_label, 'transmission.removeSelectedTorrents(true)');
+			
+			} else {	
+				// Send an ajax request to perform the action (have to convert key strings to integers)
+				var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+				this.remoteRequest('removeTorrents', torrent_id_list);			
+			}
 		}
     },
 

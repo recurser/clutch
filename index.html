@@ -16,6 +16,7 @@
 		<script type="text/javascript" src="./javascript/common.js"></script>
 		<script type="text/javascript" src="./javascript/transmission.js"></script>
 		<script type="text/javascript" src="./javascript/torrent.js"></script>
+		<script type="text/javascript" src="./javascript/dialog.js"></script>
 	</head>
 	<body>
 
@@ -129,6 +130,20 @@
 			<a href="#speed_limit" id="speed_limit">
 				<img src="images/graphics/footer_speed_limit_button.png" alt="Speed limit overrides the total bandwidth limits with it's own limits." />
 			</a>
+		</div>
+		
+		<div id="dialog_container" style="display:none;">
+			<div class="dialog_top_bar"></div>
+			<div id="dialog_window">
+				<img src='images/graphics/logo.png' />
+				<h2 id="dialog_heading">Dialog Heading</h2>
+				<div id="dialog_message">There are 1 transfers (1 active). Once Removed,<br/>
+continuing the transfers will require the torrent files.<br/>
+Do you really want to remove them?</div>
+				<a href="#dialog_confirm" id="dialog_confirm_button">Confirm</a>
+				<a href="#dialog_cancel" id="dialog_cancel_button">Cancel</a>
+				
+			</div>
 		</div>
 
 	</body>

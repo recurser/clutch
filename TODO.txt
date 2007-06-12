@@ -22,6 +22,8 @@ TODO
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Right-click menu doesn't work in opera.
 - What does 'Resume selected without wait' do?
+- Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
+- Scrollbar in firefox screws with the confirm dialog a little with small-width displays.
 - A lot of work to do on the context menu
 	- Hook up the links
 	- enable/disable menu options dynamically instead of all enable
