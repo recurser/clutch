@@ -44,41 +44,15 @@ Transmission.prototype = {
         document.addEventListener("keydown", this.keyDown.bindAsEventListener(this),false);
 
 		// Buttons
-		Event.observe($('pause_all_link'), 'mousedown', this.clickPauseAllButton.bindAsEventListener(this));
 		Event.observe($('pause_all_link'), 'mouseup', this.releasePauseAllButton.bindAsEventListener(this));
-		Event.observe($('pause_all_link'), 'mouseout', this.mouseOutPauseAllButton.bindAsEventListener(this));
-
-		Event.observe($('resume_all_link'), 'mousedown', this.clickResumeAllButton.bindAsEventListener(this));
 		Event.observe($('resume_all_link'), 'mouseup', this.releaseResumeAllButton.bindAsEventListener(this));
-		Event.observe($('resume_all_link'), 'mouseout', this.mouseOutResumeAllButton.bindAsEventListener(this));
-		
-		Event.observe($('filter'), 'mousedown', this.clickFilterButton.bindAsEventListener(this));
 		Event.observe($('filter'), 'mouseup', this.releaseFilterButton.bindAsEventListener(this));
-		Event.observe($('filter'), 'mouseout', this.mouseOutFilterButton.bindAsEventListener(this));
-
-		Event.observe($('pause_selected_link'), 'mousedown', this.clickPauseSelectedButton.bindAsEventListener(this));
 		Event.observe($('pause_selected_link'), 'mouseup', this.releasePauseSelectedButton.bindAsEventListener(this));
-		Event.observe($('pause_selected_link'), 'mouseout', this.mouseOutPauseSelectedButton.bindAsEventListener(this));
-
-		Event.observe($('resume_selected_link'), 'mousedown', this.clickResumeSelectedButton.bindAsEventListener(this));
 		Event.observe($('resume_selected_link'), 'mouseup', this.releaseResumeSelectedButton.bindAsEventListener(this));
-		Event.observe($('resume_selected_link'), 'mouseout', this.mouseOutResumeSelectedButton.bindAsEventListener(this));
-
-		Event.observe($('open_link'), 'mousedown', this.clickOpenButton.bindAsEventListener(this));
 		Event.observe($('open_link'), 'mouseup', this.releaseOpenButton.bindAsEventListener(this));
-		Event.observe($('open_link'), 'mouseout', this.mouseOutOpenButton.bindAsEventListener(this));
-
-		Event.observe($('remove_link'), 'mousedown', this.clickRemoveButton.bindAsEventListener(this));
 		Event.observe($('remove_link'), 'mouseup', this.releaseRemoveButton.bindAsEventListener(this));
-		Event.observe($('remove_link'), 'mouseout', this.mouseOutRemoveButton.bindAsEventListener(this));
-
-		Event.observe($('filter_link'), 'mousedown', this.clickFilterButton.bindAsEventListener(this));
 		Event.observe($('filter_link'), 'mouseup', this.releaseFilterButton.bindAsEventListener(this));
-		Event.observe($('filter_link'), 'mouseout', this.mouseOutFilterButton.bindAsEventListener(this));
-
-		Event.observe($('inspector_link'), 'mousedown', this.clickInspectorButton.bindAsEventListener(this));
 		Event.observe($('inspector_link'), 'mouseup', this.releaseInspectorButton.bindAsEventListener(this));
-		Event.observe($('inspector_link'), 'mouseout', this.mouseOutInspectorButton.bindAsEventListener(this));
 		
 		// Inspector tabs
 		Event.observe($('inspector_tab_info'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
@@ -247,36 +221,11 @@ Transmission.prototype = {
     },
 
 	/*
-	 * Process a mouse-down event on the 'pause all' button
-	 */
-	clickPauseAllButton: function(event) {
-		Event.stop(event);			
-		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all_on.png)';
-	},
-
-	/*
 	 * Process a mouse-up event on the 'pause all' button
 	 */
 	releasePauseAllButton: function(event) {
 		Event.stop(event);			
-		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';	
 		this.pauseAllTorrents();
-	},
-
-	/*
-	 * Process a mouse-out event on the 'pause all' button
-	 */
-	mouseOutPauseAllButton: function(event) {
-		Event.stop(event);
-		$('pause_all_link').style.backgroundImage = 'url(images/buttons/pause_all.png)';
-	},
-
-	/*
-	 * Process a mouse-down event on the 'resume all' button
-	 */
-	clickResumeAllButton: function(event) {
-		Event.stop(event);
-		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all_on.png)';
 	},
 
 	/*
@@ -284,74 +233,23 @@ Transmission.prototype = {
 	 */
 	releaseResumeAllButton: function(event) {
 		Event.stop(event);			
-		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';	
 		this.resumeAllTorrents();
-	},
-
-	/*
-	 * Process a mouse-out event on the 'resume all' button
-	 */
-	mouseOutResumeAllButton: function(event) {
-		Event.stop(event);
-		$('resume_all_link').style.backgroundImage = 'url(images/buttons/resume_all.png)';
-	},
-
-	/*
-	 * Process a mouse-down event on the 'pause selected' button
-	 */
-	clickPauseSelectedButton: function(event) {
-		Event.stop(event);			
-		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected_on.png)';
 	},
 
 	/*
 	 * Process a mouse-up event on the 'pause selected' button
 	 */
 	releasePauseSelectedButton: function(event) {
-		Event.stop(event);			
-		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';		
+		Event.stop(event);				
 		this.pauseSelectedTorrents();
-	},
-
-	/*
-	 * Process a mouse-out event on the 'pause selected' button
-	 */
-	mouseOutPauseSelectedButton: function(event) {
-		Event.stop(event);
-		$('pause_selected_link').style.backgroundImage = 'url(images/buttons/pause_selected.png)';
-	},
-
-	/*
-	 * Process a mouse-down event on the 'resume selected' button
-	 */
-	clickResumeSelectedButton: function(event) {
-		Event.stop(event);
-		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected_on.png)';
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume selected' button
 	 */
 	releaseResumeSelectedButton: function(event) {
-		Event.stop(event);			
-		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';	
+		Event.stop(event);				
 		this.resumeSelectedTorrents();
-	},
-
-	/*
-	 * Process a mouse-out event on the 'resume selected' button
-	 */
-	mouseOutResumeSelectedButton: function(event) {
-		Event.stop(event);
-		$('resume_selected_link').style.backgroundImage = 'url(images/buttons/resume_selected.png)';
-	},
-
-	/*
-	 * Process a mouse-down event on the 'open' button
-	 */
-	clickOpenButton: function(event) {	
-		Event.stop(event);
-		$('open_link').style.backgroundImage = 'url(images/buttons/open_on.png)';	
 	},
 
 	/*
@@ -359,23 +257,6 @@ Transmission.prototype = {
 	 */
 	releaseOpenButton: function(event) {
 		Event.stop(event);		
-		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
-	},
-
-	/*
-	 * Process a mouse-out event on the 'open' button
-	 */
-	mouseOutOpenButton: function(event) {
-		Event.stop(event);
-		$('open_link').style.backgroundImage = 'url(images/buttons/open.png)';
-	},
-
-	/*
-	 * Process a mouse-down event on the 'remove' button
-	 */
-	clickRemoveButton: function(event) {	
-		Event.stop(event);
-		$('remove_link').style.backgroundImage = 'url(images/buttons/remove_on.png)';	
 	},
 
 	/*
@@ -383,24 +264,7 @@ Transmission.prototype = {
 	 */
 	releaseRemoveButton: function(event) {
 		Event.stop(event);		
-		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
 		this.removeSelectedTorrents();
-	},
-
-	/*
-	 * Process a mouse-out event on the 'remove' button
-	 */
-	mouseOutRemoveButton: function(event) {
-		Event.stop(event);
-		$('remove_link').style.backgroundImage = 'url(images/buttons/remove.png)';
-	},
-
-	/*
-	 * Process a mouse-down event on the 'inspector' button
-	 */
-	clickInspectorButton: function(event) {	
-		Event.stop(event);
-		$('inspector_link').style.backgroundImage = 'url(images/buttons/info_toolbar_on.png)';	
 	},
 
 	/*
@@ -408,7 +272,6 @@ Transmission.prototype = {
 	 */
 	releaseInspectorButton: function(event) {
 		Event.stop(event);		
-		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
 		
 		// Perform the toggle
 		if (this._inspector_visible) {
@@ -416,14 +279,6 @@ Transmission.prototype = {
 		} else {
 			this.showInspector();
 		}
-	},
-
-	/*
-	 * Process a mouse-out event on the 'inspector' button
-	 */
-	mouseOutInspectorButton: function(event) {
-		Event.stop(event);
-		$('inspector_link').style.backgroundImage = 'url(images/buttons/info.png)';
 	},
 
 	/*
@@ -446,19 +301,10 @@ Transmission.prototype = {
 	},
 	
     /*
-     * Process a mouse-down event on the 'filter' button
-     */
-	clickFilterButton: function(event) {
-		Event.stop(event);
-		$('filter_link').style.backgroundImage = 'url(images/buttons/filter_on.png)';	
-	},
-	
-    /*
      * Process a mouse-up event on the 'filter' button
      */
 	releaseFilterButton: function(event) {
 		Event.stop(event);		
-		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
 		
 		// Perform the toggle
 		var container_top;
@@ -473,14 +319,6 @@ Transmission.prototype = {
 			$('torrent_filter_bar').show();
 			this._filter_visible = true;
 		}
-	},
-	
-    /*
-     * Process a mouse-out event on the 'filter' button
-     */
-	mouseOutFilterButton: function(event) {
-		Event.stop(event);
-		$('filter_link').style.backgroundImage = 'url(images/buttons/filter.png)';
 	},
 	
     /*

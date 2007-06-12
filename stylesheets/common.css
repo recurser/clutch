@@ -91,32 +91,64 @@ div.torrent_global_menu ul li#open a {
 	background: transparent url('../images/buttons/open.png') no-repeat 10px 0px ;
 	}
 
+div.torrent_global_menu ul li#open a:active {
+	background: transparent url('../images/buttons/open_on.png') no-repeat 10px 0px !important;
+	}
+
 div.torrent_global_menu ul li#remove a {
 	background: transparent url('../images/buttons/remove.png') no-repeat 16px 0px ;
 	}
 
-div.torrent_global_menu ul li#resume_selected a {
+div.torrent_global_menu ul li#remove a:active {
+	background: transparent url('../images/buttons/remove_on.png') no-repeat 16px 0px !important;
+	}
+
+div.torrent_global_menu ul li#resume_selected a{
 	background: transparent url('../images/buttons/resume_selected.png') no-repeat 19px 0px ;
+	}
+
+div.torrent_global_menu ul li#resume_selected a:active {
+	background: transparent url('../images/buttons/resume_selected_on.png') no-repeat 19px 0px !important;
 	}
 
 div.torrent_global_menu ul li#pause_selected a {
 	background: transparent url('../images/buttons/pause_selected.png') no-repeat 10px 0px ;
 	}
 
+div.torrent_global_menu ul li#pause_selected a:active {
+	background: transparent url('../images/buttons/pause_selected_on.png') no-repeat 10px 0px !important;
+	}
+
 div.torrent_global_menu ul li#pause_all a {
 	background: transparent url('../images/buttons/pause_all.png') no-repeat 19px 0px ;
+	}
+
+div.torrent_global_menu ul li#pause_all a:active {
+	background: transparent url('../images/buttons/pause_all_on.png') no-repeat 19px 0px !important;
 	}
 
 div.torrent_global_menu ul li#resume_all a {
 	background: transparent url('../images/buttons/resume_all.png') no-repeat 25px 0px ;
 	}
 
+div.torrent_global_menu ul li#resume_all a:active {
+	background: transparent url('../images/buttons/resume_all_on.png') no-repeat 25px 0px !important;
+	}
+
 div.torrent_global_menu ul li#filter a {
 	background: transparent url('../images/buttons/filter.png') no-repeat 8px 0px ;
 	}
 
+div.torrent_global_menu ul li#filter a:active {
+	background: transparent url('../images/buttons/filter_on.png') no-repeat 8px 0px !important;
+	}
+
 div.torrent_global_menu ul li#inspector a {
 	background: transparent url('../images/buttons/info.png') no-repeat 18px 0px ;
+	}
+
+div.torrent_global_menu ul li#inspector a:active {
+	background: transparent url('../images/buttons/info_toolbar_on.png') no-repeat 18px 0px !important;
 	}
 
 div.torrent_global_menu ul li.divider {
