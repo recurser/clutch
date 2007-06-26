@@ -464,7 +464,6 @@ Transmission.prototype = {
 													  	torrent._tracker['announce'];
 
 		$('torrent_inspector_hash').innerHTML			= torrent._hash;
-		$('torrent_inspector_comment').innerHTML		= torrent._comment;
 		$('torrent_inspector_state').innerHTML			= torrent._state;
 		$('torrent_inspector_ratio').innerHTML			= torrent.ratio();
 		$('torrent_inspector_uploaded').innerHTML		= Math.formatBytes(torrent._upload_total);
@@ -475,20 +474,29 @@ Transmission.prototype = {
 		$('torrent_inspector_total_seeders').innerHTML	= torrent._total_seeders;
 		$('torrent_inspector_total_leechers').innerHTML	= torrent._total_leechers;		
 		
-		if (torrent._error != '') {
+		if (torrent._error_message && torrent._error_message != '') {
 			$('torrent_inspector_error').innerHTML		= torrent._error_message;
 		} else {
 			$('torrent_inspector_error').innerHTML		= 'N/A';
 		}
+		if (torrent._comment && torrent._comment != '') {
+			$('torrent_inspector_comment').innerHTML	= torrent._comment;
+		} else {
+			$('torrent_inspector_comment').innerHTML	= 'N/A';
+		}
+		if (torrent._creator && torrent._creator != '') {
+			$('torrent_inspector_creator').innerHTML	= torrent._creator;
+		} else {
+			$('torrent_inspector_creator').innerHTML		= 'N/A';
+		}
 
-		if (torrent._private == 1)
+		if (torrent._private == 1) {
 			$('torrent_inspector_secure').innerHTML = 'Private Torrent';
-		else
+		} else {
 			$('torrent_inspector_secure').innerHTML	= 'Public Torrent';
+		}
 
-		$('torrent_inspector_creator').innerHTML	= torrent._creator;
 		$('torrent_inspector_creator_date').innerHTML	= Math.formatTimestamp(torrent._creator_date);
-		$('torrent_inspector_torrent_file').value		= torrent._torrent_file;
 	},
 
 	destroyInspector: function() {
