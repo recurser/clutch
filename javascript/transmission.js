@@ -134,7 +134,7 @@ Transmission.prototype = {
 		}
 
 		// Display in Inspector
-		this.setInspector(torrent);
+		this.updateInspector();
     },
     
     /*
@@ -177,8 +177,8 @@ Transmission.prototype = {
 			this._selected_torrents.remove(torrent.id());
 		}
 
-		// Destroy inspector
-		//this.destroyInspector();
+		// Display in Inspector
+		this.updateInspector();
 
     },
 
@@ -456,47 +456,85 @@ Transmission.prototype = {
 		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
     },
 
-	setInspector: function(torrent) {
-		$('torrent_inspector_name').innerHTML			= torrent._name;
-		$('torrent_inspector_size').innerHTML			= Math.formatBytes(torrent._size);
-		$('torrent_inspector_tracker').innerHTML		= torrent._tracker['address']+
-													  	':'+torrent._tracker['port']+
-													  	torrent._tracker['announce'];
+	updateInspector: function() {
+		if (this._inspector_visible) {
+			var torrent_count = this._selected_torrents.keys().length;
+			// If only one torrent is selected, update all fields
+			if (torrent_count == 1) {
+				torrent = this._selected_torrents[this._selected_torrents.keys()[0]];
+				$('torrent_inspector_name').innerHTML			= torrent._name;
+				$('torrent_inspector_size').innerHTML			= Math.formatBytes(torrent._size);
+				$('torrent_inspector_tracker').innerHTML		= torrent._tracker['address']+
+															  	':'+torrent._tracker['port']+
+															  	torrent._tracker['announce'];
 
-		$('torrent_inspector_hash').innerHTML			= torrent._hash;
-		$('torrent_inspector_state').innerHTML			= torrent._state;
-		$('torrent_inspector_ratio').innerHTML			= torrent.ratio();
-		$('torrent_inspector_uploaded').innerHTML		= Math.formatBytes(torrent._upload_total);
-		$('torrent_inspector_downloaded').innerHTML		= Math.formatBytes(torrent._download_total);
-		$('torrent_inspector_upload_to').innerHTML		= torrent._peers_downloading;
-		$('torrent_inspector_download_from').innerHTML	= torrent._peers_uploading;
-		$('torrent_inspector_swarm_speed').innerHTML	= torrent._swarm_speed;
-		$('torrent_inspector_total_seeders').innerHTML	= torrent._total_seeders;
-		$('torrent_inspector_total_leechers').innerHTML	= torrent._total_leechers;		
+				$('torrent_inspector_hash').innerHTML			= torrent._hash;
+				$('torrent_inspector_state').innerHTML			= torrent._state;
+				$('torrent_inspector_ratio').innerHTML			= torrent.ratio();
+				$('torrent_inspector_uploaded').innerHTML		= Math.formatBytes(torrent._upload_total);
+				$('torrent_inspector_downloaded').innerHTML		= Math.formatBytes(torrent._download_total);
+				$('torrent_inspector_upload_to').innerHTML		= torrent._peers_downloading;
+				$('torrent_inspector_download_from').innerHTML	= torrent._peers_uploading;
+				$('torrent_inspector_swarm_speed').innerHTML	= torrent._swarm_speed;
+				$('torrent_inspector_total_seeders').innerHTML	= torrent._total_seeders;
+				$('torrent_inspector_total_leechers').innerHTML	= torrent._total_leechers;		
 		
-		if (torrent._error_message && torrent._error_message != '') {
-			$('torrent_inspector_error').innerHTML		= torrent._error_message;
-		} else {
-			$('torrent_inspector_error').innerHTML		= 'N/A';
-		}
-		if (torrent._comment && torrent._comment != '') {
-			$('torrent_inspector_comment').innerHTML	= torrent._comment;
-		} else {
-			$('torrent_inspector_comment').innerHTML	= 'N/A';
-		}
-		if (torrent._creator && torrent._creator != '') {
-			$('torrent_inspector_creator').innerHTML	= torrent._creator;
-		} else {
-			$('torrent_inspector_creator').innerHTML		= 'N/A';
-		}
+				if (torrent._error_message && torrent._error_message != '') {
+					$('torrent_inspector_error').innerHTML		= torrent._error_message;
+				} else {
+					$('torrent_inspector_error').innerHTML		= 'N/A';
+				}
+				if (torrent._comment && torrent._comment != '') {
+					$('torrent_inspector_comment').innerHTML	= torrent._comment;
+				} else {
+					$('torrent_inspector_comment').innerHTML	= 'N/A';
+				}
+				if (torrent._creator && torrent._creator != '') {
+					$('torrent_inspector_creator').innerHTML	= torrent._creator;
+				} else {
+					$('torrent_inspector_creator').innerHTML		= 'N/A';
+				}
 
-		if (torrent._private == 1) {
-			$('torrent_inspector_secure').innerHTML = 'Private Torrent';
-		} else {
-			$('torrent_inspector_secure').innerHTML	= 'Public Torrent';
-		}
+				if (torrent._private == 1) {
+					$('torrent_inspector_secure').innerHTML = 'Private Torrent';
+				} else {
+					$('torrent_inspector_secure').innerHTML	= 'Public Torrent';
+				}
 
-		$('torrent_inspector_creator_date').innerHTML	= Math.formatTimestamp(torrent._creator_date);
+				$('torrent_inspector_creator_date').innerHTML	= Math.formatTimestamp(torrent._creator_date);
+			
+			// Otherwise, just update up/down totals
+			} else {
+				var total_upload = 0;
+				var total_download = 0;
+				for (i=0; i<torrent_count; i++) {
+					total_upload += this._selected_torrents[this._selected_torrents.keys()[i]]._upload_total;
+					total_download += this._selected_torrents[this._selected_torrents.keys()[i]]._download_total;
+				}
+				if (torrent_count == 0) {
+					$('torrent_inspector_name').innerHTML			= 'No Torrent Selected';
+				} else {
+					$('torrent_inspector_name').innerHTML			= torrent_count + ' Torrents Selected';
+				}
+				$('torrent_inspector_size').innerHTML			= '';
+				$('torrent_inspector_tracker').innerHTML		= 'N/A';
+				$('torrent_inspector_hash').innerHTML			= 'N/A';
+				$('torrent_inspector_state').innerHTML			= 'N/A';
+				$('torrent_inspector_ratio').innerHTML			= 'N/A';
+				$('torrent_inspector_uploaded').innerHTML		= Math.formatBytes(total_upload);
+				$('torrent_inspector_downloaded').innerHTML		= Math.formatBytes(total_download);
+				$('torrent_inspector_upload_to').innerHTML		= 'N/A';
+				$('torrent_inspector_download_from').innerHTML	= 'N/A';
+				$('torrent_inspector_swarm_speed').innerHTML	= 'N/A';
+				$('torrent_inspector_total_seeders').innerHTML	= 'N/A';
+				$('torrent_inspector_total_leechers').innerHTML	= 'N/A';
+				$('torrent_inspector_creator').innerHTML		= 'N/A';
+				$('torrent_inspector_comment').innerHTML		= 'N/A';
+				$('torrent_inspector_creator_date').innerHTML	= 'N/A';
+				$('torrent_inspector_secure').innerHTML			= 'N/A';
+				$('torrent_inspector_error').innerHTML			= 'N/A';
+			}
+		}
 	},
 
 	destroyInspector: function() {
@@ -554,6 +592,9 @@ Transmission.prototype = {
 
 		// Update global upload and download speed display
 		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
+		
+		// Update the inspector
+		this.updateInspector();
     },
 
     /*
