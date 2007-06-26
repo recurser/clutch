@@ -38,7 +38,8 @@
 						'id', 'completed', 'download-total', 'upload-total', 
 						'download-speed', 'upload-speed', 'peers-downloading', 
 						'peers-from', 'peers-total', 'peers-uploading', 'error', 
-						'error-message', 'eta', 'running', 'state');
+						'error-message', 'eta', 'running', 'state', 'swarm-speed',
+						'scrape-leechers', 'scrape-seeders');
 				$arg_list = $Instance->getTorrentData($info_fields, $status_fields);
 				break;
 	
@@ -48,7 +49,8 @@
 						'id', 'completed', 'download-total', 'upload-total', 
 						'download-speed', 'upload-speed', 'peers-downloading', 
 						'peers-from', 'peers-total', 'peers-uploading', 'error', 
-						'error-message', 'eta', 'running', 'state');
+						'error-message', 'eta', 'running', 'state', 'swarm-speed',
+						'scrape-leechers', 'scrape-seeders');
 				$arg_list = $Instance->pauseTorrents($info_fields, $status_fields, $_GET['param']);
 				break;
 	
@@ -58,7 +60,8 @@
 						'id', 'completed', 'download-total', 'upload-total', 
 						'download-speed', 'upload-speed', 'peers-downloading', 
 						'peers-from', 'peers-total', 'peers-uploading', 'error', 
-						'error-message', 'eta', 'running', 'state');
+						'error-message', 'eta', 'running', 'state', 'swarm-speed',
+						'scrape-leechers', 'scrape-seeders');
 				$arg_list = $Instance->resumeTorrents($info_fields, $status_fields, $_GET['param']);
 				break;
 	

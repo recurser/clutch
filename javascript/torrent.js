@@ -65,16 +65,19 @@ Torrent.prototype = {
 		var _peers_from;
 		var _peers_total;
 		var _error;
+		var _error_message;
 		var _state;
 		var _eta;
 		var _running;
-
 		var _tracker;
 		var _private;
 		var _comment;
 		var _creator;
 		var _creator_date;
 		var _torrent_file;
+		var _swarm_speed;
+		var _total_leechers;
+		var _total_seeders;
 		
 		// Create a new <li> element
 		var element = document.createElement('li');
@@ -225,6 +228,13 @@ Torrent.prototype = {
 	isActive: function() {
 		return !(!this._running || this._state == this._StatusStopping || this._state == this._StatusPaused);
 	},
+	
+	/*
+	 * Return the ratio for this torrent
+	 */
+	ratio: function() {
+		return Math.roundWithPrecision((this._upload_total / this._size), 2);
+	},
 
 
 
@@ -366,9 +376,21 @@ Torrent.prototype = {
 		this._peers_from            = data.peers_from; 
 		this._peers_total           = data.peers_total;
 		this._error                 = data.error;
+		this._error_message         = data.error_message;
 		this._state                 = data.state;
 		this._eta                   = data.eta;
 		this._running               = data.running;	
+		this._swarm_speed           = data.swarm_speed;	
+		this._total_leechers       	= data.scrape_leechers;	
+		this._total_seeders        	= data.scrape_seeders;
+		
+		// Get -1 returned sometimes (maybe torrents with errors?)
+		if (this._total_leechers < 0) {
+			this._total_leechers = 0;
+		}
+		if (this._total_seeders < 0) {
+			this._total_seeders = 0;
+		}
 		
 		// Figure out the percent completed
 		var float_percent_complete = this._completed / this._size * this._MaxDownloadPercent;
@@ -418,10 +440,9 @@ Torrent.prototype = {
 			
 			// Create the 'progress details' label
 			// Eg: '698.05 MB, uploaded 8.59 GB (Ratio: 12.3)'
-			var ratio = Math.roundWithPrecision((this._upload_total / this._size), 2);
 			progress_details = Math.formatBytes(this._size) + ', uploaded ';
 			progress_details += Math.formatBytes(this._upload_total) + ' (Ratio ';
-			progress_details += ratio + ')';
+			progress_details += this.ratio() + ')';
 			
 			// Hide the 'incomplete' bar
 			this._progress_incomplete_container.style.display = 'none';
@@ -452,6 +473,11 @@ Torrent.prototype = {
 			this._pause_resume_button_image.alt = 'Pause';
 			this._pause_resume_button_image.src = 'images/buttons/pause_off.png';
 		}
+		
+		if (this._error_message && this._error_message != '') {
+			peer_details = this._error_message;
+		}
+		
 		this._peer_details_container.innerHTML = peer_details;
 	},
 	
