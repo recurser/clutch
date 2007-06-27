@@ -5,6 +5,8 @@ TODO
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - Sqlite db for prefs - refresh frequency, user login details, filter etc etc.
 - Implement filter buttons.
+	- Filtering doesn't seem to be working properly after a filtered pause/resume all - only a couple of torrents show up as paused.
+	- Need to update the filter if torrents are paused - they should disappear from the list if 'seeding' or 'downloading' is selected
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Right-click menu doesn't work in opera.
 - 'Remove from list' right-menu option remains highlighted after confirm screen in Safari.
