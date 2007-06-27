@@ -35,6 +35,7 @@ CHECK
 - Do we need to worry about translations? I assume we do (the confirm dialog jscript messages might be a little fiddly to translate). Maybe we can initialise some translation constants in the JS files with ajax or something :S
 - Is there a set 'remaining time unknown' time in transmission? currently set to 999 hours with jscript.
 - Had a torrent wth ratio '.1' instead of '0.1' (although another one with '0.08' was working ok) - prob with the ratio formatting?
+- Have to pass all the torrent IDs for ajax stuff now that filtering is implemented - stress test with a 100 or so torrents sometime to check that the GET string is not too long. May need to ajax POST.
 
 IN THE FUTURE (?)
 ==================================================

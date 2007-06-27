@@ -40,7 +40,7 @@
 						'peers-from', 'peers-total', 'peers-uploading', 'error', 
 						'error-message', 'eta', 'running', 'state', 'swarm-speed',
 						'scrape-leechers', 'scrape-seeders');
-				$arg_list = $Instance->getTorrentData($info_fields, $status_fields);
+				$arg_list = $Instance->getTorrentData($info_fields, $status_fields, json_decode($_GET['param']));
 				break;
 	
 			case 'pauseTorrents' :

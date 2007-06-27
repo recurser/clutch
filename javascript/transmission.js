@@ -125,6 +125,34 @@ Transmission.prototype = {
     },
     
     /*
+     * Return a JSON string of torrent IDs
+     */
+    jsonTorrentIds: function() {
+		return this._torrents.keys().collect(function(s) {return parseInt(s)}).toJSON().replace(/ /g, '');
+    },
+    
+    /*
+     * Return a JSON string of torrent IDs
+     */
+    jsonSelectedTorrentIds: function() {
+		return this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON().replace(/ /g, '');
+    },
+    
+    /*
+     * Return the number of selected torrents
+     */
+    numTorrents: function() {
+		return this._torrents.keys().length
+    },
+    
+    /*
+     * Return the number of selected torrents
+     */
+    numSelectedTorrents: function() {
+		return this._selected_torrents.keys().length
+    },
+    
+    /*
      * Register the specified torrent as selected
      */
     selectTorrent: function(torrent) {
@@ -237,32 +265,36 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause all' button
 	 */
 	releasePauseAllButton: function(event) {
-		Event.stop(event);			
-		this.pauseAllTorrents();
+		Event.stop(event);	
+		this.pauseTorrents(transmission.jsonTorrentIds());
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume all' button
 	 */
 	releaseResumeAllButton: function(event) {
-		Event.stop(event);			
-		this.resumeAllTorrents();
+		Event.stop(event);
+		this.resumeTorrents(transmission.jsonTorrentIds());
 	},
 
 	/*
 	 * Process a mouse-up event on the 'pause selected' button
 	 */
 	releasePauseSelectedButton: function(event) {
-		Event.stop(event);				
-		this.pauseSelectedTorrents();
+		Event.stop(event);
+		if (transmission.numSelectedTorrents() > 0) {
+			this.pauseTorrents(transmission.jsonSelectedTorrentIds());
+		}
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume selected' button
 	 */
 	releaseResumeSelectedButton: function(event) {
-		Event.stop(event);				
-		this.resumeSelectedTorrents();
+		Event.stop(event);	
+		if (transmission.numSelectedTorrents() > 0) {				
+			this.resumeTorrents(transmission.jsonSelectedTorrentIds());
+		}
 	},
 
 	/*
@@ -378,10 +410,10 @@ Transmission.prototype = {
 		
 		switch (command) {
 			case 'pause_selected':
-				this.pauseSelectedTorrents();
+				this.pauseTorrents(this.jsonSelectedTorrentIds());
 				break;				
 			case 'resume_selected':
-				this.resumeSelectedTorrents();
+				this.resumeTorrents(this.jsonSelectedTorrentIds());
 				break;	
 			case 'remove_from_list':
 				this.removeSelectedTorrents();
@@ -515,7 +547,7 @@ Transmission.prototype = {
 
 	updateInspector: function() {
 		if (this._inspector_visible) {
-			var torrent_count = this._selected_torrents.keys().length;
+			var torrent_count = this.numSelectedTorrents();
 			// If only one torrent is selected, update all fields
 			if (torrent_count == 1) {
 				torrent = this._selected_torrents[this._selected_torrents.keys()[0]];
@@ -658,13 +690,11 @@ Transmission.prototype = {
      * Load a list of torrents into the application
      */
     removeTorrents: function(torrent_list) {
-		if (torrent_list.length == 0) {
-			torrent_list = this._torrents.values().collect(function(s) {return parseInt(s)});
+		if (torrent_list.length != 0) {
+        	for (i=0; i<torrent_list.length; i++) {	
+				Element.remove(this._torrents[torrent_list[i]].element());
+        	}
 		}
-		
-        for (i=0; i<torrent_list.length; i++) {	
-			Element.remove(this._torrents[torrent_list[i]].element());
-        }
     },
     
     /*
@@ -708,7 +738,7 @@ Transmission.prototype = {
      * Refresh the torrent data
      */
     reloadTorrents: function() {
-        transmission.remoteRequest('reloadTorrents');	
+        transmission.remoteRequest('reloadTorrents', transmission.jsonTorrentIds());	
     },
     
     /*
@@ -722,23 +752,19 @@ Transmission.prototype = {
     },
     
     /*
-     * Pause selected torrents
+     * Pause torrents
      */
-    pauseSelectedTorrents: function() {
-		if (this._selected_torrents.keys().length > 0) {
-			// Send an ajax request to perform the action (	have to convert key strings to integers)
-			var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+    pauseTorrents: function(torrent_id_list) {
+		if (torrent_id_list != '[]') {
 			this.remoteRequest('pauseTorrents', torrent_id_list);
 		}
     },
     
     /*
-     * Resume selected torrents
+     * Resume torrents
      */
-    resumeSelectedTorrents: function() {
-		if (this._selected_torrents.keys().length > 0) {	
-			// Send an ajax request to perform the action (have to convert key strings to integers)
-			var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
+    resumeTorrents: function(torrent_id_list) {
+		if (torrent_id_list != '[]') {	
 			this.remoteRequest('resumeTorrents', torrent_id_list);
 		}
     },
@@ -747,7 +773,7 @@ Transmission.prototype = {
      * Remove selected torrents
      */
     removeSelectedTorrents: function(confirmed) {
-		var num_torrents = this._selected_torrents.keys().length;
+		var num_torrents = this.numSelectedTorrents();
 		if (num_torrents > 0) {
 			
 			if (! confirmed) {
@@ -761,28 +787,10 @@ Transmission.prototype = {
 				dialog.confirm(dialog_heading, dialog_message, confirm_button_label, 'transmission.removeSelectedTorrents(true)');
 			
 			} else {	
-				// Send an ajax request to perform the action (have to convert key strings to integers)
-				var torrent_id_list = this._selected_torrents.keys().collect(function(s) {return parseInt(s)}).toJSON();
-				this.remoteRequest('removeTorrents', torrent_id_list);			
+				// Send an ajax request to perform the action
+				this.remoteRequest('removeTorrents', transmission.jsonSelectedTorrentIds());			
 			}
 		}
-    },
-
-    
-    /*
-     * Pause all torrents
-     */
-    pauseAllTorrents: function() {	
-		// Send an ajax request to perform the action
-		this.remoteRequest('pauseTorrents');
-    },
-    
-    /*
-     * Resume all torrents
-     */
-    resumeAllTorrents: function() {
-		// Send an ajax request to perform the action
-		this.remoteRequest('resumeTorrents');
     }
 		
 
