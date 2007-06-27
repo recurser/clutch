@@ -7,6 +7,7 @@ TODO
 - Implement filter buttons.
 	- Filtering doesn't seem to be working properly after a filtered pause/resume all - only a couple of torrents show up as paused.
 	- Need to update the filter if torrents are paused - they should disappear from the list if 'seeding' or 'downloading' is selected
+	- In addition to the above - need to update the filter every time torrents are refreshed - ie if a torrent completes and we are in the 'downloading' filter it should disappear from the list. If we are in the seeding filter and a downloaded torrent completes, it should appear in the list. Think we need to make the refreshTorrents() stuff a lot smarter - ie update torrents if they are in both the browser & remote lists, add them if they are in the remote list but not the browser list, and delete them if they are in the browser list but not in the remote list. (?)
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Right-click menu doesn't work in opera.
 - 'Remove from list' right-menu option remains highlighted after confirm screen in Safari.
