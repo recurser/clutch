@@ -1,38 +1,35 @@
 TODO
 ==================================================
-- Where does 'Valid DL' come from for the inspector?
 - *if* the memory issue is sorted, maybe try getting torrent info in groups of 3/4/whatever is safe to try and speed things up a bit?
 - Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - Sqlite db for prefs - refresh frequency, user login details, filter etc etc.
-- Total up/down should show 'x.0' instead of just 'x' if it's an integer to match the desktop app.
 - Implement filter buttons.
-- Implement torrent inspector.
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Right-click menu doesn't work in opera.
 - 'Remove from list' right-menu option remains highlighted after confirm screen in Safari.
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
+- Implement search box.
 - A lot of work to do on the context menu
 	- Hook up the links
 	- enable/disable menu options dynamically instead of all enable
-- Inspector
-	- when multiple torrents are selected, deselecting one destroys the inspector, multiple torrents should instead show "multiple torrents selected", and the total filesize of the torrents
-	- A lot of the values can be stripped out (unnecessary stuff)
-	- Make the whole inspector wider? Hash currently clipped
-	- css cursor:pointer doesn't work on safari after a tab has been clicked for some reason.
 
 OPTIMIZATIONS
 ==================================================
+- Inspector
+	- Make the whole inspector wider? Hash currently clipped
+	- css cursor:pointer doesn't work on safari after a tab has been clicked for some reason.
 - Scrollbar in firefox screws with the confirm dialog a little with small-width displays.
 - Caching system? Don't refresh un-changing values, such as a torrents total size, or files (semi-done, need to handle unchanging values specifically in torrent.js->refresh() - keep in mind for future optimization).
 - Don't update paused torrents (unless we integrate the socket stuff into libT, Then maybe update paused torrents every couple updates or such? [probably shouldn't bother]) - (nice idea gimp, hadn't thought of it)
 
 CHECK
 ==================================================
+- Do we need to worry about the various 'remove files' options in the right-click menu? Also, I've removed the file location stuff from the inspector for now - do we need it?
+- Where does 'Valid DL' come from for the inspector?
 - What does 'Resume selected without wait' do?
 - Do we need to worry about translations? I assume we do (the confirm dialog jscript messages might be a little fiddly to translate). Maybe we can initialise some translation constants in the JS files with ajax or something :S
 - Is there a set 'remaining time unknown' time in transmission? currently set to 999 hours with jscript.
-- Get a weird '-1 hours remaining' thing *very* occasionally - try to figure out why (dave)
 - Had a torrent wth ratio '.1' instead of '0.1' (although another one with '0.08' was working ok) - prob with the ratio formatting?
 
 IN THE FUTURE (?)
@@ -44,7 +41,12 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
-- Web interface loads too quickly when ./run-bin.command is run - requests torrent list before torrents are loaded
+- Web interface loads too quickly when ./run-bin.command is run - requests torrent list before torrents are loaded - (thanks swe, works great - dave)
+- Total up/down should show 'x.0' instead of just 'x' if it's an integer to match the desktop app.
+- Implement torrent inspector.
+- when multiple torrents are selected, deselecting one destroys the inspector, multiple torrents should instead show "multiple torrents selected", and the total filesize of the torrents
+- A lot of the values can be stripped out (unnecessary stuff)
+- Get a weird '-1 hours remaining' thing *very* occasionally - try to figure out why (dave)
 - Torrent error messages aren't displaying (eg 'torrent not registered with this tracker') - just get 'Paused'.
 - why does the following line of torrent.js erroring if uncommented? (SyntaxError - Parse Error)
 	if (data.private)	this._private		= data.private;

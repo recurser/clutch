@@ -38,30 +38,41 @@ window.onload=function() {
  * readable values (bytes, KB, MB, GB or TB).
  */
 Math.formatBytes = function(bytes) {
-    var result;
+    var size;
+    var unit;
     
     // Terabytes (TB).
     if ( bytes >= 1099511627776 ) { 
-        result = Math.roundWithPrecision(bytes / 1099511627776, 2) + ' TB'; 
+        size = Math.roundWithPrecision(bytes / 1099511627776, 2);
+		unit = ' TB'; 
     
     // Gigabytes (GB).
     } else if ( bytes >= 1073741824 ) { 
-        result = Math.roundWithPrecision(bytes / 1073741824, 2) + ' GB';
+        size = Math.roundWithPrecision(bytes / 1073741824, 2);
+		unit = ' GB';
 
     // Megabytes (MB).
     } else if ( bytes >= 1048576 ) { 
-        result = Math.roundWithPrecision(bytes / 1048576, 2) + ' MB';
+        size = Math.roundWithPrecision(bytes / 1048576, 2);
+		unit = ' MB';
 
     // Kilobytes (KB).
     } else if ( bytes >= 1024 ) { 
-        result = Math.roundWithPrecision(bytes / 1024, 2) + ' KB';
+        size = Math.roundWithPrecision(bytes / 1024, 2);
+		unit = ' KB';
 
     // The file is less than one KB
     } else {
-        result = bytes + ' B';
+        size = bytes;
+		unit = ' B';
     }
     
-    return result;
+	// Add the decimal if this is an integer
+	if ((size % 1) == 0 && unit != ' B') {
+		size = size +'.0';
+	}
+
+    return size + unit;
 }
 
 

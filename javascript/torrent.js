@@ -404,7 +404,7 @@ Torrent.prototype = {
 			progress_details = Math.formatBytes(this._completed) + ' of ';
 			progress_details += Math.formatBytes(this._size) + ' (';
 			progress_details += Math.roundWithPrecision(float_percent_complete, 2) + '%)';
-			if (this._eta >= this._InfiniteTimeRemaining && this.isActive()) {
+			if ((this._eta < 0 || this._eta >= this._InfiniteTimeRemaining) && this.isActive()) {
 				progress_details += ' - remaining time unknown';
 			} else if (this.isActive()) {
 				progress_details += ' - ' + Math.formatSeconds(this._eta) + ' remaining';

@@ -616,8 +616,8 @@ Transmission.prototype = {
     setGlobalSpeeds: function(num_torrents, global_up_speed, global_down_speed) {
 	
 		// Update global upload and download speed display
-		$('torrent_global_upload').innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed) + '/s';
-		$('torrent_global_download').innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed) + '/s';
+		$('torrent_global_upload').innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed, true) + '/s';
+		$('torrent_global_download').innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed, true) + '/s';
 		$('torrent_global_transfer').innerHTML = num_torrents + ' Transfers';
     },
 
