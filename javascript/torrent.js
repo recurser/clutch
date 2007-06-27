@@ -506,6 +506,13 @@ Torrent.prototype = {
 	 */
 	isSelected: function() {
 		return this._element.hasClassName('selected');
+	},
+	
+	/*
+	 * Remove this element from the dom
+	 */
+	remove: function() {
+		Element.remove(this._element);
 	}
  
  

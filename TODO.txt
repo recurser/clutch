@@ -10,6 +10,9 @@ TODO
 - 'Remove from list' right-menu option remains highlighted after confirm screen in Safari.
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Implement search box.
+- Torrent sorting (need to pass to filters too i guess).
+- Torrent uploading.
+- Add a loading indicator? Ajax requests could be quite bit long with  lot of torrents - need some indication that something is happening.
 - A lot of work to do on the context menu
 	- Hook up the links
 	- enable/disable menu options dynamically instead of all enable
@@ -25,6 +28,7 @@ OPTIMIZATIONS
 
 CHECK
 ==================================================
+- Do we need to put the PEX info in the inspector?
 - Do we need to worry about the various 'remove files' options in the right-click menu? Also, I've removed the file location stuff from the inspector for now - do we need it?
 - Where does 'Valid DL' come from for the inspector?
 - What does 'Resume selected without wait' do?

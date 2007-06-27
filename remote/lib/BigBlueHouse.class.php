@@ -217,6 +217,45 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			return json_encode($result);
 		}
 
+		/* 	public function filterTorrents([(array)$infoFields], [(array)$statusFields], [(string)$filterType])
+		 * Returns a JSON array of torrent data for the specified filter type
+		 * Ex. filterTorrents(FilterSeeding)
+		 *
+		 * @access public
+		 * @param array $infoFields Array of torrent info fields to return
+		 * @param array $statusFields Array of torrent status fields to return
+		 * @param array $filterType Type of torrents to return (FilterAll, FilterDownloading, FilterSeeding, FilterPaused)
+		 * @return string $result JSON array of torrent data
+		 */
+		public function filterTorrents($infoFields = array(), $statusFields = array(), $filterType = FilterAll)
+		{
+			// First, need to get the IDs of all the torrents that match this type
+			// Need to look through all the torrents & figure out which ones we want
+			// Is there an easier way to do this?
+			$tempTorrentList = $this->mergeTorrentData($this->M->GetInfoAll('id'), $this->M->GetStatusAll('state'));
+			$idList = array();
+			foreach ($tempTorrentList as $row) {
+				if ($filterType == $row['state'] || $filterType == FilterAll) { 
+					$idList[] = (int) $row['id'];
+				}
+				
+				// Add the torrent ID if we have a match
+				if ($includeTorrent == true) {
+					$idList[] = (int) $row['id'];
+				}
+			}
+			
+			$result = array();
+			foreach ($idList as $id) {
+				$torrentInfoData = $this->M->GetInfo($id, $infoFields);
+				$torrentStatusData = $this->M->GetStatus($id, $statusFields);
+				$torrentData = $this->mergeTorrentData($torrentInfoData, $torrentStatusData);
+				array_push($result, $torrentData[0]);
+			}		
+
+			return json_encode($result);
+		}
+
 		/* 	private function mergeTorrentData((array) $torrent_list_data, (array) $torrent_status_data)
 		 * Merge the contents of the torrent data and status arrays by torrent-id into a single array
 		 * Ex. getTorrentData(array(1,2,3))

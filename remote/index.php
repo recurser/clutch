@@ -69,6 +69,20 @@
 				$function = 'removeTorrents';
 				$arg_list = $Instance->removeTorrents($_GET['param']);
 				break;
+	
+			case 'filterTorrents' :
+				$function = 'addTorrents';		
+				$info_fields = array(
+						"id", "hash", "name", "path", "saved", "private", 
+						"trackers", "comment", "creator", "date", "size");
+				$status_fields = array(
+						"completed", "download-speed", "download-total", "error", 
+						"error-message", "eta", "id", "peers-downloading", 
+						"peers-from", "peers-total", "peers-uploading", "running", 
+						"state", "swarm-speed", "tracker", "scrape-completed", 
+						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
+				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['param']);
+				break;
 		
 		}
 	

@@ -18,7 +18,16 @@ Transmission.prototype = {
 		 * Private Constants
 		 */
 		var _RefreshInterval;
-		this._RefreshInterval = 5;
+		var _FilterAll;
+		var _FilterSeeding;
+		var _FilterDownloading;
+		var _FilterPaused;
+		this._RefreshInterval   = 5;
+		this._FilterAll         = 'all';
+		this._FilterSeeding     = 'seeding';
+		this._FilterDownloading = 'downloading';
+		this._FilterPaused      = 'paused';
+		this._current_filter    = this._FilterAll;
 		
         /*
          * Private Variables
@@ -46,13 +55,17 @@ Transmission.prototype = {
 		// Buttons
 		Event.observe($('pause_all_link'), 'mouseup', this.releasePauseAllButton.bindAsEventListener(this));
 		Event.observe($('resume_all_link'), 'mouseup', this.releaseResumeAllButton.bindAsEventListener(this));
-		Event.observe($('filter'), 'mouseup', this.releaseFilterButton.bindAsEventListener(this));
 		Event.observe($('pause_selected_link'), 'mouseup', this.releasePauseSelectedButton.bindAsEventListener(this));
 		Event.observe($('resume_selected_link'), 'mouseup', this.releaseResumeSelectedButton.bindAsEventListener(this));
 		Event.observe($('open_link'), 'mouseup', this.releaseOpenButton.bindAsEventListener(this));
 		Event.observe($('remove_link'), 'mouseup', this.releaseRemoveButton.bindAsEventListener(this));
-		Event.observe($('filter_link'), 'mouseup', this.releaseFilterButton.bindAsEventListener(this));
-		Event.observe($('inspector_link'), 'mouseup', this.releaseInspectorButton.bindAsEventListener(this));
+		Event.observe($('filter_toggle_link'), 'mouseup', this.releaseFilterToggleButton.bindAsEventListener(this));
+		Event.observe($('inspector_link'), 'mouseup', this.releaseInspectorButton.bindAsEventListener(this));		
+		Event.observe($('filter_all_link'), 'mouseup', this.releaseFilterAllButton.bindAsEventListener(this));
+		Event.observe($('filter_downloading_link'), 'mouseup', this.releaseFilterDownloadingButton.bindAsEventListener(this));
+		Event.observe($('filter_seeding_link'), 'mouseup', this.releaseFilterSeedingButton.bindAsEventListener(this));
+		Event.observe($('filter_paused_link'), 'mouseup', this.releaseFilterPausedButton.bindAsEventListener(this));
+		
 		
 		// Inspector tabs
 		Event.observe($('inspector_tab_info'), 'mouseup', this.releaseInspectorTab.bindAsEventListener(this));
@@ -303,7 +316,7 @@ Transmission.prototype = {
     /*
      * Process a mouse-up event on the 'filter' button
      */
-	releaseFilterButton: function(event) {
+	releaseFilterToggleButton: function(event) {
 		Event.stop(event);		
 		
 		// Perform the toggle
@@ -319,6 +332,38 @@ Transmission.prototype = {
 			$('torrent_filter_bar').show();
 			this._filter_visible = true;
 		}
+	},
+
+	/*
+	 * Process a mouse-up event on the 'filter all' button
+	 */
+	releaseFilterAllButton: function(event) {
+		Event.stop(event);		
+		this.filterTorrents(this._FilterAll);
+	},
+
+	/*
+	 * Process a mouse-up event on the 'filter downloading' button
+	 */
+	releaseFilterDownloadingButton: function(event) {
+		Event.stop(event);	
+		this.filterTorrents(this._FilterDownloading);
+	},
+
+	/*
+	 * Process a mouse-up event on the 'filter seeding' button
+	 */
+	releaseFilterSeedingButton: function(event) {
+		Event.stop(event);		
+		this.filterTorrents(this._FilterSeeding);
+	},
+
+	/*
+	 * Process a mouse-up event on the 'filter paused' button
+	 */
+	releaseFilterPausedButton: function(event) {
+		Event.stop(event);	
+		this.filterTorrents(this._FilterPaused);
 	},
 	
     /*
@@ -427,6 +472,18 @@ Transmission.prototype = {
         var previous_torrent;
 		var global_up_speed = 0;
 		var global_down_speed = 0;
+		
+		// Clear the inspector
+		this.deselectAll();
+		this.updateInspector();
+		
+		// Initialise the torrent lists (this function gets called for filtering as well as onLoad)
+        this._torrents.values().invoke('remove');
+        this._torrents = new Hash({});
+        this._selected_torrents = new Hash({});
+        this._last_torrent_clicked = null;
+        this._highest_selected = null;
+        this._lowest_selected = null;
         
         for (i=0; i<torrent_list.length; i++) {
             torrent_data = torrent_list[i];
@@ -652,6 +709,16 @@ Transmission.prototype = {
      */
     reloadTorrents: function() {
         transmission.remoteRequest('reloadTorrents');	
+    },
+    
+    /*
+     * Filter the torrent data
+     */
+    filterTorrents: function(filter_type) {
+		if (filter_type != this._current_filter) {	
+			this._current_filter = filter_type;
+        	transmission.remoteRequest('filterTorrents', filter_type);
+		}
     },
     
     /*
