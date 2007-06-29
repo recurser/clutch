@@ -11,6 +11,7 @@
 	require_once('IPCProtocol.class.php');
 	require_once('MessageController.class.php');
 	require_once('TransmissionController.class.php');
+	require_once('Preferences.class.php');
 
 	class BigBlueHouse
 	{

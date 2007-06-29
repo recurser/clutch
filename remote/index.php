@@ -9,7 +9,9 @@
 	$TControl = new TransmissionController(file_get_contents('data/socket.txt'));
 	$MControl = new MessageController($TControl);
 	$Instance = new BigBlueHouse($MControl);
-	
+
+	$Preferences = new Preferences('data/prefs.txt');
+
 	if (isset($_GET['action']) && isset($_GET['param'])) 
 	{
 		

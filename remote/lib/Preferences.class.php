@@ -7,38 +7,40 @@
 
 	class Preferences
 	{
-		private $PreferenceFile = 'data/prefs.txt';
+		public $PreferenceFile;
 
-		public function __construct()
+		public function __construct($PreferenceFile)
 		{
-			if (!file_exists($PreferenceFile))
-				return touch($PreferenceFile);
+			$this->PreferenceFile = $PreferenceFile;
+
+			if (!file_exists($this->PreferenceFile))
+				return touch($this->PreferenceFile);
 			else
 				return true;
 		}
 
-		private function ReadPreferences()
+		public function ReadPreferences()
 		{
-			return unserialize(file_get_contents('data/prefs.txt'));
+			return unserialize(file_get_contents($this->PreferenceFile));
 		}
 
 		private function WritePreferences($PrefsArray)
 		{
-			return file_put_contents($PreferenceFile, serialize($PrefsArray));
+			return file_put_contents($this->PreferenceFile, serialize($PrefsArray));
 		}
 
 		public function GetPreference($key)
 		{
-			$Prefs = ReadPreferences();
+			$Prefs = $this->ReadPreferences();
 			if (array_key_exists($key, $Prefs))
 				return $Prefs[$key];
 		}
 
 		public function SetPreference($key, $value)
 		{
-			$Prefs = ReadPreferences();
+			$Prefs = $this->ReadPreferences();
 			$Prefs[$key] = $value;
-			return WritePreferences($Prefs);
+			return $this->WritePreferences($Prefs);
 		}
 	}
 ?>
