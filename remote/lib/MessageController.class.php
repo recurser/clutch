@@ -45,9 +45,7 @@
 			if (!is_null($directory))
 				$Message[1]['directory'] = $directory;
 			if (!is_null($autostart))
-				// Messenger doesn't accept boolean
-				// TODO - Check with gimp that int is ok, or should i change the serializer to accept booleans?
-				$Message[1]['autostart'] = intval($autostart);
+				$Message[1]['autostart'] = $autostart;
 
 			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message));
 		}

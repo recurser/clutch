@@ -14,6 +14,9 @@
 			case is_null($mixed):
 				return $this->encode_string('');
 				break;
+			case 'boolean':
+				return $this->encode_int($mixed);
+				break;
 			case 'string':
 				return $this->encode_string($mixed);
 				break;
