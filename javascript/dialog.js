@@ -78,8 +78,22 @@ Dialog.prototype = {
     confirm: function(dialog_heading, dialog_message, confirm_button_label, callback_function) {
 		this._heading.innerHTML = dialog_heading;
 		this._message.innerHTML = dialog_message;
+		this._cancel_button.innerHTML = 'Cancel';
 		this._confirm_button.innerHTML = confirm_button_label;
+		this._confirm_button.show();
 		this._callback_function = callback_function;
+		this._container.show();
+	},
+    
+    /*
+     * Display an alert dialog
+     */
+    alert: function(dialog_heading, dialog_message, cancel_button_label) {
+		this._heading.innerHTML = dialog_heading;
+		this._message.innerHTML = dialog_message;
+		this._confirm_button.hide();
+		this._cancel_button.innerHTML = cancel_button_label;
+		$('upload_container').hide(); // Just in case
 		this._container.show();
 	}
 	

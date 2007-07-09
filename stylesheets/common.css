@@ -528,10 +528,11 @@ div.torrent_context_menu div.separator {
 
 /*--------------------------------------
  *
- * C O N F I R M   D I A L O G
+ * D I A L O G S
  *
  *--------------------------------------*/
-div#dialog_container {
+div#dialog_container,
+div#upload_container {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -542,7 +543,8 @@ div#dialog_container {
 	text-align: center;
 	}
 	
-div#dialog_container div.dialog_top_bar {
+div#dialog_container div.dialog_top_bar,
+div#upload_container div.dialog_top_bar {
 	text-align: center;
 	background: #DBDBDB url('../images/graphics/dialog_top.png') no-repeat; 
 	margin: 15px auto 0 auto;
@@ -550,7 +552,8 @@ div#dialog_container div.dialog_top_bar {
 	height: 4px;
 	}
 	
-div#dialog_container div#dialog_window {
+div#dialog_container div#dialog_window,
+div#upload_container div#dialog_window {
 	background-color: #DBDBDB;
 	width: 420px;
 	height: 135px;
@@ -563,24 +566,28 @@ div#dialog_container div#dialog_window {
 	text-align: left;
 	}
 	
-div#dialog_container div#dialog_window img {
+div#dialog_container div#dialog_window img,
+div#upload_container div#dialog_window img {
 	margin: 20px 20px 0 20px;
 	float: left;
 	}
 	
-div#dialog_container div#dialog_window h2#dialog_heading {
+div#dialog_container div#dialog_window h2#dialog_heading,
+div#upload_container div#dialog_window h2#dialog_heading {
 	display: block;
 	float: left;
 	width: 305px;
 	}
 	
-div#dialog_container div#dialog_window div#dialog_message {
+div#dialog_container div#dialog_window div#dialog_message,
+div#upload_container div#dialog_window div#dialog_message {
 	float: left;
 	width: 305px;
 	height: 55px;
 	}
 	
-div#dialog_container div#dialog_window a {
+div#dialog_container div#dialog_window a,
+div#upload_container div#dialog_window a {
 	display: block;
 	float: right;
 	margin: 5px 10px 0 0;
@@ -595,8 +602,23 @@ div#dialog_container div#dialog_window a {
 	}
 	
 div#dialog_container div#dialog_window a:hover,
-div#dialog_container div#dialog_window a:active {
+div#dialog_container div#dialog_window a:active,
+div#upload_container div#dialog_window a:hover,
+div#upload_container div#dialog_window a:active {
 	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
+	}
+	
+div#upload_container div#dialog_window div#dialog_message input {
+	margin: 5px 0 0 0;
+	padding: 1px;
+	background-color: #EEE;
+	border: 1px solid #787878;
+	display: block;
+	}
+	
+div#upload_container div#dialog_window form {
+	margin: 0px;
+	padding: 0px;
 	}
 	
 

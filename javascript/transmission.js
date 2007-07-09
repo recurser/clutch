@@ -22,7 +22,7 @@ Transmission.prototype = {
 		var _FilterSeeding;
 		var _FilterDownloading;
 		var _FilterPaused;
-		this._RefreshInterval   = 5;
+		this._RefreshInterval   = 8;
 		this._FilterAll         = 'all';
 		this._FilterSeeding     = 'seeding';
 		this._FilterDownloading = 'downloading';
@@ -65,6 +65,16 @@ Transmission.prototype = {
 		Event.observe($('filter_downloading_link'), 'mouseup', this.releaseFilterDownloadingButton.bindAsEventListener(this));
 		Event.observe($('filter_seeding_link'), 'mouseup', this.releaseFilterSeedingButton.bindAsEventListener(this));
 		Event.observe($('filter_paused_link'), 'mouseup', this.releaseFilterPausedButton.bindAsEventListener(this));
+		Event.observe($('upload_confirm_button'), 'mouseup', this.releaseUploadConfirmButton.bindAsEventListener(this));
+		Event.observe($('upload_cancel_button'), 'mouseup', this.releaseUploadCancelButton.bindAsEventListener(this));
+		
+		// Need to make an iframe for uploading torrents
+		var upload_container = document.createElement('div');
+		Element.setStyle(upload_container, {display: 'none'});
+		upload_container.innerHTML = "<iframe name='torrent_upload_frame' " +
+			"id='torrent_upload_frame' style='border:2px dashed #CC0000;position:absolute;z-index:1000;bottom:0px;right:0px;' " +
+			"src='about:blank' onload='transmission.processUpload(this);'/>";
+		$('transmission_body').appendChild(upload_container);
 		
 		
 		// Inspector tabs
@@ -301,7 +311,24 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'open' button
 	 */
 	releaseOpenButton: function(event) {
-		Event.stop(event);		
+		Event.stop(event);	
+		this.uploadTorrentFile();	
+	},
+
+	/*
+	 * Process a mouse-up event on the 'open' button
+	 */
+	releaseUploadCancelButton: function(event) {
+		Event.stop(event);	
+		$('upload_container').hide();
+	},
+
+	/*
+	 * Process a mouse-up event on the 'open' button
+	 */
+	releaseUploadConfirmButton: function(event) {
+		Event.stop(event);	
+		this.uploadTorrentFile(true);
 	},
 
 	/*
@@ -498,7 +525,7 @@ Transmission.prototype = {
     /*
      * Load a list of torrents into the application
      */
-    addTorrents: function(torrent_list) {
+    addTorrents: function(torrent_list, initialise_list) {
         var torrent_data;
         var torrent;
         var previous_torrent;
@@ -509,17 +536,25 @@ Transmission.prototype = {
 		this.deselectAll();
 		this.updateInspector();
 		
+		if (initialise_list == null) {
+			initialise_list = true;
+		}
+				
 		// Initialise the torrent lists (this function gets called for filtering as well as onLoad)
-        this._torrents.values().invoke('remove');
-        this._torrents = new Hash({});
-        this._selected_torrents = new Hash({});
-        this._last_torrent_clicked = null;
-        this._highest_selected = null;
-        this._lowest_selected = null;
-        
-        for (i=0; i<torrent_list.length; i++) {
+		if (initialise_list) {
+	        this._torrents.values().invoke('remove');
+	        this._torrents = new Hash({});
+	        this._selected_torrents = new Hash({});
+	        this._last_torrent_clicked = null;
+	        this._highest_selected = null;
+	        this._lowest_selected = null;
+        }
+		
+		var num_existing_torrents = this._torrents.keys().length;
+		var num_new_torrents = torrent_list.length;
+        for (i=0; i<num_new_torrents; i++) {
             torrent_data = torrent_list[i];
-            torrent_data.position = i+1;
+            torrent_data.position = i+1+num_existing_torrents;
             torrent = new Torrent(torrent_data);
             
 			// Set the global up and down speeds 
@@ -690,6 +725,11 @@ Transmission.prototype = {
      * Load a list of torrents into the application
      */
     removeTorrents: function(torrent_list) {
+		
+		// Clear the inspector
+		this.deselectAll();
+		this.updateInspector();
+		
 		if (torrent_list.length != 0) {
         	for (i=0; i<torrent_list.length; i++) {	
 				Element.remove(this._torrents[torrent_list[i]].element());
@@ -707,6 +747,36 @@ Transmission.prototype = {
 		$('torrent_global_download').innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed, true) + '/s';
 		$('torrent_global_transfer').innerHTML = num_torrents + ' Transfers';
     },
+    
+    /*
+     * Select a torrent file to upload
+     */
+    uploadTorrentFile: function(confirmed) {
+		// Display the upload dialog
+		if (! confirmed) {
+			$('upload_container').show();
+		// Submit the upload form			
+		} else {	
+			$('torrent_upload_form').submit();
+		}
+    },
+
+    /*
+     * Load an uploaded torrent into the list
+     */
+    processUpload: function(iframe) {
+		if (frames['torrent_upload_frame'].location != 'about:blank') {
+			try {
+				eval(frames['torrent_upload_frame'].document.body.childNodes[0].innerHTML);
+				$('upload_container').hide();
+			} catch(e) {
+				dialog.alert('Upload Error', 'An unexpected error occured', 'Dismiss');
+			}		
+		}
+    },
+
+
+	
 
 
 
@@ -792,6 +862,8 @@ Transmission.prototype = {
 			}
 		}
     }
+
+
 		
 
 

@@ -14,7 +14,7 @@
 
 	if (isset($_GET['action']) && isset($_GET['param'])) 
 	{
-		
+		$controller = 'transmission';
 		$function = '';
 		$arg_list = '';
 		
@@ -85,14 +85,35 @@
 						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
 				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['param']);
 				break;
-		
+	
+			case 'uploadTorrent' :
+				$response = $Instance->AddTorrentByUpload('torrent_file', null, true);
+				if (isset($response[1][0]['id'])) {
+					$torrent_id = intval($response[1][0]['id']);	
+					$info_fields = array(
+							"id", "hash", "name", "path", "saved", "private", 
+							"trackers", "comment", "creator", "date", "size");
+					$status_fields = array(
+							"completed", "download-speed", "download-total", "error", 
+							"error-message", "eta", "id", "peers-downloading", 
+							"peers-from", "peers-total", "peers-uploading", "running", 
+							"state", "swarm-speed", "tracker", "scrape-completed", 
+							"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
+					$arg_list = $Instance->getTorrentData($info_fields, $status_fields, array($torrent_id)) . ', false';
+					$function = 'addTorrents';
+				} else {
+					$controller = 'dialog';
+					$function = 'alert';
+					$arg_list = "'Upload Error', 'An unexpected error occured', 'Dismiss'";
+				}
+				break;		
 		}
 	
 		// Set the mime type (causes prototype to auto-eval())
 		header('Content-type: text/javascript');
 	
 		// Encode and output the response
-		echo 'transmission.' . $function . '(' . $arg_list . ');';
+		echo $controller . '.' . $function . '(' . $arg_list . ');';
 	
 	}
 ?>

@@ -18,7 +18,7 @@
 		<script type="text/javascript" src="./javascript/torrent.js"></script>
 		<script type="text/javascript" src="./javascript/dialog.js"></script>
 	</head>
-	<body>
+	<body id='transmission_body'>
 
 		<div class="torrent_global_menu">
 			 <ul>    
@@ -133,6 +133,23 @@
 				<a href="#dialog_confirm" id="dialog_confirm_button">Confirm</a>
 				<a href="#dialog_cancel" id="dialog_cancel_button">Cancel</a>
 				
+			</div>
+		</div>
+		
+		<div id="upload_container" style="display:none;">
+			<div class="dialog_top_bar"></div>
+			<div id="dialog_window">
+				<img src='images/graphics/logo.png' />
+				<h2 id="dialog_heading">Torrent Upload</h2>
+				<form action='remote/?action=uploadTorrent&amp;param=[]' method='post' id='torrent_upload_form' 
+					enctype='multipart/form-data' target='torrent_upload_frame'>  
+				<div id="dialog_message">
+					Please select a .torrent file to upload:
+					<input type='file' name='torrent_file'/>
+				</div>
+				<a href="#dialog_confirm" id="upload_confirm_button">Upload</a>
+				<a href="#dialog_cancel" id="upload_cancel_button">Cancel</a>
+				</form>
 			</div>
 		</div>
 
