@@ -3,7 +3,6 @@ TODO
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - Adding a torrent that's already downloading seems to hang everything - haven't had time to figure out why yet
 - Need to validate the torrent upload stuff and report proper error messages
-- Serializer doesn't accept booleans, so the MessageController::AddFileDetailed class breaks sending the 'autocomplete' argument. Changed to an int for now with intval() - gimp/swe are there any probs doing this? I don't know anything about the serializer but i guess it should be ok
 - *if* the memory issue is sorted, maybe try getting torrent info in groups of 3/4/whatever is safe to try and speed things up a bit?
 - Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
@@ -85,3 +84,4 @@ DONE
 - Multi-GB torrents can have greater than 2147483647 bytes, making them hit 100% early (gimp - changed from int to float).
 - Figure out a way to convert an array into something that can be accepted by func_get_args(), as this is used all over the place. Passing an array seems to result in just one argument (the array) instead of lots (the strings in the array). Tried using a combo of eval & implode but doesn't seem to work. (gimp - fixed messageclass to accept an array argument instead of list)
 - Pausing torrents works ok but resuming seems to timeout, comes back eventually with the message 'This program has encountered an error and will now exit.'. The torrent gets restarted almost straight away so it's working at some level. (gimp - made messageclass not listen for response)
+- Serializer doesn't accept booleans, so the MessageController::AddFileDetailed class breaks sending the 'autocomplete' argument. Changed to an int for now with intval() - gimp/swe are there any probs doing this? I don't know anything about the serializer but i guess it should be ok [ Serializer now accepts booleans. It automatically converts to int ]
