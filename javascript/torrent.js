@@ -5,146 +5,85 @@
  *
  * Class Torrent
  */
- 
-var Torrent = Class.create();
+
+function Torrent(data) {
+    // Constants
+	this._StatusDownloading     = 'downloading';
+	this._StatusSeeding         = 'seeding'; 
+	this._StatusStopping        = 'stopping'; 
+	this._StatusPaused          = 'paused'; 
+	this._InfiniteTimeRemaining = 215784000; // 999 Hours - may as well be infinite
+	this._MaxDownloadPercent  = 99; // reduce this to make the progress bar shorter
+
+    this.initialize(data);
+} 
+
 Torrent.prototype = {
 
     /*
      * Constructor
      */
     initialize: function(data) {
-    
-		/*
-		 * Private Constants
-		 */
-		var _StatusDownloading;
-		var _StatusSeeding; 
-		var _StatusStopping; 
-		var _StatusPaused; 
-		var _MaxDownloadPercent;
-		var _InfiniteTimeRemaining;
-		this._StatusDownloading     = 'downloading';
-		this._StatusSeeding         = 'seeding'; 
-		this._StatusStopping        = 'stopping'; 
-		this._StatusPaused          = 'paused'; 
-		this._InfiniteTimeRemaining = 215784000; // 999 Hours - may as well be infinite
-		
-		this._MaxDownloadPercent  = 99; // reduce this to make the progress bar shorter
-		
-		/*
-		 * Private Interface Variables
-		 */
-		var _controller;
-		var _element;
-		var _previous_torrent;
-		var _next_torrent;
-		var _position;
-		var _name_container;
-		var _progress_details_container;
-		var _progress_complete_container;
-		var _progress_incomplete_container;
-		var _peer_details_container;
-		var _pause_resume_button;
-		var _pause_resume_button_image;
-		
-		/*
-		 * Private Torrent Variables
-		 */
-		var _id;
-		var _name;
-		var _hash;
-		var _date;
-		var _size;
-		var _completed;
-		var _download_total;
-		var _upload_total;
-		var _download_speed;
-		var _upload_speed;
-		var _peers_downloading;
-		var _peers_uploading;
-		var _peers_from;
-		var _peers_total;
-		var _error;
-		var _error_message;
-		var _state;
-		var _eta;
-		var _running;
-		var _tracker;
-		var _private;
-		var _comment;
-		var _creator;
-		var _creator_date;
-		var _torrent_file;
-		var _swarm_speed;
-		var _total_leechers;
-		var _total_seeders;
 		
 		// Create a new <li> element
-		var element = document.createElement('li');
-		Element.extend(element);
-		element.addClassName('torrent');
-		element.id = 'torrent_' + data.id;
+		var element = $('<li/>');
+		element.addClass('torrent');
+		element[0].id = 'torrent_' + data.id;
 		this._element = element;
 		
 		// Create the 'name' <div>
-		this._name_container = document.createElement('div');
-		Element.extend(this._name_container);
-		this._name_container.addClassName('torrent_name');
-		this._name_container.innerHTML= data.name;
-		element.appendChild(this._name_container);
+		this._name_container = $('<div/>');
+		this._name_container.addClass('torrent_name');
+		this._name_container[0].innerHTML= data.name;
+		this._element.append(this._name_container);
 		
 		// Create the 'progress details' <div>
-		this._progress_details_container = document.createElement('div');
-		Element.extend(this._progress_details_container);
-		this._progress_details_container.addClassName('torrent_progress_details');
-		element.appendChild(this._progress_details_container);
+		this._progress_details_container = $('<div/>');
+		this._progress_details_container.addClass('torrent_progress_details');
+		this._element.append(this._progress_details_container);
 			
 		// Create the 'in progress' bar
-		this._progress_complete_container = document.createElement('div');
-		Element.extend(this._progress_complete_container);
-		this._progress_complete_container.addClassName('torrent_progress_bar');
-		this._progress_complete_container.addClassName('incomplete');
-		this._progress_complete_container.style.width = '0%';
-		element.appendChild(this._progress_complete_container);
+		this._progress_complete_container = $('<div/>');
+		this._progress_complete_container.addClass('torrent_progress_bar');
+		this._progress_complete_container.addClass('incomplete');
+		this._progress_complete_container.css('width', '0%');
+		this._element.append(this._progress_complete_container);
 			
 		// Create the 'incomplete' bar (initially hidden)
-		this._progress_incomplete_container = document.createElement('div');
-		Element.extend(this._progress_incomplete_container);
-		this._progress_incomplete_container.addClassName('torrent_progress_bar');
-		this._progress_incomplete_container.addClassName('incomplete');
-		this._progress_incomplete_container.style.display = 'none';
-		element.appendChild(this._progress_incomplete_container);
+		this._progress_incomplete_container = $('<div/>');
+		this._progress_incomplete_container.addClass('torrent_progress_bar');
+		this._progress_incomplete_container.addClass('incomplete');
+		this._progress_incomplete_container.hide();
+		this._element.append(this._progress_incomplete_container);
 		
 		// Add the pause/resume button - don't specify the image or alt text until 
 		// the 'refresh()' function (depends on torrent state)
-		this._pause_resume_button = document.createElement('a');
-		Element.extend(this._pause_resume_button);
-		this._pause_resume_button_image = document.createElement('img');
-		this._pause_resume_button.appendChild(this._pause_resume_button_image);
-		element.appendChild(this._pause_resume_button);
+		this._pause_resume_button = $('<a/>');
+		this._pause_resume_button_image = $('<img/>');
+		this._pause_resume_button.append(this._pause_resume_button_image);
+		this._element.append(this._pause_resume_button);
 			
 		// Set the pause button click observer
-		Event.observe(this._pause_resume_button, 'mousedown', this.clickPauseResumeButton.bindAsEventListener(this));
-		Event.observe(this._pause_resume_button, 'mouseup', this.releasePauseResumeButton.bindAsEventListener(this));
+		this._pause_resume_button.bind('mousedown', {torrent: this}, this.clickPauseResumeButton);
+		this._pause_resume_button.bind('mouseup', {torrent: this}, this.releasePauseResumeButton);
 		
 		// Create the 'peer details' <div>
-		this._peer_details_container = document.createElement('div');
-		Element.extend(this._peer_details_container);
-		this._peer_details_container.addClassName('torrent_peer_details');
-		element.appendChild(this._peer_details_container);
+		this._peer_details_container = $('<div/>');
+		this._peer_details_container.addClass('torrent_peer_details');
+		this._element.append(this._peer_details_container);
 			
 		// Set the torrent click observer
-		Event.observe(this._element, 'mouseup', this.clickTorrent.bindAsEventListener(this));
-		Event.observe(this._element, 'contextmenu', this.rightClickTorrent.bindAsEventListener(this));		
+		this._element.bind('click', {torrent: this}, this.clickTorrent);
+		this._element.bind('rightclick', {torrent: this}, this.rightClickTorrent);		
 		
 		// Safari hack - first torrent needs to be moved down for some reason. Seems to be ok when
 		// using <li>'s in straight html, but adding through the DOM gets a bit odd.
-		if (data.position == 1 && BrowserDetect.browser.toLowerCase() == 'safari') {
-			element.setStyle({'margin-top': '7px'});
+		if ($.browser.safari) {
+			this._element.css('margin-top', '7px');
 		}
 		
 		// insert the element
-		$('torrent_list').appendChild(element);
+		$('#torrent_list').append(this._element);
 		
 		// Update all the labels etc
 		this.refresh(data);
@@ -248,10 +187,13 @@ Torrent.prototype = {
 	 * Process a right-click event on this torrent
 	 */
 	rightClickTorrent: function(event) {
+		
+		var torrent = event.data.torrent;
+		
 		// Don't stop the event! need it for the right-click menu
-		if (!this.isSelected()) {
-			this._controller.deselectAll();
-			this.select();
+		if (!torrent.isSelected()) {
+			torrent._controller.deselectAll();
+			torrent.select();
 		}
 	},
 	
@@ -259,8 +201,11 @@ Torrent.prototype = {
 	 * Process a click event on this torrent
 	 */
 	clickTorrent: function(event) {
+	
+		event.stopPropagation();
 		
-		Event.stop(event);
+		var torrent = event.data.torrent;
+		
 		// console.log($H(event).keys());
 			
 		// 'Apple' button emulation on PC :
@@ -274,30 +219,30 @@ Torrent.prototype = {
 		
 		// Shift-Click - Highlight a range between this torrent and the last-clicked torrent
 		if (event.shiftKey) {
-			this._controller.selectRange(this);
+			torrent._controller.selectRange(torrent);
 			// Need to deselect any selected text
 			window.focus();
 		
 		// Apple-Click, not selected
-		} else if (!this.isSelected() && meta_key) {
-			this.select();
+		} else if (!torrent.isSelected() && meta_key) {
+			torrent.select();
 			
 		// Regular Click, not selected
-		} else if (!this.isSelected()) {
-			this._controller.deselectAll();
-			this.select();
+		} else if (!torrent.isSelected()) {
+			torrent._controller.deselectAll();
+			torrent.select();
 		
 		// Apple-Click, selected	
-		} else if (this.isSelected() && meta_key) {
-			this.deselect();
+		} else if (torrent.isSelected() && meta_key) {
+			torrent.deselect();
 			
 		// Regular Click, selected
-		} else if (this.isSelected()) {
-			this._controller.deselectAll();
-			this.select();
+		} else if (torrent.isSelected()) {
+			torrent._controller.deselectAll();
+			torrent.select();
 		}
 		
-		this._controller.setLastTorrentClicked(this);
+		torrent._controller.setLastTorrentClicked(torrent);
 	},
 	
 
@@ -305,13 +250,13 @@ Torrent.prototype = {
 	 * Process a click event on the pause/resume button
 	 */
 	clickPauseResumeButton: function(event) {
-
-		Event.stop(event);
+		
+		var torrent = event.data.torrent;
 			
-		if (this._state == this._StatusPaused) {
-			this._pause_resume_button_image.src = 'images/buttons/resume_on.png';
+		if (torrent._state == torrent._StatusPaused) {
+			torrent._pause_resume_button_image[0].src = 'images/buttons/resume_on.png';
 		} else {
-			this._pause_resume_button_image.src = 'images/buttons/pause_on.png';
+			torrent._pause_resume_button_image[0].src = 'images/buttons/pause_on.png';
 		}
 	},
 
@@ -320,19 +265,19 @@ Torrent.prototype = {
 	 */
 	releasePauseResumeButton: function(event) {	
 		
-		Event.stop(event);
+		var torrent = event.data.torrent;
 		
 		var action;	
-		if (this._state == this._StatusPaused) {
+		if (torrent._state == torrent._StatusPaused) {
 			action = 'resumeTorrents';
-			this._pause_resume_button_image.src = 'images/buttons/resume_off.png';
+			torrent._pause_resume_button_image[0].src = 'images/buttons/resume_off.png';
 		} else {
 			action = 'pauseTorrents';
-			this._pause_resume_button_image.src = 'images/buttons/pause_off.png';
+			torrent._pause_resume_button_image[0].src = 'images/buttons/pause_off.png';
 		}
 		
 		// Send an ajax request to perform the action
-		this._controller.remoteRequest(action, [this._id].toJSON());
+		torrent._controller.remoteRequest(action, $.toJSON([torrent._id]));
 	},
 
 
@@ -412,17 +357,19 @@ Torrent.prototype = {
 			
 			// Update the 'in progress' bar
 			var class_name = (this.isActive()) ? 'in_progress' : 'incomplete_stopped';
-			this._progress_complete_container.className = 'torrent_progress_bar';
-			this._progress_complete_container.addClassName(class_name);
-			this._progress_complete_container.style.width = int_percent_complete + '%';
+			this._progress_complete_container.removeClass();
+			this._progress_complete_container.addClass('torrent_progress_bar');
+			this._progress_complete_container.addClass(class_name);
+			this._progress_complete_container.css('width', int_percent_complete + '%');
 			
 			// Update the 'incomplete' bar
-			if (! this._progress_incomplete_container.hasClassName('incomplete')) {
-				this._progress_incomplete_container.className = 'torrent_progress_bar';
-				this._progress_incomplete_container.addClassName('in_progress');
+			if (! this._progress_incomplete_container.is('.incomplete')) {
+				this._progress_incomplete_container.removeClass();
+				this._progress_incomplete_container.addClass('torrent_progress_bar');
+				this._progress_incomplete_container.addClass('in_progress');
 			}
-			this._progress_incomplete_container.style.width = (this._MaxDownloadPercent - int_percent_complete) + '%';
-			this._progress_incomplete_container.style.display = 'block';
+			this._progress_incomplete_container.css('width', (this._MaxDownloadPercent - int_percent_complete) + '%');
+			this._progress_incomplete_container.show();
 			
 			// Create the 'peer details' label
 			// Eg: 'Downloading from 36 of 40 peers - DL: 60.2 KB/s UL: 4.3 KB/s'
@@ -435,8 +382,9 @@ Torrent.prototype = {
 			
 			// Update the 'in progress' bar
 			var class_name = (this.isActive()) ? 'complete' : 'complete_stopped';
-			this._progress_complete_container.className = 'torrent_progress_bar';
-			this._progress_complete_container.addClassName(class_name);
+			this._progress_complete_container.removeClass();
+			this._progress_complete_container.addClass('torrent_progress_bar');
+			this._progress_complete_container.addClass(class_name);
 			
 			// Create the 'progress details' label
 			// Eg: '698.05 MB, uploaded 8.59 GB (Ratio: 12.3)'
@@ -445,10 +393,10 @@ Torrent.prototype = {
 			progress_details += this.ratio() + ')';
 			
 			// Hide the 'incomplete' bar
-			this._progress_incomplete_container.style.display = 'none';
+			this._progress_incomplete_container.hide();
 			
 			// Set progress to maximum
-			this._progress_complete_container.style.width = this._MaxDownloadPercent + '%';
+			this._progress_complete_container.css('width', this._MaxDownloadPercent + '%');
 			
 			// Create the 'peer details' label
 			// Eg: 'Seeding to 13 of 22 peers - UL: 36.2 KB/s'
@@ -458,7 +406,7 @@ Torrent.prototype = {
 		}
 		
 		// Update the progress details
-		this._progress_details_container.innerHTML = progress_details;
+		this._progress_details_container[0].innerHTML = progress_details;
 		
 		// Update the peer details and pause/resume button
 		if (this._state == this._StatusPaused || this._state == this._StatusStopping) {
@@ -467,25 +415,25 @@ Torrent.prototype = {
 			} else {
 				peer_details = 'Stopping...';
 			}
-			this._pause_resume_button_image.alt = 'Resume';
-			this._pause_resume_button_image.src = 'images/buttons/resume_off.png';
+			this._pause_resume_button_image[0].alt = 'Resume';
+			this._pause_resume_button_image[0].src = 'images/buttons/resume_off.png';
 		} else {
-			this._pause_resume_button_image.alt = 'Pause';
-			this._pause_resume_button_image.src = 'images/buttons/pause_off.png';
+			this._pause_resume_button_image[0].alt = 'Pause';
+			this._pause_resume_button_image[0].src = 'images/buttons/pause_off.png';
 		}
 		
 		if (this._error_message && this._error_message != '') {
 			peer_details = this._error_message;
 		}
 		
-		this._peer_details_container.innerHTML = peer_details;
+		this._peer_details_container[0].innerHTML = peer_details;
 	},
 	
 	/*
 	 * Select this torrent
 	 */
 	select: function() {
-		this._element.addClassName('selected');
+		this._element.addClass('selected');
 		
 		// Inform the controller
 		this._controller.selectTorrent(this);
@@ -494,9 +442,7 @@ Torrent.prototype = {
 	/*
 	 * De-Select this torrent
 	 */
-	deselect: function() {
-		this._element.removeClassName('selected');
-		
+	deselect: function() {		
 		// Inform the controller
 		this._controller.deselectTorrent(this);
 	},
@@ -505,14 +451,14 @@ Torrent.prototype = {
 	 * Return true if this torrent is selected
 	 */
 	isSelected: function() {
-		return this._element.hasClassName('selected');
+		return this._element.is('.selected');
 	},
 	
 	/*
 	 * Remove this element from the dom
 	 */
 	remove: function() {
-		Element.remove(this._element);
+		this._element.remove();
 	}
  
  

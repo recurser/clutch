@@ -1,7 +1,12 @@
+
 TODO
 ==================================================
+- Adding a torrent that's already downloading seems to hang everything - any ideas guys?
+- torrent filtering broken since the change to jQuery 
+- right-click context menu broken since the change to jQuery 
+- show/hide inspector should change right-click menu options (commented out until new jquery right-click menu is done)
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
-- Adding a torrent that's already downloading seems to hang everything - haven't had time to figure out why yet
+- mouse up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
 - Need to validate the torrent upload stuff and report proper error messages
 - *if* the memory issue is sorted, maybe try getting torrent info in groups of 3/4/whatever is safe to try and speed things up a bit?
 - Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
@@ -22,6 +27,7 @@ TODO
 - A lot of work to do on the context menu
 	- Hook up the links
 	- enable/disable menu options dynamically instead of all enable
+- Disable access for IE
 
 OPTIMIZATIONS
 ==================================================

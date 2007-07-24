@@ -211,7 +211,7 @@ div#torrent_filter_bar {
 	border-bottom: 1px solid #979797;
 	position: fixed; 
 	left: 0; 
-	right: 300px; 
+	right: 0px; 
 	top: 98px; 
 	z-index: 2;
 	}
@@ -249,7 +249,7 @@ div#torrent_container {
 	position: fixed;
 	top: 122px;
 	bottom: 22px;
-	right: 300px;
+	right: 0px;
 	left: 0px;
 	padding:0px;
 	margin: 0px;
@@ -619,6 +619,18 @@ div#upload_container div#dialog_window div#dialog_message input {
 div#upload_container div#dialog_window form {
 	margin: 0px;
 	padding: 0px;
+	}
+	
+iframe#torrent_upload_frame {
+	display: none;
+	position: absolute;
+	top: -1000px;
+	left: -1000px;
+	width: 0px;
+	height: 0px;
+	border: none;
+	padding: 0;
+	margin: 0;
 	}
 	
 

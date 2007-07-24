@@ -6,14 +6,11 @@
 		<meta http-equiv="cache-control" content="Private" />
 		<link href="./images/favicon.ico" rel="SHORTCUT ICON" />
 		<link rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
-		<!--[if lt IE 7]>
-		<link rel="stylesheet" type="text/css" href="./stylesheets/common_ie_specific.css"/>
-		<![endif]-->
-		<script type="text/javascript" src="./javascript/scriptaculous/prototype.js"></script>
-		<script type="text/javascript" src="./javascript/scriptaculous/scriptaculous.js?load=effects,dragdrop"></script>
-		<script type="text/javascript" src="./javascript/extended_insertion.js"></script>
-		<script type="text/javascript" src="./javascript/menu.js"></script>
+		<script type="text/javascript" src="./javascript/jquery/jquery.js"></script>
+		<script type="text/javascript" src="./javascript/jquery/json.js"></script>
 		<script type="text/javascript" src="./javascript/common.js"></script>
+		<script type="text/javascript" src="./javascript/hash.js"></script>
+		<!--script type="text/javascript" src="./javascript/menu.js"></script-->
 		<script type="text/javascript" src="./javascript/transmission.js"></script>
 		<script type="text/javascript" src="./javascript/torrent.js"></script>
 		<script type="text/javascript" src="./javascript/dialog.js"></script>
@@ -54,7 +51,7 @@
 			<ul class="torrent_list" id="torrent_list"><li></li></ul>
 		</div>
 		
-		<div id="torrent_inspector">
+		<div id="torrent_inspector" style="display:none;">
 			
 			<ul class="torrent_inspector_tabs">
 				<li><a href="#info" id="inspector_tab_info" class="inspector_tab selected">Info</a></li>
@@ -152,6 +149,7 @@
 				</form>
 			</div>
 		</div>
-
+		
+		<iframe name="torrent_upload_frame" id="torrent_upload_frame" src="about:blank" />
 	</body>
 </html>
