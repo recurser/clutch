@@ -84,13 +84,13 @@ Hash.prototype = {
     /*
      * Remove an item from the hash
      */
-	removeItem: function(in_key) {
+	remove: function(key) {
 		var tmp_value;
-		if (typeof(this._items[in_key]) != 'undefined') {
+		if (typeof(this._items[key]) != 'undefined') {
 			this._length--;
-			var tmp_value = this._items[in_key];
-			delete this._items[in_key];
-			this._keys.remove(in_key);
+			var tmp_value = this._items[key];
+			delete this._items[key];
+			this._keys.remove(key);
 		}	   
 		return tmp_value;
 	},
@@ -98,21 +98,21 @@ Hash.prototype = {
     /*
      * Get an item from the hash
      */
-	getItem: function(in_key) {
-		return this._items[in_key];
+	item: function(key) {
+		return this._items[key];
 	},
 
     /*
      * Get an item from the hash
      */
-	getItemByIndex: function(index) {
+	itemByIndex: function(index) {
 		return this._items[this._keys[index]];
 	},
 
     /*
      * Set an item in the hash
      */
-	setItem: function(in_key, in_value) {
+	set: function(in_key, in_value) {
 		if (typeof(in_value) != 'undefined') {
 			if (typeof(this._items[in_key]) == 'undefined') {
 				this._length++;
@@ -128,7 +128,7 @@ Hash.prototype = {
     /*
      * Return true if the item is in the hash
      */
-	hasItem: function(in_key) {
-		return typeof(this._items[in_key]) != 'undefined';
+	hasKey: function(key) {
+		return typeof(this._items[key]) != 'undefined';
 	}
 }

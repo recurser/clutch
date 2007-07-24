@@ -171,8 +171,8 @@ Transmission.prototype = {
 		}	
 		
 		// Store this in the list of selected torrents	
-        if (!this._selected_torrents.hasItem(torrent.id())) {
-			this._selected_torrents.setItem(torrent.id(), torrent);
+        if (!this._selected_torrents.hasKey(torrent.id())) {
+			this._selected_torrents.set(torrent.id(), torrent);
 		}
 
 		// Display in Inspector
@@ -223,7 +223,7 @@ Transmission.prototype = {
 		}
 		
 		// Remove this from the list of selected torrents
-		transmission._selected_torrents.removeItem(torrent.id());
+		transmission._selected_torrents.remove(torrent.id());
 
 		// Display in Inspector
 		if (!ignore_inspector_update) {
@@ -553,7 +553,7 @@ Transmission.prototype = {
             }
             
             // Add to the collection
-            this._torrents.setItem(torrent.id(), torrent);
+            this._torrents.set(torrent.id(), torrent);
             
             previous_torrent = torrent;
         }
@@ -615,8 +615,8 @@ Transmission.prototype = {
 				var total_upload = 0;
 				var total_download = 0;
 				for (i=0; i<torrent_count; i++) {
-					total_upload += this._selected_torrents.getItemByIndex(i)._upload_total;
-					total_download += this._selected_torrents.getItemByIndex(i)._download_total;
+					total_upload += this._selected_torrents.itemByIndex(i)._upload_total;
+					total_download += this._selected_torrents.itemByIndex(i)._download_total;
 				}
 				if (torrent_count == 0) {
 					$('#torrent_inspector_name')[0].innerHTML			= 'No Torrent Selected';
@@ -679,7 +679,7 @@ Transmission.prototype = {
         
         for (i=0; i<torrent_list.length; i++) {
             torrent_data = torrent_list[i];
-			this._torrents.getItem(torrent_data.id).refresh(torrent_data);
+			this._torrents.item(torrent_data.id).refresh(torrent_data);
 			global_up_speed += torrent_data.upload_speed;
 			global_down_speed += torrent_data.download_speed;
         }
@@ -697,9 +697,9 @@ Transmission.prototype = {
     removeTorrents: function(torrent_id_list) {
 		if (torrent_id_list.length != 0) {
         	for (i=0; i<torrent_id_list.length; i++) {	
-				this._torrents.getItem(torrent_id_list[i]).element().remove();
-				this._torrents.removeItem(torrent_id_list[i]);
-				this._selected_torrents.removeItem(torrent_id_list[i]);
+				this._torrents.item(torrent_id_list[i]).element().remove();
+				this._torrents.remove(torrent_id_list[i]);
+				this._selected_torrents.remove(torrent_id_list[i]);
         	}
 		}
 		
