@@ -476,58 +476,6 @@ div#torrent_inspector div.torrent_inspector_section div {
 
 /*--------------------------------------
  *
- * T O R R E N T   C O N T E X T   M E N U
- *
- *--------------------------------------*/
-div.torrent_context_menu {
-	width: 210px;
-	background: #F4F5EB;
-	border-top: 1px solid #ddd;
-	border-left: 1px solid #ddd;
-	border-right: 1px solid #666;
-	border-bottom: 1px solid #666;
-	padding: 2px 0 0 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	text-align: left;
-	}
-
-div.torrent_context_menu a {
-	display: block;
-	margin: 0 2px;
-	padding: 5px 15px;
-	text-decoration: none;
-	color: #555;
-	font-size: 11px;
-	cursor: default;
-	}
-
-div.torrent_context_menu a:hover {
-	background: #3875D7;
-	color: #ddd;
-	}
-
-div.torrent_context_menu a.disabled {
-	color: #bbb;
-	}
-
-div.torrent_context_menu span {
-	text-decoration: underline;
-	}
-
-div.torrent_context_menu div.separator {
-	height: 1px;
-	border-bottom: 1px solid #fff;
-	background: #ddd;
-	margin: 4px 0 4px 0;
-	overflow: hidden;
-	padding: 0;
-	}
-
-
-/*--------------------------------------
- *
  * D I A L O G S
  *
  *--------------------------------------*/

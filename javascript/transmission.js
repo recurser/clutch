@@ -63,6 +63,9 @@ Transmission.prototype = {
 		// Inspector tabs
 		$('#inspector_tab_info').bind('click', {transmission: this}, this.releaseInspectorTab);
 		$('#inspector_tab_activity').bind('click', {transmission: this}, this.releaseInspectorTab);
+		
+		// Set up the right-click context menu
+		this.createContextMenu();
 
 		// Create a periodical executer to refresh the list
 		setInterval('transmission.reloadTorrents()', this._RefreshInterval);
@@ -289,18 +292,14 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause selected' button
 	 */
 	releasePauseSelectedButton: function(event) {
-		if (event.data.transmission.numSelectedTorrents() > 0) {
-			event.data.transmission.pauseTorrents(event.data.transmission.jsonSelectedTorrentIds());
-		}
+		event.data.transmission.pauseSelectedTorrents();
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume selected' button
 	 */
 	releaseResumeSelectedButton: function(event) {
-		if (event.data.transmission.numSelectedTorrents() > 0) {				
-			event.data.transmission.resumeTorrents(event.data.transmission.jsonSelectedTorrentIds());
-		}
+		event.data.transmission.resumeSelectedTorrents();
 	},
 
 	/*
@@ -410,38 +409,6 @@ Transmission.prototype = {
 		event.data.transmission.filterTorrents(event.data.transmission._FilterPaused);
 	},
 	
-    /*
-     * Process a torrent right-click-menu event
-     */
-	releaseTorrentRightClickMenu: function(event) {
-		
-		// Lower-case and replace spaces with underscores and delete periods to keep the args regular
-		var command = this.innerHTML.toLowerCase().replace(/ /g,'_');
-		var command = command.replace(/\./g,'');
-		
-		switch (command) {
-			case 'pause_selected':
-				event.data.transmission.pauseTorrents(event.data.transmission.jsonSelectedTorrentIds());
-				break;				
-			case 'resume_selected':
-				event.data.transmission.resumeTorrents(event.data.transmission.jsonSelectedTorrentIds());
-				break;	
-			case 'remove_from_list':
-				event.data.transmission.removeSelectedTorrents();
-				break;				
-			case 'show_inspector':	
-			case 'hide_inspector':
-				if (event.data.transmission._inspector_visible) {
-					event.data.transmission.hideInspector();
-				} else {
-					event.data.transmission.showInspector();
-				}
-				break;
-			default:
-				break;
-		}
-	},
-	
 	
 
     /*--------------------------------------------
@@ -467,6 +434,27 @@ Transmission.prototype = {
         this._highest_selected = null;
         this._lowest_selected = null;
     },
+    
+    /*
+     * Create the torrent right-click menu
+     */
+	createContextMenu: function() {
+		
+		var bindings = {
+			context_pause_selected:    this.pauseSelectedTorrents,
+			context_resume_selected:   this.resumeSelectedTorrents,
+			context_remove:            this.removeSelectedTorrents,
+			context_toggle_inspector:  this.toggleInspector
+		};
+		
+		// Setup the context menu
+		$('ul#torrent_list').contextMenu('torrent_context_menu', {
+			bindings:       bindings,
+			menuStyle:      Menu.context.menu_style,
+			itemStyle:      Menu.context.item_style,
+			itemHoverStyle: Menu.context.item_hover_style
+		});
+	},
     
     /*
      * Select a range from this torrent to the last clicked torrent
@@ -645,16 +633,27 @@ Transmission.prototype = {
 	},
     
     /*
+     * Toggle the inspector (used by the context menu)
+     */
+	toggleInspector: function() {
+		if (transmission._inspector_visible) {
+			transmission.hideInspector();
+		} else {
+			transmission.showInspector();
+		}
+	},
+    
+    /*
      * Show the inspector
      */
 	showInspector: function() {
 		$('#torrent_filter_bar')[0].style.right = $('#torrent_inspector').width() + 'px';
 		$('#torrent_container')[0].style.right = $('#torrent_inspector').width() + 'px';
 		$('#torrent_inspector').show();
-		this._inspector_visible = true;
-		this.updateInspector();
+		transmission._inspector_visible = true;
+		transmission.updateInspector();
 		
-		//$('#torrent_context_menu div:last-child')[0].innerHTML = 'Hide Inspector';
+		$('ul li#context_toggle_inspector')[0].innerHTML = 'Hide Inspector';
 	},
     
     /*
@@ -664,9 +663,9 @@ Transmission.prototype = {
 		$('#torrent_filter_bar')[0].style.right = '0px';
 		$('#torrent_container')[0].style.right = '0px';
 		$('#torrent_inspector').hide();
-		this._inspector_visible = false;
+		transmission._inspector_visible = false;
 		
-		//$('#torrent_context_menu div:last-child')[0].innerHTML = 'Show Inspector';
+		$('ul li#context_toggle_inspector')[0].innerHTML = 'Show Inspector';
 	},
 
     /*
@@ -697,16 +696,16 @@ Transmission.prototype = {
     removeTorrents: function(torrent_id_list) {
 		if (torrent_id_list.length != 0) {
         	for (i=0; i<torrent_id_list.length; i++) {	
-				this._torrents.item(torrent_id_list[i]).element().remove();
-				this._torrents.remove(torrent_id_list[i]);
-				this._selected_torrents.remove(torrent_id_list[i]);
+				transmission._torrents.item(torrent_id_list[i]).element().remove();
+				transmission._torrents.remove(torrent_id_list[i]);
+				transmission._selected_torrents.remove(torrent_id_list[i]);
         	}
 		}
 		
 		// Clear the inspector
-		this.deselectAll();
-		this.updateInspector();
-		this.setGlobalSpeeds(this._torrents.length());
+		transmission.deselectAll();
+		transmission.updateInspector();
+		transmission.setGlobalSpeeds(this._torrents.length());
     },
     
     /*
@@ -738,6 +737,24 @@ Transmission.prototype = {
 		} else {
 			$('#torrent_upload_form')[0].submit();
 		}
+    },
+    
+    /*
+     * Pause any currently selected torrents
+     */
+    pauseSelectedTorrents: function() {
+		if (transmission.numSelectedTorrents() > 0) {				
+			transmission.pauseTorrents(transmission.jsonSelectedTorrentIds());
+		}
+    },
+    
+    /*
+     * Resume any currently selected torrents
+     */
+    resumeSelectedTorrents: function() {
+		if (transmission.numSelectedTorrents() > 0) {				
+			transmission.resumeTorrents(transmission.jsonSelectedTorrentIds());
+		}		
     },
 
     /*
@@ -827,10 +844,11 @@ Transmission.prototype = {
      * Remove selected torrents
      */
     removeSelectedTorrents: function(confirmed) {
-		var num_torrents = this.numSelectedTorrents();
+		
+		var num_torrents = transmission.numSelectedTorrents();
 		if (num_torrents > 0) {
 			
-			if (! confirmed) {
+			if (confirmed !== true) {
 				// TODO - proper calculation of active torrents
 				var num_active_torrents  = num_torrents;
 				var confirm_button_label = 'Remove';
@@ -842,7 +860,7 @@ Transmission.prototype = {
 			
 			} else {	
 				// Send an ajax request to perform the action
-				this.remoteRequest('removeTorrents', transmission.jsonSelectedTorrentIds());			
+				transmission.remoteRequest('removeTorrents', transmission.jsonSelectedTorrentIds());			
 			}
 		}
     }

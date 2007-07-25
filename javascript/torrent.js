@@ -74,7 +74,7 @@ Torrent.prototype = {
 			
 		// Set the torrent click observer
 		this._element.bind('click', {torrent: this}, this.clickTorrent);
-		this._element.bind('rightclick', {torrent: this}, this.rightClickTorrent);		
+		this._element.bind('contextmenu', {torrent: this}, this.rightClickTorrent);		
 		
 		// Safari hack - first torrent needs to be moved down for some reason. Seems to be ok when
 		// using <li>'s in straight html, but adding through the DOM gets a bit odd.
@@ -201,8 +201,6 @@ Torrent.prototype = {
 	 * Process a click event on this torrent
 	 */
 	clickTorrent: function(event) {
-	
-		event.stopPropagation();
 		
 		var torrent = event.data.torrent;
 		
