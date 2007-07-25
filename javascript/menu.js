@@ -10,8 +10,6 @@ Menu = {
 	
 	context: {
 		
-		bindings: {},
-		
 		menu_style: {
 			width: '210px',
 			backgroundColor: '#F4F5EB',
