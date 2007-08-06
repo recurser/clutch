@@ -34,15 +34,18 @@
 				$arg_list = $Instance->getTorrentData($info_fields, $status_fields);
 				break;
 	
-			case 'reloadTorrents' :
-				$function = 'refreshTorrents';
+			case 'refreshTorrents' :
+				$function = 'refreshTorrents';	
+				$info_fields = array(
+						"id", "hash", "name", "path", "saved", "private", 
+						"trackers", "comment", "creator", "date", "size");
 				$status_fields = array(
-						'id', 'completed', 'download-total', 'upload-total', 
-						'download-speed', 'upload-speed', 'peers-downloading', 
-						'peers-from', 'peers-total', 'peers-uploading', 'error', 
-						'error-message', 'eta', 'running', 'state', 'swarm-speed',
-						'scrape-leechers', 'scrape-seeders');
-				$arg_list = $Instance->getTorrentData($info_fields, $status_fields, json_decode($_GET['param']));
+						"completed", "download-speed", "download-total", "error", 
+						"error-message", "eta", "id", "peers-downloading", 
+						"peers-from", "peers-total", "peers-uploading", "running", 
+						"state", "swarm-speed", "tracker", "scrape-completed", 
+						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
+				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['param']);
 				break;
 	
 			case 'pauseTorrents' :
@@ -73,7 +76,7 @@
 				break;
 	
 			case 'filterTorrents' :
-				$function = 'addTorrents';		
+				$function = 'refreshTorrents';		
 				$info_fields = array(
 						"id", "hash", "name", "path", "saved", "private", 
 						"trackers", "comment", "creator", "date", "size");

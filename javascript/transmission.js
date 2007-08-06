@@ -675,14 +675,35 @@ Transmission.prototype = {
 		var global_up_speed = 0;
 		var global_down_speed = 0;
         var torrent_data;
-        
+        var torrent_ids = this._torrents.keys().clone();
+        var new_torrents = [];
+
         for (i=0; i<torrent_list.length; i++) {
             torrent_data = torrent_list[i];
-			this._torrents.item(torrent_data.id).refresh(torrent_data);
-			global_up_speed += torrent_data.upload_speed;
-			global_down_speed += torrent_data.download_speed;
+	
+			// If this torrent already exists, refresh it & remove this ID from torrent_ids
+			if (torrent_ids.inArray(torrent_data.id)) {
+				this._torrents.item(torrent_data.id).refresh(torrent_data);
+				global_up_speed += torrent_data.upload_speed;
+				global_down_speed += torrent_data.download_speed;
+				torrent_ids.remove(torrent_data.id);
+			
+			// Otherwise, this is a new torrent - add it
+			} else {
+				new_torrents.push(torrent_data);
+			}
         }
-
+		
+		// Add any torrents that aren't already being displayed
+		if (new_torrents.length > 0) {
+			transmission.addTorrents(new_torrents, false);
+		}
+		
+		// Remove any torrents that are displayed but not in the refresh list
+		if (torrent_ids.length > 0) {
+			transmission.removeTorrents(torrent_ids);
+		}
+		
 		// Update global upload and download speed display
 		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
 		
@@ -809,7 +830,7 @@ Transmission.prototype = {
      * Refresh the torrent data
      */
     reloadTorrents: function() {
-        transmission.remoteRequest('reloadTorrents', transmission.jsonTorrentIds());	
+        transmission.remoteRequest('refreshTorrents', this._current_filter);
     },
     
     /*

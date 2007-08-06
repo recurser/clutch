@@ -59,6 +59,20 @@ Array.prototype.inArray = function (obj) {
 	return false;
 };
 
+
+/*
+ * Return a copy of the array
+ *
+ *   @returns array
+ */
+Array.prototype.clone = function () {
+	var a = new Array(); 
+	for (var property in this) {
+		a[property] = typeof (this[property]) == 'object' ? this[property].clone() : this[property];
+	} 
+	return a;
+}
+
 /**
  *   Array convenience method to remove element.
  *
