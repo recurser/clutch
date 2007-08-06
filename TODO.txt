@@ -2,27 +2,21 @@
 TODO
 ==================================================
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
-- torrent filtering broken since the change to jQuery 
-- right-click context menu broken since the change to jQuery 
 - show/hide inspector should change right-click menu options (commented out until new jquery right-click menu is done)
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - mouse up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
 - Need to validate the torrent upload stuff and report proper error messages
 - *if* the memory issue is sorted, maybe try getting torrent info in groups of 3/4/whatever is safe to try and speed things up a bit?
 - Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
-- Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - Sqlite db for prefs - refresh frequency, user login details, filter etc etc.
 - Implement filter buttons.
 	- Filtering doesn't seem to be working properly after a filtered pause/resume all - only a couple of torrents show up as paused.
 	- Need to update the filter if torrents are paused - they should disappear from the list if 'seeding' or 'downloading' is selected
 	- In addition to the above - need to update the filter every time torrents are refreshed - ie if a torrent completes and we are in the 'downloading' filter it should disappear from the list. If we are in the seeding filter and a downloaded torrent completes, it should appear in the list. Think we need to make the refreshTorrents() stuff a lot smarter - ie update torrents if they are in both the browser & remote lists, add them if they are in the remote list but not the browser list, and delete them if they are in the browser list but not in the remote list. (?)
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
-- Right-click menu doesn't work in opera.
-- 'Remove from list' right-menu option remains highlighted after confirm screen in Safari.
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Implement search box.
 - Torrent sorting (need to pass to filters too i guess).
-- Torrent uploading.
 - Add a loading indicator? Ajax requests could be quite bit long with  lot of torrents - need some indication that something is happening.
 - A lot of work to do on the context menu
 	- Hook up the links
@@ -51,6 +45,7 @@ CHECK
 
 IN THE FUTURE (?)
 ==================================================
+- Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - IE support if possible.
 - Fix up <UL> scrolling - seems to be a little wacky on different browsers. Ideally only have a scrollbar for the <ul> - (gimp's stuff is working great so far for the browsers we care about. Would be nice to have the list floating to the top so we can animate the filter bar open/close but no-one anywhere seems to have figured a top-floating 3-row layout yet - keep an eye out for new techniques but not a big deal).
 - Inspector layout should be aligned better (would a table be best here? it *is* a table of values...) - Tried table layout but couldn't get all the widths to line up properly, plus couldn't get overflow ellipsis to work properly - label/div for now but maybe tables later
@@ -58,6 +53,11 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- 'Remove from list' right-menu option remains highlighted after confirm screen in Safari.
+- Torrent uploading.
+- Right-click menu doesn't work in opera - NOT SUPPORTED (impossible in opera)
+- torrent filtering broken since the change to jQuery 
+- right-click context menu broken since the change to jQuery 
 - Reset inspector when a torrent is removed (currently keeps the old torrent deails)
 - Web interface loads too quickly when ./run-bin.command is run - requests torrent list before torrents are loaded - (thanks swe, works great - dave)
 - Total up/down should show 'x.0' instead of just 'x' if it's an integer to match the desktop app.

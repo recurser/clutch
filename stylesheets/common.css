@@ -461,6 +461,7 @@ div#torrent_inspector div.torrent_inspector_section div {
  	}
  
  div.torrent_footer a {
+ 	border-right: 1px solid #979797;
  	width: 30px;
  	height: inherit;
  	margin: 0 1px 0 0;
@@ -469,9 +470,26 @@ div#torrent_inspector div.torrent_inspector_section div {
  	}
  
  div.torrent_footer a img {
+	display: none;
  	border: none;
  	border-right: 1px solid #979797;
  	}
+
+div.torrent_footer a#speed_limit_button {
+	height: 22px;
+ 	width: 30px;
+	background: transparent url('../images/buttons/footer_speed_limit_button.png') no-repeat top left;
+	}
+
+div.torrent_footer a#speed_limit_button:active {
+	background: transparent url('../images/buttons/footer_speed_limit_button_on.png') no-repeat top left;
+	}
+
+div.torrent_footer a#global_settings_button {
+	height: 22px;
+ 	width: 30px;
+	background: transparent url('../images/buttons/footer_action_button.png') no-repeat top left;
+	}
 
 
 /*--------------------------------------

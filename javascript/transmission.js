@@ -30,6 +30,7 @@ Transmission.prototype = {
          */
 		this._filter_visible = true;
 		this._inspector_visible = false;
+		this._speed_limit_active = false;
 		
 		// Initialise the torrent lists
         this._torrents = new Hash();
@@ -56,6 +57,8 @@ Transmission.prototype = {
 		$('#filter_paused_link').bind('click', {transmission: this}, this.releaseFilterPausedButton);
 		$('#upload_confirm_button').bind('click', {transmission: this}, this.releaseUploadConfirmButton);
 		$('#upload_cancel_button').bind('click', {transmission: this}, this.releaseUploadCancelButton);
+		$('#speed_limit_button').bind('click', {transmission: this}, this.releaseSpeedLimitButton);
+		
 						
 		// Bind the upload iframe's onload event to process uploads
 		$('#torrent_upload_frame').load(this.processUpload);
@@ -408,6 +411,13 @@ Transmission.prototype = {
 	releaseFilterPausedButton: function(event) {
 		event.data.transmission.filterTorrents(event.data.transmission._FilterPaused);
 	},
+
+	/*
+	 * Process a mouse-up event on the 'filter paused' button
+	 */
+	releaseSpeedLimitButton: function(event) {
+		event.data.transmission.toggleSpeedLimit();
+	},
 	
 	
 
@@ -640,6 +650,19 @@ Transmission.prototype = {
 			transmission.hideInspector();
 		} else {
 			transmission.showInspector();
+		}
+	},
+    
+    /*
+     * Toggle the speed limit switch
+     */
+	toggleSpeedLimit: function() {
+		if (transmission._speed_limit_active) {
+			$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button.png')");
+			transmission._speed_limit_active = false;
+		} else {
+			$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button_blue.png')");
+			transmission._speed_limit_active = true
 		}
 	},
     
