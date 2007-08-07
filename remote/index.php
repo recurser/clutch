@@ -11,29 +11,21 @@
 	$Instance = new BigBlueHouse($MControl);
 
 	$Preferences = new Preferences('data/prefs.txt');
-
-	if (isset($_GET['action']) && isset($_GET['param'])) 
+	
+	// Initialise the filter type
+	//session_start();
+	if (!isset($_SESSION['filterType'])) {
+		$_SESSION['filterType'] = FilterAll;
+	}
+			
+	if (isset($_GET['action']) && isset($_GET['param']) && isset($_GET['filter']))
 	{
 		$controller = 'transmission';
 		$function = '';
 		$arg_list = '';
 		
 		switch($_GET['action']) 
-		{
-			case 'getTorrentList' :
-				$function = 'addTorrents';			
-				$info_fields = array(
-						"id", "hash", "name", "path", "saved", "private", 
-						"trackers", "comment", "creator", "date", "size");
-				$status_fields = array(
-						"completed", "download-speed", "download-total", "error", 
-						"error-message", "eta", "id", "peers-downloading", 
-						"peers-from", "peers-total", "peers-uploading", "running", 
-						"state", "swarm-speed", "tracker", "scrape-completed", 
-						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
-				$arg_list = $Instance->getTorrentData($info_fields, $status_fields);
-				break;
-	
+		{	
 			case 'refreshTorrents' :
 				$function = 'refreshTorrents';	
 				$info_fields = array(
@@ -45,29 +37,37 @@
 						"peers-from", "peers-total", "peers-uploading", "running", 
 						"state", "swarm-speed", "tracker", "scrape-completed", 
 						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
-				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['param']);
+				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['filter']);
 				break;
 	
 			case 'pauseTorrents' :
-				$function = 'refreshTorrents';
+				$function = 'refreshTorrents';		
+				$info_fields = array(
+						"id", "hash", "name", "path", "saved", "private", 
+						"trackers", "comment", "creator", "date", "size");
 				$status_fields = array(
-						'id', 'completed', 'download-total', 'upload-total', 
-						'download-speed', 'upload-speed', 'peers-downloading', 
-						'peers-from', 'peers-total', 'peers-uploading', 'error', 
-						'error-message', 'eta', 'running', 'state', 'swarm-speed',
-						'scrape-leechers', 'scrape-seeders');
-				$arg_list = $Instance->pauseTorrents($info_fields, $status_fields, $_GET['param']);
+						"completed", "download-speed", "download-total", "error", 
+						"error-message", "eta", "id", "peers-downloading", 
+						"peers-from", "peers-total", "peers-uploading", "running", 
+						"state", "swarm-speed", "tracker", "scrape-completed", 
+						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
+				$Instance->pauseTorrents($_GET['param']);
+				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['filter']);
 				break;
 	
 			case 'resumeTorrents' :
-				$function = 'refreshTorrents';
+				$function = 'refreshTorrents';		
+				$info_fields = array(
+						"id", "hash", "name", "path", "saved", "private", 
+						"trackers", "comment", "creator", "date", "size");
 				$status_fields = array(
-						'id', 'completed', 'download-total', 'upload-total', 
-						'download-speed', 'upload-speed', 'peers-downloading', 
-						'peers-from', 'peers-total', 'peers-uploading', 'error', 
-						'error-message', 'eta', 'running', 'state', 'swarm-speed',
-						'scrape-leechers', 'scrape-seeders');
-				$arg_list = $Instance->resumeTorrents($info_fields, $status_fields, $_GET['param']);
+						"completed", "download-speed", "download-total", "error", 
+						"error-message", "eta", "id", "peers-downloading", 
+						"peers-from", "peers-total", "peers-uploading", "running", 
+						"state", "swarm-speed", "tracker", "scrape-completed", 
+						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
+				$Instance->resumeTorrents($_GET['param']);
+				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['filter']);
 				break;
 	
 			case 'removeTorrents' :
@@ -86,7 +86,7 @@
 						"peers-from", "peers-total", "peers-uploading", "running", 
 						"state", "swarm-speed", "tracker", "scrape-completed", 
 						"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
-				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['param']);
+				$arg_list = $Instance->filterTorrents($info_fields, $status_fields, $_GET['filter']);
 				break;
 	
 			case 'uploadTorrent' :
@@ -114,7 +114,7 @@
 	
 		// Set the mime type (causes prototype to auto-eval())
 		header('Content-type: text/javascript');
-	
+				
 		// Encode and output the response
 		echo $controller . '.' . $function . '(' . $arg_list . ');';
 	

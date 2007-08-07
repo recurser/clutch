@@ -723,6 +723,7 @@ Transmission.prototype = {
 		}
 		
 		// Remove any torrents that are displayed but not in the refresh list
+		// The 'update_only' flag is sent went pausing/resuming torrents
 		if (torrent_ids.length > 0) {
 			transmission.removeTorrents(torrent_ids);
 		}
@@ -830,14 +831,17 @@ Transmission.prototype = {
 	/*
 	 * Perform a generic remote request
 	 */
-	remoteRequest: function(action, param) {
+	remoteRequest: function(action, param, filter) {
 		if (param == null) {
 			param = '0';
+		}
+		if (filter == null) {
+			filter = this._current_filter;
 		}
 		
         $.ajax({
             type: 'GET',
-            url: '/remote/?action=' + action + '&param=' + param,
+            url: '/remote/?action=' + action + '&param=' + param + '&filter=' + filter,
             dataType: "script"
         });
 	},
@@ -846,14 +850,14 @@ Transmission.prototype = {
      * Request the list of torrents from the client
      */
     getTorrentList: function() {
-        this.remoteRequest('getTorrentList');	
+        this.remoteRequest('refreshTorrents', null, this._current_filter);	
     },
     
     /*
      * Refresh the torrent data
      */
     reloadTorrents: function() {
-        transmission.remoteRequest('refreshTorrents', this._current_filter);
+        transmission.remoteRequest('refreshTorrents', null, this._current_filter);
     },
     
     /*
@@ -862,7 +866,7 @@ Transmission.prototype = {
     filterTorrents: function(filter_type) {
 		if (filter_type != this._current_filter) {	
 			this._current_filter = filter_type;
-        	transmission.remoteRequest('filterTorrents', filter_type);
+        	transmission.remoteRequest('filterTorrents', null, filter_type);
 		}
     },
     

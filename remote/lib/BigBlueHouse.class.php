@@ -136,17 +136,15 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			return $json_array;
 		}
 
-		/* public function resumeTorrents([(array)$info_fields], [(array)$status_fields], [(string) $json_array])
+		/* public function resumeTorrents([(string) $json_array])
 		 * Starts a list of torrents, and returns an JSON array of torrent data
 		 * Ex. resumeTorrents([1,2,3])
 		 *
 		 * @access public
-		 * @param array $info_fields Array of torrent info fields to return
-		 * @param array $status_fields Array of torrent status fields to return
 		 * @param string $json_array Array of torrent IDs to start
-		 * @return string $result Array of torrent data after they've started
+		 * @return void
 		 */
-		public function resumeTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")
+		public function resumeTorrents($json_array = "[]")
 		{
 			$torrent_id_list =  json_decode($json_array);
 
@@ -155,21 +153,17 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			} else {
 				$this->M->StartTorrents($torrent_id_list);
 			}
-
-			return $this->getTorrentData($info_fields, $status_fields, $torrent_id_list);
 		}
 
-		/* public function pauseTorrents([(array)$info_fields], [(array)$status_fields], [(string) $json_array])
+		/* public function pauseTorrents([(string) $json_array])
 		 * Pauses a list of torrents, and returns an JSON array of torrent data
 		 * Ex. pauseTorrents([1,2,3])
 		 *
 		 * @access public
-		 * @param array $info_fields Array of torrent info fields to return
-		 * @param array $status_fields Array of torrent status fields to return
 		 * @param string $json_array Array of torrent IDs to pause
-		 * @return string $result Array of torrent data after the pause
+		 * @return void
 		 */
-		public function pauseTorrents($info_fields = array(), $status_fields=array(), $json_array = "[]")
+		public function pauseTorrents($json_array = "[]")
 		{
 			$torrent_id_list =  json_decode($json_array);
 
@@ -178,8 +172,6 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			} else {
 				$this->M->StopTorrents($torrent_id_list);
 			}
-
-			return $this->getTorrentData($info_fields, $status_fields, $torrent_id_list);
 		}
 
 		/* 	public function getTorrentData([(array)$info_fields], [(array)$status_fields], [(array)$id_list])
@@ -253,7 +245,10 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				$torrentData = $this->mergeTorrentData($torrentInfoData, $torrentStatusData);
 				array_push($result, $torrentData[0]);
 			}		
-
+			
+			// Remember the current filter type
+			$_SESSION['filterType'] = $filterType;
+			
 			return json_encode($result);
 		}
 
