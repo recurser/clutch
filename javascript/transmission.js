@@ -841,7 +841,7 @@ Transmission.prototype = {
 		
         $.ajax({
             type: 'GET',
-            url: '/remote/?action=' + action + '&param=' + param + '&filter=' + filter,
+            url: 'remote/?action=' + action + '&param=' + param + '&filter=' + filter,
             dataType: "script"
         });
 	},
