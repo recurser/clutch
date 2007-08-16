@@ -459,36 +459,33 @@ div#torrent_inspector div.torrent_inspector_section div {
 	bottom: -1px; 
 	z-index: 2;
  	}
- 
- div.torrent_footer a {
- 	border-right: 1px solid #979797;
- 	width: 30px;
- 	height: inherit;
- 	margin: 0 1px 0 0;
- 	padding: 0;
- 	float: left;
- 	}
- 
- div.torrent_footer a img {
-	display: none;
- 	border: none;
- 	border-right: 1px solid #979797;
- 	}
 
 div.torrent_footer a#speed_limit_button {
+ 	border-right: 1px solid #979797;
+ 	margin: 0 1px 0 0;
+ 	padding: 0;
+	float: left;
 	height: 22px;
  	width: 30px;
+	position: relative;
+	left: 32px;
 	background: transparent url('../images/buttons/footer_speed_limit_button.png') no-repeat top left;
 	}
 
 div.torrent_footer a#speed_limit_button:active {
 	background: transparent url('../images/buttons/footer_speed_limit_button_on.png') no-repeat top left;
 	}
-
-div.torrent_footer a#global_settings_button {
+	
+div.torrent_footer ul#settings_menu li#button {
 	height: 22px;
  	width: 30px;
 	background: transparent url('../images/buttons/footer_action_button.png') no-repeat top left;
+ 	border-right: 1px solid #979797;
+ 	margin: 0 1px 0 0;
+ 	padding: 0;
+ 	float: left;
+	position: relative;
+	left: -32px;
 	}
 
 
@@ -598,10 +595,84 @@ iframe#torrent_upload_frame {
 	padding: 0;
 	margin: 0;
 	}
+
+
+/*--------------------------------------
+ *
+ * T R A N S   M E N U
+ *
+ *--------------------------------------*/
+.trans_menu {
+	margin: 0;
+	padding: 0;
+	cursor: default;
+	}
+
+.trans_menu, .trans_menu ul {
+	list-style: none;
+	}
 	
+.trans_menu ul {
+	min-width: 170px;
+	background-color: #F4F5EB;
+	border-top: 1px solid #ddd;
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #666;
+	border-bottom: 1px solid #666;
+	padding: 2px 0 2px 0;
+	text-align: left;
+	list-style: none;
+	}
 
+.trans_menu li {
+	background-color: #F4F5EB;
+	margin: 0 2px;
+	padding: 5px 15px;
+	color: #555;
+	font-size: 11px !important;
+	cursor: default;
+	border: none;
+	text-indent: auto !important;
+	}
 
+.trans_menu li.hover {
+	z-index: 1 !important; /* the hover z-index has to be below the normal one the hovering items may be drawn over a submenu */
+	background-color: #3875D7;
+	color: #ddd;
+	border: none;
+	}
 
+.trans_menu span.arrow {
+	}
+	
+.trans_menu div.outerbox {
+	display: none;
+	}
+
+.trans_menu div.inner {
+	left: 0;
+	margin: 0;
+	}
+	
+.trans_menu div.inner div.outerbox {
+	margin: 0;
+	left: 98px;
+	}
+	
+.trans_menu li.main {
+	float: left;
+	padding: 0 10px;
+	}
+	
+.trans_menu li.main li {
+	z-index: 2;
+	min-width: 78px;
+	}
+	
+.trans_menu a {
+	text-decoration: none;
+	cursor: default;
+	}
 
 
 

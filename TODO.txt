@@ -1,6 +1,15 @@
 
 TODO
 ==================================================
+- Bottom Menu
+	- Clean all of the IE crap out of the jquery plugin
+	- Fix firefox flicker problem
+	- Separators between menu sections
+	- right-align sub-menu arrows
+	- 'tick' for selected options
+	- server-side sqlite prefs to remember speed limits etc?
+	- clean all the crap out of the menu css
+	- figure out variable-widths for different sub-menus
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - show/hide inspector should change right-click menu options (commented out until new jquery right-click menu is done)
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.

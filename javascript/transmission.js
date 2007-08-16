@@ -69,6 +69,9 @@ Transmission.prototype = {
 		
 		// Set up the right-click context menu
 		this.createContextMenu();
+		
+		// Setup the footer settings menu
+		this.createSettingsMenu();
 
 		// Create a periodical executer to refresh the list
 		setInterval('transmission.reloadTorrents()', this._RefreshInterval);
@@ -463,6 +466,15 @@ Transmission.prototype = {
 			menuStyle:      Menu.context.menu_style,
 			itemStyle:      Menu.context.item_style,
 			itemHoverStyle: Menu.context.item_hover_style
+		});
+	},
+    
+    /*
+     * Create the bottom settings menu
+     */
+	createSettingsMenu: function() {
+		$('#settings_menu').transMenu({
+			direction: 'up'
 		});
 	},
     

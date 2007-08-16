@@ -8,7 +8,9 @@
 		<link rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
 		<script type="text/javascript" src="./javascript/jquery/jquery.js"></script>
 		<script type="text/javascript" src="./javascript/jquery/json.js"></script>
+		<script type="text/javascript" src="./javascript/jquery/jquery.dimensions.pack.js"></script>
 		<script type="text/javascript" src="./javascript/jquery/jquery.contextmenu.js"></script>
+		<script type="text/javascript" src="./javascript/jquery/jquery.transmenu.js"></script>
 		<script type="text/javascript" src="./javascript/common.js"></script>
 		<script type="text/javascript" src="./javascript/hash.js"></script>
 		<script type="text/javascript" src="./javascript/menu.js"></script>
@@ -114,8 +116,68 @@
 		</div>
 		
 		<div class="torrent_footer">
-			<a href="#global_settings" id="global_settings_button"></a>
-			<a href="#speed_limit" id="speed_limit_button"></a>
+			<a href="#speed_limit" id="speed_limit_button"></a>			
+			<ul id="settings_menu">
+				<li id='button'>&nbsp;
+					<ul>
+						<li>Total Download Rate
+							<ul>
+								<li>Unlimited</li>
+								<li>Limit</li>
+								<li>5 KB/s</li>
+								<li>10 KB/s</li>
+								<li>20 KB/s</li>
+								<li>30 KB/s</li>
+								<li>40 KB/s</li>
+								<li>50 KB/s</li>
+								<li>75 KB/s</li>
+								<li>100 KB/s</li>
+								<li>150 KB/s</li>
+								<li>200 KB/s</li>
+							</ul>
+						</li>
+						<li>Total Upload Rate
+							<ul>
+								<li>Unlimited</li>
+								<li>Limit</li>
+								<li>5 KB/s</li>
+								<li>10 KB/s</li>
+								<li>20 KB/s</li>
+								<li>30 KB/s</li>
+								<li>40 KB/s</li>
+								<li>50 KB/s</li>
+								<li>75 KB/s</li>
+								<li>100 KB/s</li>
+								<li>150 KB/s</li>
+								<li>200 KB/s</li>
+							</ul>
+						</li>
+						<li>Stop Seeding at Ratio
+							<ul>
+								<li>Seed Forever</li>
+								<li>Stop at Ratio</li>
+								<li>0.25</li>
+								<li>0.50</li>
+								<li>0.75</li>
+								<li>1.00</li>
+								<li>1.50</li>
+								<li>2.00</li>
+								<li>3.00</li>
+							</ul>
+						</li>
+						<li>Sort Transfers By
+							<ul>
+								<li>Queue Order</li>
+								<li>Date Added</li>
+								<li>Name</li>
+								<li>Progress</li>
+								<li>State</li>
+								<li>Reverse Sort Order</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
 		</div>
 		
 		<div id="dialog_container" style="display:none;">
