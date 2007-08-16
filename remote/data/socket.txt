@@ -1,1 +1,1 @@
-/Users/malcolm/Library/Application Support/Transmission/daemon/socket
+/tmp/transmission-socket
