@@ -642,6 +642,15 @@ iframe#torrent_upload_frame {
 	border: none;
 	}
 
+.trans_menu li.separator, .trans_menu li.separator.hover {
+	background-color: #F4F5EB;
+	border-top: 1px solid #ddd;
+	line-height: 1px;
+	height: 1px;
+	margin: 2px 0 2px 0;
+	padding: 0px;
+	}
+
 .trans_menu span.arrow {
 	}
 	
