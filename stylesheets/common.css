@@ -633,6 +633,7 @@ iframe#torrent_upload_frame {
 	cursor: default;
 	border: none;
 	text-indent: auto !important;
+	width: inherit;
 	}
 
 .trans_menu li.hover {
@@ -652,6 +653,8 @@ iframe#torrent_upload_frame {
 	}
 
 .trans_menu span.arrow {
+	float: right;
+	margin: -13px -10px 0 0;
 	}
 	
 .trans_menu div.outerbox {

@@ -16,6 +16,7 @@
 			});
 		},
 		arrow_char: '&#x25BA;',
+		selected_char: '&#x2713;',
 		subDelay: 300,
 		direction: 'down',
 		mainDelay: 10
@@ -426,20 +427,7 @@
 			}
 			//add shadows
 			$('ul', this).shadowBox();
-			//ie6? - add iframes
-			if ( $.browser.msie && (!$.browser.version || parseInt($.browser.version) <= 6) )
-			{
-				if ( $.fn.bgiframe )
-				{
-					$('div.outerbox', this).bgiframe();
-				}
-				else
-				{
-					/* thanks to Mark Gibson - http://www.nabble.com/forum/ViewPost.jtp?post=6504414&framed=y */
-					$('div.outerbox', this).append('<iframe style="display:block;position:absolute;top:0;left:0;z-index:-1;filter:mask();' + 
-									'width:expression(this.parentNode.offsetWidth);height:expression(this.parentNode.offsetHeight)"/>');
-				}
-			}
+			
 			//assign events
 			$(this).bind('closemenu', function(){clean();}); //assign closemenu-event, through wich the menu can be closed from outside the plugin
 			//add click event handling, if there are any elements inside the main menu
@@ -456,7 +444,12 @@
 			//add the little arrow before each submenu
 			if ( settings.arrow_char )
 			{
-				$('div.inner div.outerbox', this).before("<span class='arrow'>" + settings.arrow_char + '</span>');
+				var arrow_markup = $("<span class='arrow'>" + settings.arrow_char + '</span>');
+				// Safari float/position hack
+				if ($.browser.safari) {
+					arrow_markup.css('margin-top', '0px');
+				}
+				$('div.inner div.outerbox', this).before(arrow_markup);
 			}
 
 			//the floating list elements are destroying the layout..so make it nice again..
