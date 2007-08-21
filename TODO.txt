@@ -6,6 +6,7 @@ TODO
 	- Fix firefox flicker problem
 	- server-side sqlite prefs to remember speed limits etc?
 	- clean all the crap out of the menu css
+	- Figure out how that blue-turtle button is supposed to work & implement it
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - mouse up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
