@@ -470,12 +470,86 @@ Transmission.prototype = {
 	},
     
     /*
-     * Create the bottom settings menu
+     * Create the footer settings menu
      */
 	createSettingsMenu: function() {
 		$('#settings_menu').transMenu({
-			direction: 'up'
+			direction: 'up',
+			onClick: this.processSettingsMenuEvent
 		});
+		
+		// Make initial menu selections (TODO - do this with data from the daemon?)
+		$('#unlimited_download_rate').selectMenuItem();
+		$('#unlimited_upload_rate').selectMenuItem();
+		$('#unlimited_seed_ratio').selectMenuItem();
+		$('#sort_queue_order').selectMenuItem();
+	},
+    
+    /*
+     * Process an event in the footer-menu
+     */
+	processSettingsMenuEvent: function(event) {
+		// Don't use 'this' in the function to avoid confusion (this != transmission instance)
+		var element = this;
+		
+		// Figure out which menu has been clicked
+		switch ($(element).parent()[0].id) {
+			
+			// Limit the download rate
+			case 'footer_download_rate_menu':
+				var rate = (this.innerHTML).replace(/[^0-9]/ig, '');
+				if ($(this).is('#unlimited_download_rate')) {
+					$(this).deselectMenuSiblings().selectMenuItem()
+				} else {
+					$('#limited_download_rate')[0].innerHTML = 'Limit (' + rate + ' KB/s)';
+					$('#limited_download_rate').deselectMenuSiblings().selectMenuItem();
+				}
+				break;
+			
+			// Limit the upload rate
+			case 'footer_upload_rate_menu':
+				var rate = (this.innerHTML).replace(/[^0-9]/ig, '');
+				if ($(this).is('#unlimited_upload_rate')) {
+					$(this).deselectMenuSiblings().selectMenuItem()
+				} else {
+					$('#limited_upload_rate')[0].innerHTML = 'Limit (' + rate + ' KB/s)';
+					$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();
+				}
+				break;
+			
+			// Set the ratio to stop seeding at
+			case 'footer_stop_seeding_menu':
+				var ratio = (this.innerHTML).replace(/[^0-9¥.]/ig, '');
+				if ($(this).is('#unlimited_seed_ratio')) {
+					$(this).deselectMenuSiblings().selectMenuItem();
+				} else {
+					$('#limited_seed_ratio')[0].innerHTML = 'Stop at Ratio (' + ratio + ')';
+					$('#limited_seed_ratio').deselectMenuSiblings().selectMenuItem();
+				}
+				break;
+			
+			// Sort the torrent list 
+			case 'footer_sort_menu':
+				// The 'reverse sort' option state can be toggled on/off independant of the other options
+				if ($(this).is('#reverse_sort_order')) {
+					if ($(this).menuItemIsSelected()) {
+						$(this).deselectMenuItem();
+					} else {
+						$(this).selectMenuItem();
+					}	
+				// Otherwise, deselect all other options (except reverse-sort) and select this one				
+				} else {
+					$(this).parent().find('span.selected').each( function() {
+						if (! $(this).parent().is('#reverse_sort_order')) {
+							$(this).parent().deselectMenuItem();
+						}
+					});
+					$(this).selectMenuItem();
+				}
+				break;
+				
+				
+		}
 	},
     
     /*

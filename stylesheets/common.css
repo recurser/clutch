@@ -656,6 +656,11 @@ iframe#torrent_upload_frame {
 	float: right;
 	margin: -13px -10px 0 0;
 	}
+
+.trans_menu span.selected {
+	margin: 0 0 0 -14px;
+	font-size: 14px;
+	}
 	
 .trans_menu div.outerbox {
 	display: none;

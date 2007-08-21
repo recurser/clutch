@@ -338,4 +338,25 @@
 					before('<div class="shadowbox1"></div><div class="shadowbox2"></div><div class="shadowbox3"></div>');
 	    });
 	};
+	
+	$.fn.selectMenuItem = function() {
+		if (this.find('span.selected').length == 0) {
+			this.prepend($("<span class='selected'>&#x2713;</span>"));
+		}
+	    return this;
+	};
+	
+	$.fn.deselectMenuItem = function() {
+		return this.find('span.selected').remove();
+	};
+	
+	$.fn.menuItemIsSelected = function() {
+		return (this.find('span.selected').length > 0);
+	};
+	
+	$.fn.deselectMenuSiblings = function() {
+		this.parent().find('span.selected').remove();
+	    this.selectMenuItem();
+		return this; 
+	};
 })(jQuery);

@@ -119,11 +119,11 @@
 			<a href="#speed_limit" id="speed_limit_button"></a>			
 			<ul id="settings_menu">
 				<li id='button'>&nbsp;
-					<ul>
+					<ul id='footer_super_menu'>
 						<li>Total Download Rate
-							<ul>
-								<li>Unlimited</li>
-								<li>Limit</li>
+							<ul id='footer_download_rate_menu'>
+								<li id='unlimited_download_rate'>Unlimited</li>
+								<li id='limited_download_rate'>Limit (10 KB/s)</li>
 								<li class='separator'></li>
 								<li>5 KB/s</li>
 								<li>10 KB/s</li>
@@ -138,9 +138,9 @@
 							</ul>
 						</li>
 						<li>Total Upload Rate
-							<ul>
-								<li>Unlimited</li>
-								<li>Limit</li>
+							<ul id='footer_upload_rate_menu'>
+								<li id='unlimited_upload_rate'>Unlimited</li>
+								<li id='limited_upload_rate'>Limit (10 KB/s)</li>
 								<li class='separator'></li>
 								<li>5 KB/s</li>
 								<li>10 KB/s</li>
@@ -156,9 +156,9 @@
 						</li>
 						<li class='separator'></li>
 						<li>Stop Seeding at Ratio
-							<ul>
-								<li>Seed Forever</li>
-								<li>Stop at Ratio</li>
+							<ul id='footer_stop_seeding_menu'>
+								<li id='unlimited_seed_ratio'>Seed Forever</li>
+								<li id='limited_seed_ratio'>Stop at Ratio (2.00)</li>
 								<li class='separator'></li>
 								<li>0.25</li>
 								<li>0.50</li>
@@ -171,14 +171,14 @@
 						</li>
 						<li class='separator'></li>
 						<li>Sort Transfers By
-							<ul>
-								<li>Queue Order</li>
+							<ul id='footer_sort_menu'>
+								<li id='sort_queue_order'>Queue Order</li>
 								<li>Date Added</li>
 								<li>Name</li>
 								<li>Progress</li>
 								<li>State</li>
 								<li class='separator'></li>
-								<li>Reverse Sort Order</li>
+								<li id='reverse_sort_order'>Reverse Sort Order</li>
 							</ul>
 						</li>
 					</ul>
