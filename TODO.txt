@@ -7,6 +7,8 @@ TODO
 	- server-side sqlite prefs to remember speed limits etc?
 	- clean all the crap out of the menu css
 	- Figure out how that blue-turtle button is supposed to work & implement it
+	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
+- Opera .htauth password box pops up every ajax request - almost impossible to fill out
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - mouse up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
