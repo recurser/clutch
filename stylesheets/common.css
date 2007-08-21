@@ -358,7 +358,7 @@ div#torrent_inspector {
 	top: 98px;
 	right: 0px;
 	bottom: 22px;
-	width: 300px;
+	width: 350px;
 	background-color: #ddd;
 	border-left: #aaa 1px solid;
 	z-index: 2;
@@ -378,7 +378,7 @@ div#torrent_inspector span#torrent_inspector_size {
 	}
 	
 div#torrent_inspector ul.torrent_inspector_tabs {
-	margin: 0 0 0 88px; /* Center tabs */
+	margin: 0 0 0 113px; /* Center tabs */
 	padding: 0;
 	}
 	

@@ -26,7 +26,6 @@ TODO
 OPTIMIZATIONS
 ==================================================
 - Inspector
-	- Make the whole inspector wider? Hash currently clipped
 	- css cursor:pointer doesn't work on safari after a tab has been clicked for some reason.
 - Scrollbar in firefox screws with the confirm dialog a little with small-width displays.
 
@@ -49,6 +48,8 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Inspector
+	- Make the whole inspector wider? Hash currently clipped
 - Bottom Menu
 	- Separators between menu sections
 	- right-align sub-menu arrows
