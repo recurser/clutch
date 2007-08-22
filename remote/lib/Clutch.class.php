@@ -13,7 +13,7 @@
 	require_once('TransmissionController.class.php');
 	require_once('Preferences.class.php');
 
-	class BigBlueHouse
+	class Clutch
 	{
 		public $Torrents;
 		public $M;

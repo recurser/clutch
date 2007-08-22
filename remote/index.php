@@ -8,7 +8,7 @@
 	require_once('inc/trans_main.php');
 	$TControl = new TransmissionController(file_get_contents('data/socket.txt'));
 	$MControl = new MessageController($TControl);
-	$Instance = new BigBlueHouse($MControl);
+	$Instance = new Clutch($MControl);
 
 	$Preferences = new Preferences('data/prefs.txt');
 	

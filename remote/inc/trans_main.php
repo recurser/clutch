@@ -37,5 +37,5 @@
 	
 	// Include some base files
 	require_once('trans_constants.php');
-	require_once('BigBlueHouse.class.php');
+	require_once('Clutch.class.php');
 ?>
