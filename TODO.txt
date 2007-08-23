@@ -1,6 +1,8 @@
 
 TODO
 ==================================================
+- No MessageController function to set 'stop seeding at ratio'
+- Mouse up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents
 - Bottom Menu
 	- Clean all of the crap out of the jquery plugin
 	- Fix firefox flicker problem

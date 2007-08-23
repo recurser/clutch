@@ -101,6 +101,41 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			return $NewArray;	
 		}
 
+		/* public function setDownloadRate([(integer) $rate])
+		 * Set the maximum download rate for the daemon
+		 * Ex. setDownloadRate(5)
+		 *
+		 * @access public
+		 * @param integer $rate Maximum download rate
+		 * @return void
+		 */
+		public function setDownloadRate($rate = -1)
+		{
+			$this->M->SetDownloadLimit(intval($rate));
+		}
+
+		/* public function setUploadRate([(integer) $rate])
+		 * Set the maximum upload rate for the daemon
+		 * Ex. setUploadRate(5)
+		 *
+		 * @access public
+		 * @param integer $rate Maximum upload rate
+		 * @return void
+		 */
+		public function setUploadRate($rate = -1)
+		{
+			$this->M->SetUpLimit(intval($rate));
+		}
+
+		/* public function AddTorrentByUpload((string) $formname, [[(string) $directory], (integer) $autostart])
+		 * Upload a torrent to the daemon
+		 *
+		 * @access public
+		 * @param string $formname Name of the upload form
+		 * @param string $directory Directory to download to
+		 * @param integer $autostart Whether or not to auto-start the torrent (0 or 1)
+		 * @return void
+		 */
 		public function AddTorrentByUpload($formname, $directory = null, $autostart = null)
 		{
 			if (!is_uploaded_file($_FILES[$formname]['tmp_name']))

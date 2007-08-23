@@ -421,6 +421,11 @@ Transmission.prototype = {
 	releaseSpeedLimitButton: function(event) {
 		event.data.transmission.toggleSpeedLimit();
 	},
+
+	/*
+	 * Do nothing - used for ajax calls that don't need to do anything on return
+	 */
+	ignore: function() {},
 	
 	
 
@@ -499,22 +504,26 @@ Transmission.prototype = {
 			case 'footer_download_rate_menu':
 				var rate = (this.innerHTML).replace(/[^0-9]/ig, '');
 				if ($(this).is('#unlimited_download_rate')) {
-					$(this).deselectMenuSiblings().selectMenuItem()
+					$(this).deselectMenuSiblings().selectMenuItem();
+					rate = -1;
 				} else {
 					$('#limited_download_rate')[0].innerHTML = 'Limit (' + rate + ' KB/s)';
 					$('#limited_download_rate').deselectMenuSiblings().selectMenuItem();
 				}
+				transmission.remoteRequest('setDownloadRate', rate);
 				break;
 			
 			// Limit the upload rate
 			case 'footer_upload_rate_menu':
 				var rate = (this.innerHTML).replace(/[^0-9]/ig, '');
 				if ($(this).is('#unlimited_upload_rate')) {
-					$(this).deselectMenuSiblings().selectMenuItem()
+					$(this).deselectMenuSiblings().selectMenuItem();
+					rate = -1;
 				} else {
 					$('#limited_upload_rate')[0].innerHTML = 'Limit (' + rate + ' KB/s)';
 					$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();
 				}
+				transmission.remoteRequest('setUploadRate', rate);
 				break;
 			
 			// Set the ratio to stop seeding at
@@ -522,10 +531,12 @@ Transmission.prototype = {
 				var ratio = (this.innerHTML).replace(/[^0-9¥.]/ig, '');
 				if ($(this).is('#unlimited_seed_ratio')) {
 					$(this).deselectMenuSiblings().selectMenuItem();
+					ratio = -1;
 				} else {
 					$('#limited_seed_ratio')[0].innerHTML = 'Stop at Ratio (' + ratio + ')';
 					$('#limited_seed_ratio').deselectMenuSiblings().selectMenuItem();
 				}
+				transmission.remoteRequest('setSeedingRatio', ratio);
 				break;
 			
 			// Sort the torrent list 

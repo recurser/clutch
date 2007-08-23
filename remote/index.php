@@ -109,7 +109,24 @@
 					$function = 'alert';
 					$arg_list = "'Upload Error', 'An unexpected error occured', 'Dismiss'";
 				}
+				break;	
+	
+			case 'setDownloadRate' :
+				$function = 'ignore';
+				$Instance->setDownloadRate($_GET['param']);
+				$arg_list = '';
 				break;		
+	
+			case 'setUploadRate' :
+				$function = 'ignore';
+				$Instance->setUploadRate($_GET['param']);
+				$arg_list = '';
+				break;	
+	
+			case 'setSeedingRatio' :
+				$function = 'ignore';
+				$arg_list = '';
+				break;	
 		}
 	
 		// Set the mime type (causes prototype to auto-eval())
