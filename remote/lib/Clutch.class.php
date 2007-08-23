@@ -45,7 +45,7 @@
 		 * Valid sort options are SORT_ASC and SORT_DESC
 		 * Do not attempt to sort using an array as the method. (EG. 'trackers' or 'files')
 		 */
-		public function TorrentSort(&$Torrents, $SortMethod = 'name', $SortOrder = 4)
+		public function TorrentSort(&$Torrents, $SortMethod = 'name', $SortOrder = SORT_ASC)
 		{
 			foreach ($Torrents as $TorrentID => $TorrentInfo)
 				foreach (array_keys($Torrents[$TorrentID]) as $TorrentKey)
@@ -255,7 +255,12 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 * @param array $filterType Type of torrents to return (FilterAll, FilterDownloading, FilterSeeding, FilterPaused)
 		 * @return string $result JSON array of torrent data
 		 */
-		public function filterTorrents($infoFields = array(), $statusFields = array(), $filterType = FilterAll)
+		public function filterTorrents(
+			$infoFields = array(), 
+			$statusFields = array(), 
+			$filterType = FilterAll, 
+			$sortMethod = SortByQueueOrder, 
+			$sortDirection = SortAscending)
 		{
 			// First, need to get the IDs of all the torrents that match this type
 			// Need to look through all the torrents & figure out which ones we want
@@ -283,6 +288,16 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			
 			// Remember the current filter type
 			$_SESSION['filterType'] = $filterType;
+			
+			if ($sortMethod == SortByQueueOrder && $sortDirection == SortDescending) {
+				$result = array_reverse($result);
+				
+			} else if ($sortMethod != SortByQueueOrder && $sortDirection == SortDescending) {
+				$this->TorrentSort(&$result, $sortMethod, $SortOrder = SORT_DESC);	
+				
+			} else if ($sortMethod != SortByQueueOrder && $sortDirection == SortAscending) {
+				$this->TorrentSort(&$result, $sortMethod, $SortOrder = SORT_ASC);				
+			}	
 			
 			return json_encode($result);
 		}

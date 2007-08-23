@@ -172,11 +172,11 @@
 						<li class='separator'></li>
 						<li>Sort Transfers By
 							<ul id='footer_sort_menu'>
-								<li id='sort_queue_order'>Queue Order</li>
-								<li>Date Added</li>
-								<li>Name</li>
-								<li>Progress</li>
-								<li>State</li>
+								<li id='sort_by_queue_order'>Queue Order</li>
+								<li id='sort_by_date'>Date Added</li>
+								<li id='sort_by_name'>Name</li>
+								<li id='sort_by_completed'>Progress</li>
+								<li id='sort_by_state'>State</li>
 								<li class='separator'></li>
 								<li id='reverse_sort_order'>Reverse Sort Order</li>
 							</ul>
@@ -203,7 +203,7 @@
 			<div id="dialog_window">
 				<img src='images/graphics/logo.png' />
 				<h2 id="dialog_heading">Torrent Upload</h2>
-				<form action='remote/?action=uploadTorrent&amp;param=[]&amp;filter=[]' method='post' id='torrent_upload_form' 
+				<form action='remote/?action=uploadTorrent&amp;param=[]&amp;filter=0&amp;sort_method=0&amp;sort_direction=0' method='post' id='torrent_upload_form' 
 					enctype='multipart/form-data' target='torrent_upload_frame'>  
 				<div id="dialog_message">
 					Please select a .torrent file to upload:

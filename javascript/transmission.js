@@ -8,12 +8,16 @@
 
 function Transmission(){
     // Constants
-	this._RefreshInterval   = 5000; // Milliseconds
-	this._FilterAll         = 'all';
-	this._FilterSeeding     = 'seeding';
-	this._FilterDownloading = 'downloading';
-	this._FilterPaused      = 'paused';
-	this._current_filter    = this._FilterAll;
+	this._RefreshInterval        = 5000; // Milliseconds
+	this._FilterAll              = 'all';
+	this._FilterSeeding          = 'seeding';
+	this._FilterDownloading      = 'downloading';
+	this._FilterPaused           = 'paused';
+	this._SortAscending          = 'ascending';
+	this._SortDescending         = 'descending';
+	this._current_filter     = this._FilterAll;
+	this._current_sort_method = 'queue_order';
+	this._current_sort_direction = this._SortAscending;
 
     this.initialize();
 } 
@@ -487,7 +491,7 @@ Transmission.prototype = {
 		$('#unlimited_download_rate').selectMenuItem();
 		$('#unlimited_upload_rate').selectMenuItem();
 		$('#unlimited_seed_ratio').selectMenuItem();
-		$('#sort_queue_order').selectMenuItem();
+		$('#sort_by_queue_order').selectMenuItem();
 	},
     
     /*
@@ -541,12 +545,17 @@ Transmission.prototype = {
 			
 			// Sort the torrent list 
 			case 'footer_sort_menu':
+				var sort_method = transmission._current_sort_method;
+				var sort_direction = transmission._current_sort_direction;
+				
 				// The 'reverse sort' option state can be toggled on/off independant of the other options
 				if ($(this).is('#reverse_sort_order')) {
 					if ($(this).menuItemIsSelected()) {
 						$(this).deselectMenuItem();
+						sort_direction = transmission._SortAscending;
 					} else {
 						$(this).selectMenuItem();
+						sort_direction = transmission._SortDescending;
 					}	
 				// Otherwise, deselect all other options (except reverse-sort) and select this one				
 				} else {
@@ -556,10 +565,10 @@ Transmission.prototype = {
 						}
 					});
 					$(this).selectMenuItem();
+					sort_method = $(this)[0].id.replace(/sort_by_/, '');
 				}
+				transmission.sortTorrents(sort_method, sort_direction);
 				break;
-				
-				
 		}
 	},
     
@@ -928,17 +937,30 @@ Transmission.prototype = {
 	/*
 	 * Perform a generic remote request
 	 */
-	remoteRequest: function(action, param, filter) {
+	remoteRequest: function(action, param, filter, sort_method, sort_direction) {
 		if (param == null) {
 			param = '0';
 		}
+		
 		if (filter == null) {
 			filter = this._current_filter;
 		}
 		
+		if (sort_method == null) {
+			sort_method = this._current_sort_method;
+		}
+		
+		if (sort_direction == null) {
+			sort_direction = this._current_sort_direction;
+		}
+		
         $.ajax({
             type: 'GET',
-            url: 'remote/?action=' + action + '&param=' + param + '&filter=' + filter,
+            url: 'remote/?action=' + action + 
+				'&param=' + param + 
+				'&filter=' + filter + 
+				'&sort_method=' + sort_method + 
+				'&sort_direction=' + sort_direction,
             dataType: "script"
         });
 	},
@@ -965,6 +987,22 @@ Transmission.prototype = {
 			this._current_filter = filter_type;
         	transmission.remoteRequest('filterTorrents', null, filter_type);
 		}
+    },
+    
+    /*
+     * Sort the torrent data
+     */
+    sortTorrents: function(sort_method, sort_direction) {
+	
+		if (sort_method != this._current_sort_method) {	
+			this._current_sort_method = sort_method;
+		}
+	
+		if (sort_direction != this._current_sort_direction) {	
+			this._current_sort_direction = sort_direction;
+		}
+		
+       	transmission.remoteRequest('filterTorrents', null, this._current_filter, sort_method, sort_direction);
     },
     
     /*

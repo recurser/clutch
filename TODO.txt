@@ -1,6 +1,7 @@
 
 TODO
 ==================================================
+- Add torrents to the correct place in the sorted list after upload (ie return filterred torrent list rather than 1 torrent)
 - No MessageController function to set 'stop seeding at ratio'
 - Mouse up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents
 - Bottom Menu
