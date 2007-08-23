@@ -1,6 +1,8 @@
 
 TODO
 ==================================================
+- Clutch.app freezes when i try to stop the daemon - /tmp/ .pid file never gets deleted, & i can't start the daemon again (daemon doesn't get killed). Have to rm /tmp/clutch* and re-run the daemon from xcode to restart. Could be a symptom of my laptop being a pile of shit - anyone else having this prob? Doesn't seem to start properly if it tries to kill a process that doesn't exist (ie if the daemon /tmp/ pid file exists but the associated process doesn't) - runs but i never get the top-menu bar item to start the daemon/webgui (hope this makes sense!).
+- Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Get up/down speed & stop seeding setting from the daemon at page load
 - Add torrents to the correct place in the sorted list after upload (ie return filtered torrent list rather than 1 torrent)
 - No MessageController function to set 'stop seeding at ratio'
