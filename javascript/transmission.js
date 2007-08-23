@@ -15,8 +15,8 @@ function Transmission(){
 	this._FilterPaused           = 'paused';
 	this._SortAscending          = 'ascending';
 	this._SortDescending         = 'descending';
-	this._current_filter     = this._FilterAll;
-	this._current_sort_method = 'queue_order';
+	this._current_filter         = this._FilterAll;
+	this._current_sort_method    = 'queue_order';
 	this._current_sort_direction = this._SortAscending;
 
     this.initialize();
