@@ -11,7 +11,6 @@ define('FilterSeeding',     'seeding');
 define('FilterPaused',      'paused');
 define('SortAscending',     'ascending');
 define('SortDescending',    'descending');
-define('SortAscending',     'ascending');
 define('SortByQueueOrder',  'queue_order');
 define('SortByDate',        'date');
 define('SortByName',        'name');

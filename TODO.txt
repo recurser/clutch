@@ -6,7 +6,7 @@ TODO
 - Get up/down speed & stop seeding setting from the daemon at page load
 - Add torrents to the correct place in the sorted list after upload (ie return filtered torrent list rather than 1 torrent)
 - No MessageController function to set 'stop seeding at ratio'
-- Mouse up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents
+- Arrow button up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents
 - Bottom Menu
 	- Clean all of the crap out of the jquery plugin
 	- Fix firefox flicker problem
@@ -19,8 +19,7 @@ TODO
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - mouse up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
 - Need to validate the torrent upload stuff and report proper error messages
-- *if* the memory issue is sorted, maybe try getting torrent info in groups of 3/4/whatever is safe to try and speed things up a bit?
-- Clean up BigBlueHouse class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
+- Clean up Clutch class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 - Sqlite db for prefs - refresh frequency, user login details, filter etc etc.
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
@@ -50,7 +49,7 @@ IN THE FUTURE (?)
 ==================================================
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - IE support if possible.
-
+- Maybe try getting torrent info on the server side in groups of 3/4/whatever-is-safe to try and speed things up a bit? Performance seems ok for the time being
 
 DONE
 ==================================================
