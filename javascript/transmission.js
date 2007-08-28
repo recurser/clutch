@@ -490,7 +490,6 @@ Transmission.prototype = {
 		// Make initial menu selections (TODO - do this with data from the daemon?)
 		$('#unlimited_download_rate').selectMenuItem();
 		$('#unlimited_upload_rate').selectMenuItem();
-		$('#unlimited_seed_ratio').selectMenuItem();
 		$('#sort_by_queue_order').selectMenuItem();
 	},
     
@@ -528,19 +527,6 @@ Transmission.prototype = {
 					$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();
 				}
 				transmission.remoteRequest('setUploadRate', rate);
-				break;
-			
-			// Set the ratio to stop seeding at
-			case 'footer_stop_seeding_menu':
-				var ratio = (this.innerHTML).replace(/[^0-9¥.]/ig, '');
-				if ($(this).is('#unlimited_seed_ratio')) {
-					$(this).deselectMenuSiblings().selectMenuItem();
-					ratio = -1;
-				} else {
-					$('#limited_seed_ratio')[0].innerHTML = 'Stop at Ratio (' + ratio + ')';
-					$('#limited_seed_ratio').deselectMenuSiblings().selectMenuItem();
-				}
-				transmission.remoteRequest('setSeedingRatio', ratio);
 				break;
 			
 			// Sort the torrent list 

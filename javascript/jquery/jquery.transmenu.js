@@ -305,9 +305,9 @@
 			//add the little arrow before each submenu
 			if ( settings.arrow_char ) {
 				var arrow_markup = $("<span class='arrow'>" + settings.arrow_char + '</span>');
-				// Safari float/position hack
-				if ($.browser.safari) {
-					arrow_markup.css('margin-top', '0px');
+				// Mozilla float/position hack
+				if ($.browser.mozilla) {
+					arrow_markup.css('margin-top', '-13px');
 				}
 				$('div.inner div.outerbox', this).before(arrow_markup);
 			}
