@@ -784,21 +784,37 @@ Transmission.prototype = {
 	},
 
     /*
+     * Remove all the torrents from the interface to force a re-sort
+     */
+    refreshAndSortTorrents: function(torrent_list) {
+		transmission.removeTorrents(transmission._torrents.keys().clone());
+		transmission.refreshTorrents(torrent_list);
+	},
+
+    /*
      * Load a list of torrents into the application
      */
     refreshTorrents: function(torrent_list) {
 		var global_up_speed = 0;
 		var global_down_speed = 0;
         var torrent_data;
-        var torrent_ids = this._torrents.keys().clone();
+        var torrent_ids = transmission._torrents.keys().clone();
         var new_torrents = [];
+
+		// If the length of the new torrent_list isn't equal to the number of torrents in
+		// the browser (if a torrent has been added/deleted/filtered for example), we
+		// need to clear the list & force a re-sort
+		if (torrent_ids.length > 0 && torrent_ids.length != torrent_list.length) {
+			transmission.removeTorrents(transmission._torrents.keys().clone());
+			torrent_ids = [];
+		}
 
         for (i=0; i<torrent_list.length; i++) {
             torrent_data = torrent_list[i];
 	
 			// If this torrent already exists, refresh it & remove this ID from torrent_ids
 			if (torrent_ids.inArray(torrent_data.id)) {
-				this._torrents.item(torrent_data.id).refresh(torrent_data);
+				transmission._torrents.item(torrent_data.id).refresh(torrent_data);
 				global_up_speed += torrent_data.upload_speed;
 				global_down_speed += torrent_data.download_speed;
 				torrent_ids.remove(torrent_data.id);
@@ -821,10 +837,10 @@ Transmission.prototype = {
 		}
 		
 		// Update global upload and download speed display
-		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
+		transmission.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
 		
 		// Update the inspector
-		this.updateInspector();
+		transmission.updateInspector();
     },
 
     /*
@@ -988,7 +1004,7 @@ Transmission.prototype = {
 			this._current_sort_direction = sort_direction;
 		}
 		
-       	transmission.remoteRequest('filterTorrents', null, this._current_filter, sort_method, sort_direction);
+       	transmission.remoteRequest('sortTorrents', null, this._current_filter, sort_method, sort_direction);
     },
     
     /*

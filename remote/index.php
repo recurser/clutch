@@ -83,6 +83,15 @@
 								$_GET['sort_direction']);
 				break;
 	
+			case 'sortTorrents' :
+				$function = 'refreshAndSortTorrents';
+				$arg_list = $Instance->filterTorrents($info_fields, 
+								$status_fields, 
+								$_GET['filter'], 
+								$_GET['sort_method'], 
+								$_GET['sort_direction']);
+				break;
+	
 			case 'uploadTorrent' :
 				$response = $Instance->AddTorrentByUpload('torrent_file', null, true);
 				if (isset($response[1][0]['id'])) {

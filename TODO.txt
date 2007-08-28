@@ -5,8 +5,7 @@ TODO
 - Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Get up/down speed & stop seeding setting from the daemon at page load
 - Add torrents to the correct place in the sorted list after upload (ie return filtered torrent list rather than 1 torrent)
-- No MessageController function to set 'stop seeding at ratio'
-- Arrow button up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents
+- Arrow button up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents (also doesn't recognize newly uploaded torrents)
 - Bottom Menu
 	- Clean all of the crap out of the jquery plugin
 	- Fix firefox flicker problem
@@ -24,7 +23,6 @@ TODO
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Implement search box.
-- Torrent sorting (need to pass to filters too i guess).
 - Add a loading indicator? Ajax requests could be quite bit long with  lot of torrents - need some indication that something is happening.
 - Disable access for IE
 
@@ -53,6 +51,8 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Torrent sorting (need to pass to filters too i guess).
+- No MessageController function to set 'stop seeding at ratio' - unavailable
 - Inspector
 	- Make the whole inspector wider? Hash currently clipped
 - Bottom Menu

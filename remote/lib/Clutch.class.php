@@ -47,11 +47,13 @@
 		 */
 		public function TorrentSort(&$Torrents, $SortMethod = 'name', $SortOrder = SORT_ASC)
 		{
-			foreach ($Torrents as $TorrentID => $TorrentInfo)
-				foreach (array_keys($Torrents[$TorrentID]) as $TorrentKey)
-					${$TorrentKey}[$TorrentID] = $TorrentInfo[$TorrentKey];
+			if (count($Torrents) > 0) {
+				foreach ($Torrents as $TorrentID => $TorrentInfo)
+					foreach (array_keys($Torrents[$TorrentID]) as $TorrentKey)
+						${$TorrentKey}[$TorrentID] = $TorrentInfo[$TorrentKey];
 
-			array_multisort($$SortMethod, $SortOrder, $Torrents);
+				array_multisort($$SortMethod, $SortOrder, $Torrents);
+			}
 		}
 
 		/* public GetTorrents([(string) $SortMethod, [(int) $SortOrder]])
