@@ -40,8 +40,8 @@ Transmission.prototype = {
         this._torrents = new Hash();
         this._selected_torrents = new Hash();
         
-        // Get the initial list of torrents from the remote app
-        this.getTorrentList();
+        // Get the initial settings from the remote server
+        this.requestSettings();
         
         // Observe key presses
 		$(document).bind('keydown', {transmission: this}, this.keyDown);
@@ -76,9 +76,6 @@ Transmission.prototype = {
 		
 		// Setup the footer settings menu
 		this.createSettingsMenu();
-
-		// Create a periodical executer to refresh the list
-		setInterval('transmission.reloadTorrents()', this._RefreshInterval);
     },
     
 
@@ -438,6 +435,30 @@ Transmission.prototype = {
      *  I N T E R F A C E   F U N C T I O N S
      * 
      *--------------------------------------------*/
+    
+    /*
+     * Setup the initial settings, and request the list of torrents from the server
+     */
+	initializeSettings: function(settings) {
+		
+		// Set the download rate
+		if (settings.download_rate != -1) {
+			$('#limited_download_rate')[0].innerHTML = 'Limit (' + settings.download_rate + ' KB/s)';
+			$('#limited_download_rate').deselectMenuSiblings().selectMenuItem();			
+		}
+		
+		// Set the upload rate
+		if (settings.upload_rate != -1) {
+			$('#limited_upload_rate')[0].innerHTML = 'Limit (' + settings.upload_rate + ' KB/s)';
+			$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();			
+		}
+
+		// Request the list of torrents from the server
+		this.remoteRequest('refreshTorrents', null, this._current_filter);
+
+		// Create a periodical executer to refresh the list
+		setInterval('transmission.reloadTorrents()', this._RefreshInterval);
+    },
     
     /*
      * Select all torrents in the list
@@ -966,6 +987,13 @@ Transmission.prototype = {
             dataType: "script"
         });
 	},
+    
+    /*
+     * Request the initial settings for the web client (up/down speed etc)
+     */
+	requestSettings: function() {
+        this.remoteRequest('requestSettings');	
+    },
     
     /*
      * Request the list of torrents from the client

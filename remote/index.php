@@ -40,6 +40,11 @@
 
 		switch($_GET['action']) 
 		{	
+			case 'requestSettings' :
+				$function = 'initializeSettings';
+				$arg_list = $Instance->getInitialSettings();
+				break;
+				
 			case 'refreshTorrents' :
 				$function = 'refreshTorrents';
 				$arg_list = $Instance->filterTorrents($info_fields, 

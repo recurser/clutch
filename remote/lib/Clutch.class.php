@@ -38,6 +38,23 @@
 			return $this->LastError;
 		}
 
+		/* public GetInitialSettings()
+		 * Get the initial settings for the web client (up/down speed etc)
+		 *
+		 * @return array $result
+		 */
+		public function GetInitialSettings() {
+			$result = array();			
+			
+			$download_rate = $this->M->GetDownloadLimit();
+			$result['download_rate'] = $download_rate[1];
+			
+			$upload_rate   = $this->M->GetUploadLimit();
+			$result['upload_rate']   = $upload_rate[1];
+			
+			return json_encode($result);
+		}
+
 		/* public TorrentSort((array) $Torrents, [(string) $SortMethod, [(int) $SortOrder]])
 		 * Sorts a two-dimensional array
 		 * Ex. TorrentSort($TorrentsInArray, 'name', SORT_DESC)
@@ -126,7 +143,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function setUploadRate($rate = -1)
 		{
-			$this->M->SetUpLimit(intval($rate));
+			$this->M->SetUploadLimit(intval($rate));
 		}
 
 		/* public function AddTorrentByUpload((string) $formname, [[(string) $directory], (integer) $autostart])
