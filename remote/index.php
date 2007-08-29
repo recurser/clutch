@@ -100,9 +100,12 @@
 			case 'uploadTorrent' :
 				$response = $Instance->AddTorrentByUpload('torrent_file', null, true);
 				if (isset($response[1][0]['id'])) {
-					$torrent_id = intval($response[1][0]['id']);
-					$arg_list = $Instance->getTorrentData($info_fields, $status_fields, array($torrent_id)) . ', false';
-					$function = 'addTorrents';
+					$function = 'refreshAndSortTorrents';
+					$arg_list = $Instance->filterTorrents($info_fields, 
+								$status_fields, 
+								$_GET['filter'], 
+								$_GET['sort_method'], 
+								$_GET['sort_direction']);
 				} else {
 					$controller = 'dialog';
 					$function = 'alert';

@@ -904,11 +904,20 @@ Transmission.prototype = {
      * Select a torrent file to upload
      */
     uploadTorrentFile: function(confirmed) {
+	
 		// Display the upload dialog
 		if (! confirmed) {
 			$('#upload_container').show();
+			
 		// Submit the upload form			
 		} else {
+			// Set the form action with the appropriate params
+			$('#torrent_upload_form')[0].action = 'remote/?action=uploadTorrent&param=[]' + 
+					'&filter=' + transmission._current_filter +
+					'&sort_method=' + transmission._current_sort_method +
+					'&sort_direction=' + transmission._current_sort_direction;
+			
+			// Submit the form
 			$('#torrent_upload_form')[0].submit();
 		}
     },
