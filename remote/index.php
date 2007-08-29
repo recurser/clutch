@@ -6,11 +6,11 @@
 	 */
 	
 	require_once('inc/trans_main.php');
-	$TControl = new TransmissionController(file_get_contents('data/socket.txt'));
-	$MControl = new MessageController($TControl);
-	$Instance = new Clutch($MControl);
 
 	$Preferences = new Preferences('data/prefs.txt');
+	$TControl = new TransmissionController(file_get_contents('data/socket.txt'));
+	$MControl = new MessageController($TControl);
+	$Instance = new Clutch($MControl, $Preferences);
 	
 	// Initialise the filter type
 	//session_start();
@@ -134,12 +134,7 @@
 				$function = 'ignore';
 				$Instance->setUploadRate($_GET['param']);
 				$arg_list = '';
-				break;	
-	
-			case 'setSeedingRatio' :
-				$function = 'ignore';
-				$arg_list = '';
-				break;	
+				break;
 		}
 	
 		// Set the mime type (causes prototype to auto-eval())

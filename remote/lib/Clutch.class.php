@@ -18,13 +18,16 @@
 		public $Torrents;
 		public $M;
 		private $LastError;
+		private $Preferences;
 
-		public function __construct($MessageController = null)
+		public function __construct($MessageController = null, $Preferences)
 		{
 			if ($MessageController instanceof MessageController)
 				$this->M = $MessageController;
 			else
 				$M = new MessageController(new TransmissionController);
+				
+			$this->Preferences = $Preferences;
 		}
 
 		private function Error($ErrorString)
@@ -51,6 +54,10 @@
 			
 			$upload_rate   = $this->M->GetUploadLimit();
 			$result['upload_rate']   = $upload_rate[1];
+			
+			$result['filter']         = $this->Preferences->GetPreference('filter');
+			$result['sort_method']    = $this->Preferences->GetPreference('sort_method');
+			$result['sort_direction'] = $this->Preferences->GetPreference('sort_direction');
 			
 			return json_encode($result);
 		}
@@ -332,6 +339,11 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				}
 				$result = array_values($result);
 			}
+			
+			// Store these settings for the future
+			$this->Preferences->SetPreference('filter', $filterType);
+			$this->Preferences->SetPreference('sort_method', $sortMethod);
+			$this->Preferences->SetPreference('sort_direction', $sortDirection);
 			
 			return json_encode($result);
 		}

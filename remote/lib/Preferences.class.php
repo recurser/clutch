@@ -7,40 +7,58 @@
 
 	class Preferences
 	{
-		public $PreferenceFile;
+		private $PreferenceFile;
+		private $Preferences;
 
 		public function __construct($PreferenceFile)
 		{
+			$result = false;
 			$this->PreferenceFile = $PreferenceFile;
 
-			if (!file_exists($this->PreferenceFile))
-				return touch($this->PreferenceFile);
-			else
-				return true;
+			if (!file_exists($this->PreferenceFile)) {
+				$result = touch($this->PreferenceFile);
+			} else {
+				$result = true;
+			}
+			
+			$this->Preferences = unserialize(file_get_contents($this->PreferenceFile));
+			
+			// Set defaults if this is a fresh install
+			if (!is_array($this->Preferences)) {
+				$this->Preferences = array(
+					'filter' => DefaultFilter,
+					'sort_method' => DefaultSortMethod,
+					'sort_direction' => DefaultSortDirection
+				);
+				$this->WritePreferences();
+			}
+			
+			return $result;
 		}
 
-		public function ReadPreferences()
+		private function WritePreferences()
 		{
-			return unserialize(file_get_contents($this->PreferenceFile));
-		}
-
-		private function WritePreferences($PrefsArray)
-		{
-			return file_put_contents($this->PreferenceFile, serialize($PrefsArray));
+			return file_put_contents($this->PreferenceFile, serialize($this->Preferences));
 		}
 
 		public function GetPreference($key)
 		{
-			$Prefs = $this->ReadPreferences();
-			if (array_key_exists($key, $Prefs))
-				return $Prefs[$key];
+			$result = null;
+			if (array_key_exists($key, $this->Preferences)) {
+				$result =  $this->Preferences[$key];
+			}
+			
+			return $result;
 		}
 
 		public function SetPreference($key, $value)
 		{
-			$Prefs = $this->ReadPreferences();
-			$Prefs[$key] = $value;
-			return $this->WritePreferences($Prefs);
+			$result = true;
+			if ($this->Preferences[$key] != $value) {
+				$this->Preferences[$key] = $value;
+			 	$result = $this->WritePreferences();
+			}
+			return $result;
 		}
 	}
 ?>

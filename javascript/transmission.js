@@ -455,6 +455,25 @@ Transmission.prototype = {
 			$('#limited_upload_rate')[0].innerHTML = 'Limit (' + settings.upload_rate + ' KB/s)';
 			$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();			
 		}
+		
+		// Set the filter
+		if (settings.filter != null) {
+			this._current_filter = settings.filter;	
+		}
+		
+		// Set the sort_method
+		if (settings.sort_method != null) {
+			this._current_sort_method = settings.sort_method;
+			$('#sort_by_' + settings.sort_method).selectMenuItem();
+		}
+		
+		// Set the sort_direction
+		if (settings.sort_direction != null) {
+			this._current_sort_direction = settings.sort_direction;
+			if (settings.sort_direction == this._SortDescending) {
+				$('#reverse_sort_order').selectMenuItem();
+			}
+		}
 
 		// Request the list of torrents from the server
 		this.remoteRequest('refreshTorrents', null, this._current_filter);
@@ -531,7 +550,6 @@ Transmission.prototype = {
 		// Make initial menu selections (TODO - do this with data from the daemon?)
 		$('#unlimited_download_rate').selectMenuItem();
 		$('#unlimited_upload_rate').selectMenuItem();
-		$('#sort_by_queue_order').selectMenuItem();
 	},
     
     /*
