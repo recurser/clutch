@@ -18,6 +18,7 @@ function Transmission(){
 	this._current_filter         = this._FilterAll;
 	this._current_sort_method    = 'queue_order';
 	this._current_sort_direction = this._SortAscending;
+	this._current_search         = '';
 
     this.initialize();
 } 
@@ -62,7 +63,6 @@ Transmission.prototype = {
 		$('#upload_confirm_button').bind('click', {transmission: this}, this.releaseUploadConfirmButton);
 		$('#upload_cancel_button').bind('click', {transmission: this}, this.releaseUploadCancelButton);
 		$('#speed_limit_button').bind('click', {transmission: this}, this.releaseSpeedLimitButton);
-		
 						
 		// Bind the upload iframe's onload event to process uploads
 		$('#torrent_upload_frame').load(this.processUpload);
@@ -70,6 +70,9 @@ Transmission.prototype = {
 		// Inspector tabs
 		$('#inspector_tab_info').bind('click', {transmission: this}, this.releaseInspectorTab);
 		$('#inspector_tab_activity').bind('click', {transmission: this}, this.releaseInspectorTab);
+		
+		// Setup the search box
+		this.setupSearchBox();
 		
 		// Set up the right-click context menu
 		this.createContextMenu();
@@ -476,6 +479,23 @@ Transmission.prototype = {
         // reset the highest and lowest selected
         this._highest_selected = null;
         this._lowest_selected = null;
+    },
+    
+    /*
+     * Set up the search box
+     */
+    setupSearchBox: function() {
+		var search_box = $('#torrent_search');
+		search_box[0].value = '';
+		search_box.bind('keyup', {transmission: this}, function(event) {
+			var transmission = event.data.transmission;
+			transmission._current_search = this.value.trim();
+       		/*transmission.remoteRequest('searchTorrents', null, 
+					transmission._current_filter, 
+					transmission._current_sort_method, 
+					transmission._current_sort_direction, 
+					transmission._current_search);*/
+		});
     },
     
     /*
@@ -915,7 +935,8 @@ Transmission.prototype = {
 			$('#torrent_upload_form')[0].action = 'remote/?action=uploadTorrent&param=[]' + 
 					'&filter=' + transmission._current_filter +
 					'&sort_method=' + transmission._current_sort_method +
-					'&sort_direction=' + transmission._current_sort_direction;
+					'&sort_direction=' + transmission._current_sort_direction +
+					'&search=' + transmission._current_search;
 			
 			// Submit the form
 			$('#torrent_upload_form')[0].submit();
@@ -969,7 +990,7 @@ Transmission.prototype = {
 	/*
 	 * Perform a generic remote request
 	 */
-	remoteRequest: function(action, param, filter, sort_method, sort_direction) {
+	remoteRequest: function(action, param, filter, sort_method, sort_direction, search) {
 		if (param == null) {
 			param = '0';
 		}
@@ -986,13 +1007,18 @@ Transmission.prototype = {
 			sort_direction = this._current_sort_direction;
 		}
 		
+		if (search == null) {
+			search = this._current_search;
+		}
+		
         $.ajax({
             type: 'GET',
             url: 'remote/?action=' + action + 
 				'&param=' + param + 
 				'&filter=' + filter + 
 				'&sort_method=' + sort_method + 
-				'&sort_direction=' + sort_direction,
+				'&sort_direction=' + sort_direction + 
+				'&search=' + search,
             dataType: "script"
         });
 	},

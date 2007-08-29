@@ -192,3 +192,10 @@ Math.roundWithPrecision = function(floatnum, precision) {
     
     return result;
 }
+
+/*
+ * Trim whitespace from a string
+ */
+String.prototype.trim = function () {
+    return this.replace(/^\s*/, "").replace(/\s*$/, "");
+}

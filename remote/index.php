@@ -28,6 +28,11 @@
 		$function = '';
 		$arg_list = '';	
 		
+		// Initialise the sort string if it's null
+		if (! isset($_GET['search'])) {
+			$_GET['search'] = '';
+		}
+		
 		$info_fields = array(
 				"id", "hash", "name", "path", "saved", "private", 
 				"trackers", "comment", "creator", "date", "size");
@@ -51,7 +56,8 @@
 								$status_fields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
-								$_GET['sort_direction']);
+								$_GET['sort_direction'], 
+								$_GET['search']);
 				break;
 	
 			case 'pauseTorrents' :
@@ -61,7 +67,8 @@
 								$status_fields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
-								$_GET['sort_direction']);
+								$_GET['sort_direction'], 
+								$_GET['search']);
 				break;
 	
 			case 'resumeTorrents' :
@@ -71,7 +78,8 @@
 								$status_fields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
-								$_GET['sort_direction']);
+								$_GET['sort_direction'], 
+								$_GET['search']);
 				break;
 	
 			case 'removeTorrents' :
@@ -85,7 +93,8 @@
 								$status_fields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
-								$_GET['sort_direction']);
+								$_GET['sort_direction'], 
+								$_GET['search']);
 				break;
 	
 			case 'sortTorrents' :
@@ -94,7 +103,8 @@
 								$status_fields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
-								$_GET['sort_direction']);
+								$_GET['sort_direction'], 
+								$_GET['search']);
 				break;
 	
 			case 'uploadTorrent' :
@@ -105,7 +115,8 @@
 								$status_fields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
-								$_GET['sort_direction']);
+								$_GET['sort_direction'], 
+								$_GET['search']);
 				} else {
 					$controller = 'dialog';
 					$function = 'alert';

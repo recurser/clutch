@@ -264,7 +264,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			return json_encode($result);
 		}
 
-		/* 	public function filterTorrents([(array)$infoFields], [(array)$statusFields], [(string)$filterType])
+		/* 	public function filterTorrents([(array)$infoFields], [(array)$statusFields], [(string)$filterType], [(string)$sortMethod], [(string)$sortDirection], [(string)$search])
 		 * Returns a JSON array of torrent data for the specified filter type
 		 * Ex. filterTorrents(FilterSeeding)
 		 *
@@ -272,6 +272,9 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 * @param array $infoFields Array of torrent info fields to return
 		 * @param array $statusFields Array of torrent status fields to return
 		 * @param array $filterType Type of torrents to return (FilterAll, FilterDownloading, FilterSeeding, FilterPaused)
+		 * @param string $sortMethod Method to sort the torrents (name, progress etc)
+		 * @param string $sortDirection Direction to sort the torrents (SortAscending or SortDescending)
+		 * @param string $search Only return torrents whose name contains the search string
 		 * @return string $result JSON array of torrent data
 		 */
 		public function filterTorrents(
@@ -279,7 +282,8 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			$statusFields = array(), 
 			$filterType = FilterAll, 
 			$sortMethod = SortByQueueOrder, 
-			$sortDirection = SortAscending)
+			$sortDirection = SortAscending, 
+			$search = '')
 		{
 			// First, need to get the IDs of all the torrents that match this type
 			// Need to look through all the torrents & figure out which ones we want
@@ -316,7 +320,18 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				
 			} else if ($sortMethod != SortByQueueOrder && $sortDirection == SortAscending) {
 				$this->TorrentSort(&$result, $sortMethod, $SortOrder = SORT_ASC);				
-			}	
+			}
+			
+			// If the search string isn't empty, filter out any torrents 
+			// whose names don't include the string
+			if ($search != '') {
+				foreach ($result as $key=>$value) {
+					if (stripos($result[$key]['name'], $search) === false ) {
+						unset($result[$key]);
+					}
+				}
+				$result = array_values($result);
+			}
 			
 			return json_encode($result);
 		}
