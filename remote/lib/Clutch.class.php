@@ -58,6 +58,8 @@
 			$result['filter']         = $this->Preferences->GetPreference('filter');
 			$result['sort_method']    = $this->Preferences->GetPreference('sort_method');
 			$result['sort_direction'] = $this->Preferences->GetPreference('sort_direction');
+			$result['show_inspector'] = $this->Preferences->GetPreference('show_inspector');
+			$result['show_filter']    = $this->Preferences->GetPreference('show_filter');
 			
 			return json_encode($result);
 		}

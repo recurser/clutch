@@ -33,7 +33,7 @@ Transmission.prototype = {
         /*
          * Private Variables
          */
-		this._filter_visible = true;
+		this._filter_visible = false;
 		this._inspector_visible = false;
 		this._speed_limit_active = false;
 		
@@ -344,13 +344,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'inspector' button
 	 */
 	releaseInspectorButton: function(event) {
-		
-		// Perform the toggle
-		if (event.data.transmission._inspector_visible) {
-			event.data.transmission.hideInspector();
-		} else {
-			event.data.transmission.showInspector();
-		}
+		event.data.transmission.toggleInspector();
 	},
 
 	/*
@@ -375,20 +369,7 @@ Transmission.prototype = {
      * Process a mouse-up event on the 'filter' button
      */
 	releaseFilterToggleButton: function(event) {
-		
-		// Perform the toggle
-		var container_top;
-		if (event.data.transmission._filter_visible) {
-			container_top = parseInt($('#torrent_container').css('top')) - $('#torrent_filter_bar').height();
-			$('#torrent_container').css('top', container_top + 'px');
-			$('#torrent_filter_bar').hide();
-			event.data.transmission._filter_visible = false;
-		} else {
-			container_top = parseInt($('#torrent_container').css('top')) + $('#torrent_filter_bar').height();
-			$('#torrent_container').css('top', container_top + 'px');
-			$('#torrent_filter_bar').show();
-			event.data.transmission._filter_visible = true;
-		}
+		event.data.transmission.toggleFilter();
 	},
 
 	/*
@@ -473,6 +454,16 @@ Transmission.prototype = {
 			if (settings.sort_direction == this._SortDescending) {
 				$('#reverse_sort_order').selectMenuItem();
 			}
+		}
+		
+		// Show the filter if necessary
+		if (settings.show_filter) {
+			this.showFilter(true);
+		}
+		
+		// Show the inspector if necessary
+		if (settings.show_inspector) {
+			this.showInspector(true);
 		}
 
 		// Request the list of torrents from the server
@@ -794,7 +785,7 @@ Transmission.prototype = {
 	},
     
     /*
-     * Toggle the inspector (used by the context menu)
+     * Toggle the visibility of the inspector (used by the context menu)
      */
 	toggleInspector: function() {
 		if (transmission._inspector_visible) {
@@ -819,8 +810,9 @@ Transmission.prototype = {
     
     /*
      * Show the inspector
+	 * dont_inform_server is used when the filter is setup initially on startup
      */
-	showInspector: function() {
+	showInspector: function(dont_inform_server) {
 		$('#torrent_filter_bar')[0].style.right = $('#torrent_inspector').width() + 'px';
 		$('#torrent_container')[0].style.right = $('#torrent_inspector').width() + 'px';
 		$('#torrent_inspector').show();
@@ -828,6 +820,11 @@ Transmission.prototype = {
 		transmission.updateInspector();
 		
 		$('ul li#context_toggle_inspector')[0].innerHTML = 'Hide Inspector';
+
+		// Tell the server about this action
+		if (! dont_inform_server) {
+			transmission.setPreferences('show_inspector', true);
+		}
 	},
     
     /*
@@ -840,6 +837,45 @@ Transmission.prototype = {
 		transmission._inspector_visible = false;
 		
 		$('ul li#context_toggle_inspector')[0].innerHTML = 'Show Inspector';
+
+		// Tell the server about this action
+		transmission.setPreferences('show_inspector', false);
+	},
+	
+    /*
+     * Toggle the visibility of the filter bar
+     */
+	toggleFilter: function() {		
+		if (transmission._filter_visible) {
+			transmission.hideFilter();
+		} else {
+			transmission.showFilter();
+		}
+	},
+	
+    /*
+     * Show the filter bar
+	 * dont_inform_server is used when the filter is setup initially on startup
+     */
+	showFilter: function(dont_inform_server) {
+		var container_top = parseInt($('#torrent_container').css('top')) + $('#torrent_filter_bar').height();
+		$('#torrent_container').css('top', container_top + 'px');
+		$('#torrent_filter_bar').show();
+		transmission._filter_visible = true;
+		if (! dont_inform_server) {
+			transmission.setPreferences('show_filter', true);
+		}
+	},
+	
+    /*
+     * Hide the filter bar
+     */
+	hideFilter: function() {
+		var container_top = parseInt($('#torrent_container').css('top')) - $('#torrent_filter_bar').height();
+		$('#torrent_container').css('top', container_top + 'px');
+		$('#torrent_filter_bar').hide();
+		transmission._filter_visible = false;
+		transmission.setPreferences('show_filter', false);
 	},
 
     /*
@@ -1044,15 +1080,15 @@ Transmission.prototype = {
     /*
      * Request the initial settings for the web client (up/down speed etc)
      */
-	requestSettings: function() {
-        this.remoteRequest('requestSettings');	
+	setPreferences: function(key, value) {
+        this.remoteRequest('setPreferences', '{"'+key+'":'+value+'}');	
     },
     
     /*
-     * Request the list of torrents from the client
+     * Request the initial settings for the web client (up/down speed etc)
      */
-    getTorrentList: function() {
-        this.remoteRequest('refreshTorrents', null, this._current_filter);	
+	requestSettings: function() {
+        this.remoteRequest('requestSettings');	
     },
     
     /*

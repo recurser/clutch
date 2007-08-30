@@ -126,14 +126,23 @@
 	
 			case 'setDownloadRate' :
 				$function = 'ignore';
-				$Instance->setDownloadRate($_GET['param']);
 				$arg_list = '';
+				$Instance->setDownloadRate($_GET['param']);
 				break;		
 	
 			case 'setUploadRate' :
 				$function = 'ignore';
-				$Instance->setUploadRate($_GET['param']);
 				$arg_list = '';
+				$Instance->setUploadRate($_GET['param']);
+				break;
+				
+			case 'setPreferences' :
+				$function = 'ignore';
+				$arg_list = '';
+				$preferenceList = json_decode(stripslashes($_GET['param']));
+				foreach ($preferenceList as $key=>$value) {
+					$Preferences->SetPreference($key, $value);
+				}
 				break;
 		}
 	

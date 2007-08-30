@@ -214,6 +214,7 @@ div#torrent_filter_bar {
 	right: 0px; 
 	top: 98px; 
 	z-index: 2;
+	display: none;
 	}
 	
 div#torrent_filter_bar a {
@@ -247,7 +248,7 @@ div#torrent_filter_bar input#torrent_search {
  *--------------------------------------*/
 div#torrent_container {
 	position: fixed;
-	top: 122px;
+	top: 98px;
 	bottom: 22px;
 	right: 0px;
 	left: 0px;

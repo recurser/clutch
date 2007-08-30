@@ -5,18 +5,17 @@ TODO
 - Display an error message if the initial ajax requests fail (ie the server is down)
 - Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Bottom Menu
-	- server-side sqlite prefs to remember sort method etc?
 	- Figure out how that blue-turtle button is supposed to work & implement it
 	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
 - Opera .htauth password box pops up every ajax request - almost impossible to fill out
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
-- mouse up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
 - Need to validate the torrent upload stuff and report proper error messages
 - Clean up Clutch class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Disable access for IE
+- Style the filter buttons
 
 OPTIMIZATIONS
 ==================================================
@@ -38,6 +37,7 @@ CHECK
 
 IN THE FUTURE (?)
 ==================================================
+- Arrow up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
 - Bottom Menu
 	- Fix firefox flicker problem - not too bad now, going to be a fact of life until all the important stuff is done
 	- clean up of the transmenu plugin (does the job for now but it can def be optimized)
@@ -49,6 +49,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Remember Inspector and Filter open/closed state between sessions
 - Sqlite db for prefs - refresh frequency, user login details, filter etc etc.* Unnecessary - the serialized prefs.txt is good enough
 - Arrow button up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents (also doesn't recognize newly uploaded torrents)
 - Implement search box.
@@ -59,6 +60,7 @@ DONE
 - Inspector
 	- Make the whole inspector wider? Hash currently clipped
 - Bottom Menu
+	- server-side sqlite prefs to remember sort method etc?
 	- Separators between menu sections
 	- right-align sub-menu arrows
 	- 'tick' for selected options

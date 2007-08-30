@@ -18,9 +18,11 @@ define('SortByCompleted',   'completed');
 define('SortByState',       'state');
 
 // Defaults
-define('DefaultFilter',        FilterAll);
-define('DefaultSortMethod',    SortByQueueOrder);
-define('DefaultSortDirection', SortAscending);
+define('DefaultFilter',           FilterAll);
+define('DefaultSortMethod',       SortByQueueOrder);
+define('DefaultSortDirection',    SortAscending);
+define('DefaultFilterVisible',    true);
+define('DefaultInspectorVisible', false);
 
 
 ?>
