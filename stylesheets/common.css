@@ -677,10 +677,15 @@ div#prefs_container div#download_location label.item {
 	text-align: right;
 	}
 	
+div#prefs_container div#auto_add label.item,
 div#prefs_container div#limit_total label.item,
 div#prefs_container div#limit_over_ride label.item {
 	margin: 0 5px 0 0;
 	text-align: left;
+	}
+	
+div#prefs_container div#limit_total label.item,
+div#prefs_container div#limit_over_ride label.item {
 	width: 92px;
 	}
 	
