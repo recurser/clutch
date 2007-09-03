@@ -62,6 +62,8 @@ Transmission.prototype = {
 		$('#filter_paused_link').bind('click', {transmission: this}, this.releaseFilterPausedButton);
 		$('#upload_confirm_button').bind('click', {transmission: this}, this.releaseUploadConfirmButton);
 		$('#upload_cancel_button').bind('click', {transmission: this}, this.releaseUploadCancelButton);
+		$('#prefs_confirm_button').bind('click', {transmission: this}, this.releasePrefsSaveButton);
+		$('#prefs_cancel_button').bind('click', {transmission: this}, this.releasePrefsCancelButton);
 		$('#speed_limit_button').bind('click', {transmission: this}, this.releaseSpeedLimitButton);
 						
 		// Bind the upload iframe's onload event to process uploads
@@ -334,6 +336,20 @@ Transmission.prototype = {
 	},
 
 	/*
+	 * Process a mouse-up event on the 'cancel' button in the preferences dialog
+	 */
+	releasePrefsCancelButton: function(event) {
+		$('#prefs_container').hide();
+	},
+
+	/*
+	 * Process a mouse-up event on the 'open' button
+	 */
+	releasePrefsSaveButton: function(event) {
+		event.data.transmission.savePrefs();
+	},
+
+	/*
 	 * Process a mouse-up event on the 'remove' button
 	 */
 	releaseRemoveButton: function(event) {	
@@ -561,6 +577,13 @@ Transmission.prototype = {
 		
 		// Figure out which menu has been clicked
 		switch ($(element).parent()[0].id) {
+			
+			// Display the preferences dialog
+			case 'footer_super_menu':
+				if ($(element)[0].id == 'preferences') {
+					$('#prefs_container').show();
+				}
+				break;
 			
 			// Limit the download rate
 			case 'footer_download_rate_menu':
@@ -1149,6 +1172,13 @@ Transmission.prototype = {
 		if (torrent_id_list != '[]') {	
 			this.remoteRequest('resumeTorrents', torrent_id_list);
 		}
+    },
+    
+    /*
+     * Save preferences
+     */
+    savePrefs: function() {
+		$('#prefs_container').hide();		
     },
     
     /*

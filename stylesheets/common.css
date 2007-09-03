@@ -24,6 +24,10 @@ body {
 img {
 	border: none;
 	}
+	
+input[type=text] {
+	border: 1px solid #787878;
+	}
   
   
 /*--------------------------------------
@@ -528,6 +532,7 @@ div.torrent_footer ul#settings_menu li#button {
  *
  *--------------------------------------*/
 div#dialog_container,
+div#prefs_container,
 div#upload_container {
 	position: absolute;
 	top: 0px;
@@ -540,6 +545,7 @@ div#upload_container {
 	}
 	
 div#dialog_container div.dialog_top_bar,
+div#prefs_container div.dialog_top_bar,
 div#upload_container div.dialog_top_bar {
 	text-align: center;
 	background: #DBDBDB url('../images/graphics/dialog_top.png') no-repeat; 
@@ -549,10 +555,9 @@ div#upload_container div.dialog_top_bar {
 	}
 	
 div#dialog_container div#dialog_window,
+div#prefs_container div#dialog_window,
 div#upload_container div#dialog_window {
 	background-color: #DBDBDB;
-	width: 420px;
-	height: 135px;
 	margin: -3px auto 0 auto;
 	filter:alpha(opacity=95);
 	-moz-opacity:.95;
@@ -562,13 +567,27 @@ div#upload_container div#dialog_window {
 	text-align: left;
 	}
 	
+div#dialog_container div#dialog_window,
+div#upload_container div#dialog_window {
+	width: 420px;
+	height: 135px;
+	}
+	
+div#prefs_container div#dialog_window {
+	width: 410px;
+	height: 323px;
+	padding: 5px;
+	}
+	
 div#dialog_container div#dialog_window img,
+div#prefs_container div#dialog_window img,
 div#upload_container div#dialog_window img {
 	margin: 20px 20px 0 20px;
 	float: left;
 	}
 	
 div#dialog_container div#dialog_window h2#dialog_heading,
+div#prefs_container div#dialog_window h2#dialog_heading,
 div#upload_container div#dialog_window h2#dialog_heading {
 	display: block;
 	float: left;
@@ -576,6 +595,7 @@ div#upload_container div#dialog_window h2#dialog_heading {
 	}
 	
 div#dialog_container div#dialog_window div#dialog_message,
+div#prefs_container div#dialog_window div#dialog_message,
 div#upload_container div#dialog_window div#dialog_message {
 	float: left;
 	width: 305px;
@@ -583,6 +603,7 @@ div#upload_container div#dialog_window div#dialog_message {
 	}
 	
 div#dialog_container div#dialog_window a,
+div#prefs_container div#dialog_window a,
 div#upload_container div#dialog_window a {
 	display: block;
 	float: right;
@@ -599,6 +620,8 @@ div#upload_container div#dialog_window a {
 	
 div#dialog_container div#dialog_window a:hover,
 div#dialog_container div#dialog_window a:active,
+div#prefs_container div#dialog_window a:hover,
+div#prefs_container div#dialog_window a:active,
 div#upload_container div#dialog_window a:hover,
 div#upload_container div#dialog_window a:active {
 	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
@@ -612,7 +635,8 @@ div#upload_container div#dialog_window div#dialog_message input {
 	display: block;
 	}
 	
-div#upload_container div#dialog_window form {
+div#upload_container div#dialog_window form,
+div#prefs_container div#dialog_window form {
 	margin: 0px;
 	padding: 0px;
 	}
@@ -627,6 +651,58 @@ iframe#torrent_upload_frame {
 	border: none;
 	padding: 0;
 	margin: 0;
+	}
+
+div#prefs_container label {
+	font-size: 1.1em;
+	line-height: 25px;
+	vertical-align: center;
+	display: block;
+	}
+
+div#prefs_container label.category {
+	clear: both;
+	font-size: 1.2em;
+	margin: 0 0 0 2px;
+	}
+
+div#prefs_container label.item,
+div#prefs_container label.suffix {
+	margin: 0 5px 0 10px;
+	float: left;
+	}
+
+div#prefs_container div#download_location label.item {
+	width: 80px;
+	text-align: right;
+	}
+	
+div#prefs_container div#limit_total label.item,
+div#prefs_container div#limit_over_ride label.item {
+	margin: 0 5px 0 0;
+	text-align: left;
+	width: 92px;
+	}
+	
+div#prefs_container div.preference input[type=checkbox] {
+	margin: 4px 5px 0 30px;
+	clear: left;
+	}
+	
+div#prefs_container div.preference input[type=text] {
+	width: 40px;
+	}
+
+div#prefs_container div.preference input {
+	float: left;
+	}
+
+div#prefs_container div#download_location input {
+	width: 303px;
+	}
+
+div#prefs_container a {
+	clear: left;
 	}
 
 

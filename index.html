@@ -121,6 +121,8 @@
 			<ul id="settings_menu">
 				<li id='button'>&nbsp;
 					<ul id='footer_super_menu'>
+						<li id='preferences'>Preferences</li>
+						<li class='separator'></li>
 						<li>Total Download Rate
 							<ul id='footer_download_rate_menu'>
 								<li id='unlimited_download_rate'>Unlimited</li>
@@ -178,8 +180,51 @@
 				<img src='images/graphics/logo.png' />
 				<h2 id="dialog_heading"></h2>
 				<div id="dialog_message"></div>
-				<a href="#dialog_confirm" id="dialog_confirm_button">Confirm</a>
-				<a href="#dialog_cancel" id="dialog_cancel_button">Cancel</a>
+				<a href="#confirm" id="dialog_confirm_button">Confirm</a>
+				<a href="#cancel" id="dialog_cancel_button">Cancel</a>				
+			</div>
+		</div>
+		
+		<div id="prefs_container" style="display:none;">
+			<div class="dialog_top_bar"></div>
+			<div id="dialog_window">
+				<h2 id="dialog_heading">Preferences</h2>
+				<form id="prefs_form">  
+					<div class="preference" id='download_location'>
+						<label class='category'>Add transfers:</label>
+						<label class='item'>Download to:</label>
+						<input type='text' name='download_location'/>
+					</div>
+					<div class="preference" id='auto_add'>
+						<label class='category'>Transfers:</label>
+						<input type='checkbox' name='auto_add'/>
+						<label class='item'>Start transfers when added</label>
+					</div>
+					<div class="preference" id='limit_total'>
+						<label class='category'>Limit total bandwidth:</label>
+						<input type='checkbox' name='limit_total_download'/>
+						<label class='item'>Download Rate:</label>
+						<input type='text' name='limit_total_download_rate'/>
+						<label class='suffix'>KB/s</label>
+						<input type='checkbox' name='limit_total_upload'/>
+						<label class='item'>Upload Rate:</label>
+						<input type='text' name='limit_total_upload_rate'/>
+						<label class='suffix'>KB/s</label>
+					</div>
+					<div class="preference" id='limit_over_ride'>
+						<label class='category'>Speed Limit mode:</label>
+						<input type='checkbox' name='limit_over_ride_download'/>
+						<label class='item'>Download Rate:</label>
+						<input type='text' name='limit_over_ride_download_rate'/>
+						<label class='suffix'>KB/s</label>
+						<input type='checkbox' name='limit_over_ride_upload'/>
+						<label class='item'>Upload Rate:</label>
+						<input type='text' name='limit_over_ride_upload_rate'/>
+						<label class='suffix'>KB/s</label>
+					</div>
+					<a href="#save" id="prefs_confirm_button">Save</a>
+					<a href="#cancel" id="prefs_cancel_button">Cancel</a>
+				</form>
 				
 			</div>
 		</div>
@@ -195,8 +240,8 @@
 					Please select a .torrent file to upload:
 					<input type='file' name='torrent_file'/>
 				</div>
-				<a href="#dialog_confirm" id="upload_confirm_button">Upload</a>
-				<a href="#dialog_cancel" id="upload_cancel_button">Cancel</a>
+				<a href="#upload" id="upload_confirm_button">Upload</a>
+				<a href="#cancel" id="upload_cancel_button">Cancel</a>
 				</form>
 			</div>
 		</div>
