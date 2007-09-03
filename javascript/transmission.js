@@ -377,6 +377,8 @@ Transmission.prototype = {
 	 */
 	releaseFilterAllButton: function(event) {	
 		event.data.transmission.filterTorrents(event.data.transmission._FilterAll);
+		$(this).parent().siblings().removeClass('selected');
+		$(this).parent().addClass('selected');
 	},
 
 	/*
@@ -384,6 +386,8 @@ Transmission.prototype = {
 	 */
 	releaseFilterDownloadingButton: function(event) {
 		event.data.transmission.filterTorrents(event.data.transmission._FilterDownloading);
+		$(this).parent().siblings().removeClass('selected');
+		$(this).parent().addClass('selected');
 	},
 
 	/*
@@ -391,6 +395,8 @@ Transmission.prototype = {
 	 */
 	releaseFilterSeedingButton: function(event) {	
 		event.data.transmission.filterTorrents(event.data.transmission._FilterSeeding);
+		$(this).parent().siblings().removeClass('selected');
+		$(this).parent().addClass('selected');
 	},
 
 	/*
@@ -398,6 +404,8 @@ Transmission.prototype = {
 	 */
 	releaseFilterPausedButton: function(event) {
 		event.data.transmission.filterTorrents(event.data.transmission._FilterPaused);
+		$(this).parent().siblings().removeClass('selected');
+		$(this).parent().addClass('selected');
 	},
 
 	/*
@@ -440,6 +448,7 @@ Transmission.prototype = {
 		// Set the filter
 		if (settings.filter != null) {
 			this._current_filter = settings.filter;	
+			$('#filter_' + settings.filter + '_link').parent().addClass('selected');
 		}
 		
 		// Set the sort_method

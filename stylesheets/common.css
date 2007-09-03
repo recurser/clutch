@@ -216,20 +216,43 @@ div#torrent_filter_bar {
 	z-index: 2;
 	display: none;
 	}
-	
-div#torrent_filter_bar a {
+
+div#torrent_filter_bar ul {
+	height: 17px;
+	margin: 0;
+	padding: 0;
+	text-align: left;
+	display: inline;
+	}
+
+div#torrent_filter_bar ul li {
+	list-style-type: none;
+	list-style-image: none;
 	float: left;
+	padding: 0;
+	margin: 4px 2px 0 5px;
+	vertical-align: middle;
+	height: 17px;
+	}
+	
+div#torrent_filter_bar ul li a {
 	font-size: 1.2em;
-	/*color: #65789A;*/
 	color: #4E4E4F;
 	text-decoration: none;
 	font-weight: bold;
-	padding: 0 5px 0 10px;
-	margin: 5px 0 0 0;
+	padding: 0 7px 0 7px;
+	margin: 0;
+	height: 17px;
+	display: block;
 	}
-	
-div#torrent_filter_bar a.active {
-	color: #4E4E4F;
+
+div#torrent_filter_bar ul li.selected {
+	background: transparent url('../images/graphics/filter_selected_left.png') no-repeat top left;
+	}
+
+div#torrent_filter_bar ul li.selected a {
+	background: transparent url('../images/graphics/filter_selected_right.png') no-repeat top right;
+	color: #fff !important;
 	}
 	
 div#torrent_filter_bar input#torrent_search {
@@ -237,7 +260,7 @@ div#torrent_filter_bar input#torrent_search {
 	height: 15px;
 	width: 100px;
 	border:solid 0 #fff;
-	margin: 3px 5px 0 0;
+	margin: 4px 5px 0 0;
 	}
  
  

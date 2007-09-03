@@ -16,6 +16,7 @@ TODO
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Disable access for IE
 - Style the filter buttons
+- Handle "state":"checking" and "state":"waiting to checking" when the daemon starts - currently just says 'downloading'
 
 OPTIMIZATIONS
 ==================================================

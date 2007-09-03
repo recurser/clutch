@@ -12,6 +12,8 @@ function Torrent(data) {
 	this._StatusSeeding         = 'seeding'; 
 	this._StatusStopping        = 'stopping'; 
 	this._StatusPaused          = 'paused'; 
+	this._StatusChecking        = 'checking';
+	this._StatusWaitingToCheck  = 'waiting to checking';
 	this._InfiniteTimeRemaining = 215784000; // 999 Hours - may as well be infinite
 	this._MaxDownloadPercent  = 99; // reduce this to make the progress bar shorter
 
@@ -371,10 +373,18 @@ Torrent.prototype = {
 			
 			// Create the 'peer details' label
 			// Eg: 'Downloading from 36 of 40 peers - DL: 60.2 KB/s UL: 4.3 KB/s'
-			peer_details = 'Downloading from ' + this._peers_uploading + ' of ';
-			peer_details += this._peers_total + ' peers - DL: ';
-			peer_details += Math.formatBytes(this._download_speed) + '/s UL: ';
-			peer_details += Math.formatBytes(this._upload_speed) + '/s';			
+			if (this._state == this._StatusChecking) {
+				peer_details = 'Checking...';
+				
+			} else if (this._state == this._StatusWaitingToCheck) {
+				peer_details = 'Waiting to check...';
+				
+			} else {
+				peer_details = 'Downloading from ' + this._peers_uploading + ' of ';
+				peer_details += this._peers_total + ' peers - DL: ';
+				peer_details += Math.formatBytes(this._download_speed) + '/s UL: ';
+				peer_details += Math.formatBytes(this._upload_speed) + '/s';			
+			}
 			
 		} else {
 			
