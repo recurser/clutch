@@ -1,7 +1,6 @@
 
 TODO
 ==================================================
-- Clutch.app freezes when i try to stop the daemon - /tmp/ .pid file never gets deleted, & i can't start the daemon again (daemon doesn't get killed). Have to rm /tmp/clutch* and re-run the daemon from xcode to restart. Could be a symptom of my laptop being a pile of shit - anyone else having this prob? Doesn't seem to start properly if it tries to kill a process that doesn't exist (ie if the daemon /tmp/ pid file exists but the associated process doesn't) - runs but i never get the top-menu bar item to start the daemon/webgui (hope this makes sense!).
 - Display an error message if the initial ajax requests fail (ie the server is down)
 - Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Bottom Menu
@@ -11,12 +10,10 @@ TODO
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - Need to validate the torrent upload stuff and report proper error messages
-- Clean up Clutch class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Disable access for IE
-- Style the filter buttons
-- Handle "state":"checking" and "state":"waiting to checking" when the daemon starts - currently just says 'downloading'
+- Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 
 OPTIMIZATIONS
 ==================================================
@@ -47,9 +44,13 @@ IN THE FUTURE (?)
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - IE support if possible.
 - Maybe try getting torrent info on the server side in groups of 3/4/whatever-is-safe to try and speed things up a bit? Performance seems ok for the time being
+- Clean up Clutch class once the structure gets a bit clearer- currently semi-duplicating GetTorrents(=getTorrentData) & MergeArraysById(=mergeTorrentData) functions for convenience + don't want to get rid of anything without confirming - must be a nicer way to do this getData/merge stuff but it's not obvious how to do it.
 
 DONE
 ==================================================
+- Clutch.app freezes when i try to stop the daemon - /tmp/ .pid file never gets deleted, & i can't start the daemon again (daemon doesn't get killed). Have to rm /tmp/clutch* and re-run the daemon from xcode to restart. Could be a symptom of my laptop being a pile of shit - anyone else having this prob? Doesn't seem to start properly if it tries to kill a process that doesn't exist (ie if the daemon /tmp/ pid file exists but the associated process doesn't) - runs but i never get the top-menu bar item to start the daemon/webgui (hope this makes sense!) * pretty sure this is because of my old daemon binary + not being able to build the latest version *
+- Style the filter buttons
+- Handle "state":"checking" and "state":"waiting to checking" when the daemon starts - currently just says 'downloading'
 - Remember Inspector and Filter open/closed state between sessions
 - Sqlite db for prefs - refresh frequency, user login details, filter etc etc.* Unnecessary - the serialized prefs.txt is good enough
 - Arrow button up/down seems to have probs after clicking a few filter buttons - think it's losing track of the order of torrents (also doesn't recognize newly uploaded torrents)

@@ -246,6 +246,15 @@ div#torrent_filter_bar ul li a {
 	display: block;
 	}
 
+div#torrent_filter_bar ul li:hover {
+	background: transparent url('../images/graphics/filter_hover_left.png') no-repeat top left;
+	}
+
+div#torrent_filter_bar ul li:hover a {
+	background: transparent url('../images/graphics/filter_hover_right.png') no-repeat top right;
+	color: #fff !important;
+	}
+
 div#torrent_filter_bar ul li.selected {
 	background: transparent url('../images/graphics/filter_selected_left.png') no-repeat top left;
 	}
