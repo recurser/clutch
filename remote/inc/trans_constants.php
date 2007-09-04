@@ -18,11 +18,15 @@ define('SortByCompleted',   'completed');
 define('SortByState',       'state');
 
 // Defaults
-define('DefaultFilter',           FilterAll);
-define('DefaultSortMethod',       SortByQueueOrder);
-define('DefaultSortDirection',    SortAscending);
-define('DefaultFilterVisible',    true);
-define('DefaultInspectorVisible', false);
+define('DefaultFilter',                FilterAll);
+define('DefaultSortMethod',            SortByQueueOrder);
+define('DefaultSortDirection',         SortAscending);
+define('DefaultFilterVisible',         true);
+define('DefaultInspectorVisible',      false);
+define('DefaultOverRideDownloadLimit', false);
+define('DefaultOverRideDownloadRate',  10);
+define('DefaultOverRideUploadLimit',   false);
+define('DefaultOverRideUploadRate',    10);
 
 
 ?>

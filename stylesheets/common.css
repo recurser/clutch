@@ -681,15 +681,15 @@ div#prefs_container div#port label.item {
 	width: 112px;
 	}
 	
-div#prefs_container div#auto_add label.item,
+div#prefs_container div#auto_start label.item,
 div#prefs_container div#limit_total label.item,
-div#prefs_container div#limit_over_ride label.item {
+div#prefs_container div#over_ride_limit label.item {
 	margin: 0 5px 0 0;
 	text-align: left;
 	}
 	
 div#prefs_container div#limit_total label.item,
-div#prefs_container div#limit_over_ride label.item {
+div#prefs_container div#over_ride_limit label.item {
 	width: 92px;
 	}
 	
@@ -699,7 +699,7 @@ div#prefs_container div.preference input[type=checkbox] {
 	}
 	
 div#prefs_container div.preference input[type=text] {
-	width: 40px;
+	width: 50px;
 	}
 
 div#prefs_container div.preference input {

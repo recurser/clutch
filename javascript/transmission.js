@@ -462,24 +462,33 @@ Transmission.prototype = {
 		}
 		
 		// Set the filter
-		if (settings.filter != null) {
-			this._current_filter = settings.filter;	
-			$('#filter_' + settings.filter + '_link').parent().addClass('selected');
-		}
+		this._current_filter = settings.filter;	
+		$('#filter_' + settings.filter + '_link').parent().addClass('selected');
 		
 		// Set the sort_method
-		if (settings.sort_method != null) {
-			this._current_sort_method = settings.sort_method;
-			$('#sort_by_' + settings.sort_method).selectMenuItem();
-		}
+		this._current_sort_method = settings.sort_method;
+		$('#sort_by_' + settings.sort_method).selectMenuItem();
 		
 		// Set the sort_direction
-		if (settings.sort_direction != null) {
-			this._current_sort_direction = settings.sort_direction;
-			if (settings.sort_direction == this._SortDescending) {
-				$('#reverse_sort_order').selectMenuItem();
-			}
+		this._current_sort_direction = settings.sort_direction;
+		if (settings.sort_direction == this._SortDescending) {
+			$('#reverse_sort_order').selectMenuItem();
 		}
+		
+		// Preferences
+		$('div#download_location input')[0].value      = settings.download_location;
+		$('div#port input')[0].value                   = settings.port;
+		$('div#auto_start input')[0].checked           = settings.auto_start;
+		$('input#limit_total_download')[0].checked     = (settings.download_rate > -1);
+		$('input#limit_total_download_rate')[0].value  = settings.download_rate;
+		$('input#limit_total_upload')[0].checked       = (settings.upload_rate > -1);
+		$('input#limit_total_upload_rate')[0].value    = settings.upload_rate;
+		$('input#over_ride_download_limit')[0].checked = settings.over_ride_download_limit;
+		$('input#over_ride_download_rate')[0].value    = settings.over_ride_download_rate;
+		$('input#over_ride_upload_limit')[0].checked   = settings.over_ride_upload_limit;
+		$('input#over_ride_upload_rate')[0].value      = settings.over_ride_upload_rate;
+		
+		
 		
 		// Show the filter if necessary
 		if (settings.show_filter) {

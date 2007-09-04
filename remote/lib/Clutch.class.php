@@ -49,17 +49,26 @@
 		public function GetInitialSettings() {
 			$result = array();			
 			
-			$download_rate = $this->M->GetDownloadLimit();
-			$result['download_rate'] = $download_rate[1];
+			$download_rate               = $this->M->GetDownloadLimit();
+			$result['download_rate']     = $download_rate[1];			
+			$upload_rate                 = $this->M->GetUploadLimit();
+			$result['upload_rate']       = $upload_rate[1];			
+			$auto_start                  = $this->M->GetAutoStart();
+			$result['auto_start']        = $auto_start[1];			
+			$download_location           = $this->M->GetDefaultDirectory();
+			$result['download_location'] = $download_location[1];			
+			$port                        = $this->M->GetPort();
+			$result['port']              = $port[1];	
 			
-			$upload_rate   = $this->M->GetUploadLimit();
-			$result['upload_rate']   = $upload_rate[1];
-			
-			$result['filter']         = $this->Preferences->GetPreference('filter');
-			$result['sort_method']    = $this->Preferences->GetPreference('sort_method');
-			$result['sort_direction'] = $this->Preferences->GetPreference('sort_direction');
-			$result['show_inspector'] = $this->Preferences->GetPreference('show_inspector');
-			$result['show_filter']    = $this->Preferences->GetPreference('show_filter');
+			$result['filter']                    = $this->Preferences->GetPreference('filter');
+			$result['sort_method']               = $this->Preferences->GetPreference('sort_method');
+			$result['sort_direction']            = $this->Preferences->GetPreference('sort_direction');
+			$result['show_inspector']            = $this->Preferences->GetPreference('show_inspector');
+			$result['show_filter']               = $this->Preferences->GetPreference('show_filter');			
+			$result['over_ride_download_limit']  = $this->Preferences->GetPreference('over_ride_download_limit');
+			$result['over_ride_download_rate']   = $this->Preferences->GetPreference('over_ride_download_rate');
+			$result['over_ride_upload_limit']    = $this->Preferences->GetPreference('over_ride_upload_limit');
+			$result['over_ride_upload_rate']     = $this->Preferences->GetPreference('over_ride_upload_rate');
 			
 			return json_encode($result);
 		}
