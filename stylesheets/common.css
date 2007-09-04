@@ -575,7 +575,7 @@ div#upload_container div#dialog_window {
 	
 div#prefs_container div#dialog_window {
 	width: 410px;
-	height: 323px;
+	height: 373px;
 	padding: 5px;
 	}
 	
@@ -666,15 +666,19 @@ div#prefs_container label.category {
 	margin: 0 0 0 2px;
 	}
 
-div#prefs_container label.item,
+div#prefs_container label.item {
+	margin: 0 5px 0 20px;
+	float: left;
+	}
+
 div#prefs_container label.suffix {
 	margin: 0 5px 0 10px;
 	float: left;
 	}
 
-div#prefs_container div#download_location label.item {
-	width: 80px;
-	text-align: right;
+div#prefs_container div#download_location label.item,
+div#prefs_container div#port label.item {
+	width: 112px;
 	}
 	
 div#prefs_container div#auto_add label.item,
@@ -690,7 +694,7 @@ div#prefs_container div#limit_over_ride label.item {
 	}
 	
 div#prefs_container div.preference input[type=checkbox] {
-	margin: 4px 5px 0 30px;
+	margin: 4px 5px 0 22px;
 	clear: left;
 	}
 	
@@ -703,7 +707,7 @@ div#prefs_container div.preference input {
 	}
 
 div#prefs_container div#download_location input {
-	width: 303px;
+	width: 261px;
 	}
 
 div#prefs_container a {
