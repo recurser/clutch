@@ -7,6 +7,7 @@
 		<link href="./images/favicon.ico" rel="SHORTCUT ICON" />
 		<link rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
 		<script type="text/javascript" src="./javascript/jquery/jquery.js"></script>
+		<script type="text/javascript" src="./javascript/jquery/jquery.form.js"></script>
 		<script type="text/javascript" src="./javascript/jquery/json.js"></script>
 		<script type="text/javascript" src="./javascript/jquery/jquery.dimensions.pack.js"></script>
 		<script type="text/javascript" src="./javascript/jquery/jquery.contextmenu.js"></script>
@@ -189,7 +190,7 @@
 			<div class="dialog_top_bar"></div>
 			<div id="dialog_window">
 				<h2 id="dialog_heading">Preferences</h2>
-				<form id="prefs_form">  
+				<form id="prefs_form" action="remote?action=savePrefs">  
 					<div class="preference" id='download_location'>
 						<label class='category'>Add transfers:</label>
 						<label class='item'>Download to:</label>
@@ -202,7 +203,7 @@
 					</div>
 					<div class="preference" id='auto_start'>
 						<label class='category'>Transfers:</label>
-						<input type='checkbox' name='auto_start'/>
+						<input type='checkbox' name='auto_start' id='auto_start'/>
 						<label class='item'>Start transfers when added</label>
 					</div>
 					<div class="preference" id='limit_total'>
@@ -227,7 +228,7 @@
 						<input type='text' name='over_ride_upload_rate' id='over_ride_upload_rate'/>
 						<label class='suffix'>KB/s</label>
 					</div>
-					<a href="#save" id="prefs_confirm_button">Save</a>
+					<a href="#save" id="prefs_save_button">Save</a>
 					<a href="#cancel" id="prefs_cancel_button">Cancel</a>
 				</form>
 				

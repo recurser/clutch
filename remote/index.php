@@ -50,6 +50,12 @@
 				$arg_list = $Instance->getInitialSettings();
 				break;
 				
+			case 'savePrefs' :
+				$function = 'updatePrefs';
+				$arg_list = '';
+				$Instance->savePrefs();
+				break;
+				
 			case 'refreshTorrents' :
 				$function = 'refreshTorrents';
 				$arg_list = $Instance->filterTorrents($info_fields, 

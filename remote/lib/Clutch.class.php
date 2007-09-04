@@ -73,6 +73,36 @@
 			return json_encode($result);
 		}
 
+		/* public savePrefs()
+		 * save the POSTed preferences for the web client (up/down speed etc)
+		 *
+		 */
+		public function savePrefs() {
+			$prefs = $_POST;
+			
+			// The checkbox-based prefs won't be passed if they're not selected
+			if (! array_key_exists('auto_start', $prefs)) { $prefs['auto_start'] = false; }
+			if (! array_key_exists('over_ride_download_limit', $prefs)) { $prefs['over_ride_download_limit'] = false; }
+			if (! array_key_exists('over_ride_upload_limit', $prefs)) { $prefs['over_ride_upload_limit'] = false; }
+			
+			// Set any daemon-specific settings
+			$this->M->SetAutoStart(intval($prefs['auto_start']));
+			unset($prefs['auto_start']);
+			$this->M->SetPort(intval($prefs['port']));
+			unset($prefs['port']);
+			$this->M->SetDefaultDirectory($prefs['download_location']);
+			unset($prefs['download_location']);			
+			
+			$download_rate               = $this->M->GetDownloadLimit();
+			$result['download_rate']     = $download_rate[1];			
+			$upload_rate                 = $this->M->GetUploadLimit();
+			$result['upload_rate']       = $upload_rate[1];		
+			
+			foreach ($prefs as $key=>$value) {
+				$this->Preferences->SetPreference($key, $value);
+			}
+		}		
+
 		/* public TorrentSort((array) $Torrents, [(string) $SortMethod, [(int) $SortOrder]])
 		 * Sorts a two-dimensional array
 		 * Ex. TorrentSort($TorrentsInArray, 'name', SORT_DESC)

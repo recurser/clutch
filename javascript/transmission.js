@@ -62,7 +62,7 @@ Transmission.prototype = {
 		$('#filter_paused_link').bind('click', {transmission: this}, this.releaseFilterPausedButton);
 		$('#upload_confirm_button').bind('click', {transmission: this}, this.releaseUploadConfirmButton);
 		$('#upload_cancel_button').bind('click', {transmission: this}, this.releaseUploadCancelButton);
-		$('#prefs_confirm_button').bind('click', {transmission: this}, this.releasePrefsSaveButton);
+		$('#prefs_save_button').bind('click', {transmission: this}, this.releasePrefsSaveButton);
 		$('#prefs_cancel_button').bind('click', {transmission: this}, this.releasePrefsCancelButton);
 		$('#speed_limit_button').bind('click', {transmission: this}, this.releaseSpeedLimitButton);
 						
@@ -1186,7 +1186,15 @@ Transmission.prototype = {
     /*
      * Save preferences
      */
-    savePrefs: function() {
+    savePrefs: function() {	
+		// Set the form action with the appropriate params
+		$('#prefs_form')[0].action = 'remote/?action=savePrefs&param=[]' + 
+				'&filter=' + transmission._current_filter +
+				'&sort_method=' + transmission._current_sort_method +
+				'&sort_direction=' + transmission._current_sort_direction +
+				'&search=' + transmission._current_search;
+		$('#prefs_form').ajaxSubmit({dataType: 'script', type: 'POST'});
+				
 		$('#prefs_container').hide();		
     },
     

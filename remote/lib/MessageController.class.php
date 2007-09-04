@@ -68,7 +68,7 @@
 		 * Toogle automatic starting of torrent files using boolean.  
 		 * Ex. AutoStart( 1 )
 		 */
-		public function AutoStart($autostart) 
+		public function SetAutoStart($autostart) 
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
@@ -82,7 +82,7 @@
 		 * Set the download folder for all torrents started in the future
 		 * Ex. DefaultDirectory( '/home/me/thefolder' )
 		 */
-		public function DefaultDirectory($directory) 
+		public function SetDefaultDirectory($directory) 
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
