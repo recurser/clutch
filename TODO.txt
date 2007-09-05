@@ -15,6 +15,7 @@ TODO
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Total up/down speed doesn't sem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
+- Revert preferences when the cancel button is clicked (maybe with an ajax request?)
 
 OPTIMIZATIONS
 ==================================================

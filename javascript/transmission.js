@@ -81,6 +81,9 @@ Transmission.prototype = {
 		
 		// Setup the footer settings menu
 		this.createSettingsMenu();
+		
+		// Setup the search box
+		this.setupPreferences();
     },
     
 
@@ -534,11 +537,19 @@ Transmission.prototype = {
 		search_box.bind('keyup', {transmission: this}, function(event) {
 			var transmission = event.data.transmission;
 			transmission._current_search = this.value.trim();
-       		/*transmission.remoteRequest('searchTorrents', null, 
-					transmission._current_filter, 
-					transmission._current_sort_method, 
-					transmission._current_sort_direction, 
-					transmission._current_search);*/
+		});
+    },
+    
+    /*
+     * Set up the preference validation
+     */
+    setupPreferences: function() {
+		// Make sure only integers are input for speed limit & port options		
+		$('div.preference input[@type=text]:not(#download_location)').blur( function() {
+			this.value = this.value.replace(/[^0-9]/gi, '');
+			if (this.value == '') {
+				this.value = 0;
+			}
 		});
     },
     
