@@ -51,9 +51,15 @@
 				break;
 				
 			case 'savePrefs' :
-				$function = 'updatePrefs';
-				$arg_list = '';
 				$Instance->savePrefs();
+				$function = 'updatePrefs';
+				$arg_list = $Instance->getInitialSettings();
+				break;
+				
+			case 'setOverRide' :
+				$Instance->setOverRide($_GET['param']);
+				$function = 'ignore';
+				$arg_list = '';
 				break;
 				
 			case 'refreshTorrents' :

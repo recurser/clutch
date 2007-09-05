@@ -4,18 +4,16 @@ TODO
 - Display an error message if the initial ajax requests fail (ie the server is down)
 - Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Bottom Menu
-	- Figure out how that blue-turtle button is supposed to work & implement it
 	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
-- Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - Need to validate the torrent upload stuff and report proper error messages
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Disable access for IE
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
-- Total up/down speed doesn't sem to update when all torrents are paused - still shows X KB/s
+- Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
-- Revert preferences when the cancel button is clicked (maybe with an ajax request?)
+- Revert preferences when the cancel button is clicked somehow
 
 OPTIMIZATIONS
 ==================================================
@@ -49,6 +47,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - Opera .htauth password box pops up every ajax request - almost impossible to fill out * Seems to be fixed - can't reproduce *
 - Clutch.app freezes when i try to stop the daemon - /tmp/ .pid file never gets deleted, & i can't start the daemon again (daemon doesn't get killed). Have to rm /tmp/clutch* and re-run the daemon from xcode to restart. Could be a symptom of my laptop being a pile of shit - anyone else having this prob? Doesn't seem to start properly if it tries to kill a process that doesn't exist (ie if the daemon /tmp/ pid file exists but the associated process doesn't) - runs but i never get the top-menu bar item to start the daemon/webgui (hope this makes sense!) * pretty sure this is because of my old daemon binary + not being able to build the latest version *
@@ -65,6 +64,7 @@ DONE
 - Inspector
 	- Make the whole inspector wider? Hash currently clipped
 - Bottom Menu
+	- Figure out how that blue-turtle button is supposed to work & implement it
 	- server-side sqlite prefs to remember sort method etc?
 	- Separators between menu sections
 	- right-align sub-menu arrows

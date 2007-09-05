@@ -677,19 +677,18 @@ div#prefs_container label.suffix {
 	}
 
 div#prefs_container div#download_location label.item,
-div#prefs_container div#port label.item {
+div#prefs_container div#port label.item,
+div#prefs_container div#over_ride_limit label.item {
 	width: 112px;
+	clear: left;
 	}
 	
 div#prefs_container div#auto_start label.item,
-div#prefs_container div#limit_total label.item,
-div#prefs_container div#over_ride_limit label.item {
+div#prefs_container div#limit_total label.item {
 	margin: 0 5px 0 0;
-	text-align: left;
 	}
 	
-div#prefs_container div#limit_total label.item,
-div#prefs_container div#over_ride_limit label.item {
+div#prefs_container div#limit_total label.item {
 	width: 92px;
 	}
 	

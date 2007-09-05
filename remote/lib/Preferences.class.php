@@ -31,9 +31,12 @@
 					'sort_direction'           => DefaultSortDirection,
 					'show_inspector'           => DefaultInspectorVisible,
 					'show_filter'              => DefaultFilterVisible,
-					'over_ride_download_limit' => DefaultOverRideDownloadLimit,
+					'over_ride_rate'           => DefaultOverRideRate,
+					'limit_download'           => DefaultLimitDownload,
+					'limit_upload'             => DefaultLimitUpload,
+					'download_rate'            => DefaultDownloadRate,
+					'upload_rate'              => DefaultUploadRate,
 					'over_ride_download_rate'  => DefaultOverRideDownloadRate,
-					'over_ride_upload_limit'   => DefaultOverRideUploadLimit,
 					'over_ride_upload_rate'    => DefaultOverRideUploadRate
 				);
 				$this->WritePreferences();

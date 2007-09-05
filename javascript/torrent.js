@@ -374,10 +374,10 @@ Torrent.prototype = {
 			// Create the 'peer details' label
 			// Eg: 'Downloading from 36 of 40 peers - DL: 60.2 KB/s UL: 4.3 KB/s'
 			if (this._state == this._StatusChecking) {
-				peer_details = 'Checking...';
+				peer_details = 'Checking existing files';
 				
 			} else if (this._state == this._StatusWaitingToCheck) {
-				peer_details = 'Waiting to check...';
+				peer_details = 'Waiting to check existing files';
 				
 			} else {
 				peer_details = 'Downloading from ' + this._peers_uploading + ' of ';

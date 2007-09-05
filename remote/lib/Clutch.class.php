@@ -49,10 +49,6 @@
 		public function GetInitialSettings() {
 			$result = array();			
 			
-			$download_rate               = $this->M->GetDownloadLimit();
-			$result['download_rate']     = $download_rate[1];			
-			$upload_rate                 = $this->M->GetUploadLimit();
-			$result['upload_rate']       = $upload_rate[1];			
 			$auto_start                  = $this->M->GetAutoStart();
 			$result['auto_start']        = $auto_start[1];			
 			$download_location           = $this->M->GetDefaultDirectory();
@@ -65,9 +61,12 @@
 			$result['sort_direction']            = $this->Preferences->GetPreference('sort_direction');
 			$result['show_inspector']            = $this->Preferences->GetPreference('show_inspector');
 			$result['show_filter']               = $this->Preferences->GetPreference('show_filter');			
-			$result['over_ride_download_limit']  = $this->Preferences->GetPreference('over_ride_download_limit');
+			$result['limit_download']            = $this->Preferences->GetPreference('limit_download');
+			$result['limit_upload']              = $this->Preferences->GetPreference('limit_upload');			
+			$result['download_rate']             = $this->Preferences->GetPreference('download_rate');
+			$result['upload_rate']               = $this->Preferences->GetPreference('upload_rate');		
+			$result['over_ride_rate']            = $this->Preferences->GetPreference('over_ride_rate');
 			$result['over_ride_download_rate']   = $this->Preferences->GetPreference('over_ride_download_rate');
-			$result['over_ride_upload_limit']    = $this->Preferences->GetPreference('over_ride_upload_limit');
 			$result['over_ride_upload_rate']     = $this->Preferences->GetPreference('over_ride_upload_rate');
 			
 			return json_encode($result);
@@ -82,8 +81,20 @@
 			
 			// The checkbox-based prefs won't be passed if they're not selected
 			if (! array_key_exists('auto_start', $prefs)) { $prefs['auto_start'] = false; }
-			if (! array_key_exists('over_ride_download_limit', $prefs)) { $prefs['over_ride_download_limit'] = false; }
-			if (! array_key_exists('over_ride_upload_limit', $prefs)) { $prefs['over_ride_upload_limit'] = false; }
+			if (! array_key_exists('limit_download', $prefs)) { $prefs['limit_download'] = false; }
+			if (! array_key_exists('limit_upload', $prefs)) { $prefs['limit_upload'] = false; }
+			
+			// Checkboxes pass selected state as 'on'
+			foreach ($prefs as $key=>$value) {				
+				if ($value == 'on') {
+					$prefs[$key] = true;
+				}
+				
+				// Make sure 'rate' prefs are sotred as ints
+				if (strpos($key, 'rate') !== false) {
+					$prefs[$key] = intval($value);
+				}
+			}
 			
 			// Set any daemon-specific settings
 			$this->M->SetAutoStart(intval($prefs['auto_start']));
@@ -91,17 +102,47 @@
 			$this->M->SetPort(intval($prefs['port']));
 			unset($prefs['port']);
 			$this->M->SetDefaultDirectory($prefs['download_location']);
-			unset($prefs['download_location']);			
+			unset($prefs['download_location']);		
 			
-			$download_rate               = $this->M->GetDownloadLimit();
-			$result['download_rate']     = $download_rate[1];			
-			$upload_rate                 = $this->M->GetUploadLimit();
-			$result['upload_rate']       = $upload_rate[1];		
-			
-			foreach ($prefs as $key=>$value) {
+			foreach ($prefs as $key=>$value) {								
 				$this->Preferences->SetPreference($key, $value);
 			}
-		}		
+			
+			// Set the appropriate down & up rates
+			if (! $prefs['over_ride_rate']) {
+				if ($prefs['limit_download']) {
+					$this->M->SetDownloadLimit($prefs['download_rate']);
+				} else {
+					$this->M->SetDownloadLimit(-1);
+				}
+				if ($prefs['limit_upload']) {
+					$this->M->SetUploadLimit($prefs['upload_rate']);
+				} else {
+					$this->M->SetUploadLimit(-1);
+				}
+			}
+		}
+
+		/* public setOverRide([(bool) $overRide])
+		 * Set the speed-limit over-ride
+		 * Ex. setOverRide(true)
+		 *
+		 */
+		public function setOverRide($overRide = false)
+		{
+			// Set the up and down limits
+			if ($overRide) {
+				$this->M->SetDownloadLimit($this->Preferences->GetPreference('over_ride_download_rate'));
+				$this->M->SetUploadLimit($this->Preferences->GetPreference('over_ride_upload_rate'));
+			} else {
+				$this->M->SetDownloadLimit($this->Preferences->GetPreference('download_rate'));
+				$this->M->SetUploadLimit($this->Preferences->GetPreference('upload_rate'));
+			}
+			
+			// Store the $overRide value in the preferences
+			$this->Preferences->SetPreference('over_ride_rate', intval($overRide));
+						
+		}
 
 		/* public TorrentSort((array) $Torrents, [(string) $SortMethod, [(int) $SortOrder]])
 		 * Sorts a two-dimensional array
@@ -178,7 +219,15 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function setDownloadRate($rate = -1)
 		{
-			$this->M->SetDownloadLimit(intval($rate));
+			if (! $this->Preferences->GetPreference('over_ride_rate')) {
+				$this->M->SetDownloadLimit(intval($rate));
+			}
+			
+			if ($rate == -1) {
+				$this->Preferences->SetPreference('limit_download', false);	
+			} else {
+				$this->Preferences->SetPreference('download_rate', intval($rate));
+			}
 		}
 
 		/* public function setUploadRate([(integer) $rate])
@@ -191,7 +240,15 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function setUploadRate($rate = -1)
 		{
-			$this->M->SetUploadLimit(intval($rate));
+			if (! $this->Preferences->GetPreference('over_ride_rate')) {
+				$this->M->SetUploadLimit(intval($rate));
+			}
+			
+			if ($rate == -1) {
+				$this->Preferences->SetPreference('limit_upload', false);	
+			} else {
+				$this->Preferences->SetPreference('upload_rate', intval($rate));
+			}
 		}
 
 		/* public function AddTorrentByUpload((string) $formname, [[(string) $directory], (integer) $autostart])

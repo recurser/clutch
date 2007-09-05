@@ -23,9 +23,12 @@ define('DefaultSortMethod',            SortByQueueOrder);
 define('DefaultSortDirection',         SortAscending);
 define('DefaultFilterVisible',         true);
 define('DefaultInspectorVisible',      false);
-define('DefaultOverRideDownloadLimit', false);
+define('DefaultOverRideRate',          false);
+define('DefaultLimitDownload',         false);
+define('DefaultLimitUpload',           false);
+define('DefaultDownloadRate',          10);
+define('DefaultUploadRate',            10);
 define('DefaultOverRideDownloadRate',  10);
-define('DefaultOverRideUploadLimit',   false);
 define('DefaultOverRideUploadRate',    10);
 
 

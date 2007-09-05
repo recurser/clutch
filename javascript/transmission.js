@@ -83,7 +83,7 @@ Transmission.prototype = {
 		this.createSettingsMenu();
 		
 		// Setup the search box
-		this.setupPreferences();
+		this.setupPrefs();
     },
     
 
@@ -452,18 +452,6 @@ Transmission.prototype = {
      */
 	initializeSettings: function(settings) {
 		
-		// Set the download rate
-		if (settings.download_rate != -1) {
-			$('#limited_download_rate')[0].innerHTML = 'Limit (' + settings.download_rate + ' KB/s)';
-			$('#limited_download_rate').deselectMenuSiblings().selectMenuItem();			
-		}
-		
-		// Set the upload rate
-		if (settings.upload_rate != -1) {
-			$('#limited_upload_rate')[0].innerHTML = 'Limit (' + settings.upload_rate + ' KB/s)';
-			$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();			
-		}
-		
 		// Set the filter
 		this._current_filter = settings.filter;	
 		$('#filter_' + settings.filter + '_link').parent().addClass('selected');
@@ -478,20 +466,8 @@ Transmission.prototype = {
 			$('#reverse_sort_order').selectMenuItem();
 		}
 		
-		// Preferences
-		$('div#download_location input')[0].value      = settings.download_location;
-		$('div#port input')[0].value                   = settings.port;
-		$('div#auto_start input')[0].checked           = settings.auto_start;
-		$('input#limit_total_download')[0].checked     = (settings.download_rate > -1);
-		$('input#limit_total_download_rate')[0].value  = settings.download_rate;
-		$('input#limit_total_upload')[0].checked       = (settings.upload_rate > -1);
-		$('input#limit_total_upload_rate')[0].value    = settings.upload_rate;
-		$('input#over_ride_download_limit')[0].checked = settings.over_ride_download_limit;
-		$('input#over_ride_download_rate')[0].value    = settings.over_ride_download_rate;
-		$('input#over_ride_upload_limit')[0].checked   = settings.over_ride_upload_limit;
-		$('input#over_ride_upload_rate')[0].value      = settings.over_ride_upload_rate;
-		
-		
+		// Update the preferences
+		this.updatePrefs(settings);		
 		
 		// Show the filter if necessary
 		if (settings.show_filter) {
@@ -509,6 +485,61 @@ Transmission.prototype = {
 		// Create a periodical executer to refresh the list
 		setInterval('transmission.reloadTorrents()', this._RefreshInterval);
     },
+    
+    /*
+     * Set up the preference validation
+     */
+    setupPrefs: function() {
+		// Make sure only integers are input for speed limit & port options		
+		$('div.preference input[@type=text]:not(#download_location)').blur( function() {
+			this.value = this.value.replace(/[^0-9]/gi, '');
+			if (this.value == '') {
+				this.value = 0;
+			}
+		});
+    },
+    
+    /*
+     * Process the preferences window with the provided values
+     */
+	updatePrefs: function(settings) {
+		
+		$('div#download_location input')[0].value      = settings.download_location;
+		$('div#port input')[0].value                   = settings.port;
+		$('div#auto_start input')[0].checked           = settings.auto_start;
+		$('input#limit_download')[0].checked           = settings.limit_download;
+		$('input#download_rate')[0].value              = settings.download_rate;
+		$('input#limit_upload')[0].checked             = settings.limit_upload;
+		$('input#upload_rate')[0].value                = settings.upload_rate;
+		$('form#prefs_form input#over_ride_rate')[0].value             = settings.over_ride_rate;
+		$('input#over_ride_download_rate')[0].value    = settings.over_ride_download_rate;
+		$('input#over_ride_upload_rate')[0].value      = settings.over_ride_upload_rate;
+		
+		// Set the download rate
+		$('#limited_download_rate')[0].innerHTML = 'Limit (' + settings.download_rate + ' KB/s)';
+		if (settings.limit_download) {
+			$('#limited_download_rate').deselectMenuSiblings().selectMenuItem();			
+		} else {
+			$('#unlimited_download_rate').deselectMenuSiblings().selectMenuItem();
+		}
+		
+		// Set the upload rate
+		$('#limited_upload_rate')[0].innerHTML = 'Limit (' + settings.upload_rate + ' KB/s)';
+		if (settings.limit_upload) {
+			$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();			
+		} else {
+			$('#unlimited_upload_rate').deselectMenuSiblings().selectMenuItem();
+		}
+		
+		// Turn on speed-limit over-ride if necessary
+		if (settings.over_ride_rate) {
+			transmission.activateSpeedLimit(false);
+		} else {
+			transmission.deactivateSpeedLimit(false);
+		}
+		
+		$('#prefs_container').hide();	
+	},
     
     /*
      * Select all torrents in the list
@@ -537,19 +568,6 @@ Transmission.prototype = {
 		search_box.bind('keyup', {transmission: this}, function(event) {
 			var transmission = event.data.transmission;
 			transmission._current_search = this.value.trim();
-		});
-    },
-    
-    /*
-     * Set up the preference validation
-     */
-    setupPreferences: function() {
-		// Make sure only integers are input for speed limit & port options		
-		$('div.preference input[@type=text]:not(#download_location)').blur( function() {
-			this.value = this.value.replace(/[^0-9]/gi, '');
-			if (this.value == '') {
-				this.value = 0;
-			}
 		});
     },
     
@@ -610,10 +628,13 @@ Transmission.prototype = {
 				var rate = (this.innerHTML).replace(/[^0-9]/ig, '');
 				if ($(this).is('#unlimited_download_rate')) {
 					$(this).deselectMenuSiblings().selectMenuItem();
+					$('div.preference input#limit_download')[0].checked = false;
 					rate = -1;
 				} else {
 					$('#limited_download_rate')[0].innerHTML = 'Limit (' + rate + ' KB/s)';
 					$('#limited_download_rate').deselectMenuSiblings().selectMenuItem();
+					$('div.preference input#download_rate')[0].value = rate;
+					$('div.preference input#limit_download')[0].checked = true;
 				}
 				transmission.remoteRequest('setDownloadRate', rate);
 				break;
@@ -623,10 +644,13 @@ Transmission.prototype = {
 				var rate = (this.innerHTML).replace(/[^0-9]/ig, '');
 				if ($(this).is('#unlimited_upload_rate')) {
 					$(this).deselectMenuSiblings().selectMenuItem();
+					$('div.preference input#limit_upload')[0].checked = false;
 					rate = -1;
 				} else {
 					$('#limited_upload_rate')[0].innerHTML = 'Limit (' + rate + ' KB/s)';
 					$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();
+					$('div.preference input#upload_rate')[0].value = rate;
+					$('div.preference input#limit_upload')[0].checked = true;
 				}
 				transmission.remoteRequest('setUploadRate', rate);
 				break;
@@ -753,7 +777,10 @@ Transmission.prototype = {
 		// Update global upload and download speed display
 		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
     },
-
+    
+    /*
+     * Update the inspector with the latest data for the curently selected torrents
+     */
 	updateInspector: function() {
 		if (this._inspector_visible) {
 			var torrent_count = this.numSelectedTorrents();
@@ -848,19 +875,6 @@ Transmission.prototype = {
 	},
     
     /*
-     * Toggle the speed limit switch
-     */
-	toggleSpeedLimit: function() {
-		if (transmission._speed_limit_active) {
-			$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button.png')");
-			transmission._speed_limit_active = false;
-		} else {
-			$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button_blue.png')");
-			transmission._speed_limit_active = true
-		}
-	},
-    
-    /*
      * Show the inspector
 	 * dont_inform_server is used when the filter is setup initially on startup
      */
@@ -892,6 +906,43 @@ Transmission.prototype = {
 
 		// Tell the server about this action
 		transmission.setPreferences('show_inspector', false);
+	},
+    
+    /*
+     * Toggle the speed limit switch
+     */
+	toggleSpeedLimit: function() {
+		if (transmission._speed_limit_active) {
+			transmission.deactivateSpeedLimit(true);
+		} else {
+			transmission.activateSpeedLimit(true);
+		}
+	},
+    
+    /*
+     * Turn the speed limit on
+     */
+	activateSpeedLimit: function(informServer) {
+		$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button_blue.png')");
+		transmission._speed_limit_active = true;
+		$('form#prefs_form input#over_ride_rate')[0].value = 1;
+		
+		if (informServer) {
+        	transmission.remoteRequest('setOverRide', 1);
+		}
+	},
+    
+    /*
+     * Turn the speed limit off
+     */
+	deactivateSpeedLimit: function(informServer) {
+		$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button.png')");
+		transmission._speed_limit_active = false;
+		$('form#prefs_form input#over_ride_rate')[0].value = 0;
+		
+		if (informServer) {
+        	transmission.remoteRequest('setOverRide', 0);
+		}
 	},
 	
     /*
@@ -1205,8 +1256,6 @@ Transmission.prototype = {
 				'&sort_direction=' + transmission._current_sort_direction +
 				'&search=' + transmission._current_search;
 		$('#prefs_form').ajaxSubmit({dataType: 'script', type: 'POST'});
-				
-		$('#prefs_container').hide();		
     },
     
     /*
