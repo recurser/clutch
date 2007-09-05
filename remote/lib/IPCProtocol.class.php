@@ -24,7 +24,10 @@
 		public function CreateMessage()
 		{
 			foreach (func_get_args() as $Value)
+			{	
+				array_push($Value, time());
 				$Message .= $this->Serializer->Serialize($Value);
+			}
 			$PayloadLength = (string) dechex(strlen($Message)+0);
 			$Length = str_pad($PayloadLength, 8, '0', STR_PAD_LEFT);
 			return $Length.$Message;
