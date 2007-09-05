@@ -135,6 +135,7 @@
 			$this->Debug('Read [ '.$Data.' ] from socket.', null);
 	
 			$Value = $this->IPCProtocol->UnSerializer->UnSerialize($Data);
+			array_pop($Value); // This gets rid of the tag id
 
 			return $Value;
 		}

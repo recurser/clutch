@@ -47,7 +47,7 @@
 			if (!is_null($autostart))
 				$Message[1]['autostart'] = $autostart;
 
-			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message), false);
+			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message));
 		}
 
 		/* public AutoMap((bool) $automap)
@@ -59,8 +59,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('automap', $automap)
-				),
-				false
+				)
 			);
 		}
 		
@@ -73,8 +72,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('autostart', $autostart)
-				),
-				false
+				)
 			);
 		}
 
@@ -87,8 +85,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('directory', $directory)
-				),
-				false
+				)
 			);
 		}
 		
@@ -101,8 +98,7 @@
          	return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('downlimit', $limit)
-				),
-				false
+				)
 			);
 		}
 		
@@ -115,8 +111,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-automap', '')
-				),
-				true
+				)
 			);
 		}
 		
@@ -129,8 +124,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-autostart', '')
-				),
-				true
+				)
 			);
 		}
 		
@@ -143,8 +137,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-directory', '')
-				),
-				true
+				)
 			);
 		}
 		
@@ -158,8 +151,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-downlimit', '')
-				),
-				true
+				)
 			);
 		}
 		
@@ -179,8 +171,7 @@
 							'type' => (array) $type
 						)
 					)
-				),
-				true
+				)
 			);
 		}
 		
@@ -208,8 +199,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-pex', '')
-				),
-				true
+				)
 			);
 		}
 		
@@ -222,8 +212,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-port', '')
-				),
-				true
+				)
 			);
 		}
 		
@@ -242,8 +231,7 @@
 							'type' => (array) $type
 						)
 					)
-				),
-				true
+				)
 			);
 		}
 		
@@ -271,8 +259,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-supported', func_get_args())
-				),
-				true
+				)
 			);
 		}
 		
@@ -286,8 +273,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-uplimit', '')
-				),
-				true
+				)
 			);
 		}
 		
@@ -313,8 +299,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('noop', '')
-				),
-				false
+				)
 			);
 		}
 
@@ -327,8 +312,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('not-supported', '')
-				),
-				false
+				)
 			);
 		}
 		
@@ -341,8 +325,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('autostart', $pex)
-				),
-				false
+				)
 			);
 		}
 		
@@ -355,8 +338,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('port', $port)
-				),
-				false
+				)
 			);
 		}
 
@@ -371,8 +353,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('remove', $Torrents)
-				),
-				false
+				)
 			);
 
 		}
@@ -386,8 +367,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('remove-all', '')
-				),
-				false
+				)
 			);
 
 		}
@@ -403,8 +383,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('start', $Torrents)
-				),
-				false
+				)
 			);
 
 		}
@@ -418,8 +397,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('start-all', '')
-				),
-				false
+				)
 			);
 
 		}
@@ -435,8 +413,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('stop', $Torrents)
-				),
-				false
+				)
 			);
 
 		}
@@ -450,8 +427,7 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('stop-all', '')
-				),
-				false
+				)
 			);
 
 		}
@@ -465,8 +441,7 @@
          	return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('uplimit', $limit)
-				),
-				false
+				)
 			);
 		}      
 	}
