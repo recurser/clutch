@@ -18,16 +18,14 @@
 		}
 
 		/*
-		 * public CreateMessage(array $Values)
+		 * public CreateMessage(mixed $Value)
 		 * creates a formated string to send to the socket
 		 */
-		public function CreateMessage()
+		public function CreateMessage($Value)
 		{
-			foreach (func_get_args() as $Value)
-			{	
-				array_push($Value, time());
-				$Message .= $this->Serializer->Serialize($Value);
-			}
+			array_push($Value, time());
+			$Message = $this->Serializer->Serialize($Value);
+
 			$PayloadLength = (string) dechex(strlen($Message)+0);
 			$Length = str_pad($PayloadLength, 8, '0', STR_PAD_LEFT);
 			return $Length.$Message;
