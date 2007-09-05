@@ -84,13 +84,14 @@
 			if (! array_key_exists('limit_download', $prefs)) { $prefs['limit_download'] = false; }
 			if (! array_key_exists('limit_upload', $prefs)) { $prefs['limit_upload'] = false; }
 			
-			// Checkboxes pass selected state as 'on'
-			foreach ($prefs as $key=>$value) {				
+			foreach ($prefs as $key=>$value) {
+				
+				// Checkboxes pass selected state as 'on'
 				if ($value == 'on') {
 					$prefs[$key] = true;
 				}
 				
-				// Make sure 'rate' prefs are sotred as ints
+				// Make sure 'rate' prefs are stored as ints
 				if (strpos($key, 'rate') !== false) {
 					$prefs[$key] = intval($value);
 				}
@@ -109,7 +110,11 @@
 			}
 			
 			// Set the appropriate down & up rates
-			if (! $prefs['over_ride_rate']) {
+			if ($prefs['over_ride_rate']) {
+				$this->M->SetDownloadLimit($prefs['over_ride_download_rate']);
+				$this->M->SetUploadLimit($prefs['over_ride_upload_rate']);
+				
+			} else {
 				if ($prefs['limit_download']) {
 					$this->M->SetDownloadLimit($prefs['download_rate']);
 				} else {

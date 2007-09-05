@@ -13,7 +13,8 @@ TODO
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
-- Report an error if the preferences download folder doesn't exist
+- Report an error if the preferences download folder doesn't exist.
+- Safari search box vertical-alignment is a bit wacky
 
 OPTIMIZATIONS
 ==================================================
@@ -35,6 +36,7 @@ CHECK
 
 IN THE FUTURE (?)
 ==================================================
+- Make 'Checking existing files' stuff use the orange bar from the latest transmission version.
 - Arrow up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
 - Bottom Menu
 	- Fix firefox flicker problem - not too bad now, going to be a fact of life until all the important stuff is done
