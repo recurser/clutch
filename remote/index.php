@@ -114,7 +114,7 @@
 				break;
 	
 			case 'uploadTorrent' :
-				$response = $Instance->AddTorrentByUpload('torrent_file', null, true);
+				$response = $Instance->AddTorrentByUpload('torrent_file', null);
 				if (isset($response[1][0]['id'])) {
 					$function = 'refreshAndSortTorrents';
 					$arg_list = $Instance->filterTorrents($info_fields, 

@@ -47,7 +47,7 @@
 			if (!is_null($autostart))
 				$Message[1]['autostart'] = $autostart;
 
-			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message));
+			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message), false);
 		}
 
 		/* public AutoMap((bool) $automap)

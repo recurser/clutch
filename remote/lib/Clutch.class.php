@@ -203,7 +203,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 * @param integer $autostart Whether or not to auto-start the torrent (0 or 1)
 		 * @return void
 		 */
-		public function AddTorrentByUpload($formname, $directory = null, $autostart = null)
+		public function AddTorrentByUpload($formname, $directory = null)
 		{
 			if (!is_uploaded_file($_FILES[$formname]['tmp_name']))
 				return $this->Error('No file uploaded');
@@ -213,7 +213,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				if ($parts['extension'] != 'torrent')
 					return $this->Error('Uploaded file was not a .torrent file');
 				else
-					return $this->M->AddFileDetailed($_FILES[$formname]['tmp_name'], $directory, $autostart);
+					return $this->M->AddFileDetailed($_FILES[$formname]['tmp_name'], $directory);
 			}
 		}
 
