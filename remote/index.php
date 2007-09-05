@@ -56,6 +56,11 @@
 				$arg_list = $Instance->getInitialSettings();
 				break;
 				
+			case 'resetPrefs' :
+				$function = 'updatePrefs';
+				$arg_list = $Instance->getInitialSettings();
+				break;
+				
 			case 'setOverRide' :
 				$Instance->setOverRide($_GET['param']);
 				$function = 'ignore';

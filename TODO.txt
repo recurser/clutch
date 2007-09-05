@@ -13,7 +13,7 @@ TODO
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
-- Revert preferences when the cancel button is clicked somehow
+- Report an error if the preferences download folder doesn't exist
 
 OPTIMIZATIONS
 ==================================================
@@ -47,6 +47,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Revert preferences when the cancel button is clicked somehow
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
 - Opera .htauth password box pops up every ajax request - almost impossible to fill out * Seems to be fixed - can't reproduce *
