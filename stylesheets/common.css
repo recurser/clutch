@@ -642,7 +642,7 @@ div#prefs_container div#dialog_window form {
 	}
 	
 iframe#torrent_upload_frame {
-	display: block;
+	display: block; /* Don't change this : safari forms won't target hidden frames (they open a new window) */
 	position: absolute;
 	top: -1000px;
 	left: -1000px;
