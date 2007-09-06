@@ -65,9 +65,6 @@ Transmission.prototype = {
 		$('#prefs_save_button').bind('click', {transmission: this}, this.releasePrefsSaveButton);
 		$('#prefs_cancel_button').bind('click', {transmission: this}, this.releasePrefsCancelButton);
 		$('#speed_limit_button').bind('click', {transmission: this}, this.releaseSpeedLimitButton);
-						
-		// Bind the upload iframe's onload event to process uploads
-		$('#torrent_upload_frame').load(this.processUpload);
 		
 		// Inspector tabs
 		$('#inspector_tab_info').bind('click', {transmission: this}, this.releaseInspectorTab);
@@ -988,6 +985,7 @@ Transmission.prototype = {
      * Remove all the torrents from the interface to force a re-sort
      */
     refreshAndSortTorrents: function(torrent_list) {
+		$('#upload_container').hide();
 		transmission.removeTorrents(transmission._torrents.keys().clone());
 		transmission.refreshTorrents(torrent_list);
 	},
@@ -1119,24 +1117,7 @@ Transmission.prototype = {
 		if (transmission.numSelectedTorrents() > 0) {				
 			transmission.resumeTorrents(transmission.jsonSelectedTorrentIds());
 		}		
-    },
-
-    /*
-     * Load an uploaded torrent into the list
-     */
-    processUpload: function(iframe) {
-		if (frames['torrent_upload_frame'].location != 'about:blank') {
-			try {
-				eval(frames['torrent_upload_frame'].document.body.childNodes[0].innerHTML);
-				$('#upload_container').hide();
-			} catch(e) {
-				dialog.alert('Upload Error', 'An unexpected error occured', 'Dismiss');
-			}		
-		}
-    },
-
-
-	
+    },	
 
 
 
@@ -1285,10 +1266,4 @@ Transmission.prototype = {
 			}
 		}
     }
-
-
-		
-
-
-
 }

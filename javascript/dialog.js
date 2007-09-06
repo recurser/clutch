@@ -73,6 +73,7 @@ Dialog.prototype = {
      * Display a confirm dialog
      */
     confirm: function(dialog_heading, dialog_message, confirm_button_label, callback_function) {
+		$('.dialog_container').hide();
 		this._heading[0].innerHTML = dialog_heading;
 		this._message[0].innerHTML = dialog_message;
 		this._cancel_button[0].innerHTML = 'Cancel';
@@ -86,6 +87,7 @@ Dialog.prototype = {
      * Display an alert dialog
      */
     alert: function(dialog_heading, dialog_message, cancel_button_label) {
+		$('.dialog_container').hide();
 		this._heading[0].innerHTML = dialog_heading;
 		this._message[0].innerHTML = dialog_message;
 		this._confirm_button.hide();

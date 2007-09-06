@@ -642,7 +642,7 @@ div#prefs_container div#dialog_window form {
 	}
 	
 iframe#torrent_upload_frame {
-	display: none;
+	display: block;
 	position: absolute;
 	top: -1000px;
 	left: -1000px;

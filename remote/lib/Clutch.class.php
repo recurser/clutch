@@ -159,11 +159,11 @@
 		public function TorrentSort(&$Torrents, $SortMethod = 'name', $SortOrder = SORT_ASC)
 		{
 			if (count($Torrents) > 0) {
-				foreach ($Torrents as $TorrentID => $TorrentInfo)
-					foreach (array_keys($Torrents[$TorrentID]) as $TorrentKey)
-						${$TorrentKey}[$TorrentID] = $TorrentInfo[$TorrentKey];
-
-				array_multisort($$SortMethod, $SortOrder, $Torrents);
+				$sortCriteria = array();
+				foreach ($Torrents as $TorrentID => $TorrentInfo) {
+					$sortCriteria[$TorrentID] = $TorrentInfo[$SortMethod];
+				}
+				array_multisort($sortCriteria, $SortOrder, $Torrents);
 			}
 		}
 

@@ -27,6 +27,7 @@
 		$controller = 'transmission';
 		$function = '';
 		$arg_list = '';	
+		$is_upload = false;
 		
 		// Initialise the sort string if it's null
 		if (! isset($_GET['search'])) {
@@ -125,6 +126,7 @@
 				break;
 	
 			case 'uploadTorrent' :
+				$is_upload = true;
 				$response = $Instance->AddTorrentByUpload('torrent_file', null);
 				if (isset($response[1][0]['id'])) {
 					$function = 'refreshAndSortTorrents';
@@ -162,12 +164,17 @@
 				}
 				break;
 		}
-	
-		// Set the mime type (causes prototype to auto-eval())
-		header('Content-type: text/javascript');
 				
 		// Encode and output the response
-		echo $controller . '.' . $function . '(' . $arg_list . ');';
-	
+		if (!$is_upload) {
+			// Set the mime type (causes prototype to auto-eval())
+			header('Content-type: text/javascript');
+			echo $controller . '.' . $function . '(' . $arg_list . ');';
+			
+		// Safari uploads require the onLoad code to be inside the returned page - not 
+		// bound to the frame itself by the parent.
+		} else {
+			include('upload_response.php');
+		}	
 	}
 ?>

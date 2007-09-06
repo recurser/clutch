@@ -5,7 +5,6 @@ TODO
 - Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Bottom Menu
 	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
-- Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - Need to validate the torrent upload stuff and report proper error messages
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
@@ -16,6 +15,10 @@ TODO
 - Report an error if the preferences download folder doesn't exist.
 - Safari search box vertical-alignment is a bit wacky
 - Alternating torrent background coloring doesn't seem to be working.
+- Sort by progress isn't working - is sorting by bytes completed which vary depending on the torrent size. 
+- Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
+- Right-click menu is partially hidden if the torrent is near the bottom of the screen - need to be able to set a bounding box for the menu position
+- Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
 
 OPTIMIZATIONS
 ==================================================
@@ -50,6 +53,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - Revert preferences when the cancel button is clicked somehow
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
 - Some display should happen while the torrent is processing 'resume' - stopping says 'Stopping...', should resume say 'checking existing files' or something? 
