@@ -2,7 +2,6 @@
 TODO
 ==================================================
 - Display an error message if the initial ajax requests fail (ie the server is down)
-- Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Bottom Menu
 	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
 - Need to validate the torrent upload stuff and report proper error messages
@@ -13,7 +12,6 @@ TODO
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
 - Report an error if the preferences download folder doesn't exist.
-- Safari search box vertical-alignment is a bit wacky
 - Alternating torrent background coloring doesn't seem to be working.
 - Sort by progress isn't working - is sorting by bytes completed which vary depending on the torrent size. 
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
@@ -55,6 +53,8 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Safari search box vertical-alignment is a bit wacky
+- Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.
 - Revert preferences when the cancel button is clicked somehow
 - Adding a torrent that's already downloading seems to hang everything - any ideas guys?
