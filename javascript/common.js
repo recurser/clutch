@@ -23,11 +23,11 @@ $(document).ready( function() {
 		// Fix div height problem - causes scrollbar flash in
 		// firefox so have to be safari-specific
 		$('#torrent_inspector').css('height', '100%');
-
 		
 		// Set Filter input to type search (nicely styled input field)
 		$('#torrent_search')[0].type = 'search';
 		$('#torrent_search')[0].placeholder = 'Filter';
+		$('#torrent_search').css('margin-top', 3);
 	}
 });
 
