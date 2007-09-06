@@ -26,6 +26,7 @@ OPTIMIZATIONS
 - Inspector
 	- css cursor:pointer doesn't work on safari after a tab has been clicked for some reason.
 - Scrollbar in firefox screws with the confirm dialog a little with small-width displays.
+- Changing the port in the prefs isn't reflected in Clutch.app - not a big deal but maybe look at it sometime.
 
 CHECK
 ==================================================
