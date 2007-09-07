@@ -55,19 +55,8 @@
 			$result['download_location'] = $download_location[1];			
 			$port                        = $this->M->GetPort();
 			$result['port']              = $port[1];	
-			
-			$result['filter']                    = $this->Preferences->GetPreference('filter');
-			$result['sort_method']               = $this->Preferences->GetPreference('sort_method');
-			$result['sort_direction']            = $this->Preferences->GetPreference('sort_direction');
-			$result['show_inspector']            = $this->Preferences->GetPreference('show_inspector');
-			$result['show_filter']               = $this->Preferences->GetPreference('show_filter');			
-			$result['limit_download']            = $this->Preferences->GetPreference('limit_download');
-			$result['limit_upload']              = $this->Preferences->GetPreference('limit_upload');			
-			$result['download_rate']             = $this->Preferences->GetPreference('download_rate');
-			$result['upload_rate']               = $this->Preferences->GetPreference('upload_rate');		
-			$result['over_ride_rate']            = $this->Preferences->GetPreference('over_ride_rate');
-			$result['over_ride_download_rate']   = $this->Preferences->GetPreference('over_ride_download_rate');
-			$result['over_ride_upload_rate']     = $this->Preferences->GetPreference('over_ride_upload_rate');
+
+			$result = array_merge($result, $this->Preferences->GetAllPreferences());
 			
 			return json_encode($result);
 		}

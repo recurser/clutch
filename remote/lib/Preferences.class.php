@@ -50,6 +50,11 @@
 			return file_put_contents($this->PreferenceFile, serialize($this->Preferences));
 		}
 
+		public function GetAllPreferences()
+		{
+			return $this->Preferences;
+		}
+
 		public function GetPreference($key)
 		{
 			$result = null;
