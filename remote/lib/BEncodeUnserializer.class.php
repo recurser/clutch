@@ -29,20 +29,20 @@
 		private function _bDecode()
 		{
 			switch ($this->_getChar()) {
-			case 'i':
-				$this->_position++;
-				return $this->_decode_int();
-				break;
-			case 'l':
-				$this->_position++;
-				return $this->_decode_list();
-				break;
-			case 'd':
-				$this->_position++;
-				return $this->_decode_dict();
-				break;
-			default:
-				return $this->_decode_string();
+				case 'i':
+					$this->_position++;
+					return $this->_decode_int();
+					break;
+				case 'l':
+					$this->_position++;
+					return $this->_decode_list();
+					break;
+				case 'd':
+					$this->_position++;
+					return $this->_decode_dict();
+					break;
+				default:
+					return $this->_decode_string();
 			}
 		}
 		

@@ -422,15 +422,14 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			// Remember the current filter type
 			$_SESSION['filterType'] = $filterType;
 			
-			if ($sortMethod == SortByQueueOrder && $sortDirection == SortDescending) {
+			if ($sortMethod == SortByQueueOrder && $sortDirection == SortDescending)
 				$result = array_reverse($result);
 				
-			} else if ($sortMethod != SortByQueueOrder && $sortDirection == SortDescending) {
-				$this->TorrentSort(&$result, $sortMethod, $SortOrder = SORT_DESC);	
+			else if ($sortMethod != SortByQueueOrder && $sortDirection == SortDescending)
+				$this->TorrentSort($result, $sortMethod, $SortOrder = SORT_DESC);
 				
-			} else if ($sortMethod != SortByQueueOrder && $sortDirection == SortAscending) {
-				$this->TorrentSort(&$result, $sortMethod, $SortOrder = SORT_ASC);				
-			}
+			else if ($sortMethod != SortByQueueOrder && $sortDirection == SortAscending)
+				$this->TorrentSort($result, $sortMethod, $SortOrder = SORT_ASC);
 			
 			// If the search string isn't empty, filter out any torrents 
 			// whose names don't include the string

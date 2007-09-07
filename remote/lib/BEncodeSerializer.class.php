@@ -11,23 +11,23 @@
 		public function Serialize($mixed)
 		{
 			switch (gettype($mixed)) {
-			case is_null($mixed):
-				return $this->encode_string('');
-				break;
-			case 'boolean':
-				return $this->encode_int($mixed);
-				break;
-			case 'string':
-				return $this->encode_string($mixed);
-				break;
-			case 'integer':
-				return  $this->encode_int($mixed);
-				break;
-			case 'array':
-				return $this->encode_array($mixed);
-				break;
-			default:
-				die("BEncodeSerializer::encode() - Unsupported type. Variable must be one of 'string', 'integer' or 'array'\n");
+				case is_null($mixed):
+					return $this->encode_string('');
+					break;
+				case 'boolean':
+					return $this->encode_int($mixed);
+					break;
+				case 'string':
+					return $this->encode_string($mixed);
+					break;
+				case 'integer':
+					return  $this->encode_int($mixed);
+					break;
+				case 'array':
+					return $this->encode_array($mixed);
+					break;
+				default:
+					die("BEncodeSerializer::encode() - Unsupported type. Variable must be one of 'string', 'integer' or 'array'\n");
 			}
 		}
 
