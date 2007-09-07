@@ -275,7 +275,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				if ($parts['extension'] != 'torrent')
 					return $this->Error('Uploaded file was not a .torrent file');
 				else
-					return $this->M->AddFileDetailed($_FILES[$formname]['tmp_name'], $directory);
+					return $this->M->AddFileDetailed(file_get_contents($_FILES[$formname]['tmp_name']), $directory);
 			}
 		}
 

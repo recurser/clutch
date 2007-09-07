@@ -19,6 +19,8 @@ TODO
 - Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
 
+- IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
+
 OPTIMIZATIONS
 ==================================================
 - Inspector
