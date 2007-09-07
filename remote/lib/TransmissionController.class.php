@@ -15,6 +15,8 @@
 		public $MessageController;
 
 		public $Debug = false;
+		public $DebugToLogFile = false;
+		public $DebugFile = 'data/debug.log';
 
 		private $NewLine = "\n";
 
@@ -56,8 +58,10 @@
 			else
 				$ReturnMessage = '[OK]';
 
-			if ($this->Debug === true)
+			if ($this->Debug === true && $this->DebugToLogFile === false)
 				echo $Message.' '.$ReturnMessage.$this->NewLine;
+			else if ($this->Debug === true && $this->DebugToLogFile === true)
+				file_put_contents($this->DebugFile, $Message.' '.$ReturnMessage."\n", FILE_APPEND);
 
 			if ($Return === false)
 				die('This program has encountered an error and will now exit.'.$this->NewLine);
