@@ -405,6 +405,9 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				$torrentInfoData = $this->M->GetInfo($id, $infoFields);
 				$torrentStatusData = $this->M->GetStatus($id, $statusFields);
 				$torrentData = $this->mergeTorrentData($torrentInfoData, $torrentStatusData);
+				
+				// Set 'completed' as a percentage
+				$torrentData[0]['percent_completed'] = round($torrentData[0]['completed'] / $torrentData[0]['size'] * 100);
 				array_push($result, $torrentData[0]);
 			}		
 			

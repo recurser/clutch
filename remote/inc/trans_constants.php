@@ -15,7 +15,7 @@ define('SortDescending',    'descending');
 define('SortByQueueOrder',  'queue_order');
 define('SortByDate',        'date');
 define('SortByName',        'name');
-define('SortByCompleted',   'completed');
+define('SortByCompleted',   'percent_completed');
 define('SortByState',       'state');
 
 // Defaults

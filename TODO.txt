@@ -18,6 +18,9 @@ TODO
 - Right-click menu is partially hidden if the torrent is near the bottom of the screen - need to be able to set a bounding box for the menu position
 - Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
+- Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).
+- Change javascript to use the percent_completed from the server rather than calculating it.
+- GUI doesn't seem to remember the sort order if you reload
 
 - IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
 
