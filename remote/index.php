@@ -7,7 +7,7 @@
 	
 	require_once('inc/trans_main.php');
 
-	$Preferences = new Preferences('data/prefs.txt');
+	$Preferences = new Preferences('data/prefs.txt', $CONST['default_preferences']);
 	$TControl = new TransmissionController(file_get_contents('data/socket.txt'));
 	$MControl = new MessageController($TControl);
 	$Instance = new Clutch($MControl, $Preferences);
@@ -167,7 +167,7 @@
 				
 		// Encode and output the response
 		if (!$is_upload) {
-			// Set the mime type (causes prototype to auto-eval())
+			// Set the mime type (forces jquery to auto-eval())
 			header('Content-type: text/javascript');
 			echo $controller . '.' . $function . '(' . $arg_list . ');';
 			

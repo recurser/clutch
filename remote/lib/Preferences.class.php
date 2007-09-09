@@ -10,7 +10,7 @@
 		private $PreferenceFile;
 		private $Preferences;
 
-		public function __construct($PreferenceFile)
+		public function __construct($PreferenceFile, $Defaults)
 		{
 			$result = false;
 			$this->PreferenceFile = $PreferenceFile;
@@ -25,20 +25,7 @@
 			
 			// Set defaults if this is a fresh install
 			if (!is_array($this->Preferences)) {
-				$this->Preferences = array(
-					'filter'                   => DefaultFilter,
-					'sort_method'              => DefaultSortMethod,
-					'sort_direction'           => DefaultSortDirection,
-					'show_inspector'           => DefaultInspectorVisible,
-					'show_filter'              => DefaultFilterVisible,
-					'over_ride_rate'           => DefaultOverRideRate,
-					'limit_download'           => DefaultLimitDownload,
-					'limit_upload'             => DefaultLimitUpload,
-					'download_rate'            => DefaultDownloadRate,
-					'upload_rate'              => DefaultUploadRate,
-					'over_ride_download_rate'  => DefaultOverRideDownloadRate,
-					'over_ride_upload_rate'    => DefaultOverRideUploadRate
-				);
+				$this->Preferences = $Defaults;
 				$this->WritePreferences();
 			}
 			
