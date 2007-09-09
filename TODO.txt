@@ -13,14 +13,12 @@ TODO
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
 - Report an error if the preferences download folder doesn't exist.
 - Alternating torrent background coloring doesn't seem to be working.
-- Sort by progress isn't working - is sorting by bytes completed which vary depending on the torrent size. 
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Right-click menu is partially hidden if the torrent is near the bottom of the screen - need to be able to set a bounding box for the menu position
 - Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
 - Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).
 - Change javascript to use the percent_completed from the server rather than calculating it.
-- GUI doesn't seem to remember the sort order if you reload
 
 - IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
 
@@ -33,6 +31,8 @@ OPTIMIZATIONS
 
 CHECK
 ==================================================
+- Sort by progress isn't working - is sorting by bytes completed which vary depending on the torrent size. 
+- GUI doesn't seem to remember the sort order if you reload * my mistake *
 - Search box currently only refreshing with he normal setInterval refreshes - doesn't do a request of it's own. Maybe try to figure out a better way to do this, but want to avoid sending a request every time the user hits a key, maybe with a timer or something to figure out when they've stopped typing.
 - Do we need to put the PEX info in the inspector?
 - Do we need to worry about the various 'remove files' options in the right-click menu? Also, I've removed the file location stuff from the inspector for now - do we need it?
