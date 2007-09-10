@@ -6,7 +6,6 @@ TODO
 - Need to validate the torrent upload stuff and report proper error messages
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
-- Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
 - Report an error if the preferences download folder doesn't exist.
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
@@ -56,6 +55,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Alternating row colors don't update if a torrent is deleted 
 - Individual torrent's 'nextTorrent' & 'prevTorrent' don't get updated correctly if a torrent is deleted (causes arrow keys to behave oddly)
 - Safari torrents aren't selectable after an upload.
