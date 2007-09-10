@@ -11,7 +11,6 @@ TODO
 - Report an error if the preferences download folder doesn't exist.
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Right-click menu is partially hidden if the torrent is near the bottom of the screen - need to be able to set a bounding box for the menu position
-- Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
 - Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).
 - Change javascript to use the percent_completed from the server rather than calculating it.
@@ -57,6 +56,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
 - Display an error message if ajax requests fail (ie the server is down)
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Alternating torrent background coloring doesn't seem to be working.
