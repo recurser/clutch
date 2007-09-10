@@ -29,6 +29,12 @@ Transmission.prototype = {
      * Constructor
      */
     initialize: function() {
+	
+		// Before we do anything, browser compatability test
+		if ($.browser.msie) {
+			$('div#unsupported_browser').show();
+			return;
+		}
 		
         /*
          * Private Variables

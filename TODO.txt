@@ -7,7 +7,6 @@ TODO
 - Need to validate the torrent upload stuff and report proper error messages
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
-- Disable access for IE
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
@@ -46,6 +45,7 @@ CHECK
 
 IN THE FUTURE (?)
 ==================================================
+- Get better 'unsupported browser' icons.
 - Make 'Checking existing files' stuff use the orange bar from the latest transmission version.
 - Arrow up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
 - Bottom Menu
@@ -59,6 +59,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Disable access for IE
 - Safari search box vertical-alignment is a bit wacky
 - Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
 - Torrent upload form doesn't target the hidden iframe on safari - opens a new window.

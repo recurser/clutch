@@ -531,9 +531,7 @@ div.torrent_footer ul#settings_menu li#button {
  * D I A L O G S
  *
  *--------------------------------------*/
-div#dialog_container,
-div#prefs_container,
-div#upload_container {
+div.dialog_container {
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -544,9 +542,7 @@ div#upload_container {
 	text-align: center;
 	}
 	
-div#dialog_container div.dialog_top_bar,
-div#prefs_container div.dialog_top_bar,
-div#upload_container div.dialog_top_bar {
+div.dialog_container div.dialog_top_bar {
 	text-align: center;
 	background: #DBDBDB url('../images/graphics/dialog_top.png') no-repeat; 
 	margin: 15px auto 0 auto;
@@ -554,9 +550,7 @@ div#upload_container div.dialog_top_bar {
 	height: 4px;
 	}
 	
-div#dialog_container div#dialog_window,
-div#prefs_container div#dialog_window,
-div#upload_container div#dialog_window {
+div.dialog_container div.dialog_window {
 	background-color: #DBDBDB;
 	margin: -3px auto 0 auto;
 	filter:alpha(opacity=95);
@@ -565,46 +559,34 @@ div#upload_container div#dialog_window {
 	border: 1px solid #B5B5B5;
 	border-top: none;
 	text-align: left;
-	}
-	
-div#dialog_container div#dialog_window,
-div#upload_container div#dialog_window {
 	width: 420px;
 	height: 135px;
 	}
 	
-div#prefs_container div#dialog_window {
+div#prefs_container div.dialog_window {
 	width: 410px;
 	height: 373px;
 	padding: 5px;
 	}
 	
-div#dialog_container div#dialog_window img,
-div#prefs_container div#dialog_window img,
-div#upload_container div#dialog_window img {
+div.dialog_container div.dialog_window img {
 	margin: 20px 20px 0 20px;
 	float: left;
 	}
 	
-div#dialog_container div#dialog_window h2#dialog_heading,
-div#prefs_container div#dialog_window h2#dialog_heading,
-div#upload_container div#dialog_window h2#dialog_heading {
+div.dialog_container div.dialog_window h2.dialog_heading {
 	display: block;
 	float: left;
 	width: 305px;
 	}
 	
-div#dialog_container div#dialog_window div#dialog_message,
-div#prefs_container div#dialog_window div#dialog_message,
-div#upload_container div#dialog_window div#dialog_message {
+div.dialog_container div.dialog_window div.dialog_message {
 	float: left;
 	width: 305px;
 	height: 55px;
 	}
 	
-div#dialog_container div#dialog_window a,
-div#prefs_container div#dialog_window a,
-div#upload_container div#dialog_window a {
+div.dialog_container div.dialog_window a {
 	display: block;
 	float: right;
 	margin: 5px 10px 0 0;
@@ -618,16 +600,12 @@ div#upload_container div#dialog_window a {
 	color: #323232;
 	}
 	
-div#dialog_container div#dialog_window a:hover,
-div#dialog_container div#dialog_window a:active,
-div#prefs_container div#dialog_window a:hover,
-div#prefs_container div#dialog_window a:active,
-div#upload_container div#dialog_window a:hover,
-div#upload_container div#dialog_window a:active {
+div.dialog_container div.dialog_window a:hover,
+div.dialog_container div.dialog_window a:active {
 	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
 	}
 	
-div#upload_container div#dialog_window div#dialog_message input {
+div#upload_container div.dialog_window div.dialog_message input {
 	margin: 5px 0 0 0;
 	padding: 1px;
 	background-color: #EEE;
@@ -635,8 +613,7 @@ div#upload_container div#dialog_window div#dialog_message input {
 	display: block;
 	}
 	
-div#upload_container div#dialog_window form,
-div#prefs_container div#dialog_window form {
+div.dialog_container div.dialog_window form {
 	margin: 0px;
 	padding: 0px;
 	}
@@ -711,6 +688,62 @@ div#prefs_container div#download_location input {
 
 div#prefs_container a {
 	clear: left;
+	}
+
+
+/*--------------------------------------
+ *
+ * U N S U P P O R T E D   B R O W S E R
+ *
+ *--------------------------------------*/
+div#unsupported_browser {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 3;
+	text-align: center;
+	background: #fff;
+	}
+	
+div#unsupported_browser div.dialog_top_bar {
+	width: 450px;
+	height: 21px;
+	margin: 100px auto 0 auto;
+	background: transparent url('../images/graphics/status_bar_background.png') repeat-x;
+	border: 1px solid #979797;
+	color: #222;
+	}
+	
+div#unsupported_browser div.dialog_window{
+	width: 450px;
+	height: 200px;
+	margin: 0 auto 0 auto;
+	border: 1px solid #979797;	
+	border-top: none;
+	} 
+	
+div#unsupported_browser div.dialog_window img {
+	margin: 10px;
+	}
+	
+div#unsupported_browser div.dialog_window img.logo {
+	margin: 20px 20px 0 20px;
+	float: left;
+	}
+	
+div#unsupported_browser div.dialog_window h2 {
+	margin: 40px 0 40px 0;
+	display: block;
+	float: left;
+	width: 305px;
+	}
+	
+div#unsupported_browser div.dialog_window p {
+	clear: both;
+	font-size: 1.4em;
 	}
 
 

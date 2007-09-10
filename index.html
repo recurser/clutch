@@ -177,10 +177,10 @@
 		
 		<div class='dialog_container' id="dialog_container" style="display:none;">
 			<div class="dialog_top_bar"></div>
-			<div id="dialog_window">
+			<div class="dialog_window">
 				<img src='images/graphics/logo.png' />
-				<h2 id="dialog_heading"></h2>
-				<div id="dialog_message"></div>
+				<h2 class="dialog_heading" id="dialog_heading"></h2>
+				<div class="dialog_message" id="dialog_message"></div>
 				<a href="#confirm" id="dialog_confirm_button">Confirm</a>
 				<a href="#cancel" id="dialog_cancel_button">Cancel</a>				
 			</div>
@@ -188,8 +188,8 @@
 		
 		<div class='dialog_container' id="prefs_container" style="display:none;">
 			<div class="dialog_top_bar"></div>
-			<div id="dialog_window">
-				<h2 id="dialog_heading">Preferences</h2>
+			<div class="dialog_window">
+				<h2 class="dialog_heading">Preferences</h2>
 				<form id="prefs_form" action="remote?action=savePrefs">
 					<input type='hidden' name='over_ride_rate' id='over_ride_rate'/>
 					<div class="preference" id='download_location'>
@@ -236,18 +236,30 @@
 		
 		<div class='dialog_container' id="upload_container" style="display:none;">
 			<div class="dialog_top_bar"></div>
-			<div id="dialog_window">
+			<div class="dialog_window">
 				<img src='images/graphics/logo.png' />
-				<h2 id="dialog_heading">Torrent Upload</h2>
+				<h2 class="dialog_heading">Torrent Upload</h2>
 				<form action='#' method='post' id='torrent_upload_form' 
 					enctype='multipart/form-data' target='torrent_upload_frame'>  
-				<div id="dialog_message">
+				<div class="dialog_message">
 					Please select a .torrent file to upload:
 					<input type='file' name='torrent_file'/>
 				</div>
 				<a href="#upload" id="upload_confirm_button">Upload</a>
 				<a href="#cancel" id="upload_cancel_button">Cancel</a>
 				</form>
+			</div>
+		</div>
+		
+		<div id='unsupported_browser' style="display:none;">
+			<div class="dialog_top_bar"></div>
+			<div class="dialog_window">
+				<img class='logo' src='images/graphics/logo.png' />
+				<h2>Sorry, your browser is not supported</h2>
+				<p>We currently support the following browsers:</p>
+				<a href="http://www.mozilla.com/en-US/firefox/"><img src="images/graphics/browser_firefox.gif"></a>
+				<a href="http://www.apple.com/safari/"><img src="images/graphics/browser_safari.gif"></a>
+				<a href="http://www.opera.com/download/"><img src="images/graphics/browser_opera.gif"></a>
 			</div>
 		</div>
 		
