@@ -302,7 +302,6 @@ Torrent.prototype = {
 		if (data.size)		this._size			= data.size;
 		if (data.position)	this._position		= data.position;
 		if (data.tracker)	this._tracker		= data.tracker;
-//		if (data.private)	this._private		= data.private;
 		if (data.comment)	this._comment		= data.comment;
 		if (data.creator)	this._creator		= data.creator;
 		if (data.date)		this._creator_date	= data.date;
@@ -328,13 +327,6 @@ Torrent.prototype = {
 		this._swarm_speed           = data.swarm_speed;	
 		this._total_leechers       	= data.scrape_leechers;	
 		this._total_seeders        	= data.scrape_seeders;
-		
-		// Set the background color
-		if (this._position % 2 == 0) {
-			this._element.addClass('even');
-		} else {
-			this._element.removeClass('even');
-		}
 		
 		// Get -1 returned sometimes (maybe torrents with errors?)
 		if (this._total_leechers < 0) {

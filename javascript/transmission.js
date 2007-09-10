@@ -1061,6 +1061,9 @@ Transmission.prototype = {
 			transmission.removeTorrents(torrent_ids);
 		}
 		
+		// Update the alternating torrent background colors
+		transmission.setTorrentBgColors();
+		
 		// Update global upload and download speed display
 		transmission.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
 		
@@ -1072,9 +1075,11 @@ Transmission.prototype = {
      * Load a list of torrents into the application
      */
     removeTorrents: function(torrent_id_list) {
+		var torrent;
+		
 		if (torrent_id_list.length != 0) {
         	for (i=0; i<torrent_id_list.length; i++) {	
-				var torrent = transmission._torrents.item(torrent_id_list[i]);
+				torrent = transmission._torrents.item(torrent_id_list[i]);
 				
 				// Keep the torrent chain intact
 				if (torrent.previousTorrent()) {
@@ -1091,10 +1096,27 @@ Transmission.prototype = {
         	}
 		}
 		
+		// Set the background colors
+		transmission.setTorrentBgColors();
+		
 		// Clear the inspector
 		transmission.deselectAll();
 		transmission.updateInspector();
 		transmission.setGlobalSpeeds(this._torrents.length());
+    },
+    
+    /*
+     * Set the alternating background colors for torrents
+     */
+    setTorrentBgColors: function() {
+		for (i=0; i<this._torrents.length(); i++) {	
+			torrent = this._torrents.itemByIndex(i);
+			if ((i+1) % 2 == 0) {
+				torrent.element().addClass('even');
+			} else {
+				torrent.element().removeClass('even');
+			}
+		}
     },
     
     /*
