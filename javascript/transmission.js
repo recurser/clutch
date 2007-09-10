@@ -1074,7 +1074,18 @@ Transmission.prototype = {
     removeTorrents: function(torrent_id_list) {
 		if (torrent_id_list.length != 0) {
         	for (i=0; i<torrent_id_list.length; i++) {	
-				transmission._torrents.item(torrent_id_list[i]).element().remove();
+				var torrent = transmission._torrents.item(torrent_id_list[i]);
+				
+				// Keep the torrent chain intact
+				if (torrent.previousTorrent()) {
+					torrent.previousTorrent().setNextTorrent(torrent.nextTorrent());
+				}
+				if (torrent.nextTorrent()) {
+					torrent.nextTorrent().setPreviousTorrent(torrent.previousTorrent());
+				}
+				
+				// Remove the torrent from the list
+				torrent.element().remove();
 				transmission._torrents.remove(torrent_id_list[i]);
 				transmission._selected_torrents.remove(torrent_id_list[i]);
         	}
