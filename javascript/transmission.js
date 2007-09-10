@@ -915,7 +915,7 @@ Transmission.prototype = {
 
 		// Tell the server about this action
 		if (! dont_inform_server) {
-			transmission.setPreferences('show_inspector', true);
+			transmission.setPreference('show_inspector', true);
 		}
 	},
     
@@ -931,7 +931,7 @@ Transmission.prototype = {
 		$('ul li#context_toggle_inspector')[0].innerHTML = 'Show Inspector';
 
 		// Tell the server about this action
-		transmission.setPreferences('show_inspector', false);
+		transmission.setPreference('show_inspector', false);
 	},
     
     /*
@@ -992,7 +992,7 @@ Transmission.prototype = {
 		$('#torrent_filter_bar').show();
 		transmission._filter_visible = true;
 		if (! dont_inform_server) {
-			transmission.setPreferences('show_filter', true);
+			transmission.setPreference('show_filter', true);
 		}
 	},
 	
@@ -1004,7 +1004,7 @@ Transmission.prototype = {
 		$('#torrent_container').css('top', container_top + 'px');
 		$('#torrent_filter_bar').hide();
 		transmission._filter_visible = false;
-		transmission.setPreferences('show_filter', false);
+		transmission.setPreference('show_filter', false);
 	},
 
     /*
@@ -1223,7 +1223,7 @@ Transmission.prototype = {
     /*
      * Request the initial settings for the web client (up/down speed etc)
      */
-	setPreferences: function(key, value) {
+	setPreference: function(key, value) {
         this.remoteRequest('setPreferences', '{"'+key+'":'+value+'}');	
     },
     

@@ -53,12 +53,12 @@
 			case 'savePrefs' :
 				$Instance->savePrefs();
 				$arg_list = $Instance->getInitialSettings();
-				$actions = array('updatePrefs' => $arg_list);
+				$actions = array('transmission.updatePrefs' => $arg_list);
 				break;
 				
 			case 'resetPrefs' :
 				$arg_list = $Instance->getInitialSettings();
-				$actions = array('updatePrefs' => $arg_list);
+				$actions = array('transmission.updatePrefs' => $arg_list);
 				break;
 				
 			case 'setOverRide' :
