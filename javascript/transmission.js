@@ -296,14 +296,14 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause all' button
 	 */
 	releasePauseAllButton: function(event) {
-		event.data.transmission.pauseTorrents(transmission.jsonTorrentIds());
+		event.data.transmission.pauseTorrents('[]');
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume all' button
 	 */
 	releaseResumeAllButton: function(event) {
-		event.data.transmission.resumeTorrents(transmission.jsonTorrentIds());
+		event.data.transmission.resumeTorrents('[]');
 	},
 
 	/*
@@ -1271,18 +1271,14 @@ Transmission.prototype = {
      * Pause torrents
      */
     pauseTorrents: function(torrent_id_list) {
-		if (torrent_id_list != '[]') {
-			this.remoteRequest('pauseTorrents', torrent_id_list);
-		}
+		this.remoteRequest('pauseTorrents', torrent_id_list);
     },
     
     /*
      * Resume torrents
      */
     resumeTorrents: function(torrent_id_list) {
-		if (torrent_id_list != '[]') {	
-			this.remoteRequest('resumeTorrents', torrent_id_list);
-		}
+		this.remoteRequest('resumeTorrents', torrent_id_list);
     },
     
     /*
