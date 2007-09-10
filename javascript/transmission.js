@@ -1040,14 +1040,16 @@ Transmission.prototype = {
 			// If this torrent already exists, refresh it & remove this ID from torrent_ids
 			if (torrent_ids.inArray(torrent_data.id)) {
 				transmission._torrents.item(torrent_data.id).refresh(torrent_data);
-				global_up_speed += torrent_data.upload_speed;
-				global_down_speed += torrent_data.download_speed;
 				torrent_ids.remove(torrent_data.id);
 			
 			// Otherwise, this is a new torrent - add it
 			} else {
 				new_torrents.push(torrent_data);
 			}
+			
+			// Keep track of global upload speeds
+			global_up_speed += torrent_data.upload_speed;
+			global_down_speed += torrent_data.download_speed;
         }
 		
 		// Add any torrents that aren't already being displayed

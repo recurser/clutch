@@ -55,6 +55,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Global upload/download set to zero when you filter torrents, not updated until the next refresh.
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Alternating row colors don't update if a torrent is deleted 
 - Individual torrent's 'nextTorrent' & 'prevTorrent' don't get updated correctly if a torrent is deleted (causes arrow keys to behave oddly)
