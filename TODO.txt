@@ -21,12 +21,9 @@ OPTIMIZATIONS
 - Inspector
 	- css cursor:pointer doesn't work on safari after a tab has been clicked for some reason.
 - Scrollbar in firefox screws with the confirm dialog a little with small-width displays.
-- Changing the port in the prefs isn't reflected in Clutch.app - not a big deal but maybe look at it sometime. (swe - server port and transmission port is different, and i doubt they should/can be the same, that what this line is talking about?)
 
 CHECK
 ==================================================
-- Sort by progress isn't working - is sorting by bytes completed which vary depending on the torrent size. 
-- GUI doesn't seem to remember the sort order if you reload * my mistake *
 - Search box currently only refreshing with he normal setInterval refreshes - doesn't do a request of it's own. Maybe try to figure out a better way to do this, but want to avoid sending a request every time the user hits a key, maybe with a timer or something to figure out when they've stopped typing.
 - Do we need to put the PEX info in the inspector?
 - Do we need to worry about the various 'remove files' options in the right-click menu? Also, I've removed the file location stuff from the inspector for now - do we need it?
@@ -54,6 +51,9 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Changing the port in the prefs isn't reflected in Clutch.app - not a big deal but maybe look at it sometime. (swe - server port and transmission port is different, and i doubt they should/can be the same, that what this line is talking about?) (dave - ignore this, for some reason i keep getting the 2 different port settings confused - i'm a dummy!)
+- GUI doesn't seem to remember the sort order if you reload * my mistake *
+- Sort by progress isn't working - is sorting by bytes completed which vary depending on the torrent size. 
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
 - Global upload/download set to zero when you filter torrents, not updated until the next refresh.
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
