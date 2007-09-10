@@ -11,10 +11,12 @@ var dialog;
 
 $(document).ready( function() {
 	// Initialise a torrent controller to handle events
-	transmission = new Transmission();
 	
 	// Initialise the dialog controller
 	dialog = new Dialog();
+	
+	// Initialise the main Transmission controller
+	transmission = new Transmission();
 
 	if ($.browser.safari) {
 		

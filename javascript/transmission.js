@@ -489,7 +489,7 @@ Transmission.prototype = {
 		this.remoteRequest('refreshTorrents', null, this._current_filter);
 
 		// Create a periodical executer to refresh the list
-		setInterval('transmission.reloadTorrents()', this._RefreshInterval);
+		this._periodic_refresh = setInterval('transmission.reloadTorrents()', this._RefreshInterval);
     },
     
     /*
@@ -545,6 +545,14 @@ Transmission.prototype = {
 		}
 		
 		$('#prefs_container').hide();	
+	},
+    
+    /*
+     * Display an error if an ajax request fails, and stop sending requests
+     */
+    ajaxError: function(request, error_string, exception) {
+		dialog.alert('Connection Failed', 'Could not connect to the server. You may need to reload the page to reconnect.', 'Dismiss');
+		clearInterval(transmission._periodic_refresh);
 	},
     
     /*
@@ -1166,7 +1174,8 @@ Transmission.prototype = {
 				'&sort_method=' + sort_method + 
 				'&sort_direction=' + sort_direction + 
 				'&search=' + search,
-            dataType: "script"
+            dataType: "script",
+			error: this.ajaxError
         });
 	},
     
