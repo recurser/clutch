@@ -329,6 +329,13 @@ Torrent.prototype = {
 		this._total_leechers       	= data.scrape_leechers;	
 		this._total_seeders        	= data.scrape_seeders;
 		
+		// Set the background color
+		if (this._position % 2 == 0) {
+			this._element.addClass('even');
+		} else {
+			this._element.removeClass('even');
+		}
+		
 		// Get -1 returned sometimes (maybe torrents with errors?)
 		if (this._total_leechers < 0) {
 			this._total_leechers = 0;

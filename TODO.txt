@@ -11,7 +11,6 @@ TODO
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
 - Filtering by 'downloading', then pausing a torrent (thus removing it from the list), then clicking 'resume all' doesn't put the torrent back in the list - pause/resume all buttons not hooked into filtering properly.
 - Report an error if the preferences download folder doesn't exist.
-- Alternating torrent background coloring doesn't seem to be working.
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Right-click menu is partially hidden if the torrent is near the bottom of the screen - need to be able to set a bounding box for the menu position
 - Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
@@ -59,6 +58,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Alternating torrent background coloring doesn't seem to be working.
 - Disable access for IE
 - Safari search box vertical-alignment is a bit wacky
 - Allow the user to set the download location somewhere (Clutch.app or webgui?), and use this directory when doing torrent uploads.
