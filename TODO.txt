@@ -14,7 +14,6 @@ TODO
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
 - Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).
 - Change javascript to use the percent_completed from the server rather than calculating it.
-- Safari torrents aren't selectable after an upload.
 - Safari doesn't handle $.ajax::error properly if a request fails.
 - Alternating row colors don't update if a torrent is deleted 
 - Individual torrent's 'nextTorrent' & 'prevTorrent' don't get updated correctly if a torrent is deleted (causes arrow keys to behave oddly)
@@ -44,6 +43,7 @@ CHECK
 
 IN THE FUTURE (?)
 ==================================================
+- Safari sometimes tries to re-upload a torrent if the page is refreshed after an upload (think it's remembering the iframe location or re-posting or something). Tried to fix it in upload_reponse.php but it only seems to work intermittently. May have to create the iframe programmatically to get around this?
 - Get better 'unsupported browser' icons.
 - Make 'Checking existing files' stuff use the orange bar from the latest transmission version.
 - Arrow up/down scrolls the torrent window on safari - should try to scroll so the last selected torrent is always in view if possible
@@ -58,6 +58,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Safari torrents aren't selectable after an upload.
 - Opera page is too high if there are more torrents than can fit on one screen (ie you get 2 scrollbars, the torrent window scrollbar and the main page scrollbar)
 - Display an error message if ajax requests fail (ie the server is down)
 - There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?

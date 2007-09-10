@@ -13,9 +13,8 @@
 				echo "top." . $command . "(" . $arguments . ");";
 			}
 ?>
-			// Safari remembers the iframe locatoin on reload - redirect to 
-			// make sure jscript is not executed twice
-			document.location.href = 'about:blank';
+				// Safari remembers the iframe location on reload - redirect to make sure jscript is not executed twice
+				document.location.href = './';
 			});
 		</script>
 	</head>
