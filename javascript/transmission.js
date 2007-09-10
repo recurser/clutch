@@ -441,6 +441,18 @@ Transmission.prototype = {
 	},
 
 	/*
+	 * Process a mouse-up event on the 'filter paused' button
+	 */
+	togglePeriodicRefresh: function(state) {
+		if (state && this._periodic_refresh == null) {
+			this._periodic_refresh = setInterval('transmission.reloadTorrents()', this._RefreshInterval);
+		} else {
+			clearInterval(this._periodic_refresh);
+			this._periodic_refresh = null;
+		}
+	},
+
+	/*
 	 * Do nothing - used for ajax calls that don't need to do anything on return
 	 */
 	ignore: function() {},
@@ -489,7 +501,7 @@ Transmission.prototype = {
 		this.remoteRequest('refreshTorrents', null, this._current_filter);
 
 		// Create a periodical executer to refresh the list
-		this._periodic_refresh = setInterval('transmission.reloadTorrents()', this._RefreshInterval);
+		this.togglePeriodicRefresh(true);
     },
     
     /*
@@ -552,7 +564,7 @@ Transmission.prototype = {
      */
     ajaxError: function(request, error_string, exception) {
 		dialog.alert('Connection Failed', 'Could not connect to the server. You may need to reload the page to reconnect.', 'Dismiss');
-		clearInterval(transmission._periodic_refresh);
+		transmission.togglePeriodicRefresh(false);
 	},
     
     /*
@@ -1112,6 +1124,9 @@ Transmission.prototype = {
 			
 			// Submit the form
 			$('#torrent_upload_form')[0].submit();
+			
+			// Disable the periodic refresh call
+			transmission.togglePeriodicRefresh(false);
 		}
     },
     

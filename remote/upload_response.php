@@ -9,7 +9,9 @@
 			 
 			$(document).ready( function() {
 <?php
-			echo 'top.' . $controller . '.' . $function . '(' . $arg_list . ');';
+			foreach ($actions as $command => $arguments) {
+				echo "top." . $command . "(" . $arguments . ");";
+			}
 ?>
 			// Safari remembers the iframe locatoin on reload - redirect to 
 			// make sure jscript is not executed twice
