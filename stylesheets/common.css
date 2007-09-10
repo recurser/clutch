@@ -314,7 +314,7 @@ ul.torrent_list li {
 ul.torrent_list li.torrent {
 	border-bottom: 1px solid #ccc;
 	padding: 3px 16px 3px 10px; /* Make space for buttons on the right */
-	margin: 0;	
+	margin: 0 !important;	
 	}
 
 	

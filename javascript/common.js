@@ -17,8 +17,6 @@ $(document).ready( function() {
 	dialog = new Dialog();
 
 	if ($.browser.safari) {
-		// Hack to move the torrent view to the right spot in safari
-		$('#torrent_list').css('marginTop', '-7px');
 		
 		// Fix div height problem - causes scrollbar flash in
 		// firefox so have to be safari-specific

@@ -5,7 +5,6 @@ TODO
 - Bottom Menu
 	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
 - Need to validate the torrent upload stuff and report proper error messages
-- There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Total up/down speed doesn't seem to update when all torrents are paused - still shows X KB/s
@@ -58,6 +57,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- There's a rogue </li> at the start of the torrent list - maybe what's causing the safari <ul> top-position problem?
 - Alternating torrent background coloring doesn't seem to be working.
 - Disable access for IE
 - Safari search box vertical-alignment is a bit wacky
