@@ -150,9 +150,14 @@
 			if (count($Torrents) > 0) {
 				$sortCriteria = array();
 				foreach ($Torrents as $TorrentID => $TorrentInfo) {
-					$sortCriteria[$TorrentID] = $TorrentInfo[$SortMethod];
+					$sortCriteria[$TorrentID] = strtolower($TorrentInfo[$SortMethod]);
+					
+					// Need to convert the criteria to lower case if it's a string to sort case-insensitively
+					if (is_string($sortCriteria[$TorrentID])) {
+						$sortCriteria[$TorrentID] = strtolower($sortCriteria[$TorrentID]);
+					}
 				}
-				array_multisort($sortCriteria, $SortOrder, $Torrents);
+				array_multisort($sortCriteria, $SortOrder, SORT_STRING, $Torrents);
 			}
 		}
 

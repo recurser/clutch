@@ -49,6 +49,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Sorting torrents by strings (eg sort-by-name) is case-sensitive
 - Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).
 - Change javascript to use the percent_completed from the server rather than calculating it.
 - Right-click menu is partially hidden if the torrent is near the bottom of the screen - need to be able to set a bounding box for the menu position
