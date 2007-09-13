@@ -44,7 +44,7 @@ Array.prototype.clear = function () {
 
 
 /*
- * Return true if the given object is in the array
+ *   Return true if the given object is in the array
  *
  *   @param object element
  *   @returns boolean
@@ -61,7 +61,7 @@ Array.prototype.inArray = function (obj) {
 
 
 /*
- * Return a copy of the array
+ *   Return a copy of the array
  *
  *   @returns array
  */
@@ -72,6 +72,22 @@ Array.prototype.clone = function () {
 	} 
 	return a;
 }
+
+
+/*
+ *   Return a JSON representation of the array. 
+ *   Force single integers to be returned in an array
+ *
+ *   @returns string
+ */
+Array.prototype.json = function () {
+	var result = $.toJSON(this);
+	if (parseInt(result) == result) {
+		result = '[' + result + ']'
+	}
+	return result;
+}
+
 
 /**
  *   Array convenience method to remove element.
@@ -99,8 +115,11 @@ Array.prototype.remove = function (element) {
 
 
 /*
- * Converts file & folder byte size values to more  
- * readable values (bytes, KB, MB, GB or TB).
+ *   Converts file & folder byte size values to more  
+ *   readable values (bytes, KB, MB, GB or TB).
+ *
+ *   @param integer bytes
+ *   @returns string
  */
 Math.formatBytes = function(bytes) {
     var size;
@@ -142,8 +161,10 @@ Math.formatBytes = function(bytes) {
 
 
 /*
- * Converts file & folder byte size values to more  
- * readable values (bytes, KB, MB, GB or TB).
+ *   Converts seconds to more readable units (hours, minutes etc).
+ *
+ *   @param integer seconds
+ *   @returns string
  */
 Math.formatSeconds = function(seconds) {
     var result;
@@ -167,7 +188,10 @@ Math.formatSeconds = function(seconds) {
 
 
 /*
- * Converts a unix timestamp to a human readable value
+ *   Converts a unix timestamp to a human readable value
+ *
+ *   @param integer seconds
+ *   @returns string
  */
 Math.formatTimestamp = function(seconds) {
 	var myDate = new Date(seconds*1000);
@@ -175,8 +199,12 @@ Math.formatTimestamp = function(seconds) {
 }
 
 /*
- * Round a float to a specified number of decimal 
- * places, stripping trailing zeroes
+ *   Round a float to a specified number of decimal 
+ *   places, stripping trailing zeroes
+ *
+ *   @param float floatnum
+ *   @param integer precision
+ *   @returns float
  */
 Math.roundWithPrecision = function(floatnum, precision) {
     

@@ -39,13 +39,15 @@ Transmission.prototype = {
         /*
          * Private Variables
          */
-		this._filter_visible = false;
-		this._inspector_visible = false;
+		this._filter_visible     = false;
+		this._inspector_visible  = false;
 		this._speed_limit_active = false;
 		
 		// Initialise the torrent lists
-        this._torrents = new Hash();
+        this._torrents          = new Hash();
         this._selected_torrents = new Hash();
+        this._paused_torrents   = new Hash();
+        this._active_torrents   = new Hash();
         
         // Get the initial settings from the remote server
         this.requestSettings();
@@ -136,28 +138,6 @@ Transmission.prototype = {
      */
     setLowestSelected: function(torrent) {
         this._lowest_selected = torrent;
-    },
-    
-    /*
-     * Return a JSON string of torrent IDs
-     */
-    jsonTorrentIds: function() {
-		var result = $.toJSON(this._torrents.keys());
-		if (parseInt(result) == result) {
-			result = '[' + result + ']'
-		}
-		return result;
-    },
-    
-    /*
-     * Return a JSON string of torrent IDs
-     */
-    jsonSelectedTorrentIds: function() {
-		var result = $.toJSON(this._selected_torrents.keys());
-		if (parseInt(result) == result) {
-			result = '[' + result + ']'
-		}
-		return result;
     },
     
     /*
@@ -296,14 +276,14 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause all' button
 	 */
 	releasePauseAllButton: function(event) {
-		event.data.transmission.pauseTorrents('[]');
+		event.data.transmission.pauseTorrents([]);
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume all' button
 	 */
 	releaseResumeAllButton: function(event) {
-		event.data.transmission.resumeTorrents('[]');
+		event.data.transmission.resumeTorrents([]);
 	},
 
 	/*
@@ -1164,7 +1144,7 @@ Transmission.prototype = {
      */
     pauseSelectedTorrents: function() {
 		if (transmission.numSelectedTorrents() > 0) {				
-			transmission.pauseTorrents(transmission.jsonSelectedTorrentIds());
+			transmission.pauseTorrents(this._selected_torrents.keys());
 		}
     },
     
@@ -1173,7 +1153,7 @@ Transmission.prototype = {
      */
     resumeSelectedTorrents: function() {
 		if (transmission.numSelectedTorrents() > 0) {				
-			transmission.resumeTorrents(transmission.jsonSelectedTorrentIds());
+			transmission.resumeTorrents(this._selected_torrents.keys());
 		}		
     },	
 
@@ -1274,14 +1254,16 @@ Transmission.prototype = {
      * Pause torrents
      */
     pauseTorrents: function(torrent_id_list) {
-		this.remoteRequest('pauseTorrents', torrent_id_list);
+		var json = torrent_id_list.json();
+		this.remoteRequest('pauseTorrents', json);
     },
     
     /*
      * Resume torrents
      */
     resumeTorrents: function(torrent_id_list) {
-		this.remoteRequest('resumeTorrents', torrent_id_list);
+		var json = torrent_id_list.json();
+		this.remoteRequest('resumeTorrents', json);
     },
     
     /*
@@ -1317,7 +1299,7 @@ Transmission.prototype = {
 			
 			} else {	
 				// Send an ajax request to perform the action
-				transmission.remoteRequest('removeTorrents', transmission.jsonSelectedTorrentIds());			
+				transmission.remoteRequest('removeTorrents', this._selected_torrents.keys());			
 			}
 		}
     }
