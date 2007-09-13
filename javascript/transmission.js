@@ -611,10 +611,13 @@ Transmission.prototype = {
 		
 		// Setup the context menu
 		$('ul#torrent_list').contextMenu('torrent_context_menu', {
-			bindings:       bindings,
-			menuStyle:      Menu.context.menu_style,
-			itemStyle:      Menu.context.item_style,
-			itemHoverStyle: Menu.context.item_hover_style
+			bindings:        bindings,
+			menuStyle:       Menu.context.menu_style,
+			itemStyle:       Menu.context.item_style,
+			itemHoverStyle:  Menu.context.item_hover_style,
+			boundingElement: $('div#torrent_container'),
+			boundingRightPad: 20,
+			boundingBottomPad: 5
 		});
 	},
     

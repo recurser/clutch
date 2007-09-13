@@ -45,7 +45,10 @@
     eventPosY: 'pageY',
     shadow : true,
     onContextMenu: null,
-    onShowMenu: null
+    onShowMenu: null,
+    boundingElement: [],
+	boundingRightPad: 0,
+	boundingBottomPad: 0
  	};
 
   $.fn.contextMenu = function(id, options) {
@@ -69,6 +72,9 @@
       id : id,
       menuStyle: $.extend({}, defaults.menuStyle, options.menuStyle || {}),
       itemStyle: $.extend({}, defaults.itemStyle, options.itemStyle || {}),
+      boundingElement: options.boundingElement || defaults.boundingElement,
+      boundingRightPad: options.boundingRightPad || defaults.boundingRightPad,
+      boundingBottomPad: options.boundingBottomPad || defaults.boundingBottomPad,
       itemHoverStyle: $.extend({}, defaults.itemHoverStyle, options.itemHoverStyle || {}),
       bindings: options.bindings || {},
       shadow: options.shadow || options.shadow === false ? options.shadow : defaults.shadow,
@@ -114,9 +120,32 @@
         func(trigger, currentTarget);
       });
     });
-
-    menu.css({'left':e[cur.eventPosX],'top':e[cur.eventPosY]}).show();
-    if (cur.shadow) shadow.css({width:menu.width(),height:menu.height(),left:e.pageX+2,top:e.pageY+2}).show();
+	
+	// Figure out the X and Y positions of the menu
+	var xPos = e[cur.eventPosX];
+	var yPos = e[cur.eventPosY];
+	
+	if (cur.boundingElement.length > 0) {
+		var menuElement = $('#' + cur.id);
+		var offset = cur.boundingElement.offset();
+		var boundingRight = offset.left + cur.boundingElement.outerWidth() - cur.boundingRightPad;
+		var boundingBottom = offset.top + cur.boundingElement.outerHeight() - cur.boundingBottomPad;
+		
+		// Have to show the menu first (offscreen) or the width() function doesn't work properly
+    	menu.css({'left':-1000,'top':-1000}).show();
+		
+		// Make sure the menu lies inside the bounding box
+		if (xPos > boundingRight-menu.outerWidth()) {
+			xPos = boundingRight-menu.outerWidth();
+		}
+		if (yPos > boundingBottom-menu.outerHeight()) {
+			yPos = boundingBottom-menu.outerHeight();
+		}
+	}
+	
+    menu.css({'left':xPos,'top':yPos}).show();
+		
+    if (cur.shadow) shadow.css({width:menu.width(),height:menu.height(),left:xPos+2,top:yPos+2}).show();
     $(document).one('click', hide);
   }
 
