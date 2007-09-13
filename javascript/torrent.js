@@ -15,7 +15,7 @@ function Torrent(data) {
 	this._StatusChecking        = 'checking';
 	this._StatusWaitingToCheck  = 'waiting to checking';
 	this._InfiniteTimeRemaining = 215784000; // 999 Hours - may as well be infinite
-	this._MaxDownloadPercent  = 99; // reduce this to make the progress bar shorter
+	this._MaxProgressBarWidth   = 99; // reduce this to make the progress bar shorter (%)
 
     this.initialize(data);
 } 
@@ -310,6 +310,7 @@ Torrent.prototype = {
 		// Set the regularly-changing torrent variables
 		this._id               	    = data.id;
 		this._completed             = data.completed;
+		this._percent_completed     = data.percent_completed;
 		this._download_total        = data.download_total;
 		this._upload_total          = data.upload_total;
 		this._download_speed        = data.download_speed;
@@ -337,17 +338,17 @@ Torrent.prototype = {
 		}
 		
 		// Figure out the percent completed
-		var float_percent_complete = this._completed / this._size * this._MaxDownloadPercent;
-		var int_percent_complete = Math.ceil(float_percent_complete);
+		var css_percent_completed = Math.ceil(this._percent_completed * 100 / this._MaxProgressBarWidth);
+		var int_percent_completed = Math.ceil(this._percent_completed);
 
 		// Add the progress bar
-		if (int_percent_complete < this._MaxDownloadPercent) {
+		if (css_percent_completed < this._MaxProgressBarWidth) {
 			
 			// Create the 'progress details' label
 			// Eg: '101 MB of 631 MB (16.02%) - 2 hr 30 min remaining'
 			progress_details = Math.formatBytes(this._completed) + ' of ';
 			progress_details += Math.formatBytes(this._size) + ' (';
-			progress_details += Math.roundWithPrecision(float_percent_complete, 2) + '%)';
+			progress_details += this._percent_completed + '%)';
 			if ((this._eta < 0 || this._eta >= this._InfiniteTimeRemaining) && this.isActive()) {
 				progress_details += ' - remaining time unknown';
 			} else if (this.isActive()) {
@@ -359,7 +360,7 @@ Torrent.prototype = {
 			this._progress_complete_container.removeClass();
 			this._progress_complete_container.addClass('torrent_progress_bar');
 			this._progress_complete_container.addClass(class_name);
-			this._progress_complete_container.css('width', int_percent_complete + '%');
+			this._progress_complete_container.css('width', css_percent_completed + '%');
 			
 			// Update the 'incomplete' bar
 			if (! this._progress_incomplete_container.is('.incomplete')) {
@@ -367,7 +368,7 @@ Torrent.prototype = {
 				this._progress_incomplete_container.addClass('torrent_progress_bar');
 				this._progress_incomplete_container.addClass('in_progress');
 			}
-			this._progress_incomplete_container.css('width', (this._MaxDownloadPercent - int_percent_complete) + '%');
+			this._progress_incomplete_container.css('width', (this._MaxProgressBarWidth - css_percent_completed) + '%');
 			this._progress_incomplete_container.show();
 			
 			// Create the 'peer details' label
@@ -403,7 +404,7 @@ Torrent.prototype = {
 			this._progress_incomplete_container.hide();
 			
 			// Set progress to maximum
-			this._progress_complete_container.css('width', this._MaxDownloadPercent + '%');
+			this._progress_complete_container.css('width', this._MaxProgressBarWidth + '%');
 			
 			// Create the 'peer details' label
 			// Eg: 'Seeding to 13 of 22 peers - UL: 36.2 KB/s'

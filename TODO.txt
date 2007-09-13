@@ -9,8 +9,6 @@ TODO
 - Report an error if the preferences download folder doesn't exist.
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
-- Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).
-- Change javascript to use the percent_completed from the server rather than calculating it.
 - Safari doesn't handle $.ajax::error properly if a request fails.
 - Set top-level buttons to enabled/disabled depending on context to match the behaviour of transmission.app (eg. remove/pause/resume should be disabled if no torrents are selected, pause-all should be disabled if all torrents are paused etc).
 
@@ -51,6 +49,8 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).
+- Change javascript to use the percent_completed from the server rather than calculating it.
 - Right-click menu is partially hidden if the torrent is near the bottom of the screen - need to be able to set a bounding box for the menu position
 - Changing the port in the prefs isn't reflected in Clutch.app - not a big deal but maybe look at it sometime. (swe - server port and transmission port is different, and i doubt they should/can be the same, that what this line is talking about?) (dave - ignore this, for some reason i keep getting the 2 different port settings confused - i'm a dummy!)
 - GUI doesn't seem to remember the sort order if you reload * my mistake *
