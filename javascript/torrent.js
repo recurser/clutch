@@ -167,7 +167,7 @@ Torrent.prototype = {
 	 * Return the state of this torrent
 	 */
 	isActive: function() {
-		return !(!this._running || this._state == this._StatusStopping || this._state == this._StatusPaused);
+		return this._state == this._StatusSeeding || !(this._state == this._StatusStopping || this._state == this._StatusPaused);
 	},
 	
 	/*
@@ -205,8 +205,6 @@ Torrent.prototype = {
 	clickTorrent: function(event) {
 		
 		var torrent = event.data.torrent;
-		
-		// console.log($H(event).keys());
 			
 		// 'Apple' button emulation on PC :
 		// Need settable meta-key and ctrl-key variables for mac emulation

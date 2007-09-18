@@ -44,10 +44,12 @@ Transmission.prototype = {
 		this._speed_limit_active = false;
 		
 		// Initialise the torrent lists
-        this._torrents          = new Hash();
-        this._selected_torrents = new Hash();
-        this._paused_torrents   = new Hash();
-        this._active_torrents   = new Hash();
+        this._torrents            = new Hash();
+        this._selected_torrents   = new Hash();
+        this._num_paused_torrents = 0;
+        this._num_active_torrents = 0;
+        this._num_selected_paused_torrents = 0;
+        this._num_selected_active_torrents = 0;
         
         // Get the initial settings from the remote server
         this.requestSettings();
@@ -175,6 +177,14 @@ Transmission.prototype = {
         if (!this._selected_torrents.hasKey(torrent.id())) {
 			this._selected_torrents.set(torrent.id(), torrent);
 		}
+		
+		// Enable/disabled buttons based on the selection
+		if (torrent.isActive()) {
+			this._num_selected_active_torrents++;
+		} else {
+			this._num_selected_paused_torrents++;
+		}
+		this.updateButtonStates();
 
 		// Display in Inspector
 		this.updateInspector();
@@ -195,40 +205,51 @@ Transmission.prototype = {
 		// De-select the torrent via css
 		torrent.element().removeClass('selected');
 		
-		// May need to re-calculate the controllers highest selected torrent :
-		// work down the list until the next selected torrent
-		if (torrent == transmission._highestSelected) {
-			temp_torrent = torrent._next_torrent;
-			found = false;
-			while (found == false && temp_torrent != null) {
-				if 	(temp_torrent.isSelected()) {
-					found = true;
-					transmission._highestSelected = temp_torrent;
-				}
-				temp_torrent = temp_torrent.nextTorrent();
-			}
-		}
-		
-		// May need to re-calculate the controllers lowest selected torrent :
-		// work down the list until the next selected torrent
-		if (torrent == transmission._lowestSelected) {
-			temp_torrent = torrent._previous_torrent;
-			found = false;
-			while (found == false && temp_torrent != null) {
-				if 	(temp_torrent.isSelected()) {
-					found = true;
-					transmission._lowestSelected = temp_torrent;
-				}
-				temp_torrent = temp_torrent.previousTorrent();
-			}
-		}
-		
 		// Remove this from the list of selected torrents
 		transmission._selected_torrents.remove(torrent.id());
-
-		// Display in Inspector
-		if (!ignore_inspector_update) {
-			transmission.updateInspector();
+		
+		if (! ignore_inspector_update) {
+		
+			// May need to re-calculate the controllers highest selected torrent :
+			// work down the list until the next selected torrent
+			if (torrent == transmission._highestSelected) {
+				temp_torrent = torrent._next_torrent;
+				found = false;
+				while (found == false && temp_torrent != null) {
+					if 	(temp_torrent.isSelected()) {
+						found = true;
+						transmission._highestSelected = temp_torrent;
+					}
+					temp_torrent = temp_torrent.nextTorrent();
+				}
+			}
+		
+			// May need to re-calculate the controllers lowest selected torrent :
+			// work down the list until the next selected torrent
+			if (torrent == transmission._lowestSelected) {
+				temp_torrent = torrent._previous_torrent;
+				found = false;
+				while (found == false && temp_torrent != null) {
+					if 	(temp_torrent.isSelected()) {
+						found = true;
+						transmission._lowestSelected = temp_torrent;
+					}
+					temp_torrent = temp_torrent.previousTorrent();
+				}
+			}
+			
+			// Enable/disabled buttons based on the selection
+			if (torrent.isActive()) {
+				transmission._num_selected_active_torrents--;
+			} else {
+				transmission._num_selected_paused_torrents--;
+			}
+			transmission.updateButtonStates();
+		
+			// Display in Inspector
+			if (!ignore_inspector_update) {
+				transmission.updateInspector();
+			}
 		}
     },
 
@@ -563,6 +584,8 @@ Transmission.prototype = {
         // reset the highest and lowest selected
         this._highest_selected = null;
         this._lowest_selected = null;
+		this._num_selected_active_torrents = 0;
+		this._num_selected_paused_torrents = 0;
     },
     
     /*
@@ -613,6 +636,42 @@ Transmission.prototype = {
 		// Make initial menu selections (TODO - do this with data from the daemon?)
 		$('#unlimited_download_rate').selectMenuItem();
 		$('#unlimited_upload_rate').selectMenuItem();
+	},
+    
+    /*
+     * Enable/disable the button states
+     */
+	updateButtonStates: function() {
+		
+		if (this._num_selected_active_torrents == 0) {
+			$('li#pause_selected a').addClass('disabled');			
+		} else {
+			$('li#pause_selected a.disabled').removeClass('disabled');
+		}
+		
+		if (this._num_selected_paused_torrents == 0) {
+			$('li#resume_selected a').addClass('disabled');			
+		} else {
+			$('li#resume_selected a.disabled').removeClass('disabled');
+		}
+		
+		if (this.numSelectedTorrents() == 0) {
+			$('li#remove a').addClass('disabled');
+		} else {
+			$('li#remove a.disabled').removeClass('disabled');
+		}
+		
+		if (this._num_active_torrents == 0) {
+			$('li#pause_all a').addClass('disabled');
+		} else {
+			$('li#pause_all a.disabled').removeClass('disabled');
+		}
+		
+		if (this._num_paused_torrents == 0) {
+			$('li#resume_all a').addClass('disabled');
+		} else {
+			$('li#resume_all a.disabled').removeClass('disabled');
+		}
 	},
     
     /*
@@ -780,6 +839,13 @@ Transmission.prototype = {
             // Add to the collection
             this._torrents.set(torrent.id(), torrent);
             
+			// Keep track of torrent statuses
+			if (torrent.isActive()) {
+				this._num_active_torrents++;
+			} else {
+				this._num_paused_torrents++;
+			}
+			
             previous_torrent = torrent;
         }
 
@@ -1008,6 +1074,11 @@ Transmission.prototype = {
         var torrent_data;
         var torrent_ids = transmission._torrents.keys().clone();
         var new_torrents = [];
+			
+		this._num_active_torrents = 0;
+		this._num_paused_torrents = 0;
+		this._num_selected_active_torrents = 0;
+		this._num_selected_paused_torrents = 0;
 
 		// If the length of the new torrent_list isn't equal to the number of torrents in
 		// the browser (if a torrent has been added/deleted/filtered for example), we
@@ -1022,7 +1093,19 @@ Transmission.prototype = {
 	
 			// If this torrent already exists, refresh it & remove this ID from torrent_ids
 			if (torrent_ids.inArray(torrent_data.id)) {
-				transmission._torrents.item(torrent_data.id).refresh(torrent_data);
+				var torrent = transmission._torrents.item(torrent_data.id)
+				torrent.refresh(torrent_data);
+				if (torrent.isActive()) {
+					this._num_active_torrents++;
+					if (torrent.isSelected()) {
+						this._num_selected_active_torrents++;
+					}
+				} else {
+					this._num_paused_torrents++;
+					if (torrent.isSelected()) {
+						this._num_selected_paused_torrents++;
+					}
+				}
 				torrent_ids.remove(torrent_data.id);
 			
 			// Otherwise, this is a new torrent - add it
@@ -1051,6 +1134,9 @@ Transmission.prototype = {
 		
 		// Update global upload and download speed display
 		transmission.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
+		
+		// Update the button states
+		transmission.updateButtonStates();
 		
 		// Update the inspector
 		transmission.updateInspector();
@@ -1144,7 +1230,7 @@ Transmission.prototype = {
      */
     pauseSelectedTorrents: function() {
 		if (transmission.numSelectedTorrents() > 0) {				
-			transmission.pauseTorrents(this._selected_torrents.keys());
+			transmission.pauseTorrents(transmission._selected_torrents.keys());
 		}
     },
     
@@ -1153,7 +1239,7 @@ Transmission.prototype = {
      */
     resumeSelectedTorrents: function() {
 		if (transmission.numSelectedTorrents() > 0) {				
-			transmission.resumeTorrents(this._selected_torrents.keys());
+			transmission.resumeTorrents(transmission._selected_torrents.keys());
 		}		
     },	
 
@@ -1253,17 +1339,17 @@ Transmission.prototype = {
     /*
      * Pause torrents
      */
-    pauseTorrents: function(torrent_id_list) {
-		var json = torrent_id_list.json();
-		this.remoteRequest('pauseTorrents', json);
+    pauseTorrents: function(torrent_id_list) {		
+		var json_torrent_id_list = torrent_id_list.json();
+		this.remoteRequest('pauseTorrents', json_torrent_id_list);
     },
     
     /*
      * Resume torrents
      */
     resumeTorrents: function(torrent_id_list) {
-		var json = torrent_id_list.json();
-		this.remoteRequest('resumeTorrents', json);
+		var json_torrent_id_list = torrent_id_list.json();
+		this.remoteRequest('resumeTorrents', json_torrent_id_list);
     },
     
     /*

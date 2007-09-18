@@ -114,7 +114,7 @@ Hash.prototype = {
 	},
 
     /*
-     * Get an item from the hash
+     * Get an item from the hash by index
      */
 	itemByIndex: function(index) {
 		return this._items[this._keys[index]];
