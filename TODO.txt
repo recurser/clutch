@@ -10,6 +10,7 @@ TODO
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
 - Safari doesn't handle $.ajax::error properly if a request fails.
+- Enable-disable right-click-menu options depending on the status of the selected torrents
 
 - IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
 
