@@ -48,6 +48,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Add a preference for GUI refresh rate
 - Set top-level buttons to enabled/disabled depending on context to match the behaviour of transmission.app (eg. remove/pause/resume should be disabled if no torrents are selected, pause-all should be disabled if all torrents are paused etc).
 - Sorting torrents by strings (eg sort-by-name) is case-sensitive
 - Think the torrent.js 'completed' percentage being displayed is wrong (a fraction of 99 instead of 100).

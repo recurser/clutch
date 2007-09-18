@@ -8,7 +8,6 @@
 
 function Transmission(){
     // Constants
-	this._RefreshInterval        = 5000; // Milliseconds
 	this._FilterAll              = 'all';
 	this._FilterSeeding          = 'seeding';
 	this._FilterDownloading      = 'downloading';
@@ -52,7 +51,7 @@ Transmission.prototype = {
         this._num_selected_active_torrents = 0;
         
         // Get the initial settings from the remote server
-        this.requestSettings();
+        this.remoteRequest('requestSettings');
         
         // Observe key presses
 		$(document).bind('keydown', {transmission: this}, this.keyDown);
@@ -155,6 +154,46 @@ Transmission.prototype = {
     numSelectedTorrents: function() {
 		return this._selected_torrents.length()
     },
+
+
+
+
+    
+    /*--------------------------------------------
+     * 
+     *  E V E N T   F U N C T I O N S
+     * 
+     *--------------------------------------------*/
+    
+    /*
+     * Process key event
+     */
+    keyDown: function(event) {
+		
+		var transmission = event.data.transmission;
+        var selected_torrent;
+
+        // Down Arrow Key
+        if (event.keyCode == 40 && transmission._lowest_selected != null) {
+            selected_torrent = transmission._lowest_selected;
+            if (selected_torrent.nextTorrent() != null) {
+                selected_torrent = selected_torrent.nextTorrent();
+            }
+            transmission.deselectAll();
+            selected_torrent.select();
+            transmission._last_torrent_clicked = selected_torrent;
+            
+        // Up Arrow key	
+        } else if (event.keyCode == 38) {
+            selected_torrent = transmission._highest_selected;
+            if (selected_torrent.previousTorrent() != null) {
+                selected_torrent = selected_torrent.previousTorrent();
+            }
+            transmission.deselectAll();
+            selected_torrent.select();
+            transmission._last_torrent_clicked = selected_torrent;
+		}
+    },
     
     /*
      * Register the specified torrent as selected
@@ -250,46 +289,6 @@ Transmission.prototype = {
 			if (!ignore_inspector_update) {
 				transmission.updateInspector();
 			}
-		}
-    },
-
-
-
-
-    
-    /*--------------------------------------------
-     * 
-     *  E V E N T   F U N C T I O N S
-     * 
-     *--------------------------------------------*/
-    
-    /*
-     * Process key event
-     */
-    keyDown: function(event) {
-		
-		var transmission = event.data.transmission;
-        var selected_torrent;
-
-        // Down Arrow Key
-        if (event.keyCode == 40 && transmission._lowest_selected != null) {
-            selected_torrent = transmission._lowest_selected;
-            if (selected_torrent.nextTorrent() != null) {
-                selected_torrent = selected_torrent.nextTorrent();
-            }
-            transmission.deselectAll();
-            selected_torrent.select();
-            transmission._last_torrent_clicked = selected_torrent;
-            
-        // Up Arrow key	
-        } else if (event.keyCode == 38) {
-            selected_torrent = transmission._highest_selected;
-            if (selected_torrent.previousTorrent() != null) {
-                selected_torrent = selected_torrent.previousTorrent();
-            }
-            transmission.deselectAll();
-            selected_torrent.select();
-            transmission._last_torrent_clicked = selected_torrent;
 		}
     },
 
@@ -442,11 +441,11 @@ Transmission.prototype = {
 	},
 
 	/*
-	 * Process a mouse-up event on the 'filter paused' button
+	 * Turn the periodic ajax-refresh on & off
 	 */
 	togglePeriodicRefresh: function(state) {
 		if (state && this._periodic_refresh == null) {
-			this._periodic_refresh = setInterval('transmission.reloadTorrents()', this._RefreshInterval);
+			this._periodic_refresh = setInterval('transmission.reloadTorrents()', this._refresh_rate * 1000);
 		} else {
 			clearInterval(this._periodic_refresh);
 			this._periodic_refresh = null;
@@ -513,7 +512,11 @@ Transmission.prototype = {
 		$('div.preference input[@type=text]:not(#download_location)').blur( function() {
 			this.value = this.value.replace(/[^0-9]/gi, '');
 			if (this.value == '') {
-				this.value = 0;
+				if ($(this).is('#refresh_rate')) {
+					this.value = 5;
+				} else {
+					this.value = 0;
+				}
 			}
 		});
     },
@@ -530,9 +533,10 @@ Transmission.prototype = {
 		$('input#download_rate')[0].value              = settings.download_rate;
 		$('input#limit_upload')[0].checked             = settings.limit_upload;
 		$('input#upload_rate')[0].value                = settings.upload_rate;
-		$('form#prefs_form input#over_ride_rate')[0].value             = settings.over_ride_rate;
+		$('form#prefs_form input#over_ride_rate')[0].value = settings.over_ride_rate;
 		$('input#over_ride_download_rate')[0].value    = settings.over_ride_download_rate;
 		$('input#over_ride_upload_rate')[0].value      = settings.over_ride_upload_rate;
+		$('input#refresh_rate')[0].value               = settings.refresh_rate;
 		
 		// Set the download rate
 		$('#limited_download_rate')[0].innerHTML = 'Limit (' + settings.download_rate + ' KB/s)';
@@ -555,6 +559,13 @@ Transmission.prototype = {
 			transmission.activateSpeedLimit(false);
 		} else {
 			transmission.deactivateSpeedLimit(false);
+		}
+		
+		// Update the refresh rate and force the new value to be used next refresh
+		transmission._refresh_rate = parseInt(settings.refresh_rate);
+		if (transmission._periodic_refresh) {
+			transmission.togglePeriodicRefresh(false);
+			transmission.togglePeriodicRefresh(true);
 		}
 		
 		$('#prefs_container').hide();	
@@ -1294,13 +1305,6 @@ Transmission.prototype = {
      */
 	setPreference: function(key, value) {
         this.remoteRequest('setPreferences', '{"'+key+'":'+value+'}');	
-    },
-    
-    /*
-     * Request the initial settings for the web client (up/down speed etc)
-     */
-	requestSettings: function() {
-        this.remoteRequest('requestSettings');	
     },
     
     /*

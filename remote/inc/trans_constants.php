@@ -31,6 +31,7 @@ define('DefaultDownloadRate',          10);
 define('DefaultUploadRate',            10);
 define('DefaultOverRideDownloadRate',  10);
 define('DefaultOverRideUploadRate',    10);
+define('DefaultRefreshRate',           5);
 
 // Preferences
 $CONST['default_preferences'] = array(
@@ -45,7 +46,8 @@ $CONST['default_preferences'] = array(
 	'download_rate'            => DefaultDownloadRate,
 	'upload_rate'              => DefaultUploadRate,
 	'over_ride_download_rate'  => DefaultOverRideDownloadRate,
-	'over_ride_upload_rate'    => DefaultOverRideUploadRate
+	'over_ride_upload_rate'    => DefaultOverRideUploadRate,
+	'refresh_rate'             => DefaultRefreshRate
 );
 
 
