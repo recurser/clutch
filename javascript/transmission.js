@@ -625,12 +625,13 @@ Transmission.prototype = {
 		
 		// Setup the context menu
 		$('ul#torrent_list').contextMenu('torrent_context_menu', {
-			bindings:        bindings,
-			menuStyle:       Menu.context.menu_style,
-			itemStyle:       Menu.context.item_style,
-			itemHoverStyle:  Menu.context.item_hover_style,
-			boundingElement: $('div#torrent_container'),
-			boundingRightPad: 20,
+			bindings:          bindings,
+			menuStyle:         Menu.context.menu_style,
+			itemStyle:         Menu.context.item_style,
+			itemHoverStyle:    Menu.context.item_hover_style,
+			itemDisabledStyle: Menu.context.item_disabled_style,
+			boundingElement:   $('div#torrent_container'),
+			boundingRightPad:  20,
 			boundingBottomPad: 5
 		});
 	},
@@ -653,17 +654,20 @@ Transmission.prototype = {
      * Enable/disable the button states
      */
 	updateButtonStates: function() {
-		
 		if (this._num_selected_active_torrents == 0) {
-			$('li#pause_selected a').addClass('disabled');			
+			$('li#pause_selected a').addClass('disabled');
+			$('li.context_pause_selected').addClass('disabled');		
 		} else {
 			$('li#pause_selected a.disabled').removeClass('disabled');
+			$('li.context_pause_selected').removeClass('disabled');
 		}
 		
 		if (this._num_selected_paused_torrents == 0) {
-			$('li#resume_selected a').addClass('disabled');			
+			$('li#resume_selected a').addClass('disabled');
+			$('li.context_resume_selected').addClass('disabled');
 		} else {
 			$('li#resume_selected a.disabled').removeClass('disabled');
+			$('li.context_resume_selected').removeClass('disabled');
 		}
 		
 		if (this.numSelectedTorrents() == 0) {
@@ -683,6 +687,8 @@ Transmission.prototype = {
 		} else {
 			$('li#resume_all a.disabled').removeClass('disabled');
 		}
+		
+		return true;
 	},
     
     /*

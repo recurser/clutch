@@ -41,6 +41,10 @@
       border: '1px solid #0a246a',
       backgroundColor: '#b6bdd2'
     },
+    itemDisabledStyle: {
+      color: '#999',
+      backgroundColor: 'transparent'
+    },
     eventPosX: 'pageX',
     eventPosY: 'pageY',
     shadow : true,
@@ -76,6 +80,7 @@
       boundingRightPad: options.boundingRightPad || defaults.boundingRightPad,
       boundingBottomPad: options.boundingBottomPad || defaults.boundingBottomPad,
       itemHoverStyle: $.extend({}, defaults.itemHoverStyle, options.itemHoverStyle || {}),
+      itemDisabledStyle: $.extend({}, defaults.itemDisabledStyle, options.itemDisabledStyle || {}),
       bindings: options.bindings || {},
       shadow: options.shadow || options.shadow === false ? options.shadow : defaults.shadow,
       onContextMenu: options.onContextMenu || defaults.onContextMenu,
@@ -95,9 +100,10 @@
   };
 
   function display(index, trigger, e, options) {
-    var cur = hash[index];
+	var cur = hash[index];	
     content = $('#'+cur.id).find('ul:first').clone(true);
-    content.css(cur.menuStyle).find('li').css(cur.itemStyle).hover(
+    content.css(cur.menuStyle).find('li.disabled').css(cur.itemDisabledStyle);
+    content.css(cur.menuStyle).find('li:not(.disabled)').css(cur.itemStyle).hover(
       function() {
         $(this).css(cur.itemHoverStyle);
       },
@@ -117,7 +123,9 @@
     $.each(cur.bindings, function(id, func) {
       $('#'+id, menu).bind('click', function(e) {
         hide();
-        func(trigger, currentTarget);
+        if (! $(this).is('.disabled')) {
+          func(trigger, currentTarget);
+        }
       });
     });
 	

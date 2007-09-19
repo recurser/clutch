@@ -32,6 +32,15 @@ Menu = {
 		item_hover_style: {
 			backgroundColor: '#3875D7',
 			color: '#ddd',
+			border: 'none'},
+		
+		item_disabled_style: {
+			backgroundColor: '#F4F5EB',
+			margin: '0 2px',
+			padding: '5px 15px',
+			color: '#999',
+			fontSize: '11px',
+			cursor: 'default',
 			border: 'none'}
 	}
 	
