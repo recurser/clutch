@@ -4,7 +4,6 @@ TODO
 - Bottom Menu
 	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
 - Need to validate the torrent upload stuff and report proper error messages
-- Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Report an error if the preferences download folder doesn't exist.
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
@@ -49,6 +48,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Add a preference for GUI refresh rate
 - Set top-level buttons to enabled/disabled depending on context to match the behaviour of transmission.app (eg. remove/pause/resume should be disabled if no torrents are selected, pause-all should be disabled if all torrents are paused etc).
 - Sorting torrents by strings (eg sort-by-name) is case-sensitive

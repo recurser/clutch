@@ -1379,13 +1379,11 @@ Transmission.prototype = {
 			
 			if (confirmed !== true) {
 				// TODO - proper calculation of active torrents
-				var num_active_torrents  = num_torrents;
-				var confirm_button_label = 'Remove';
 				var dialog_heading       = 'Confirm Removal of ' + num_torrents + ' Transfers';
-				var dialog_message = 'There are ' + num_torrents + ' transfers (' + num_active_torrents;
+				var dialog_message = 'There are ' + num_torrents + ' transfers (' + transmission._num_selected_active_torrents;
 				dialog_message    += ' active). Once Removed,<br />continuing the transfers will require the torrent files.';
 				dialog_message    += '<br />Do you really want to remove them?';
-				dialog.confirm(dialog_heading, dialog_message, confirm_button_label, 'transmission.removeSelectedTorrents(true)');
+				dialog.confirm(dialog_heading, dialog_message, 'Remove', 'transmission.removeSelectedTorrents(true)');
 			
 			} else {	
 				// Send an ajax request to perform the action
