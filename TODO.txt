@@ -6,7 +6,6 @@ TODO
 - Need to validate the torrent upload stuff and report proper error messages
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Report an error if the preferences download folder doesn't exist.
-- Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
 - Safari doesn't handle $.ajax::error properly if a request fails.
 - Enable-disable right-click-menu options depending on the status of the selected torrents
@@ -48,6 +47,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Add a preference for GUI refresh rate
 - Set top-level buttons to enabled/disabled depending on context to match the behaviour of transmission.app (eg. remove/pause/resume should be disabled if no torrents are selected, pause-all should be disabled if all torrents are paused etc).

@@ -90,7 +90,8 @@ Dialog.prototype = {
 		$('.dialog_container').hide();
 		this._heading[0].innerHTML = dialog_heading;
 		this._message[0].innerHTML = dialog_message;
-		this._confirm_button.hide();
+		// jquery::hide() doesn't work here in Safari for some odd reason
+		this._confirm_button.css('display', 'none');
 		this._cancel_button[0].innerHTML = cancel_button_label;
 		$('upload_container').hide(); // Just in case
 		this._container.show();
