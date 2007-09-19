@@ -1,11 +1,8 @@
 
 TODO
 ==================================================
-- Bottom Menu
-	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
 - Need to validate the torrent upload stuff and report proper error messages
 - Report an error if the preferences download folder doesn't exist.
-- Safari doesn't handle $.ajax::error properly if a request fails.
 
 - IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
 
@@ -29,6 +26,7 @@ CHECK
 
 IN THE FUTURE (?)
 ==================================================
+- Safari doesn't handle $.ajax::error properly if a request fails. * Dave - tried a few different fixes for this but nothing works. More for peace of mind than anything, not really a big deal but try and get it working eventually *
 - Safari sometimes tries to re-upload a torrent if the page is refreshed after an upload (think it's remembering the iframe location or re-posting or something). Tried to fix it in upload_reponse.php but it only seems to work intermittently. May have to create the iframe programmatically to get around this?
 - Get better 'unsupported browser' icons.
 - Make 'Checking existing files' stuff use the orange bar from the latest transmission version.
@@ -90,6 +88,7 @@ DONE
 - Inspector
 	- Make the whole inspector wider? Hash currently clipped
 - Bottom Menu
+	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows * Seems to be ok now, a little slow to hide submenus but nothing serious *
 	- Figure out how that blue-turtle button is supposed to work & implement it
 	- server-side sqlite prefs to remember sort method etc?
 	- Separators between menu sections
