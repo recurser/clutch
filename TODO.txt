@@ -4,9 +4,7 @@ TODO
 - Bottom Menu
 	- Menu pretty screwy on opera - need some alignment and show/hide fixes for the submenus & arrows
 - Need to validate the torrent upload stuff and report proper error messages
-- Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Report an error if the preferences download folder doesn't exist.
-- Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently.
 - Safari doesn't handle $.ajax::error properly if a request fails.
 - Enable-disable right-click-menu options depending on the status of the selected torrents
 
@@ -47,6 +45,8 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
+- Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently. * Seems to be fine now *
 - Safari doesn't hide the 'confirm' button for 'alert' dialogs (ie 'an error occurred' box has 2 buttons, confirm & dismiss, confusing).
 - Keep track of 'active' torrents in jscript controller for the torrent remove dialogue box.
 - Add a preference for GUI refresh rate
