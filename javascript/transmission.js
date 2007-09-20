@@ -831,28 +831,13 @@ Transmission.prototype = {
     /*
      * Load a list of torrents into the application
      */
-    addTorrents: function(torrent_list, initialise_list) {
+    addTorrents: function(torrent_list, previous_torrent) {
         var torrent_data;
         var torrent;
-        var previous_torrent;
-		var global_up_speed = 0;
-		var global_down_speed = 0;
 		
 		// Clear the inspector
 		this.deselectAll();
 		this.updateInspector();
-		
-		if (initialise_list == null) {
-			initialise_list = true;
-		}
-				
-		// Initialise the torrent lists (this function gets called for filtering as well as onLoad)
-		if (initialise_list) {
-			this.removeTorrents(this._torrents.keys());
-	        this._last_torrent_clicked = null;
-	        this._highest_selected = null;
-	        this._lowest_selected = null;
-        }
 		
 		var num_existing_torrents = this._torrents.length();
 		var num_new_torrents = torrent_list.length;
@@ -860,10 +845,6 @@ Transmission.prototype = {
             torrent_data = torrent_list[i];
             torrent_data.position = i+1+num_existing_torrents;
             torrent = new Torrent(torrent_data);
-            
-			// Set the global up and down speeds 
-			global_up_speed += torrent_data.upload_speed;
-			global_down_speed += torrent_data.download_speed;
 			
             // Set the controller
             torrent.setController(this);
@@ -886,9 +867,6 @@ Transmission.prototype = {
 			
             previous_torrent = torrent;
         }
-
-		// Update global upload and download speed display
-		this.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
     },
     
     /*
@@ -1097,21 +1075,21 @@ Transmission.prototype = {
     /*
      * Remove all the torrents from the interface to force a re-sort
      */
-    refreshAndSortTorrents: function(torrent_list) {
+    refreshAndSortTorrents: function(data) {
 		$('#upload_container').hide();
 		transmission.removeTorrents(transmission._torrents.keys().clone());
-		transmission.refreshTorrents(torrent_list);
+		transmission.refreshTorrents(data);
 	},
 
     /*
      * Load a list of torrents into the application
      */
-    refreshTorrents: function(torrent_list) {
-		var global_up_speed = 0;
-		var global_down_speed = 0;
+    refreshTorrents: function(data) {
         var torrent_data;
         var torrent_ids = transmission._torrents.keys().clone();
         var new_torrents = [];
+		var torrent_list = data.torrent_list;
+		var last_torrent;
 			
 		this._num_active_torrents = 0;
 		this._num_paused_torrents = 0;
@@ -1145,20 +1123,17 @@ Transmission.prototype = {
 					}
 				}
 				torrent_ids.remove(torrent_data.id);
+				last_torrent = torrent;
 			
 			// Otherwise, this is a new torrent - add it
 			} else {
 				new_torrents.push(torrent_data);
 			}
-			
-			// Keep track of global upload speeds
-			global_up_speed += torrent_data.upload_speed;
-			global_down_speed += torrent_data.download_speed;
         }
 		
 		// Add any torrents that aren't already being displayed
 		if (new_torrents.length > 0) {
-			transmission.addTorrents(new_torrents, false);
+			transmission.addTorrents(new_torrents, last_torrent);
 		}
 		
 		// Remove any torrents that are displayed but not in the refresh list
@@ -1171,7 +1146,7 @@ Transmission.prototype = {
 		transmission.setTorrentBgColors();
 		
 		// Update global upload and download speed display
-		transmission.setGlobalSpeeds(torrent_list.length, global_up_speed, global_down_speed);
+		transmission.setGlobalSpeeds(torrent_list.length,  data.total_upload_rate, data.total_download_rate);
 		
 		// Update the button states
 		transmission.updateButtonStates();

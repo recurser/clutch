@@ -406,9 +406,16 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			// First, need to get the IDs of all the torrents that match this type
 			// Need to look through all the torrents & figure out which ones we want
 			// Is there an easier way to do this?
-			$tempTorrentList = $this->mergeTorrentData($this->M->GetInfoAll('id'), $this->M->GetStatusAll('state'));
-			$idList = array();
+			$tempTorrentList = $this->mergeTorrentData(
+									$this->M->GetInfoAll('id'), 
+									$this->M->GetStatusAll('state', 'download-speed', 'upload-speed')
+								);
+			$idList            = array();
+			$TotalDownloadRate = 0;
+			$TotalUploadRate   = 0;
 			foreach ($tempTorrentList as $row) {
+				$TotalDownloadRate += $row['download_speed'];
+				$TotalUploadRate   += $row['upload_speed'];
 				if ($filterType == $row['state'] || $filterType == FilterAll) { 
 					$idList[] = (int) $row['id'];
 				}
@@ -452,6 +459,13 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 				}
 				$result = array_values($result);
 			}
+			
+			// Include total down and up rates in the result
+			$result = array(
+						'total_download_rate' => $TotalDownloadRate,
+						'total_upload_rate'   => $TotalUploadRate,
+						'torrent_list'        => $result
+					);
 			
 			// Store these settings for the future
 			$this->Preferences->SetPreference('filter', $filterType);
