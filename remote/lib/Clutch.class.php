@@ -261,8 +261,15 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function AddTorrentByUpload($formname, $directory = null)
 		{
+			if (! $directory) {
+				$response = $this->M->GetDefaultDirectory();
+				$directory = $response[1];
+			}
+			
 			if (!is_uploaded_file($_FILES[$formname]['tmp_name']))
 				return $this->Error('No file uploaded');
+			else if (!is_dir($directory))
+				return $this->Error("The upload directory doesn't exist. (" . $directory . ")");
 			else
 			{
 				$parts = pathinfo($_FILES[$formname]['name']);

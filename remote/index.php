@@ -137,9 +137,12 @@
 							'transmission.togglePeriodicRefresh' => "true"
 						);
 				} else {
-					$arg_list = "'Upload Error', 'An unexpected error occured', 'Dismiss'";
+					$error = addslashes($Instance->GetError());
+					if (!$error || $error == '') {
+						$error = 'An unexpected error occured. The torrent you uploaded may already be running.';
+					}
 					$actions = array(
-							'dialog.alert' => "'Upload Error', 'An unexpected error occured', 'Dismiss'",
+							'dialog.alert' => "'Upload Error', '${error}', 'Dismiss'",
 							'transmission.togglePeriodicRefresh' => "true"
 						);
 				}

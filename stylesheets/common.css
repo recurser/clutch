@@ -614,6 +614,7 @@ div.dialog_container div.dialog_window div.dialog_message {
 	float: left;
 	width: 305px;
 	height: 55px;
+	overflow: hidden;
 	}
 	
 div.dialog_container div.dialog_window a {

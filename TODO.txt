@@ -1,7 +1,6 @@
 
 TODO
 ==================================================
-- Need to validate the torrent upload stuff and report proper error messages
 - Report an error if the preferences download folder doesn't exist.
 
 - IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
@@ -26,6 +25,7 @@ CHECK
 
 IN THE FUTURE (?)
 ==================================================
+- Need to validate the torrent upload stuff and report proper error messages * Dave - Done as much as we can... would be good to get error messages back from the daemon in the future *
 - Safari doesn't handle $.ajax::error properly if a request fails. * Dave - tried a few different fixes for this but nothing works. More for peace of mind than anything, not really a big deal but try and get it working eventually *
 - Safari sometimes tries to re-upload a torrent if the page is refreshed after an upload (think it's remembering the iframe location or re-posting or something). Tried to fix it in upload_reponse.php but it only seems to work intermittently. May have to create the iframe programmatically to get around this?
 - Get better 'unsupported browser' icons.
