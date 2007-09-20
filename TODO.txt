@@ -41,6 +41,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Display 'filter' in the search box on blur so users know what it's for.
 - Report an error if the preferences download folder doesn't exist.
 - Enable-disable right-click-menu options depending on the status of the selected torrents
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)

@@ -88,7 +88,7 @@ Transmission.prototype = {
 		// Setup the footer settings menu
 		this.createSettingsMenu();
 		
-		// Setup the search box
+		// Setup the preference box
 		this.setupPrefs();
     },
     
@@ -613,10 +613,20 @@ Transmission.prototype = {
      */
     setupSearchBox: function() {
 		var search_box = $('#torrent_search');
-		search_box[0].value = '';
+		search_box[0].value = 'filter';
 		search_box.bind('keyup', {transmission: this}, function(event) {
-			var transmission = event.data.transmission;
-			transmission._current_search = this.value.trim();
+			event.data.transmission._current_search = this.value.trim();
+		}).bind('blur', {transmission: this}, function(event) {
+			if (this.value == '') {
+				$(this).addClass('blur');
+				this.value = 'filter';
+				event.data.transmission._current_search = '';
+			}
+		}).bind('focus', {}, function(event) {
+			if ($(this).is('.blur')) {
+				this.value = '';
+				$(this).removeClass('blur');
+			}
 		});
     },
     

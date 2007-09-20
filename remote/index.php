@@ -13,30 +13,27 @@
 	$Instance = new Clutch($MControl, $Preferences);
 	
 	// Initialise the filter type
-	//session_start();
-	if (!isset($_SESSION['filterType'])) {
+	if (!isset($_SESSION['filterType'])) 
 		$_SESSION['filterType'] = FilterAll;
-	}
 			
 	if (isset($_GET['action']) && 
 		isset($_GET['param']) && 
 		isset($_GET['filter']) && 
 		isset($_GET['sort_method']) && 
-		isset($_GET['sort_direction'])) {
+		isset($_GET['sort_direction'])) 
+	{
 			
-		$actions = array('transmission.ignore' => '');
-		$arg_list = '';	
-		$is_upload = false;
+		$Actions = array('transmission.ignore' => '');
+		$IsUpload = false;
 		
 		// Initialise the sort string if it's null
-		if (! isset($_GET['search'])) {
+		if (! isset($_GET['search'])) 
 			$_GET['search'] = '';
-		}
 		
-		$info_fields = array(
+		$InfoFields = array(
 				"id", "hash", "name", "path", "saved", "private", 
 				"trackers", "comment", "creator", "date", "size");
-		$status_fields = array(
+		$StatusFields = array(
 				"completed", "download-speed", "download-total", "error", 
 				"error-message", "eta", "id", "peers-downloading", 
 				"peers-from", "peers-total", "peers-uploading", "running", 
@@ -46,22 +43,25 @@
 		switch($_GET['action']) 
 		{	
 			case 'requestSettings' :
-				$arg_list = $Instance->getInitialSettings();
-				$actions = array('transmission.initializeSettings' => $arg_list);
+				$ArgList = $Instance->getInitialSettings();
+				$Actions = array('transmission.initializeSettings' => $ArgList);
 				break;
 				
 			case 'savePrefs' :
-				if ($Instance->savePrefs()) {
-					$arg_list = $Instance->getInitialSettings();
-					$actions = array('transmission.updatePrefs' => $arg_list);
-				} else {
-					$actions = array('transmission.preferenceError' => "'".addslashes($Instance->GetError())."'");
+				if ($Instance->savePrefs()) 
+				{
+					$ArgList = $Instance->getInitialSettings();
+					$Actions = array('transmission.updatePrefs' => $ArgList);
+				}
+				else
+				{
+					$Actions = array('transmission.preferenceError' => "'".addslashes($Instance->GetError())."'");
 				}
 				break;
 				
 			case 'resetPrefs' :
-				$arg_list = $Instance->getInitialSettings();
-				$actions = array('transmission.updatePrefs' => $arg_list);
+				$ArgList = $Instance->getInitialSettings();
+				$Actions = array('transmission.updatePrefs' => $ArgList);
 				break;
 				
 			case 'setOverRide' :
@@ -69,82 +69,85 @@
 				break;
 				
 			case 'refreshTorrents' :
-				$arg_list = $Instance->filterTorrents($info_fields, 
-								$status_fields, 
+				$ArgList = $Instance->filterTorrents($InfoFields, 
+								$StatusFields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
 								$_GET['sort_direction'], 
 								$_GET['search']);
-				$actions = array('transmission.refreshTorrents' => $arg_list);
+				$Actions = array('transmission.refreshTorrents' => $ArgList);
 				break;
 	
 			case 'pauseTorrents' :
 				$Instance->pauseTorrents($_GET['param']);
-				$arg_list = $Instance->filterTorrents($info_fields, 
-								$status_fields, 
+				$ArgList = $Instance->filterTorrents($InfoFields, 
+								$StatusFields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
 								$_GET['sort_direction'], 
 								$_GET['search']);
-				$actions = array('transmission.refreshTorrents' => $arg_list);
+				$Actions = array('transmission.refreshTorrents' => $ArgList);
 				break;
 	
 			case 'resumeTorrents' :
 				$Instance->resumeTorrents($_GET['param']);
-				$arg_list = $Instance->filterTorrents($info_fields, 
-								$status_fields, 
+				$ArgList = $Instance->filterTorrents($InfoFields, 
+								$StatusFields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
 								$_GET['sort_direction'], 
 								$_GET['search']);
-				$actions = array('transmission.refreshTorrents' => $arg_list);
+				$Actions = array('transmission.refreshTorrents' => $ArgList);
 				break;
 	
 			case 'removeTorrents' :
-				$arg_list = $Instance->removeTorrents($_GET['param']);
-				$actions = array('transmission.removeTorrents' => $arg_list);
+				$ArgList = $Instance->removeTorrents($_GET['param']);
+				$Actions = array('transmission.removeTorrents' => $ArgList);
 				break;
 	
 			case 'filterTorrents' :
-				$arg_list = $Instance->filterTorrents($info_fields, 
-								$status_fields, 
+				$ArgList = $Instance->filterTorrents($InfoFields, 
+								$StatusFields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
 								$_GET['sort_direction'], 
 								$_GET['search']);
-				$actions = array('transmission.refreshTorrents' => $arg_list);
+				$Actions = array('transmission.refreshTorrents' => $ArgList);
 				break;
 	
 			case 'sortTorrents' :
-				$arg_list = $Instance->filterTorrents($info_fields, 
-								$status_fields, 
+				$ArgList = $Instance->filterTorrents($InfoFields, 
+								$StatusFields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
 								$_GET['sort_direction'], 
 								$_GET['search']);
-				$actions = array('transmission.refreshAndSortTorrents' => $arg_list);
+				$Actions = array('transmission.refreshAndSortTorrents' => $ArgList);
 				break;
 	
 			case 'uploadTorrent' :
-				$is_upload = true;
-				$response = $Instance->AddTorrentByUpload('torrent_file', null);
-				if (isset($response[1][0]['id'])) {
-					$arg_list = $Instance->filterTorrents($info_fields, 
-								$status_fields, 
+				$IsUpload = true;
+				$Response = $Instance->AddTorrentByUpload('torrent_file', null);
+				if (isset($Response[1][0]['id'])) 
+				{
+					$ArgList = $Instance->filterTorrents($InfoFields, 
+								$StatusFields, 
 								$_GET['filter'], 
 								$_GET['sort_method'], 
 								$_GET['sort_direction'], 
 								$_GET['search']);
-					$actions = array(
-							'transmission.refreshAndSortTorrents' => $arg_list,
+					$Actions = array(
+							'transmission.refreshAndSortTorrents' => $ArgList,
 							'transmission.togglePeriodicRefresh' => "true"
 						);
-				} else {
-					$error = addslashes($Instance->GetError());
-					if (!$error || $error == '') {
-						$error = 'An unexpected error occured. The torrent you uploaded may already be running.';
-					}
-					$actions = array(
+				} 
+				else 
+				{
+					$Error = addslashes($Instance->GetError());
+					if (!$Error || $Error == '')
+						$Error = 'An unexpected error occured. The torrent you uploaded may already be running.';
+						
+					$Actions = array(
 							'dialog.alert' => "'Upload Error', '${error}', 'Dismiss'",
 							'transmission.togglePeriodicRefresh' => "true"
 						);
@@ -160,24 +163,25 @@
 				break;
 				
 			case 'setPreferences' :
-				$preferenceList = json_decode(stripslashes($_GET['param']));
-				foreach ($preferenceList as $key=>$value) {
+				$PreferenceList = json_decode(stripslashes($_GET['param']));
+				foreach ($PreferenceList as $key=>$value)
 					$Preferences->SetPreference($key, $value);
-				}
+					
 				break;
 		}
 				
 		// Encode and output the response
-		if (!$is_upload) {
+		if (!$IsUpload) 
+		{
 			// Set the mime type (forces jquery to auto-eval())
 			header('Content-type: text/javascript');
-			foreach ($actions as $command => $arguments) {
-				echo $command . "(" . $arguments . ");";
-			}
-			
+			foreach ($Actions as $Command => $Arguments)
+				echo $Command . "(" . $Arguments . ");";			
+		} 
 		// Safari uploads require the onLoad code to be inside the returned page - not 
 		// bound to the frame itself by the parent.
-		} else {
+		else 
+		{
 			include('upload_response.php');
 		}	
 	}

@@ -303,7 +303,13 @@ div#torrent_filter_bar input#torrent_search {
 	height: 15px;
 	width: 100px;
 	border:solid 0 #fff;
+	padding-left: 2px;
+	padding-right: 2px;
 	margin: 4px 5px 0 0;
+	}
+	
+div#torrent_filter_bar input#torrent_search.blur {
+	color: #999;
 	}
  
  
