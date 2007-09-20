@@ -68,6 +68,11 @@
 		public function savePrefs() {
 			$prefs = $_POST;
 			
+			// Make sure the download directory exists
+			if (! is_dir($prefs['download_location'])) {
+				return $this->Error("The download directory doesn't exist.");
+			}
+			
 			// The checkbox-based prefs won't be passed if they're not selected
 			if (! array_key_exists('auto_start', $prefs)) { $prefs['auto_start'] = false; }
 			if (! array_key_exists('limit_download', $prefs)) { $prefs['limit_download'] = false; }
@@ -115,6 +120,8 @@
 					$this->M->SetUploadLimit(-1);
 				}
 			}
+			
+			return true;
 		}
 
 		/* public setOverRide([(bool) $overRide])
@@ -269,7 +276,7 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 			if (!is_uploaded_file($_FILES[$formname]['tmp_name']))
 				return $this->Error('No file uploaded');
 			else if (!is_dir($directory))
-				return $this->Error("The upload directory doesn't exist. (" . $directory . ")");
+				return $this->Error("The download directory doesn't exist. Please check your preferences.");
 			else
 			{
 				$parts = pathinfo($_FILES[$formname]['name']);

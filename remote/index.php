@@ -51,9 +51,12 @@
 				break;
 				
 			case 'savePrefs' :
-				$Instance->savePrefs();
-				$arg_list = $Instance->getInitialSettings();
-				$actions = array('transmission.updatePrefs' => $arg_list);
+				if ($Instance->savePrefs()) {
+					$arg_list = $Instance->getInitialSettings();
+					$actions = array('transmission.updatePrefs' => $arg_list);
+				} else {
+					$actions = array('transmission.preferenceError' => "'".addslashes($Instance->GetError())."'");
+				}
 				break;
 				
 			case 'resetPrefs' :

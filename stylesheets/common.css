@@ -721,6 +721,25 @@ div#prefs_container div#download_location input {
 div#prefs_container a {
 	clear: left;
 	}
+	
+div#prefs_container h2.dialog_heading {
+	display: none;
+	}
+	
+div#prefs_container div#pref_error {
+	display: none;
+	width: 395px;
+	margin: 6px auto 6px auto;
+	padding: 3px 0 3px 0;
+	border: 2px solid #cc3333;
+	color: #cc3333;
+	font-size: 1.2em;
+	vertical-align: middle;
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	background-color: #FFEFEF;
+	}
 
 
 /*--------------------------------------

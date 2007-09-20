@@ -1,7 +1,6 @@
 
 TODO
 ==================================================
-- Report an error if the preferences download folder doesn't exist.
 
 - IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
 
@@ -42,6 +41,7 @@ IN THE FUTURE (?)
 
 DONE
 ==================================================
+- Report an error if the preferences download folder doesn't exist.
 - Enable-disable right-click-menu options depending on the status of the selected torrents
 - Get someone with some photoshop skills to fix up my crappy filter hover backgrounds :)
 - Submitting a safari upload with no torrent file selected seems to hang the daemon intermittently. * Seems to be fine now *

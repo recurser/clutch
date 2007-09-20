@@ -580,6 +580,15 @@ Transmission.prototype = {
 	},
     
     /*
+     * Display an error if a preference update request fails
+     */
+    preferenceError: function(error_msg) {
+		$('div#prefs_container h2.dialog_heading').hide();
+		$('div#prefs_container div#pref_error')[0].innerHTML = error_msg;
+		$('div#prefs_container div#pref_error').show();
+	},
+    
+    /*
      * Select all torrents in the list
      */
     selectAll: function() {
@@ -704,6 +713,8 @@ Transmission.prototype = {
 			// Display the preferences dialog
 			case 'footer_super_menu':
 				if ($(element)[0].id == 'preferences') {
+					$('div#prefs_container div#pref_error').hide();
+					$('div#prefs_container h2.dialog_heading').show();
 					$('#prefs_container').show();
 				}
 				break;
@@ -1366,6 +1377,10 @@ Transmission.prototype = {
      * Save preferences
      */
     savePrefs: function() {	
+		// Clear any errors
+		$('div#prefs_container div#pref_error').hide();
+		$('div#prefs_container h2.dialog_heading').show();
+					
 		// Set the form action with the appropriate params
 		$('#prefs_form')[0].action = 'remote/?action=savePrefs&param=[]' + 
 				'&filter=' + transmission._current_filter +
