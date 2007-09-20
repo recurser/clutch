@@ -148,7 +148,7 @@
 						$Error = 'An unexpected error occured. The torrent you uploaded may already be running.';
 						
 					$Actions = array(
-							'dialog.alert' => "'Upload Error', '${error}', 'Dismiss'",
+							'dialog.alert' => "'Upload Error', '${Error}', 'Dismiss'",
 							'transmission.togglePeriodicRefresh' => "true"
 						);
 				}

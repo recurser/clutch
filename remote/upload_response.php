@@ -9,8 +9,8 @@
 			 
 			$(document).ready( function() {
 <?php
-			foreach ($actions as $command => $arguments) {
-				echo "top." . $command . "(" . $arguments . ");";
+			foreach ($Actions as $Command => $Arguments) {
+				echo "top." . $Command . "(" . $Arguments . ");";
 			}
 ?>
 				// Safari remembers the iframe location on reload - redirect to make sure jscript is not executed twice
