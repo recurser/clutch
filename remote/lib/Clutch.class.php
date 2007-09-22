@@ -44,21 +44,21 @@
 		/* public GetInitialSettings()
 		 * Get the initial settings for the web client (up/down speed etc)
 		 *
-		 * @return array $result
+		 * @return array $Result
 		 */
 		public function GetInitialSettings() {
-			$result = array();			
+			$Result = array();			
 			
-			$auto_start                  = $this->M->GetAutoStart();
-			$result['auto_start']        = $auto_start[1];			
-			$download_location           = $this->M->GetDefaultDirectory();
-			$result['download_location'] = $download_location[1];			
-			$port                        = $this->M->GetPort();
-			$result['port']              = $port[1];	
+			$AutoStart                  = $this->M->GetAutoStart();
+			$Result['auto_start']        = $AutoStart[1];			
+			$DownloadLocation           = $this->M->GetDefaultDirectory();
+			$Result['download_location'] = $DownloadLocation[1];			
+			$Port                        = $this->M->GetPort();
+			$Result['port']              = $Port[1];	
 
-			$result = array_merge($result, $this->Preferences->GetAllPreferences());
+			$Result = array_merge($Result, $this->Preferences->GetAllPreferences());
 			
-			return json_encode($result);
+			return json_encode($Result);
 		}
 
 		/* public savePrefs()
@@ -66,56 +66,56 @@
 		 *
 		 */
 		public function savePrefs() {
-			$prefs = $_POST;
+			$Prefs = $_POST;
 			
 			// Make sure the download directory exists
-			if (! is_dir($prefs['download_location'])) {
+			if (! is_dir($Prefs['download_location'])) {
 				return $this->Error("The download directory doesn't exist.");
 			}
 			
 			// The checkbox-based prefs won't be passed if they're not selected
-			if (! array_key_exists('auto_start', $prefs)) { $prefs['auto_start'] = false; }
-			if (! array_key_exists('limit_download', $prefs)) { $prefs['limit_download'] = false; }
-			if (! array_key_exists('limit_upload', $prefs)) { $prefs['limit_upload'] = false; }
+			if (! array_key_exists('auto_start', $Prefs)) { $Prefs['auto_start'] = false; }
+			if (! array_key_exists('limit_download', $Prefs)) { $Prefs['limit_download'] = false; }
+			if (! array_key_exists('limit_upload', $Prefs)) { $Prefs['limit_upload'] = false; }
 			
-			foreach ($prefs as $key=>$value) {
+			foreach ($Prefs as $Key=>$Value) {
 				
 				// Checkboxes pass selected state as 'on'
-				if ($value == 'on') {
-					$prefs[$key] = true;
+				if ($Value == 'on') {
+					$Prefs[$Key] = true;
 				}
 				
 				// Make sure 'rate' prefs are stored as ints
-				if (strpos($key, 'rate') !== false) {
-					$prefs[$key] = intval($value);
+				if (strpos($Key, 'rate') !== false) {
+					$Prefs[$Key] = intval($Value);
 				}
 			}
 			
 			// Set any daemon-specific settings
-			$this->M->SetAutoStart(intval($prefs['auto_start']));
-			unset($prefs['auto_start']);
-			$this->M->SetPort(intval($prefs['port']));
-			unset($prefs['port']);
-			$this->M->SetDefaultDirectory($prefs['download_location']);
-			unset($prefs['download_location']);		
+			$this->M->SetAutoStart(intval($Prefs['auto_start']));
+			unset($Prefs['auto_start']);
+			$this->M->SetPort(intval($Prefs['port']));
+			unset($Prefs['port']);
+			$this->M->SetDefaultDirectory($Prefs['download_location']);
+			unset($Prefs['download_location']);		
 			
-			foreach ($prefs as $key=>$value) {								
-				$this->Preferences->SetPreference($key, $value);
+			foreach ($Prefs as $Key=>$Value) {								
+				$this->Preferences->SetPreference($Key, $Value);
 			}
 			
 			// Set the appropriate down & up rates
-			if ($prefs['over_ride_rate']) {
-				$this->M->SetDownloadLimit($prefs['over_ride_download_rate']);
-				$this->M->SetUploadLimit($prefs['over_ride_upload_rate']);
+			if ($Prefs['over_ride_rate']) {
+				$this->M->SetDownloadLimit($Prefs['over_ride_download_rate']);
+				$this->M->SetUploadLimit($Prefs['over_ride_upload_rate']);
 				
 			} else {
-				if ($prefs['limit_download']) {
-					$this->M->SetDownloadLimit($prefs['download_rate']);
+				if ($Prefs['limit_download']) {
+					$this->M->SetDownloadLimit($Prefs['download_rate']);
 				} else {
 					$this->M->SetDownloadLimit(-1);
 				}
-				if ($prefs['limit_upload']) {
-					$this->M->SetUploadLimit($prefs['upload_rate']);
+				if ($Prefs['limit_upload']) {
+					$this->M->SetUploadLimit($Prefs['upload_rate']);
 				} else {
 					$this->M->SetUploadLimit(-1);
 				}
@@ -124,15 +124,15 @@
 			return true;
 		}
 
-		/* public setOverRide([(bool) $overRide])
+		/* public setOverRide([(bool) $OverRide])
 		 * Set the speed-limit over-ride
 		 * Ex. setOverRide(true)
 		 *
 		 */
-		public function setOverRide($overRide = false)
+		public function setOverRide($OverRide = false)
 		{
 			// Set the up and down limits
-			if ($overRide) {
+			if ($OverRide) {
 				$this->M->SetDownloadLimit($this->Preferences->GetPreference('over_ride_download_rate'));
 				$this->M->SetUploadLimit($this->Preferences->GetPreference('over_ride_upload_rate'));
 			} else {
@@ -140,8 +140,8 @@
 				$this->M->SetUploadLimit($this->Preferences->GetPreference('upload_rate'));
 			}
 			
-			// Store the $overRide value in the preferences
-			$this->Preferences->SetPreference('over_ride_rate', intval($overRide));
+			// Store the $OverRide value in the preferences
+			$this->Preferences->SetPreference('over_ride_rate', intval($OverRide));
 						
 		}
 
@@ -155,41 +155,17 @@
 		public function TorrentSort(&$Torrents, $SortMethod = 'name', $SortOrder = SORT_ASC)
 		{
 			if (count($Torrents) > 0) {
-				$sortCriteria = array();
+				$SortCriteria = array();
 				foreach ($Torrents as $TorrentID => $TorrentInfo) {
-					$sortCriteria[$TorrentID] = strtolower($TorrentInfo[$SortMethod]);
+					$SortCriteria[$TorrentID] = strtolower($TorrentInfo[$SortMethod]);
 					
 					// Need to convert the criteria to lower case if it's a string to sort case-insensitively
-					if (is_string($sortCriteria[$TorrentID])) {
-						$sortCriteria[$TorrentID] = strtolower($sortCriteria[$TorrentID]);
+					if (is_string($SortCriteria[$TorrentID])) {
+						$SortCriteria[$TorrentID] = strtolower($SortCriteria[$TorrentID]);
 					}
 				}
-				array_multisort($sortCriteria, $SortOrder, SORT_STRING, $Torrents);
+				array_multisort($SortCriteria, $SortOrder, SORT_STRING, $Torrents);
 			}
-		}
-
-		/* public GetTorrents([(string) $SortMethod, [(int) $SortOrder]])
-		 * Gets an array containing all torrents and all information and sorts it
-		 * Ex. GetTorrents()
-		 *
-		 * Valid sort options are SORT_ASC and SORT_DESC
-		 * Do not attempt to sort using an array as the method. (EG. 'trackers' or 'files')
-		 *
-		 * Please note this function will get slower the more torrents there are.
-		 * We suggest you use the functions from the MessageController ( Interface::$M )
-		 * directly, instead of using this function
-	
-GET RID OF THIS FUNCTION IT SUCKZ0RS
-
-		 */
-		public function GetTorrents($SortMethod = 'id', $SortOrder = 4)
-		{
-			$TorrentInfos = $this->M->GetInfoAll('id', 'hash', 'name', 'path', 'saved', 'private', 'trackers', 'comment', 'creator', 'date', 'size', 'files');
-			$TorrentStatuses = $this->M->GetStatusAll('completed', 'download-speed', 'download-total', 'error', 'error-message', 'eta', 'id', 'peers-downloading', 'peers-from', 'peers-total', 'peers-uploading', 'running', 'state', 'swarm-speed', 'tracker', 'scrape-completed', 'scrape-leechers', 'scrape-seeders', 'upload-speed', 'upload-total');
-
-			$Torrents = $this->MergeArraysById($TorrentInfos, $TorrentStatuses);
-			$this->TorrentSort($Torrents, $SortMethod, $SortOrder);
-			return $Torrents;
 		}
 
 		/* public MergeArraysById((array) $Array1, (array) $Array2)
@@ -198,343 +174,313 @@ GET RID OF THIS FUNCTION IT SUCKZ0RS
 		 */
 		public function MergeArraysById($Array1, $Array2)
 		{
-			foreach ($Array1 as $key => $value)
-				$NewArray1[$value['id']] = $Array1[$key];
-			foreach ($Array2 as $key => $value)
-				$NewArray2[$value['id']] = $Array2[$key];
+			foreach ($Array1 as $Key => $Value)
+				$NewArray1[$Value['id']] = $Array1[$Key];
+			foreach ($Array2 as $Key => $Value)
+				$NewArray2[$Value['id']] = $Array2[$Key];
 
 			asort($NewArray1, SORT_ASC);
 			asort($NewArray2, SORT_ASC);
 
-			foreach ($NewArray1 as $key => $value)
+			foreach ($NewArray1 as $Key => $Value)
 			{
-				unset($NewArray2[$key]['id']);
-				$NewArray[$key] = array_merge_recursive($NewArray1[$key], $NewArray2[$key]);
+				unset($NewArray2[$Key]['id']);
+				$NewArray[$Key] = array_merge_recursive($NewArray1[$Key], $NewArray2[$Key]);
 			}
 
 			return $NewArray;	
 		}
 
-		/* public function setDownloadRate([(integer) $rate])
+		/* public function setDownloadRate([(integer) $Rate])
 		 * Set the maximum download rate for the daemon
 		 * Ex. setDownloadRate(5)
 		 *
 		 * @access public
-		 * @param integer $rate Maximum download rate
+		 * @param integer $Rate Maximum download rate
 		 * @return void
 		 */
-		public function setDownloadRate($rate = -1)
+		public function setDownloadRate($Rate = -1)
 		{
 			if (! $this->Preferences->GetPreference('over_ride_rate')) {
-				$this->M->SetDownloadLimit(intval($rate));
+				$this->M->SetDownloadLimit(intval($Rate));
 			}
 			
-			if ($rate == -1) {
+			if ($Rate == -1) {
 				$this->Preferences->SetPreference('limit_download', false);	
 			} else {
-				$this->Preferences->SetPreference('download_rate', intval($rate));
+				$this->Preferences->SetPreference('download_rate', intval($Rate));
 			}
 		}
 
-		/* public function setUploadRate([(integer) $rate])
+		/* public function setUploadRate([(integer) $Rate])
 		 * Set the maximum upload rate for the daemon
 		 * Ex. setUploadRate(5)
 		 *
 		 * @access public
-		 * @param integer $rate Maximum upload rate
+		 * @param integer $Rate Maximum upload rate
 		 * @return void
 		 */
-		public function setUploadRate($rate = -1)
+		public function setUploadRate($Rate = -1)
 		{
 			if (! $this->Preferences->GetPreference('over_ride_rate')) {
-				$this->M->SetUploadLimit(intval($rate));
+				$this->M->SetUploadLimit(intval($Rate));
 			}
 			
-			if ($rate == -1) {
+			if ($Rate == -1) {
 				$this->Preferences->SetPreference('limit_upload', false);	
 			} else {
-				$this->Preferences->SetPreference('upload_rate', intval($rate));
+				$this->Preferences->SetPreference('upload_rate', intval($Rate));
 			}
 		}
 
-		/* public function AddTorrentByUpload((string) $formname, [[(string) $directory], (integer) $autostart])
+		/* public function AddTorrentByUpload((string) $FormName, [[(string) $Directory], (integer) $autostart])
 		 * Upload a torrent to the daemon
 		 *
 		 * @access public
-		 * @param string $formname Name of the upload form
-		 * @param string $directory Directory to download to
+		 * @param string $FormName Name of the upload form
+		 * @param string $Directory Directory to download to
 		 * @param integer $autostart Whether or not to auto-start the torrent (0 or 1)
 		 * @return void
 		 */
-		public function AddTorrentByUpload($formname, $directory = null)
+		public function AddTorrentByUpload($FormName, $Directory = null)
 		{
-			if (! $directory) {
-				$response = $this->M->GetDefaultDirectory();
-				$directory = $response[1];
+			if (! $Directory) {
+				$Response = $this->M->GetDefaultDirectory();
+				$Directory = $Response[1];
 			}
 			
-			if (!is_uploaded_file($_FILES[$formname]['tmp_name']))
+			if (!is_uploaded_file($_FILES[$FormName]['tmp_name']))
 				return $this->Error('No file uploaded');
-			else if (!is_dir($directory))
+			else if (!is_dir($Directory))
 				return $this->Error("The download directory doesn't exist. Please check your preferences.");
 			else
 			{
-				$parts = pathinfo($_FILES[$formname]['name']);
+				$parts = pathinfo($_FILES[$FormName]['name']);
 				if ($parts['extension'] != 'torrent')
 					return $this->Error('Uploaded file was not a .torrent file');
 				else
-					return $this->M->AddFileDetailed(file_get_contents($_FILES[$formname]['tmp_name']), $directory);
+					return $this->M->AddFileDetailed(file_get_contents($_FILES[$FormName]['tmp_name']), $Directory);
 			}
 		}
 
-		/* public function removeTorrents([(string) $json_array], [(array)$info_fields], [(array)$status_fields])
+		/* public function removeTorrents([(string) $JsonArray], [(array)$InfoFields], [(array)$status_fields])
 		 * Removes a list of torrents, and returns an JSON array of torrent ids for the interface to remove
 		 * Ex. removeTorrents([1,2,3])
 		 *
 		 * @access public
-		 * @param string $json_array Array of torrent IDs to remove
-		 * @return string $result Array of torrent IDs for the interface to remove
+		 * @param string $JsonArray Array of torrent IDs to remove
+		 * @return string $Result Array of torrent IDs for the interface to remove
 		 */
-		public function removeTorrents($json_array = "[]")
+		public function removeTorrents($JsonArray = "[]")
 		{
-			$torrent_id_list =  json_decode($json_array);
+			$TorrentIdList =  json_decode($JsonArray);
 
-			if (count($torrent_id_list) == 0) {
+			if (count($TorrentIdList) == 0) {
 				$this->M->RemoveAllTorrents();
 			} else {
-				$this->M->RemoveTorrents($torrent_id_list);
+				$this->M->RemoveTorrents($TorrentIdList);
 			}
 
-			return $json_array;
+			return $JsonArray;
 		}
 
-		/* public function resumeTorrents([(string) $json_array])
+		/* public function resumeTorrents([(string) $JsonArray])
 		 * Starts a list of torrents, and returns an JSON array of torrent data
 		 * Ex. resumeTorrents([1,2,3])
 		 *
 		 * @access public
-		 * @param string $json_array Array of torrent IDs to start
+		 * @param string $JsonArray Array of torrent IDs to start
 		 * @return void
 		 */
-		public function resumeTorrents($json_array = "[]")
+		public function resumeTorrents($JsonArray = "[]")
 		{
-			$torrent_id_list =  json_decode($json_array);
+			$TorrentIdList =  json_decode($JsonArray);
 
-			if (count($torrent_id_list) == 0) {
+			if (count($TorrentIdList) == 0) {
 				$this->M->StartAllTorrents();
 			} else {
-				$this->M->StartTorrents($torrent_id_list);
+				$this->M->StartTorrents($TorrentIdList);
 			}
 		}
 
-		/* public function pauseTorrents([(string) $json_array])
+		/* public function pauseTorrents([(string) $JsonArray])
 		 * Pauses a list of torrents, and returns an JSON array of torrent data
 		 * Ex. pauseTorrents([1,2,3])
 		 *
 		 * @access public
-		 * @param string $json_array Array of torrent IDs to pause
+		 * @param string $JsonArray Array of torrent IDs to pause
 		 * @return void
 		 */
-		public function pauseTorrents($json_array = "[]")
+		public function pauseTorrents($JsonArray = "[]")
 		{
-			$torrent_id_list =  json_decode($json_array);
+			$TorrentIdList =  json_decode($JsonArray);
 
-			if (count($torrent_id_list) == 0) {
+			if (count($TorrentIdList) == 0) {
 				$this->M->StopAllTorrents();
 			} else {
-				$this->M->StopTorrents($torrent_id_list);
+				$this->M->StopTorrents($TorrentIdList);
 			}
 		}
 
-		/* 	public function getTorrentData([(array)$info_fields], [(array)$status_fields], [(array)$id_list])
+		/* 	public function getTorrentData([(array)$InfoFields], [(array)$status_fields], [(array)$IdList])
 		 * Returns a JSON array of torrent data for the specified torrent-ids
 		 * Ex. getTorrentData(array(1,2,3))
 		 *
 		 * @access public
-		 * @param array $info_fields Array of torrent info fields to return
+		 * @param array $InfoFields Array of torrent info fields to return
 		 * @param array $status_fields Array of torrent status fields to return
-		 * @param array $id_list Array of torrent IDs to get data about
-		 * @return string $result JSON array of torrent data
+		 * @param array $IdList Array of torrent IDs to get data about
+		 * @return string $Result JSON array of torrent data
 		 */
-		public function getTorrentData($info_fields = array(), $status_fields = array(), $id_list = array())
+		public function getTorrentData($InfoFields = array(), $status_fields = array(), $IdList = array())
 		{
-			$torrent_list_data = array();
-			$torrent_status_data = array();
+			$TorrentListData = array();
+			$Torrent_status_data = array();
 
 			// If no ids are specified, get a list of all torrent IDs
-			if (count($id_list) == 0) {
-				$temp_id_list = $this->M->GetInfoAll('id');
-				$temp_id_list = $temp_id_list[1];
-				$id_list = array();
-				foreach ($temp_id_list as $row) {
-					$id_list[] = (int) $row['id'];
+			if (count($IdList) == 0) {
+				$TempIdList = $this->M->GetInfoAll('id');
+				$TempIdList = $TempIdList[1];
+				$IdList = array();
+				foreach ($TempIdList as $Row) {
+					$IdList[] = (int) $Row['id'];
 				}
 			}
 			
-			$result = array();
-			foreach ($id_list as $id) {
-				$torrent_list_data = $this->M->GetInfo($id, $info_fields);
-				$torrent_status_data = $this->M->GetStatus($id, $status_fields);
-				$torrent_data = $this->mergeTorrentData($torrent_list_data, $torrent_status_data);
-				array_push($result, $torrent_data[0]);
+			$Result = array();
+			foreach ($IdList as $Id) {
+				$TorrentListData = $this->M->GetInfo($Id, $InfoFields);
+				$Torrent_status_data = $this->M->GetStatus($Id, $status_fields);
+				$Torrent_data = $this->mergeTorrentData($TorrentListData, $Torrent_status_data);
+				array_push($Result, $Torrent_data[0]);
 			}		
 
-			return json_encode($result);
+			return json_encode($Result);
 		}
 
-		/* 	public function filterTorrents([(array)$infoFields], [(array)$statusFields], [(string)$filterType], [(string)$sortMethod], [(string)$sortDirection], [(string)$search])
+		/* 	public function filterTorrents([(array)$InfoFields], [(array)$StatusFields], [(string)$FlterType], [(string)$sortMethod], [(string)$sortDirection], [(string)$Search])
 		 * Returns a JSON array of torrent data for the specified filter type
 		 * Ex. filterTorrents(FilterSeeding)
 		 *
 		 * @access public
-		 * @param array $infoFields Array of torrent info fields to return
-		 * @param array $statusFields Array of torrent status fields to return
-		 * @param array $filterType Type of torrents to return (FilterAll, FilterDownloading, FilterSeeding, FilterPaused)
+		 * @param array $InfoFields Array of torrent info fields to return
+		 * @param array $StatusFields Array of torrent status fields to return
+		 * @param array $FlterType Type of torrents to return (FilterAll, FilterDownloading, FilterSeeding, FilterPaused)
 		 * @param string $sortMethod Method to sort the torrents (name, progress etc)
 		 * @param string $sortDirection Direction to sort the torrents (SortAscending or SortDescending)
-		 * @param string $search Only return torrents whose name contains the search string
-		 * @return string $result JSON array of torrent data
+		 * @param string $Search Only return torrents whose name contains the search string
+		 * @return string $Result JSON array of torrent data
 		 */
 		public function filterTorrents(
-			$infoFields = array(), 
-			$statusFields = array(), 
-			$filterType = FilterAll, 
+			$InfoFields = array(), 
+			$StatusFields = array(), 
+			$FlterType = FilterAll, 
 			$sortMethod = SortByQueueOrder, 
 			$sortDirection = SortAscending, 
-			$search = '')
+			$Search = '')
 		{
 			// First, need to get the IDs of all the torrents that match this type
 			// Need to look through all the torrents & figure out which ones we want
 			// Is there an easier way to do this?
-			$tempTorrentList = $this->mergeTorrentData(
+			$TempTorrentList = $this->mergeTorrentData(
 									$this->M->GetInfoAll('id'), 
 									$this->M->GetStatusAll('state', 'download-speed', 'upload-speed')
 								);
-			$idList            = array();
+			$IdList            = array();
 			$TotalDownloadRate = 0;
 			$TotalUploadRate   = 0;
-			foreach ($tempTorrentList as $row) {
-				$TotalDownloadRate += $row['download_speed'];
-				$TotalUploadRate   += $row['upload_speed'];
-				if ($filterType == $row['state'] || $filterType == FilterAll) { 
-					$idList[] = (int) $row['id'];
+			foreach ($TempTorrentList as $Row) {
+				$TotalDownloadRate += $Row['download_speed'];
+				$TotalUploadRate   += $Row['upload_speed'];
+				if ($FlterType == $Row['state'] || $FlterType == FilterAll) { 
+					$IdList[] = (int) $Row['id'];
 				}
 				
 				// Add the torrent ID if we have a match
 				if ($includeTorrent == true) {
-					$idList[] = (int) $row['id'];
+					$IdList[] = (int) $Row['id'];
 				}
 			}
 			
-			$result = array();
-			foreach ($idList as $id) {
-				$torrentInfoData = $this->M->GetInfo($id, $infoFields);
-				$torrentStatusData = $this->M->GetStatus($id, $statusFields);
-				$torrentData = $this->mergeTorrentData($torrentInfoData, $torrentStatusData);
+			$Result = array();
+			foreach ($IdList as $Id) {
+				$TorrentInfoData = $this->M->GetInfo($Id, $InfoFields);
+				$TorrentStatusData = $this->M->GetStatus($Id, $StatusFields);
+				$TorrentData = $this->mergeTorrentData($TorrentInfoData, $TorrentStatusData);
 				
 				// Set 'completed' as a percentage
-				$torrentData[0]['percent_completed'] = round($torrentData[0]['completed'] / $torrentData[0]['size'] * 100, 2);
-				array_push($result, $torrentData[0]);
+				$TorrentData[0]['percent_completed'] = round($TorrentData[0]['completed'] / $TorrentData[0]['size'] * 100, 2);
+				array_push($Result, $TorrentData[0]);
 			}		
 			
 			// Remember the current filter type
-			$_SESSION['filterType'] = $filterType;
+			$_SESSION['filterType'] = $FlterType;
 			
 			if ($sortMethod == SortByQueueOrder && $sortDirection == SortDescending)
-				$result = array_reverse($result);
+				$Result = array_reverse($Result);
 				
 			else if ($sortMethod != SortByQueueOrder && $sortDirection == SortDescending)
-				$this->TorrentSort($result, $sortMethod, $SortOrder = SORT_DESC);
+				$this->TorrentSort($Result, $sortMethod, $SortOrder = SORT_DESC);
 				
 			else if ($sortMethod != SortByQueueOrder && $sortDirection == SortAscending)
-				$this->TorrentSort($result, $sortMethod, $SortOrder = SORT_ASC);
+				$this->TorrentSort($Result, $sortMethod, $SortOrder = SORT_ASC);
 			
 			// If the search string isn't empty, filter out any torrents 
 			// whose names don't include the string
-			if ($search != '') {
-				foreach ($result as $key=>$value) {
-					if (stripos($result[$key]['name'], $search) === false ) {
-						unset($result[$key]);
+			if ($Search != '') {
+				foreach ($Result as $Key=>$Value) {
+					if (stripos($Result[$Key]['name'], $Search) === false ) {
+						unset($Result[$Key]);
 					}
 				}
-				$result = array_values($result);
+				$Result = array_values($Result);
 			}
 			
 			// Include total down and up rates in the result
-			$result = array(
+			$Result = array(
 						'total_download_rate' => $TotalDownloadRate,
 						'total_upload_rate'   => $TotalUploadRate,
-						'torrent_list'        => $result
+						'torrent_list'        => $Result
 					);
 			
 			// Store these settings for the future
-			$this->Preferences->SetPreference('filter', $filterType);
+			$this->Preferences->SetPreference('filter', $FlterType);
 			$this->Preferences->SetPreference('sort_method', $sortMethod);
 			$this->Preferences->SetPreference('sort_direction', $sortDirection);
 			
-			return json_encode($result);
+			return json_encode($Result);
 		}
 
-		/* 	private function mergeTorrentData((array) $torrent_list_data, (array) $torrent_status_data)
+		/* 	private function mergeTorrentData((array) $TorrentListData, (array) $Torrent_status_data)
 		 * Merge the contents of the torrent data and status arrays by torrent-id into a single array
 		 * Ex. getTorrentData(array(1,2,3))
 		 *
 		 * @access private
-		 * @param array $torrent_list_data Array of basic torrent data
-		 * @param array $torrent_status_data Array of torrent status data
-		 * @return array $result merged torrent data
+		 * @param array $TorrentListData Array of basic torrent data
+		 * @param array $Torrent_status_data Array of torrent status data
+		 * @return array $Result merged torrent data
 		 */
-		private function mergeTorrentData($torrent_list_data, $torrent_status_data) 
+		private function mergeTorrentData($TorrentListData, $Torrent_status_data) 
 		{
-			$result = array();
+			$Result = array();
 
-			foreach ($torrent_list_data[1] as $torrent) :
-				$result[$torrent['id']] = array();
-				foreach ($torrent as $key => $value) :
-					$key = str_replace('-', '_', $key);
-					$result[$torrent['id']][$key] = $value;
+			foreach ($TorrentListData[1] as $Torrent) :
+				$Result[$Torrent['id']] = array();
+				foreach ($Torrent as $Key => $Value) :
+					$Key = str_replace('-', '_', $Key);
+					$Result[$Torrent['id']][$Key] = $Value;
 				endforeach;
 			endforeach;
 
-			foreach ($torrent_status_data[1] as $torrent) :
-				foreach ($torrent as $key => $value) :
-					$key = str_replace('-', '_', $key);
-					$result[$torrent['id']][$key] = $value;
+			foreach ($Torrent_status_data[1] as $Torrent) :
+				foreach ($Torrent as $Key => $Value) :
+					$Key = str_replace('-', '_', $Key);
+					$Result[$Torrent['id']][$Key] = $Value;
 				endforeach;
 			endforeach;
 
 			// Not interested in the keys anymore - only needed them for mapping
-			return array_values($result);
-		}
-
-		/* public FindPossibleSockets()
-		 * Look for the transmission socket under each home directory
-		 * Use for *AID* in finding the socket by the end user
-		 * IE, these are some of the things it *COULD* be.
-		 * Note: Will not work if the users home dir has been moved
-		 */
-		public function FindPossibleSockets()
-		{
-			$Find = 'socket';
-			$placesToLook = array
-			(
-				'/Users/'	=> '/Library/Application Support/Transmission/daemon/',
-				'/Users/'	=> '/Library/Application Support/Transmission/',
-				'/home/'	=> '/.transmission/daemon/',
-				'/home/'	=> '/.transmission/',
-			);
-	
-			foreach ($placesToLook as $home => $loc)
-				if (is_dir($home))
-				{
-					$h = opendir($home);
-					while (($file = readdir($h)) !== false)
-						if (file_exists($home.$file.$loc.$Find)) 
-							$Results[] = $home.$file.$loc.$Find;
-					closedir($h);
-				}
-	
-			return $Results;
+			return array_values($Result);
 		}
 	}
 ?>
