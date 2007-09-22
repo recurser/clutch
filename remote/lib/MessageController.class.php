@@ -28,12 +28,12 @@
 			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message));
 		}
 
-		/* public AddFileDetailed((string) $FileOrHash, [(string) $directory, [(bool) $autostart]])
+		/* public AddFileDetailed((string) $FileOrHash, [(string) $Directory, [(bool) $AutoStart]])
 		 * Add a single torrent file via path or file data.
 		 * Also allows specification of download directory and/or autostart
 		 * Ex. AddFileDetailed('/tmp/torrentfile.torrent', '/home/me/thefolder/', 1)
 		 */
-		public function AddFileDetailed($FileOrData, $directory = null, $autostart = null)
+		public function AddFileDetailed($FileOrData, $Directory = null, $AutoStart = null)
 		{
 			$Message = array('addfile-detailed');
 
@@ -42,10 +42,10 @@
 			else
 				$Message[1]['data'] = $FileOrData;
 
-			if (!is_null($directory))
-				$Message[1]['directory'] = $directory;
-			if (!is_null($autostart))
-				$Message[1]['autostart'] = $autostart;
+			if (!is_null($Directory))
+				$Message[1]['directory'] = $Directory;
+			if (!is_null($AutoStart))
+				$Message[1]['autostart'] = $AutoStart;
 
 			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message));
 		}
@@ -63,41 +63,41 @@
 			);
 		}
 		
-		/* public AutoStart((bool) $autostart)
+		/* public AutoStart((bool) $AutoStart)
 		 * Toogle automatic starting of torrent files using boolean.  
 		 * Ex. AutoStart( 1 )
 		 */
-		public function SetAutoStart($autostart) 
+		public function SetAutoStart($AutoStart) 
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('autostart', $autostart)
+					array('autostart', $AutoStart)
 				)
 			);
 		}
 
-		/* public DefaultDirectory((string) $directory)
+		/* public DefaultDirectory((string) $Directory)
 		 * Set the download folder for all torrents started in the future
 		 * Ex. DefaultDirectory( '/home/me/thefolder' )
 		 */
-		public function SetDefaultDirectory($directory) 
+		public function SetDefaultDirectory($Directory) 
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('directory', $directory)
+					array('directory', $Directory)
 				)
 			);
 		}
 		
-		/* public SetDownloadLimit((int) $limit)
+		/* public SetDownloadLimit((int) $Limit)
 		 * Set download limit in kbs via integer, where -1 means infinity
 		 * Ex. SetDownloadLimit( 123 )
 		 */
-		public function SetDownloadLimit($limit)
+		public function SetDownloadLimit($Limit)
 		{
          	return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('downlimit', $limit)
+					array('downlimit', $Limit)
 				)
 			);
 		}
@@ -155,37 +155,37 @@
 			);
 		}
 		
-		/* public GetInfo((array) $id, [(array) $type])
-		 * Get info on the torrent IDs listed in $id
-		 * Specify info wanted by $type
+		/* public GetInfo((array) $Id, [(array) $Type])
+		 * Get info on the torrent IDs listed in $Id
+		 * Specify info wanted by $Type
 		 * Ex. GetInfo(4)
 		 */
-		public function GetInfo($id, $type = array('hash', 'name'))
+		public function GetInfo($Id, $Type = array('hash', 'name'))
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array(
 						'get-info',
 						array(
-							'id' => (array) $id,
-							'type' => (array) $type
+							'id' => (array) $Id,
+							'type' => (array) $Type
 						)
 					)
 				)
 			);
 		}
 		
-		/* public GetInfoAll((string) $type, [(string) $type2, [(string) $type3...]])
+		/* public GetInfoAll((string) $Type, [(string) $Type2, [(string) $Type3...]])
 		 * Returns all info on inputed torrent(s). 
 		 * Ex. GetInfoAll('name', 'size')
 		 */
 		public function GetInfoAll()
 		{
-			$field_list = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args(); 
+			$FieldList = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args(); 
 			
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('get-info-all', $field_list)
+					array('get-info-all', $FieldList)
 				)
 			);
 		}
@@ -216,36 +216,36 @@
 			);
 		}
 		
-		/* public GetStatus((int) $id, [(array) $type])
+		/* public GetStatus((int) $Id, [(array) $Type])
 		 * 
 		 * Ex. GetStatus()
 		 */
-		public function GetStatus($id, $type = array('state', 'eta'))
+		public function GetStatus($Id, $Type = array('state', 'eta'))
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array(
 						'get-status',
 						array(
-							'id' => (array) $id,
-							'type' => (array) $type
+							'id' => (array) $Id,
+							'type' => (array) $Type
 						)
 					)
 				)
 			);
 		}
 		
-		/* public GetStatusAll((string) $type1, [(string) $type2, [(string) $type3, ...]])
+		/* public GetStatusAll((string) $Type1, [(string) $Type2, [(string) $Type3, ...]])
 		 * Same as GetStatus with all torrent IDs specified.
 		 * Ex. GetStatusAll('state', 'size')
 		 */
 		public function GetStatusAll()
 		{
-			$field_list = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args(); 
+			$FieldList = (is_array(func_get_arg(0))) ? func_get_arg(0) : func_get_args(); 
 			
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('get-status-all', $field_list)
+					array('get-status-all', $FieldList)
 				)
 			);
 		}
@@ -316,33 +316,33 @@
 			);
 		}
 		
-		/* public SetPex((bool) $pex)
+		/* public SetPex((bool) $Pex)
 		 * Toogle automatic starting of torrent files using boolean.  
 		 * Ex. SetPex( 1 )
 		 */
-		public function SetPex($pex) 
+		public function SetPex($Pex) 
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('autostart', $pex)
+					array('autostart', $Pex)
 				)
 			);
 		}
 		
-		/* public SetPort((int) $port)
+		/* public SetPort((int) $Port)
 		 * Set port to use. Port is an integer between 0 and 65535. 
 		 * Ex. SetPort( 54321 )
 		 */
-		public function SetPort($port) 
+		public function SetPort($Port) 
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('port', $port)
+					array('port', $Port)
 				)
 			);
 		}
 
-		/* public RemoveTorrents((string) $id1, [(string) $id2, [(string) $id3, ...]])
+		/* public RemoveTorrents((string) $Id1, [(string) $Id2, [(string) $Id3, ...]])
 		 * Remove torrent from the daemon via list of id's. 
 		 * Ex. RemoveTorrents(6, 14)
 		 */
@@ -372,7 +372,7 @@
 
 		}
 		
-		/* public StartTorrents((string) $id1, [(string) $id2, [(string) $id3, ...]])
+		/* public StartTorrents((string) $Id1, [(string) $Id2, [(string) $Id3, ...]])
 		 * Start a torrent(s) in the daemon via list of id's. 
 		 * Ex. StartTorrents(1, 7)
 		 */
@@ -402,7 +402,7 @@
 
 		}
 
-		/* public StopTorrents((string) $id1, [(string) $id2, [(string) $id3, ...]])
+		/* public StopTorrents((string) $Id1, [(string) $Id2, [(string) $Id3, ...]])
 		 * Stop a torrent(s) in the daemon via list of id's. 
 		 * Ex. StopTorrents(4)
 		 */
@@ -432,15 +432,15 @@
 
 		}
 		
-		/* public SetUploadLimit((int) $limit)
+		/* public SetUploadLimit((int) $Limit)
 		 * Set global upload limit in kbs via integer, where -1 means infinity
 		 * Ex. SetUploadLimit( 123 )
 		 */
-		public function SetUploadLimit($limit)
+		public function SetUploadLimit($Limit)
 		{
          	return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('uplimit', $limit)
+					array('uplimit', $Limit)
 				)
 			);
 		}      
