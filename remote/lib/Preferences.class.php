@@ -12,13 +12,13 @@
 
 		public function __construct($PreferenceFile, $Defaults)
 		{
-			$result = false;
+			$Result = false;
 			$this->PreferenceFile = $PreferenceFile;
 
 			if (!file_exists($this->PreferenceFile)) {
-				$result = touch($this->PreferenceFile);
+				$Result = touch($this->PreferenceFile);
 			} else {
-				$result = true;
+				$Result = true;
 			}
 			
 			$this->Preferences = unserialize(file_get_contents($this->PreferenceFile));
@@ -29,7 +29,7 @@
 				$this->WritePreferences();
 			}
 			
-			return $result;
+			return $Result;
 		}
 
 		private function WritePreferences()
@@ -42,24 +42,24 @@
 			return $this->Preferences;
 		}
 
-		public function GetPreference($key)
+		public function GetPreference($Key)
 		{
-			$result = null;
-			if (array_key_exists($key, $this->Preferences)) {
-				$result =  $this->Preferences[$key];
+			$Result = null;
+			if (array_key_exists($Key, $this->Preferences)) {
+				$Result =  $this->Preferences[$Key];
 			}
 			
-			return $result;
+			return $Result;
 		}
 
-		public function SetPreference($key, $value)
+		public function SetPreference($Key, $Value)
 		{
-			$result = true;
-			if ($this->Preferences[$key] != $value) {
-				$this->Preferences[$key] = $value;
-			 	$result = $this->WritePreferences();
+			$Result = true;
+			if ($this->Preferences[$Key] != $Value) {
+				$this->Preferences[$Key] = $Value;
+			 	$Result = $this->WritePreferences();
 			}
-			return $result;
+			return $Result;
 		}
 	}
 ?>
