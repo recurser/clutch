@@ -49,6 +49,9 @@ Transmission.prototype = {
         this._num_active_torrents = 0;
         this._num_selected_paused_torrents = 0;
         this._num_selected_active_torrents = 0;
+		
+		// Pre-load the images
+		this.preloadImages();
         
         // Get the initial settings from the remote server
         this.remoteRequest('requestSettings');
@@ -1255,8 +1258,67 @@ Transmission.prototype = {
 			transmission.resumeTorrents(transmission._selected_torrents.keys());
 		}		
     },	
-
-
+    
+    /*
+     * Pre-load the images
+     */
+    preloadImages: function() {
+		$.preloadImages(
+			'images/buttons/filter.png',
+			'images/buttons/filter_on.png',
+			'images/buttons/footer_action_button.png',
+			'images/buttons/footer_speed_limit_button.png',
+			'images/buttons/footer_speed_limit_button_blue.png',
+			'images/buttons/footer_speed_limit_button_graphite.png',
+			'images/buttons/footer_speed_limit_button_on.png',
+			'images/buttons/info.png',
+			'images/buttons/info_off.png',
+			'images/buttons/info_on.png',
+			'images/buttons/info_toolbar_on.png',
+			'images/buttons/open.png',
+			'images/buttons/open_on.png',
+			'images/buttons/pause_all.png',
+			'images/buttons/pause_all_disabled.png',
+			'images/buttons/pause_all_on.png',
+			'images/buttons/pause_off.png',
+			'images/buttons/pause_on.png',
+			'images/buttons/pause_selected.png',
+			'images/buttons/pause_selected_disabled.png',
+			'images/buttons/pause_selected_on.png',
+			'images/buttons/remove.png',
+			'images/buttons/remove_disabled.png',
+			'images/buttons/remove_on.png',
+			'images/buttons/resume_all.png',
+			'images/buttons/resume_all_disabled.png',
+			'images/buttons/resume_all_on.png',
+			'images/buttons/resume_off.png',
+			'images/buttons/resume_on.png',
+			'images/buttons/resume_selected.png',
+			'images/buttons/resume_selected_disabled.png',
+			'images/buttons/resume_selected_on.png',
+			'images/graphics/browser_firefox.gif',
+			'images/graphics/browser_opera.gif',
+			'images/graphics/browser_safari.gif',
+			'images/graphics/dialog_top.png',
+			'images/graphics/filter_bar_bg.png',
+			'images/graphics/filter_hover_left.png',
+			'images/graphics/filter_hover_right.png',
+			'images/graphics/filter_selected_left.png',
+			'images/graphics/filter_selected_right.png',
+			'images/graphics/footer_bg.png',
+			'images/graphics/logo.png',
+			'images/graphics/menu_bg.gif',
+			'images/graphics/menu_divider.png',
+			'images/graphics/pause_all_disabled.png',
+			'images/graphics/status_bar_background.png',
+			'images/graphics/status_bar_divider.png',
+			'images/progress/complete.png',
+			'images/progress/complete_stopped.png',
+			'images/progress/in_progress.png',
+			'images/progress/incomplete.png',
+			'images/progress/incomplete_stopped.png'
+		);	
+    },	
 
 
     /*--------------------------------------------
