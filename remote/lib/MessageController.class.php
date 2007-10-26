@@ -62,7 +62,7 @@
 				)
 			);
 		}
-		
+
 		/* public AutoStart((bool) $AutoStart)
 		 * Toogle automatic starting of torrent files using boolean.  
 		 * Ex. AutoStart( 1 )
@@ -88,7 +88,7 @@
 				)
 			);
 		}
-		
+
 		/* public SetDownloadLimit((int) $Limit)
 		 * Set download limit in kbs via integer, where -1 means infinity
 		 * Ex. SetDownloadLimit( 123 )
@@ -101,7 +101,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetAutoMap()
 		 * Get automatic mapping status. Returns as 0 (off) or 1 (on).
 		 * Ex. GetAutoMap()
@@ -114,7 +114,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetAutoStart()
 		 * Get automatic starting status. Returns as 0 (off) or 1 (on).
 		 * Ex. GetAutoStart()
@@ -127,7 +127,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetDefaultDirectory()
 		 * Get the default folder that all new torrents are saved in. Returns absolute path as string.
 		 * Ex. GetDefaultDirectory()
@@ -140,7 +140,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetDownloadLimit()
 		 * Get the global download limit.  
 		 * Returns as integer, where -1 means infinity.
@@ -154,7 +154,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetInfo((array) $Id, [(array) $Type])
 		 * Get info on the torrent IDs listed in $Id
 		 * Specify info wanted by $Type
@@ -174,7 +174,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetInfoAll((string) $Type, [(string) $Type2, [(string) $Type3...]])
 		 * Returns all info on inputed torrent(s). 
 		 * Ex. GetInfoAll('name', 'size')
@@ -189,7 +189,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetPex()
 		 * Get Peer Exchange status. Returns as 0 (off) or 1 (on).
 		 * Ex. GetPex()
@@ -202,7 +202,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetPort()
 		 * Get port number. Returns as integer.
 		 * Ex. GetPort()
@@ -215,7 +215,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetStatus((int) $Id, [(array) $Type])
 		 * 
 		 * Ex. GetStatus()
@@ -234,7 +234,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetStatusAll((string) $Type1, [(string) $Type2, [(string) $Type3, ...]])
 		 * Same as GetStatus with all torrent IDs specified.
 		 * Ex. GetStatusAll('state', 'size')
@@ -249,7 +249,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetSupport((string) $key1, [(string) $key2, [(string) $key3, ...]])
 		 * Get a support message for each torrent via key.
 		 * Ex. GetSupport('ihavenoideawhatakeylookslike1', 'ihavenoideawhatakeylookslike2')
@@ -262,7 +262,7 @@
 				)
 			);
 		}
-		
+
 		/* public GetUploadLimit()
 		 * Get the global upload limit. 
 		 * Returns as integer, where -1 means infinity.
@@ -276,7 +276,7 @@
 				)
 			);
 		}
-		
+
 		/* public LookupTorrents((string) $hash1, [(string) $hash2, [(string) $hash3, ...]])
 		 * Lookup torrent via hash. Returns info message with id and hash keys. 
 		 * Ex. AddFiles('a822566542550f83a0106be7833dec98b50509bd')
@@ -315,12 +315,12 @@
 				)
 			);
 		}
-		
+
 		/* public SetPex((bool) $Pex)
 		 * Toogle automatic starting of torrent files using boolean.  
 		 * Ex. SetPex( 1 )
 		 */
-		public function SetPex($Pex) 
+		public function SetPex($Pex)
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
@@ -328,7 +328,7 @@
 				)
 			);
 		}
-		
+
 		/* public SetPort((int) $Port)
 		 * Set port to use. Port is an integer between 0 and 65535. 
 		 * Ex. SetPort( 54321 )
@@ -355,9 +355,8 @@
 					array('remove', $Torrents)
 				)
 			);
-
 		}
-		
+
 		/* public RemoveAllTorrents()
 		 * Remove every torrent from the daemon. 
 		 * Ex. RemoveAllTorrents()
@@ -371,7 +370,7 @@
 			);
 
 		}
-		
+
 		/* public StartTorrents((string) $Id1, [(string) $Id2, [(string) $Id3, ...]])
 		 * Start a torrent(s) in the daemon via list of id's. 
 		 * Ex. StartTorrents(1, 7)
@@ -387,7 +386,7 @@
 			);
 
 		}
-		
+
 		/* public StartAllTorrents()
 		 * Starts all torrents in the daemon. 
 		 * Ex. StartAllTorrents()
@@ -417,7 +416,7 @@
 			);
 
 		}
-		
+
 		/* public StopAllTorrents()
 		 * Stops all torrents in the daemon. 
 		 * Ex. StopAllTorrents()
@@ -431,7 +430,7 @@
 			);
 
 		}
-		
+
 		/* public SetUploadLimit((int) $Limit)
 		 * Set global upload limit in kbs via integer, where -1 means infinity
 		 * Ex. SetUploadLimit( 123 )
@@ -443,6 +442,32 @@
 					array('uplimit', $Limit)
 				)
 			);
-		}      
+		}
+
+		/* public GetEncryption()
+		 * Get Encryption status. Returns as "preferred" or "required"
+		 * Ex. GetPex()
+		 */
+		public function GetPex()
+		{
+			return $this->Controller->Send(
+				$this->Controller->IPCProtocol->CreateMessage(
+					array('get-encryption', '')
+				)
+			);
+		}
+
+		/* public SetEncryption((string) $Encryption)
+		 * Set encryption to either "required" or "preferred" 
+		 * Ex. SetPex( 1 )
+		 */
+		public function SetEncryption($Encryption)
+		{
+			return $this->Controller->Send(
+				$this->Controller->IPCProtocol->CreateMessage(
+					array('encryption', $Encryption)
+				)
+			);
+		}
 	}
 ?>
