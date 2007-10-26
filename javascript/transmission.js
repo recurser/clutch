@@ -31,6 +31,7 @@ Transmission.prototype = {
 	
 		// Before we do anything, browser compatability test
 		if ($.browser.msie) {
+			$('div.torrent_footer').hide();
 			$('div#unsupported_browser').show();
 			return;
 		}
