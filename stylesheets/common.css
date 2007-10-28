@@ -1,4 +1,4 @@
-
+#999
   
   
 /*--------------------------------------
@@ -474,9 +474,10 @@ div#torrent_inspector ul.torrent_inspector_tabs li {
 div#torrent_inspector ul.torrent_inspector_tabs li a {
 	display: block;
 	margin: 10px -1px 3px 0; /* Collapse horizontal borders */
-	padding: 5px;
-	background-color: #EEE;
-	border: 1px solid #787878;
+	padding:4px;
+	background: transparent url('../images/buttons/info_tab_back.png') repeat-x;;
+	border-left: 1px solid #787878;
+	border-right: 1px solid #787878;
 	width: 50px;
 	text-align: center;
 	font-weight: bold;
@@ -486,7 +487,7 @@ div#torrent_inspector ul.torrent_inspector_tabs li a {
 	}
 	
 div#torrent_inspector ul.torrent_inspector_tabs li a.selected {
-	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
+	background: transparent url('../images/buttons/info_tab_selected.png') repeat-x;
 	}
 	
 div#torrent_inspector div.torrent_inspector_section h2 {
