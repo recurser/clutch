@@ -448,7 +448,7 @@
 		 * Get Encryption status. Returns as "preferred" or "required"
 		 * Ex. GetPex()
 		 */
-		public function GetPex()
+		public function GetEncryption()
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
