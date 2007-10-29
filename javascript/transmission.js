@@ -1463,7 +1463,7 @@ Transmission.prototype = {
 			
 			} else {	
 				// Send an ajax request to perform the action
-				transmission.remoteRequest('removeTorrents', this._selected_torrents.keys());			
+				transmission.remoteRequest('removeTorrents', this._selected_torrents.keys().json());			
 			}
 		}
     }
