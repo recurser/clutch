@@ -23,7 +23,7 @@ TransmissionRemote.prototype = {
 	/*
 	 * Perform a generic remote request
 	 */
-	remoteRequest: function(action, param, filter, sort_method, sort_direction, search) {
+	request: function(action, param, filter, sort_method, sort_direction, search) {
 		if (param == null) {
 			param = '0';
 		}
@@ -61,14 +61,14 @@ TransmissionRemote.prototype = {
      * Request the initial settings for the web client (up/down speed etc)
      */
 	setPreference: function(key, value) {
-        this.remoteRequest('setPreferences', '{"'+key+'":'+value+'}');	
+        this.request('setPreferences', '{"'+key+'":'+value+'}');	
     },
     
     /*
      * Refresh the torrent data
      */
     reloadTorrents: function() {
-        this.remoteRequest('refreshTorrents', null, this._current_filter);
+        this.request('refreshTorrents', null, this._current_filter);
     },
     
     /*
@@ -77,7 +77,7 @@ TransmissionRemote.prototype = {
     filterTorrents: function(filter_type) {
 		if (filter_type != this._controller.currentFilter()) {
 			this._controller.setCurrentFilter(filter_type);
-        	this.remoteRequest('filterTorrents', null, filter_type);
+        	this.request('filterTorrents', null, filter_type);
 		}
     },
     
@@ -94,7 +94,7 @@ TransmissionRemote.prototype = {
 			this._controller.setCurrentSortDirection(sort_direction);
 		}
 		
-       	this.remoteRequest('sortTorrents', null, this._controller.currentFilter(), sort_method, sort_direction);
+       	this.request('sortTorrents', null, this._controller.currentFilter(), sort_method, sort_direction);
     },
     
     /*
@@ -102,7 +102,7 @@ TransmissionRemote.prototype = {
      */
     pauseTorrents: function(torrent_id_list) {		
 		var json_torrent_id_list = torrent_id_list.json();
-		this.remoteRequest('pauseTorrents', json_torrent_id_list);
+		this.request('pauseTorrents', json_torrent_id_list);
     },
     
     /*
@@ -110,7 +110,7 @@ TransmissionRemote.prototype = {
      */
     resumeTorrents: function(torrent_id_list) {
 		var json_torrent_id_list = torrent_id_list.json();
-		this.remoteRequest('resumeTorrents', json_torrent_id_list);
+		this.request('resumeTorrents', json_torrent_id_list);
     },
     
     /*
@@ -147,7 +147,7 @@ TransmissionRemote.prototype = {
 			
 			} else {	
 				// Send an ajax request to perform the action
-				this.remoteRequest('removeTorrents', this._controller.selectedTorrents().keys().json());			
+				this.request('removeTorrents', this._controller.selectedTorrents().keys().json());			
 			}
 		}
     }

@@ -275,7 +275,7 @@ Torrent.prototype = {
 		}
 		
 		// Send an ajax request to perform the action
-		torrent._controller.remote.remoteRequest(action, $.toJSON([torrent._id]));
+		torrent._controller.remote.request(action, $.toJSON([torrent._id]));
 	},
 
 

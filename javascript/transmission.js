@@ -60,7 +60,7 @@ Transmission.prototype = {
 		this.preloadImages();
         
         // Get the initial settings from the remote server
-        this.remote.remoteRequest('requestSettings');
+        this.remote.request('requestSettings');
         
         // Observe key presses
 		$(document).bind('keydown', {transmission: this}, this.keyDown);
@@ -420,7 +420,7 @@ Transmission.prototype = {
 		$('#prefs_container').hide();
 		
 		// Reset all the settings
-		transmission.remote.remoteRequest('resetPrefs');
+		transmission.remote.request('resetPrefs');
 	},
 
 	/*
@@ -570,7 +570,7 @@ Transmission.prototype = {
 		}
 
 		// Request the list of torrents from the server
-		this.remote.remoteRequest('refreshTorrents', null, this._current_filter);
+		this.remote.request('refreshTorrents', null, this._current_filter);
 
 		// Create a periodical executer to refresh the list
 		this.togglePeriodicRefresh(true);
@@ -815,7 +815,7 @@ Transmission.prototype = {
 					$('div.preference input#download_rate')[0].value = rate;
 					$('div.preference input#limit_download')[0].checked = true;
 				}
-				transmission.remote.remoteRequest('setDownloadRate', rate);
+				transmission.remote.request('setDownloadRate', rate);
 				break;
 			
 			// Limit the upload rate
@@ -831,7 +831,7 @@ Transmission.prototype = {
 					$('div.preference input#upload_rate')[0].value = rate;
 					$('div.preference input#limit_upload')[0].checked = true;
 				}
-				transmission.remote.remoteRequest('setUploadRate', rate);
+				transmission.remote.request('setUploadRate', rate);
 				break;
 			
 			// Sort the torrent list 
@@ -1092,7 +1092,7 @@ Transmission.prototype = {
 		$('form#prefs_form input#over_ride_rate')[0].value = 1;
 		
 		if (informServer) {
-        	transmission.remote.remoteRequest('setOverRide', 1);
+        	transmission.remote.request('setOverRide', 1);
 		}
 	},
     
@@ -1105,7 +1105,7 @@ Transmission.prototype = {
 		$('form#prefs_form input#over_ride_rate')[0].value = 0;
 		
 		if (informServer) {
-        	transmission.remote.remoteRequest('setOverRide', 0);
+        	transmission.remote.request('setOverRide', 0);
 		}
 	},
 	
