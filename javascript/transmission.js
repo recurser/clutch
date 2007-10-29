@@ -1215,8 +1215,12 @@ Transmission.prototype = {
      */
     setGlobalSpeeds: function(num_torrents, global_up_speed, global_down_speed) {
 		$('#torrent_global_transfer')[0].innerHTML = num_torrents + ' Transfers';
-		$('#torrent_global_upload')[0].innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed, true) + '/s';
-		$('#torrent_global_download')[0].innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed, true) + '/s';
+		if (global_up_speed != null) {
+			$('#torrent_global_upload')[0].innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed, true) + '/s';
+		}
+		if (global_down_speed != null) {
+			$('#torrent_global_download')[0].innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed, true) + '/s';
+		}
     },
     
     /*
