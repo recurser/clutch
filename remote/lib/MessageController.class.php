@@ -459,7 +459,7 @@
 
 		/* public SetEncryption((string) $Encryption)
 		 * Set encryption to either "required" or "preferred" 
-		 * Ex. SetPex( 1 )
+		 * Ex. SetEncryption( "required" )
 		 */
 		public function SetEncryption($Encryption)
 		{

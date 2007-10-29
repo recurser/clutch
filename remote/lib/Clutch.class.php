@@ -49,12 +49,14 @@
 		public function GetInitialSettings() {
 			$Result = array();			
 			
-			$AutoStart                  = $this->M->GetAutoStart();
+			$AutoStart                   = $this->M->GetAutoStart();
 			$Result['auto_start']        = $AutoStart[1];			
-			$DownloadLocation           = $this->M->GetDefaultDirectory();
+			$DownloadLocation            = $this->M->GetDefaultDirectory();
 			$Result['download_location'] = $DownloadLocation[1];			
 			$Port                        = $this->M->GetPort();
-			$Result['port']              = $Port[1];	
+			$Result['port']              = $Port[1];				
+			$Encryption                  = $this->M->GetEncryption();
+			$Result['encryption']        = $Encryption[1];	
 
 			$Result = array_merge($Result, $this->Preferences->GetAllPreferences());
 			
@@ -97,7 +99,10 @@
 			$this->M->SetPort(intval($Prefs['port']));
 			unset($Prefs['port']);
 			$this->M->SetDefaultDirectory($Prefs['download_location']);
-			unset($Prefs['download_location']);		
+			unset($Prefs['download_location']);
+			$Encryption = ($Prefs['encryption'] == 1) ? EncryptionRequired : EncryptionPreferred;
+			$this->M->SetEncryption($Encryption);
+			unset($Prefs['encryption']);		
 			
 			foreach ($Prefs as $Key=>$Value) {								
 				$this->Preferences->SetPreference($Key, $Value);

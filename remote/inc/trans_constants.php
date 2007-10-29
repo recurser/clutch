@@ -6,17 +6,19 @@
 	 */
 $CONST = array();
 
-define('FilterAll',         'all');
-define('FilterDownloading', 'downloading');
-define('FilterSeeding',     'seeding');
-define('FilterPaused',      'paused');
-define('SortAscending',     'ascending');
-define('SortDescending',    'descending');
-define('SortByQueueOrder',  'queue_order');
-define('SortByDate',        'date');
-define('SortByName',        'name');
-define('SortByCompleted',   'percent_completed');
-define('SortByState',       'state');
+define('FilterAll',           'all');
+define('FilterDownloading',   'downloading');
+define('FilterSeeding',       'seeding');
+define('FilterPaused',        'paused');
+define('SortAscending',       'ascending');
+define('SortDescending',      'descending');
+define('SortByQueueOrder',    'queue_order');
+define('SortByDate',          'date');
+define('SortByName',          'name');
+define('SortByCompleted',     'percent_completed');
+define('SortByState',         'state');
+define('EncryptionRequired',  'required');
+define('EncryptionPreferred', 'preferred');
 
 // Defaults
 define('DefaultFilter',                FilterAll);
@@ -32,6 +34,7 @@ define('DefaultUploadRate',            10);
 define('DefaultOverRideDownloadRate',  10);
 define('DefaultOverRideUploadRate',    10);
 define('DefaultRefreshRate',           5);
+define('DefaultEncryptionState',       EncryptionRequired);
 
 // Preferences
 $CONST['default_preferences'] = array(
@@ -47,6 +50,7 @@ $CONST['default_preferences'] = array(
 	'upload_rate'              => DefaultUploadRate,
 	'over_ride_download_rate'  => DefaultOverRideDownloadRate,
 	'over_ride_upload_rate'    => DefaultOverRideUploadRate,
+	'refresh_rate'             => DefaultRefreshRate,
 	'refresh_rate'             => DefaultRefreshRate
 );
 

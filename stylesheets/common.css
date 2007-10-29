@@ -599,7 +599,7 @@ div.dialog_container div.dialog_window {
 	
 div#prefs_container div.dialog_window {
 	width: 410px;
-	height: 423px;
+	height: 478px;
 	padding: 5px;
 	}
 	
@@ -697,6 +697,7 @@ div#prefs_container div#web_gui label.item {
 	}
 	
 div#prefs_container div#auto_start label.item,
+div#prefs_container div#encryption label.item,
 div#prefs_container div#limit_total label.item {
 	margin: 0 5px 0 0;
 	}

@@ -14,6 +14,8 @@ function Transmission(){
 	this._FilterPaused           = 'paused';
 	this._SortAscending          = 'ascending';
 	this._SortDescending         = 'descending';
+	this._EncryptionPreferred    = 'preferred';
+	this._EncryptionRequired     = 'required';
 	this._current_filter         = this._FilterAll;
 	this._current_sort_method    = 'queue_order';
 	this._current_sort_direction = this._SortAscending;
@@ -541,6 +543,7 @@ Transmission.prototype = {
 		$('input#over_ride_download_rate')[0].value    = settings.over_ride_download_rate;
 		$('input#over_ride_upload_rate')[0].value      = settings.over_ride_upload_rate;
 		$('input#refresh_rate')[0].value               = settings.refresh_rate;
+		$('div#encryption input')[0].checked           = (settings.encryption == transmission._EncryptionRequired);
 		
 		// Set the download rate
 		$('#limited_download_rate')[0].innerHTML = 'Limit (' + settings.download_rate + ' KB/s)';
