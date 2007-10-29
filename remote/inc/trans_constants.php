@@ -17,6 +17,7 @@ define('SortByDate',          'date');
 define('SortByName',          'name');
 define('SortByCompleted',     'percent_completed');
 define('SortByState',         'state');
+define('SortByTracker',       'tracker');
 define('EncryptionRequired',  'required');
 define('EncryptionPreferred', 'preferred');
 

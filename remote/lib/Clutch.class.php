@@ -162,7 +162,12 @@
 			if (count($Torrents) > 0) {
 				$SortCriteria = array();
 				foreach ($Torrents as $TorrentID => $TorrentInfo) {
-					$SortCriteria[$TorrentID] = strtolower($TorrentInfo[$SortMethod]);
+					
+					if ($SortMethod == SortByTracker && isset($TorrentInfo[$SortMethod]['address'])) {
+						$SortCriteria[$TorrentID] = strtolower($TorrentInfo[$SortMethod]['address']);
+					} else {
+						$SortCriteria[$TorrentID] = strtolower($TorrentInfo[$SortMethod]);
+					}
 					
 					// Need to convert the criteria to lower case if it's a string to sort case-insensitively
 					if (is_string($SortCriteria[$TorrentID])) {
