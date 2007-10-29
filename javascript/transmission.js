@@ -38,6 +38,9 @@ Transmission.prototype = {
 			return;
 		}
 		
+		// Initialize the helper classes
+		this.remote = new TransmissionRemote(this);
+		
         /*
          * Private Variables
          */
@@ -57,7 +60,7 @@ Transmission.prototype = {
 		this.preloadImages();
         
         // Get the initial settings from the remote server
-        this.remoteRequest('requestSettings');
+        this.remote.remoteRequest('requestSettings');
         
         // Observe key presses
 		$(document).bind('keydown', {transmission: this}, this.keyDown);
@@ -106,6 +109,55 @@ Transmission.prototype = {
      *--------------------------------------------*/
     
     /*
+     * Return the current filter
+     */
+    currentFilter: function() {
+        return this._current_filter;
+    },
+    
+    /*
+     * Set the current filter
+     */
+    setCurrentFilter: function(filter) {
+        this._current_filter = filter;
+    },
+    
+    /*
+     * Return the current sort method
+     */
+    currentSortMethod: function() {
+        return this._current_sort_method;
+    },
+    
+    /*
+     * Set the current sort method
+     */
+    setCurrentSortMethod: function(sort_method) {
+        this._current_sort_method = sort_method;
+    },
+    
+    /*
+     * Return the current sort direction
+     */
+    currentSortDirection: function() {
+        return this._current_sort_direction;
+    },
+    
+    /*
+     * Set the current sort direction
+     */
+    setCurrentSortDirection: function(sort_direction) {
+        this._current_sort_direction = sort_direction;
+    },
+    
+    /*
+     * Return the current search criteria
+     */
+    currentSearch: function() {
+        return this._current_search;
+    },
+    
+    /*
      * Return the last torrent clicked
      */
     lastTorrentClicked: function() {
@@ -151,14 +203,28 @@ Transmission.prototype = {
      * Return the number of selected torrents
      */
     numTorrents: function() {
-		return this._torrents.length()
+		return this._torrents.length();
     },
     
     /*
      * Return the number of selected torrents
      */
     numSelectedTorrents: function() {
-		return this._selected_torrents.length()
+		return this._selected_torrents.length();
+    },
+    
+    /*
+     * Return the number of selected active torrents
+     */
+    numSelectedActiveTorrents: function() {
+		return this._num_selected_active_torrents;
+    },
+    
+    /*
+     * Return the list of selected torrents
+     */
+    selectedTorrents: function() {
+		return this._selected_torrents;
     },
 
 
@@ -302,14 +368,14 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause all' button
 	 */
 	releasePauseAllButton: function(event) {
-		event.data.transmission.pauseTorrents([]);
+		event.data.transmission.remote.pauseTorrents([]);
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume all' button
 	 */
 	releaseResumeAllButton: function(event) {
-		event.data.transmission.resumeTorrents([]);
+		event.data.transmission.remote.resumeTorrents([]);
 	},
 
 	/*
@@ -354,21 +420,21 @@ Transmission.prototype = {
 		$('#prefs_container').hide();
 		
 		// Reset all the settings
-		transmission.remoteRequest('resetPrefs');
+		transmission.remote.remoteRequest('resetPrefs');
 	},
 
 	/*
 	 * Process a mouse-up event on the 'open' button
 	 */
 	releasePrefsSaveButton: function(event) {
-		event.data.transmission.savePrefs();
+		event.data.transmission.remote.savePrefs();
 	},
 
 	/*
 	 * Process a mouse-up event on the 'remove' button
 	 */
 	releaseRemoveButton: function(event) {	
-		event.data.transmission.removeSelectedTorrents();
+		event.data.transmission.remote.removeSelectedTorrents();
 	},
 
 	/*
@@ -407,7 +473,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'filter all' button
 	 */
 	releaseFilterAllButton: function(event) {	
-		event.data.transmission.filterTorrents(event.data.transmission._FilterAll);
+		event.data.transmission.remote.filterTorrents(event.data.transmission._FilterAll);
 		$(this).parent().siblings().removeClass('selected');
 		$(this).parent().addClass('selected');
 	},
@@ -416,7 +482,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'filter downloading' button
 	 */
 	releaseFilterDownloadingButton: function(event) {
-		event.data.transmission.filterTorrents(event.data.transmission._FilterDownloading);
+		event.data.transmission.remote.filterTorrents(event.data.transmission._FilterDownloading);
 		$(this).parent().siblings().removeClass('selected');
 		$(this).parent().addClass('selected');
 	},
@@ -425,7 +491,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'filter seeding' button
 	 */
 	releaseFilterSeedingButton: function(event) {	
-		event.data.transmission.filterTorrents(event.data.transmission._FilterSeeding);
+		event.data.transmission.remote.filterTorrents(event.data.transmission._FilterSeeding);
 		$(this).parent().siblings().removeClass('selected');
 		$(this).parent().addClass('selected');
 	},
@@ -434,7 +500,7 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'filter paused' button
 	 */
 	releaseFilterPausedButton: function(event) {
-		event.data.transmission.filterTorrents(event.data.transmission._FilterPaused);
+		event.data.transmission.remote.filterTorrents(event.data.transmission._FilterPaused);
 		$(this).parent().siblings().removeClass('selected');
 		$(this).parent().addClass('selected');
 	},
@@ -451,7 +517,7 @@ Transmission.prototype = {
 	 */
 	togglePeriodicRefresh: function(state) {
 		if (state && this._periodic_refresh == null) {
-			this._periodic_refresh = setInterval('transmission.reloadTorrents()', this._refresh_rate * 1000);
+			this._periodic_refresh = setInterval('transmission.remote.reloadTorrents()', this._refresh_rate * 1000);
 		} else {
 			clearInterval(this._periodic_refresh);
 			this._periodic_refresh = null;
@@ -504,7 +570,7 @@ Transmission.prototype = {
 		}
 
 		// Request the list of torrents from the server
-		this.remoteRequest('refreshTorrents', null, this._current_filter);
+		this.remote.remoteRequest('refreshTorrents', null, this._current_filter);
 
 		// Create a periodical executer to refresh the list
 		this.togglePeriodicRefresh(true);
@@ -645,7 +711,7 @@ Transmission.prototype = {
 		var bindings = {
 			context_pause_selected:    this.pauseSelectedTorrents,
 			context_resume_selected:   this.resumeSelectedTorrents,
-			context_remove:            this.removeSelectedTorrents,
+			context_remove:            this.remote.removeSelectedTorrents,
 			context_toggle_inspector:  this.toggleInspector
 		};
 		
@@ -749,7 +815,7 @@ Transmission.prototype = {
 					$('div.preference input#download_rate')[0].value = rate;
 					$('div.preference input#limit_download')[0].checked = true;
 				}
-				transmission.remoteRequest('setDownloadRate', rate);
+				transmission.remote.remoteRequest('setDownloadRate', rate);
 				break;
 			
 			// Limit the upload rate
@@ -765,7 +831,7 @@ Transmission.prototype = {
 					$('div.preference input#upload_rate')[0].value = rate;
 					$('div.preference input#limit_upload')[0].checked = true;
 				}
-				transmission.remoteRequest('setUploadRate', rate);
+				transmission.remote.remoteRequest('setUploadRate', rate);
 				break;
 			
 			// Sort the torrent list 
@@ -792,7 +858,7 @@ Transmission.prototype = {
 					$(this).selectMenuItem();
 					sort_method = $(this)[0].id.replace(/sort_by_/, '');
 				}
-				transmission.sortTorrents(sort_method, sort_direction);
+				transmission.remote.sortTorrents(sort_method, sort_direction);
 				break;
 		}
 	},
@@ -987,7 +1053,7 @@ Transmission.prototype = {
 
 		// Tell the server about this action
 		if (! dont_inform_server) {
-			transmission.setPreference('show_inspector', true);
+			transmission.remote.setPreference('show_inspector', true);
 		}
 	},
     
@@ -1003,7 +1069,7 @@ Transmission.prototype = {
 		$('ul li#context_toggle_inspector')[0].innerHTML = 'Show Inspector';
 
 		// Tell the server about this action
-		transmission.setPreference('show_inspector', false);
+		transmission.remote.setPreference('show_inspector', false);
 	},
     
     /*
@@ -1026,7 +1092,7 @@ Transmission.prototype = {
 		$('form#prefs_form input#over_ride_rate')[0].value = 1;
 		
 		if (informServer) {
-        	transmission.remoteRequest('setOverRide', 1);
+        	transmission.remote.remoteRequest('setOverRide', 1);
 		}
 	},
     
@@ -1039,7 +1105,7 @@ Transmission.prototype = {
 		$('form#prefs_form input#over_ride_rate')[0].value = 0;
 		
 		if (informServer) {
-        	transmission.remoteRequest('setOverRide', 0);
+        	transmission.remote.remoteRequest('setOverRide', 0);
 		}
 	},
 	
@@ -1064,7 +1130,7 @@ Transmission.prototype = {
 		$('#torrent_filter_bar').show();
 		transmission._filter_visible = true;
 		if (! dont_inform_server) {
-			transmission.setPreference('show_filter', true);
+			transmission.remote.setPreference('show_filter', true);
 		}
 	},
 	
@@ -1076,7 +1142,7 @@ Transmission.prototype = {
 		$('#torrent_container').css('top', container_top + 'px');
 		$('#torrent_filter_bar').hide();
 		transmission._filter_visible = false;
-		transmission.setPreference('show_filter', false);
+		transmission.remote.setPreference('show_filter', false);
 	},
 
     /*
@@ -1254,7 +1320,7 @@ Transmission.prototype = {
      */
     pauseSelectedTorrents: function() {
 		if (transmission.numSelectedTorrents() > 0) {				
-			transmission.pauseTorrents(transmission._selected_torrents.keys());
+			transmission.remote.pauseTorrents(transmission._selected_torrents.keys());
 		}
     },
     
@@ -1263,7 +1329,7 @@ Transmission.prototype = {
      */
     resumeSelectedTorrents: function() {
 		if (transmission.numSelectedTorrents() > 0) {				
-			transmission.resumeTorrents(transmission._selected_torrents.keys());
+			transmission.remote.resumeTorrents(transmission._selected_torrents.keys());
 		}		
     },	
     
@@ -1326,145 +1392,5 @@ Transmission.prototype = {
 			'images/progress/incomplete.png',
 			'images/progress/incomplete_stopped.png'
 		);	
-    },	
-
-
-    /*--------------------------------------------
-     * 
-     *  A J A X   F U N C T I O N S
-     * 
-     *--------------------------------------------*/
-
-	/*
-	 * Perform a generic remote request
-	 */
-	remoteRequest: function(action, param, filter, sort_method, sort_direction, search) {
-		if (param == null) {
-			param = '0';
-		}
-		
-		if (filter == null) {
-			filter = this._current_filter;
-		}
-		
-		if (sort_method == null) {
-			sort_method = this._current_sort_method;
-		}
-		
-		if (sort_direction == null) {
-			sort_direction = this._current_sort_direction;
-		}
-		
-		if (search == null) {
-			search = this._current_search;
-		}
-		
-        $.ajax({
-            type: 'GET',
-            url: 'remote/?action=' + action + 
-				'&param=' + param + 
-				'&filter=' + filter + 
-				'&sort_method=' + sort_method + 
-				'&sort_direction=' + sort_direction + 
-				'&search=' + search,
-            dataType: "script",
-			error: this.ajaxError
-        });
-	},
-    
-    /*
-     * Request the initial settings for the web client (up/down speed etc)
-     */
-	setPreference: function(key, value) {
-        this.remoteRequest('setPreferences', '{"'+key+'":'+value+'}');	
-    },
-    
-    /*
-     * Refresh the torrent data
-     */
-    reloadTorrents: function() {
-        transmission.remoteRequest('refreshTorrents', null, this._current_filter);
-    },
-    
-    /*
-     * Filter the torrent data
-     */
-    filterTorrents: function(filter_type) {
-		if (filter_type != this._current_filter) {	
-			this._current_filter = filter_type;
-        	transmission.remoteRequest('filterTorrents', null, filter_type);
-		}
-    },
-    
-    /*
-     * Sort the torrent data
-     */
-    sortTorrents: function(sort_method, sort_direction) {
-	
-		if (sort_method != this._current_sort_method) {	
-			this._current_sort_method = sort_method;
-		}
-	
-		if (sort_direction != this._current_sort_direction) {	
-			this._current_sort_direction = sort_direction;
-		}
-		
-       	transmission.remoteRequest('sortTorrents', null, this._current_filter, sort_method, sort_direction);
-    },
-    
-    /*
-     * Pause torrents
-     */
-    pauseTorrents: function(torrent_id_list) {		
-		var json_torrent_id_list = torrent_id_list.json();
-		this.remoteRequest('pauseTorrents', json_torrent_id_list);
-    },
-    
-    /*
-     * Resume torrents
-     */
-    resumeTorrents: function(torrent_id_list) {
-		var json_torrent_id_list = torrent_id_list.json();
-		this.remoteRequest('resumeTorrents', json_torrent_id_list);
-    },
-    
-    /*
-     * Save preferences
-     */
-    savePrefs: function() {	
-		// Clear any errors
-		$('div#prefs_container div#pref_error').hide();
-		$('div#prefs_container h2.dialog_heading').show();
-					
-		// Set the form action with the appropriate params
-		$('#prefs_form')[0].action = 'remote/?action=savePrefs&param=[]' + 
-				'&filter=' + transmission._current_filter +
-				'&sort_method=' + transmission._current_sort_method +
-				'&sort_direction=' + transmission._current_sort_direction +
-				'&search=' + transmission._current_search;
-		$('#prefs_form').ajaxSubmit({dataType: 'script', type: 'POST'});
-    },
-    
-    /*
-     * Remove selected torrents
-     */
-    removeSelectedTorrents: function(confirmed) {
-		
-		var num_torrents = transmission.numSelectedTorrents();
-		if (num_torrents > 0) {
-			
-			if (confirmed !== true) {
-				// TODO - proper calculation of active torrents
-				var dialog_heading       = 'Confirm Removal of ' + num_torrents + ' Transfers';
-				var dialog_message = 'There are ' + num_torrents + ' transfers (' + transmission._num_selected_active_torrents;
-				dialog_message    += ' active). Once Removed,<br />continuing the transfers will require the torrent files.';
-				dialog_message    += '<br />Do you really want to remove them?';
-				dialog.confirm(dialog_heading, dialog_message, 'Remove', 'transmission.removeSelectedTorrents(true)');
-			
-			} else {	
-				// Send an ajax request to perform the action
-				transmission.remoteRequest('removeTorrents', this._selected_torrents.keys().json());			
-			}
-		}
     }
 }
