@@ -645,14 +645,6 @@ Transmission.prototype = {
 	},
     
     /*
-     * Display an error if an ajax request fails, and stop sending requests
-     */
-    ajaxError: function(request, error_string, exception) {
-		dialog.alert('Connection Failed', 'Could not connect to the server. You may need to reload the page to reconnect.', 'Dismiss');
-		transmission.togglePeriodicRefresh(false);
-	},
-    
-    /*
      * Display an error if a preference update request fails
      */
     preferenceError: function(error_msg) {

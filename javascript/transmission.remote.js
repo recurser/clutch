@@ -18,6 +18,7 @@ TransmissionRemote.prototype = {
      */
     initialize: function(controller) {
 		this._controller = controller;
+		this._error = '';
 	},
 
 	/*
@@ -53,8 +54,25 @@ TransmissionRemote.prototype = {
 				'&sort_direction=' + sort_direction + 
 				'&search=' + search,
             dataType: "script",
-			error: this._controller.ajaxError
+			error: this.ajaxError
         });
+	},
+    
+    /*
+     * Display an error if an ajax request fails, and stop sending requests
+     */
+    ajaxError: function(request, error_string, exception) {
+		transmission.remote._error = request.responseText.trim().replace(/(<([^>]+)>)/ig,"");
+		if (transmission.remote._error == '') {
+			transmission.remote._error = 'Server not responding';
+		}
+		
+		dialog.confirm('Connection Failed', 
+			'Could not connect to the server. You may need to reload the page to reconnect.', 
+			'Details',
+			'alert(transmission.remote._error);',
+			'Dismiss');
+		transmission.togglePeriodicRefresh(false);
 	},
     
     /*

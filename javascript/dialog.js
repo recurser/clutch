@@ -72,11 +72,11 @@ Dialog.prototype = {
     /*
      * Display a confirm dialog
      */
-    confirm: function(dialog_heading, dialog_message, confirm_button_label, callback_function) {
+    confirm: function(dialog_heading, dialog_message, confirm_button_label, callback_function, cancel_button_label) {
 		$('.dialog_container').hide();
 		this._heading[0].innerHTML = dialog_heading;
 		this._message[0].innerHTML = dialog_message;
-		this._cancel_button[0].innerHTML = 'Cancel';
+		this._cancel_button[0].innerHTML = (cancel_button_label == null) ? 'Cancel' : cancel_button_label;
 		this._confirm_button[0].innerHTML = confirm_button_label;
 		this._confirm_button.show();
 		this._callback_function = callback_function;
