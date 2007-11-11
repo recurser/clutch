@@ -251,17 +251,19 @@
 		
 		<div class='dialog_container' id="upload_container" style="display:none;">
 			<div class="dialog_top_bar"></div>
-			<div class="dialog_window">
+			<div class="dialog_window" style="height: 150px;">
 				<img src='images/graphics/logo.png' />
 				<h2 class="dialog_heading">Torrent Upload</h2>
 				<form action='#' method='post' id='torrent_upload_form' 
 					enctype='multipart/form-data' target='torrent_upload_frame'>  
-				<div class="dialog_message">
-					Please select a .torrent file to upload:
-					<input type='file' name='torrent_file'/>
-				</div>
-				<a href="#upload" id="upload_confirm_button">Upload</a>
-				<a href="#cancel" id="upload_cancel_button">Cancel</a>
+					<div class="dialog_message" style="height: 70px;">
+						Please select a .torrent file OR a URL to upload:
+							<input type='file' name='torrent_file' />
+						<span style="float: left; margin-top: 8px;">URL:</span>
+							<input type='text' name='torrent_url' id='torrent_upload_url' style="float: right; margin-right: 130px;" />
+					</div>
+					<a href="#upload" id="upload_confirm_button">Upload</a>
+					<a href="#cancel" id="upload_cancel_button">Cancel</a>
 				</form>
 			</div>
 		</div>

@@ -410,7 +410,11 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'open' button
 	 */
 	releaseUploadConfirmButton: function(event) {
-		event.data.transmission.uploadTorrentFile(true);
+		var url_data = jQuery.fieldValue($("#torrent_upload_url")[0]);
+		if (url_data.length == 0)
+			event.data.transmission.uploadTorrentFile(true);
+		else
+			event.data.transmission.remote.addTorrentByURL();
 	},
 
 	/*
@@ -1298,10 +1302,10 @@ Transmission.prototype = {
 					'&sort_method=' + transmission._current_sort_method +
 					'&sort_direction=' + transmission._current_sort_direction +
 					'&search=' + transmission._current_search;
-			
+		
 			// Submit the form
 			$('#torrent_upload_form')[0].submit();
-			
+		
 			// Disable the periodic refresh call
 			transmission.togglePeriodicRefresh(false);
 		}

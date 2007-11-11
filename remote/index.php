@@ -53,7 +53,35 @@
 					"scrape-leechers", "scrape-seeders", "upload-speed", "upload-total");
 
 			switch($_GET['action']) 
-			{	
+			{
+				case 'addTorrentByURL' :
+					$Response = $Instance->AddTorrentByURL($_POST['torrent_url'], null);
+					if (isset($Response[1][0]['id'])) 
+					{
+						$ArgList = $Instance->filterTorrents($InfoFields, 
+									$StatusFields, 
+									$_GET['filter'], 
+									$_GET['sort_method'], 
+									$_GET['sort_direction'], 
+									$_GET['search']);
+						$Actions = array(
+								'transmission.refreshAndSortTorrents' => $ArgList,
+								'transmission.togglePeriodicRefresh' => "true"
+							);
+					} 
+					else 
+					{
+						$Error = addslashes($Instance->GetError());
+						if (!$Error || $Error == '')
+							$Error = 'An unexpected error occured. The torrent you uploaded may already be running.';
+						
+						$Actions = array(
+								'dialog.alert' => "'Upload Error', '${Error}', 'Dismiss'",
+								'transmission.togglePeriodicRefresh' => "true"
+							);
+					}
+					break;
+
 				case 'requestSettings' :
 					$ArgList = $Instance->getInitialSettings();
 					$Actions = array('transmission.initializeSettings' => $ArgList);
