@@ -243,13 +243,12 @@
 			}
 		}
 
-		/* public function AddTorrentByUpload((string) $FormName, [[(string) $Directory], (integer) $autostart])
+		/* public function AddTorrentByUpload((string) $FormName, [(string) $Directory])
 		 * Upload a torrent to the daemon
 		 *
 		 * @access public
 		 * @param string $FormName Name of the upload form
 		 * @param string $Directory Directory to download to
-		 * @param integer $autostart Whether or not to auto-start the torrent (0 or 1)
 		 * @return void
 		 */
 		public function AddTorrentByUpload($FormName, $Directory = null)
@@ -271,6 +270,24 @@
 				else
 					return $this->M->AddFileDetailed(file_get_contents($_FILES[$FormName]['tmp_name']), $Directory);
 			}
+		}
+
+		/* public function AddTorrentByURL((string) $URL, [(string) $Directory])
+		 * Upload a torrent to the daemon by specifying a URL
+		 * 
+		 * @access public
+		 * @param string $URL URL where the .torrent file is
+		 * @param string $Directory Directory to download to
+		 * @return void
+		 */
+		public function AddTorrentByURL($URL, $Directory = null)
+		{
+			if (!$Directory) {
+				$Response = $this->M->GetDefaultDirectory();
+				$Directory = $Response[1];
+			}
+
+			return $this->M->AddFileDetailed(file_get_contents($URL), $Directory);
 		}
 
 		/* public function removeTorrents([(string) $JsonArray], [(array)$InfoFields], [(array)$status_fields])
