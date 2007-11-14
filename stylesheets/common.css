@@ -640,12 +640,29 @@ div.dialog_container div.dialog_window a:active {
 	background: #C0C8D6 url('../images/graphics/filter_bar_bg.png') repeat-x;
 	}
 	
+div#upload_container div.dialog_window {	
+	height: 170px !important;
+	} 
+	
+div#upload_container div.dialog_window div.dialog_message {
+	height: 90px;
+	}
+	
+div#upload_container div.dialog_window div.dialog_message label {
+	margin-top: 5px;
+	display: block;
+	}
+	
 div#upload_container div.dialog_window div.dialog_message input {
 	margin: 5px 0 0 0;
 	padding: 1px;
 	background-color: #EEE;
 	border: 1px solid #787878;
 	display: block;
+	}
+	
+div#upload_container div.dialog_window div.dialog_message input[type=text] {
+	width: 245px;
 	}
 	
 div.dialog_container div.dialog_window form {
