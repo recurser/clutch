@@ -50,19 +50,6 @@
 			return $this->Controller->Send($this->Controller->IPCProtocol->CreateMessage($Message));
 		}
 
-		/* public AutoMap((bool) $automap)
-		 * Toogle automatic port mapping using boolean.  
-		 * Ex. AutoMap( 1 )
-		 */
-		public function AutoMap($automap)
-		{
-			return $this->Controller->Send(
-				$this->Controller->IPCProtocol->CreateMessage(
-					array('automap', $automap)
-				)
-			);
-		}
-
 		/* public AutoStart((bool) $AutoStart)
 		 * Toogle automatic starting of torrent files using boolean.  
 		 * Ex. AutoStart( 1 )
@@ -98,19 +85,6 @@
          	return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('downlimit', $Limit)
-				)
-			);
-		}
-
-		/* public GetAutoMap()
-		 * Get automatic mapping status. Returns as 0 (off) or 1 (on).
-		 * Ex. GetAutoMap()
-		 */
-		public function GetAutoMap()
-		{
-			return $this->Controller->Send(
-				$this->Controller->IPCProtocol->CreateMessage(
-					array('get-automap', '')
 				)
 			);
 		}
@@ -250,19 +224,6 @@
 			);
 		}
 
-		/* public GetSupport((string) $key1, [(string) $key2, [(string) $key3, ...]])
-		 * Get a support message for each torrent via key.
-		 * Ex. GetSupport('ihavenoideawhatakeylookslike1', 'ihavenoideawhatakeylookslike2')
-		 */
-		public function GetSupport()
-		{
-			return $this->Controller->Send(
-				$this->Controller->IPCProtocol->CreateMessage(
-					array('get-supported', func_get_args())
-				)
-			);
-		}
-
 		/* public GetUploadLimit()
 		 * Get the global upload limit. 
 		 * Returns as integer, where -1 means infinity.
@@ -273,19 +234,6 @@
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
 					array('get-uplimit', '')
-				)
-			);
-		}
-
-		/* public LookupTorrents((string) $hash1, [(string) $hash2, [(string) $hash3, ...]])
-		 * Lookup torrent via hash. Returns info message with id and hash keys. 
-		 * Ex. AddFiles('a822566542550f83a0106be7833dec98b50509bd')
-		 */
-		public function LookupTorrents()
-		{
-			return $this->Controller->Send(
-				$this->Controller->IPCProtocol->CreateMessage(
-					array('lookup', func_get_args())
 				)
 			);
 		}
@@ -303,19 +251,6 @@
 			);
 		}
 
-		/* public NotSupported()
-		 * Tells daemon something wasn't supported.
-		 * Ex. NotSupported()
-		 */
-		public function NotSupported()
-		{
-			return $this->Controller->Send(
-				$this->Controller->IPCProtocol->CreateMessage(
-					array('not-supported', '')
-				)
-			);
-		}
-
 		/* public SetPex((bool) $Pex)
 		 * Toogle automatic starting of torrent files using boolean.  
 		 * Ex. SetPex( 1 )
@@ -324,7 +259,7 @@
 		{
 			return $this->Controller->Send(
 				$this->Controller->IPCProtocol->CreateMessage(
-					array('autostart', $Pex)
+					array('pex', $Pex)
 				)
 			);
 		}
