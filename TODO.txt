@@ -4,6 +4,8 @@ TODO
 
 - IMPORTANT: Must stop click events, so the links don't go through to #cancel, #save, w/e, as you end up with parse errors from webkit because of the non-existant stuffs I think. Either that, or something is wrong. big time.
 
+-When toggling the turtle off, it ignores if the check boxes are unchecked on the new speed.
+
 OPTIMIZATIONS
 ==================================================
 - Inspector
