@@ -1,15 +1,16 @@
 Welcome to the Clutch WebUI for Transmission!
 http://clutchbt.com
 
-*** CLUTCH REQUIRES PHP 5.2+ ***
+Clutch Version 0.2
+
+*** CLUTCH REQUIRES PHP 5.2+ WITH SOCKETS AND JSON ENABLED ***
 
 Instructions For Usage:
 
 1. In order to get started, you must also have transmission-daemon.
-We suggest you build from the version 0.82 source, as it is the 
-most stable and complete daemon version. (Yes, we're sorry, you 
-don't get encryption just yet, there is no developer currently 
-maintaining the daemon)
+We suggest you build from the version 1.00 source, as it is the 
+most stable and complete daemon version available at the time of 
+this writing.
 
 2. Your httpd / php needs read-write access to the /remote/data 
 folder, as this is where it will store your preferences.
@@ -24,6 +25,6 @@ be able to access the WebUI in the browser of your choice, as long
 as it is not Internet Explorer.
 
 Please see #transmission on irc.freenode.net for support, or the
-forums at http://transmission.m0k.org/forums/
+forums at http://transmissionbt.com/forums/
 
 Thank you from the developers for using Transmission and Clutch.
