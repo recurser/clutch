@@ -1,0 +1,613 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 42;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		BE518CB70D0CC452001DD0A2 /* lighttpd */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = BE518CBC0D0CC473001DD0A2 /* Build configuration list for PBXAggregateTarget "lighttpd" */;
+			buildPhases = (
+				BE518CB60D0CC452001DD0A2 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = lighttpd;
+			productName = lighttpd;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		BE0A1CB20C6951FC00BE8D83 /* PrefController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0A1CB10C6951FC00BE8D83 /* PrefController.m */; };
+		BE0A1D8A0C695A1E00BE8D83 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0A1D870C695A1E00BE8D83 /* Security.framework */; };
+		BE0A1D8B0C695A1E00BE8D83 /* SecurityFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE0A1D880C695A1E00BE8D83 /* SecurityFoundation.framework */; };
+		BE130E2B0C6B5F020029E462 /* Clutch.icns in Resources */ = {isa = PBXBuildFile; fileRef = BE130E2A0C6B5F020029E462 /* Clutch.icns */; };
+		BE14B1D20C6BF2A10075A23B /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE14B1D10C6BF2A10075A23B /* Credits.rtf */; };
+		BE14B3950C6BFA340075A23B /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE14B3940C6BFA340075A23B /* Sparkle.framework */; };
+		BE14B3E30C6BFA790075A23B /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE14B3940C6BFA340075A23B /* Sparkle.framework */; };
+		BE155E240C6919FA006816D3 /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE155E230C6919FA006816D3 /* MainController.m */; };
+		BE284DF30C6989A2000C20CD /* GlobalConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE284DF20C6989A2000C20CD /* GlobalConstants.m */; };
+		BE31222E0CCC5D3500F57298 /* Menubar-Off-Clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31222A0CCC5D3500F57298 /* Menubar-Off-Clicked.png */; };
+		BE31222F0CCC5D3500F57298 /* Menubar-Off.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31222B0CCC5D3500F57298 /* Menubar-Off.png */; };
+		BE3122300CCC5D3500F57298 /* Menubar-On-Clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31222C0CCC5D3500F57298 /* Menubar-On-Clicked.png */; };
+		BE3122310CCC5D3500F57298 /* Menubar-On.png in Resources */ = {isa = PBXBuildFile; fileRef = BE31222D0CCC5D3500F57298 /* Menubar-On.png */; };
+		BE518E300D0CD391001DD0A2 /* php-cgi in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518CAD0D0CC3F5001DD0A2 /* php-cgi */; };
+		BE518E470D0CD42C001DD0A2 /* liblightcomp.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E1D0D0CD312001DD0A2 /* liblightcomp.dylib */; };
+		BE518E490D0CD42C001DD0A2 /* mod_auth.so in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E200D0CD312001DD0A2 /* mod_auth.so */; };
+		BE518E4A0D0CD42C001DD0A2 /* mod_dirlisting.so in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E210D0CD312001DD0A2 /* mod_dirlisting.so */; };
+		BE518E4B0D0CD42C001DD0A2 /* mod_fastcgi.so in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E220D0CD312001DD0A2 /* mod_fastcgi.so */; };
+		BE518E4C0D0CD42C001DD0A2 /* mod_indexfile.so in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E230D0CD312001DD0A2 /* mod_indexfile.so */; };
+		BE518E4D0D0CD42C001DD0A2 /* mod_staticfile.so in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E240D0CD312001DD0A2 /* mod_staticfile.so */; };
+		BE518E5D0D0CD4FD001DD0A2 /* etc in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E510D0CD4D4001DD0A2 /* etc */; };
+		BE518E620D0CD562001DD0A2 /* lighttpd in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E1E0D0CD312001DD0A2 /* lighttpd */; };
+		BE518FBA0D0CD771001DD0A2 /* javascript in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518F4C0D0CD75C001DD0A2 /* javascript */; };
+		BE518FBB0D0CD771001DD0A2 /* images in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518F600D0CD75C001DD0A2 /* images */; };
+		BE518FBC0D0CD771001DD0A2 /* index.html in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518FA20D0CD75C001DD0A2 /* index.html */; };
+		BE518FBD0D0CD771001DD0A2 /* remote in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518FA30D0CD75C001DD0A2 /* remote */; };
+		BE518FBE0D0CD771001DD0A2 /* stylesheets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518FB70D0CD75C001DD0A2 /* stylesheets */; };
+		BE8E36870D2A0D2B0046893F /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE8E36830D2A0D2B0046893F /* Preferences.xib */; };
+		BE8E36880D2A0D2B0046893F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE8E36850D2A0D2B0046893F /* MainMenu.xib */; };
+		BE8E37200D2A283C0046893F /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E37180D2A283C0046893F /* UKFileWatcher.m */; };
+		BE8E37210D2A283C0046893F /* UKFNSubscribeFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E371A0D2A283C0046893F /* UKFNSubscribeFileWatcher.m */; };
+		BE8E37230D2A283C0046893F /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E371D0D2A283C0046893F /* UKKQueue.m */; };
+		BE8E37240D2A283C0046893F /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E371F0D2A283C0046893F /* UKMainThreadProxy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE446AEC0D2F411500632D02 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518CB70D0CC452001DD0A2 /* lighttpd */;
+			remoteInfo = lighttpd;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BE14B3DF0C6BFA6F0075A23B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				BE14B3E30C6BFA790075A23B /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518E400D0CD39D001DD0A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = binary/bin;
+			dstSubfolderSpec = 7;
+			files = (
+				BE518E300D0CD391001DD0A2 /* php-cgi in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518E460D0CD40B001DD0A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = binary/lib;
+			dstSubfolderSpec = 7;
+			files = (
+				BE518E470D0CD42C001DD0A2 /* liblightcomp.dylib in CopyFiles */,
+				BE518E490D0CD42C001DD0A2 /* mod_auth.so in CopyFiles */,
+				BE518E4A0D0CD42C001DD0A2 /* mod_dirlisting.so in CopyFiles */,
+				BE518E4B0D0CD42C001DD0A2 /* mod_fastcgi.so in CopyFiles */,
+				BE518E4C0D0CD42C001DD0A2 /* mod_indexfile.so in CopyFiles */,
+				BE518E4D0D0CD42C001DD0A2 /* mod_staticfile.so in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518E600D0CD50C001DD0A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = binary;
+			dstSubfolderSpec = 7;
+			files = (
+				BE518E5D0D0CD4FD001DD0A2 /* etc in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518E680D0CD56E001DD0A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = binary/sbin;
+			dstSubfolderSpec = 7;
+			files = (
+				BE518E620D0CD562001DD0A2 /* lighttpd in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518F490D0CD732001DD0A2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = binary/www;
+			dstSubfolderSpec = 7;
+			files = (
+				BE518FBA0D0CD771001DD0A2 /* javascript in CopyFiles */,
+				BE518FBB0D0CD771001DD0A2 /* images in CopyFiles */,
+				BE518FBC0D0CD771001DD0A2 /* index.html in CopyFiles */,
+				BE518FBD0D0CD771001DD0A2 /* remote in CopyFiles */,
+				BE518FBE0D0CD771001DD0A2 /* stylesheets in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* Clutch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clutch_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* Clutch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Clutch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE0A1CB00C6951FC00BE8D83 /* PrefController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefController.h; sourceTree = "<group>"; };
+		BE0A1CB10C6951FC00BE8D83 /* PrefController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefController.m; sourceTree = "<group>"; };
+		BE0A1D870C695A1E00BE8D83 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
+		BE0A1D880C695A1E00BE8D83 /* SecurityFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SecurityFoundation.framework; path = /System/Library/Frameworks/SecurityFoundation.framework; sourceTree = "<absolute>"; };
+		BE130E2A0C6B5F020029E462 /* Clutch.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Clutch.icns; sourceTree = "<group>"; };
+		BE14B1D10C6BF2A10075A23B /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
+		BE14B3940C6BFA340075A23B /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		BE155E220C6919FA006816D3 /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainController.h; sourceTree = "<group>"; };
+		BE155E230C6919FA006816D3 /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainController.m; sourceTree = "<group>"; };
+		BE284DF10C6989A2000C20CD /* GlobalConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConstants.h; sourceTree = "<group>"; };
+		BE284DF20C6989A2000C20CD /* GlobalConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalConstants.m; sourceTree = "<group>"; };
+		BE31222A0CCC5D3500F57298 /* Menubar-Off-Clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menubar-Off-Clicked.png"; sourceTree = "<group>"; };
+		BE31222B0CCC5D3500F57298 /* Menubar-Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menubar-Off.png"; sourceTree = "<group>"; };
+		BE31222C0CCC5D3500F57298 /* Menubar-On-Clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menubar-On-Clicked.png"; sourceTree = "<group>"; };
+		BE31222D0CCC5D3500F57298 /* Menubar-On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menubar-On.png"; sourceTree = "<group>"; };
+		BE518CAD0D0CC3F5001DD0A2 /* php-cgi */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = "php-cgi"; path = "third-party/php-cgi"; sourceTree = "<group>"; };
+		BE518E1D0D0CD312001DD0A2 /* liblightcomp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = liblightcomp.dylib; path = "third-party/lighttpd/build/Release/liblightcomp.dylib"; sourceTree = "<group>"; };
+		BE518E1E0D0CD312001DD0A2 /* lighttpd */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; name = lighttpd; path = "third-party/lighttpd/build/Release/lighttpd"; sourceTree = "<group>"; };
+		BE518E200D0CD312001DD0A2 /* mod_auth.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = mod_auth.so; path = "third-party/lighttpd/build/Release/mod_auth.so"; sourceTree = "<group>"; };
+		BE518E210D0CD312001DD0A2 /* mod_dirlisting.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = mod_dirlisting.so; path = "third-party/lighttpd/build/Release/mod_dirlisting.so"; sourceTree = "<group>"; };
+		BE518E220D0CD312001DD0A2 /* mod_fastcgi.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = mod_fastcgi.so; path = "third-party/lighttpd/build/Release/mod_fastcgi.so"; sourceTree = "<group>"; };
+		BE518E230D0CD312001DD0A2 /* mod_indexfile.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = mod_indexfile.so; path = "third-party/lighttpd/build/Release/mod_indexfile.so"; sourceTree = "<group>"; };
+		BE518E240D0CD312001DD0A2 /* mod_staticfile.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = mod_staticfile.so; path = "third-party/lighttpd/build/Release/mod_staticfile.so"; sourceTree = "<group>"; };
+		BE518E510D0CD4D4001DD0A2 /* etc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = etc; path = Data/etc; sourceTree = "<group>"; };
+		BE518F4C0D0CD75C001DD0A2 /* javascript */ = {isa = PBXFileReference; lastKnownFileType = folder; name = javascript; path = ../../trunk/javascript; sourceTree = SOURCE_ROOT; };
+		BE518F600D0CD75C001DD0A2 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../trunk/images; sourceTree = SOURCE_ROOT; };
+		BE518FA20D0CD75C001DD0A2 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = ../../trunk/index.html; sourceTree = SOURCE_ROOT; };
+		BE518FA30D0CD75C001DD0A2 /* remote */ = {isa = PBXFileReference; lastKnownFileType = folder; name = remote; path = ../../trunk/remote; sourceTree = SOURCE_ROOT; };
+		BE518FB70D0CD75C001DD0A2 /* stylesheets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = stylesheets; path = ../../trunk/stylesheets; sourceTree = SOURCE_ROOT; };
+		BE8E36840D2A0D2B0046893F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
+		BE8E36860D2A0D2B0046893F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BE8E37170D2A283C0046893F /* UKFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFileWatcher.h; sourceTree = "<group>"; };
+		BE8E37180D2A283C0046893F /* UKFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFileWatcher.m; sourceTree = "<group>"; };
+		BE8E37190D2A283C0046893F /* UKFNSubscribeFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFNSubscribeFileWatcher.h; sourceTree = "<group>"; };
+		BE8E371A0D2A283C0046893F /* UKFNSubscribeFileWatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKFNSubscribeFileWatcher.m; sourceTree = "<group>"; };
+		BE8E371C0D2A283C0046893F /* UKKQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKKQueue.h; sourceTree = "<group>"; };
+		BE8E371D0D2A283C0046893F /* UKKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKKQueue.m; sourceTree = "<group>"; };
+		BE8E371E0D2A283C0046893F /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainThreadProxy.h; sourceTree = "<group>"; };
+		BE8E371F0D2A283C0046893F /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMainThreadProxy.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				BE0A1D8A0C695A1E00BE8D83 /* Security.framework in Frameworks */,
+				BE0A1D8B0C695A1E00BE8D83 /* SecurityFoundation.framework in Frameworks */,
+				BE14B3950C6BFA340075A23B /* Sparkle.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BE155E220C6919FA006816D3 /* MainController.h */,
+				BE155E230C6919FA006816D3 /* MainController.m */,
+				BE0A1CB00C6951FC00BE8D83 /* PrefController.h */,
+				BE0A1CB10C6951FC00BE8D83 /* PrefController.m */,
+				BE284DF10C6989A2000C20CD /* GlobalConstants.h */,
+				BE284DF20C6989A2000C20CD /* GlobalConstants.m */,
+				BE8E37160D2A283C0046893F /* UKKQueue */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Clutch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* Clutch */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = Clutch;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* Clutch_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BE518F4A0D0CD747001DD0A2 /* Clutch-www */,
+				BE518E510D0CD4D4001DD0A2 /* etc */,
+				BE518CAB0D0CC3C4001DD0A2 /* Backend */,
+				BE130E2A0C6B5F020029E462 /* Clutch.icns */,
+				BE14B1D10C6BF2A10075A23B /* Credits.rtf */,
+				BE31222A0CCC5D3500F57298 /* Menubar-Off-Clicked.png */,
+				BE31222B0CCC5D3500F57298 /* Menubar-Off.png */,
+				BE31222C0CCC5D3500F57298 /* Menubar-On-Clicked.png */,
+				BE31222D0CCC5D3500F57298 /* Menubar-On.png */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				BE8E36830D2A0D2B0046893F /* Preferences.xib */,
+				BE8E36850D2A0D2B0046893F /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BE14B3940C6BFA340075A23B /* Sparkle.framework */,
+				BE0A1D870C695A1E00BE8D83 /* Security.framework */,
+				BE0A1D880C695A1E00BE8D83 /* SecurityFoundation.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE518CAB0D0CC3C4001DD0A2 /* Backend */ = {
+			isa = PBXGroup;
+			children = (
+				BE518E1C0D0CD2F3001DD0A2 /* lighttpd */,
+				BE518CAD0D0CC3F5001DD0A2 /* php-cgi */,
+			);
+			name = Backend;
+			sourceTree = "<group>";
+		};
+		BE518E1C0D0CD2F3001DD0A2 /* lighttpd */ = {
+			isa = PBXGroup;
+			children = (
+				BE518E1D0D0CD312001DD0A2 /* liblightcomp.dylib */,
+				BE518E1E0D0CD312001DD0A2 /* lighttpd */,
+				BE518E200D0CD312001DD0A2 /* mod_auth.so */,
+				BE518E210D0CD312001DD0A2 /* mod_dirlisting.so */,
+				BE518E220D0CD312001DD0A2 /* mod_fastcgi.so */,
+				BE518E230D0CD312001DD0A2 /* mod_indexfile.so */,
+				BE518E240D0CD312001DD0A2 /* mod_staticfile.so */,
+			);
+			name = lighttpd;
+			sourceTree = "<group>";
+		};
+		BE518F4A0D0CD747001DD0A2 /* Clutch-www */ = {
+			isa = PBXGroup;
+			children = (
+				BE518F4C0D0CD75C001DD0A2 /* javascript */,
+				BE518F600D0CD75C001DD0A2 /* images */,
+				BE518FA20D0CD75C001DD0A2 /* index.html */,
+				BE518FA30D0CD75C001DD0A2 /* remote */,
+				BE518FB70D0CD75C001DD0A2 /* stylesheets */,
+			);
+			name = "Clutch-www";
+			sourceTree = "<group>";
+		};
+		BE8E37160D2A283C0046893F /* UKKQueue */ = {
+			isa = PBXGroup;
+			children = (
+				BE8E37170D2A283C0046893F /* UKFileWatcher.h */,
+				BE8E37180D2A283C0046893F /* UKFileWatcher.m */,
+				BE8E37190D2A283C0046893F /* UKFNSubscribeFileWatcher.h */,
+				BE8E371A0D2A283C0046893F /* UKFNSubscribeFileWatcher.m */,
+				BE8E371C0D2A283C0046893F /* UKKQueue.h */,
+				BE8E371D0D2A283C0046893F /* UKKQueue.m */,
+				BE8E371E0D2A283C0046893F /* UKMainThreadProxy.h */,
+				BE8E371F0D2A283C0046893F /* UKMainThreadProxy.m */,
+			);
+			name = UKKQueue;
+			path = "third-party/UKKQueue";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* Clutch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Clutch" */;
+			buildPhases = (
+				BE518E600D0CD50C001DD0A2 /* CopyFiles */,
+				BE518E680D0CD56E001DD0A2 /* CopyFiles */,
+				BE518E400D0CD39D001DD0A2 /* CopyFiles */,
+				BE518E460D0CD40B001DD0A2 /* CopyFiles */,
+				BE518F490D0CD732001DD0A2 /* CopyFiles */,
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+				BE14B3DF0C6BFA6F0075A23B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE446AED0D2F411500632D02 /* PBXTargetDependency */,
+			);
+			name = Clutch;
+			productInstallPath = "$(HOME)/Applications";
+			productName = Clutch;
+			productReference = 8D1107320486CEB800E47090 /* Clutch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Clutch" */;
+			compatibilityVersion = "Xcode 2.4";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* Clutch */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Clutch */,
+				BE518CB70D0CC452001DD0A2 /* lighttpd */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				BE130E2B0C6B5F020029E462 /* Clutch.icns in Resources */,
+				BE14B1D20C6BF2A10075A23B /* Credits.rtf in Resources */,
+				BE31222E0CCC5D3500F57298 /* Menubar-Off-Clicked.png in Resources */,
+				BE31222F0CCC5D3500F57298 /* Menubar-Off.png in Resources */,
+				BE3122300CCC5D3500F57298 /* Menubar-On-Clicked.png in Resources */,
+				BE3122310CCC5D3500F57298 /* Menubar-On.png in Resources */,
+				BE8E36870D2A0D2B0046893F /* Preferences.xib in Resources */,
+				BE8E36880D2A0D2B0046893F /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BE518CB60D0CC452001DD0A2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cd ./third-party/lighttpd\nxcodebuild -target lighttpd -configuration Release";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				BE155E240C6919FA006816D3 /* MainController.m in Sources */,
+				BE0A1CB20C6951FC00BE8D83 /* PrefController.m in Sources */,
+				BE284DF30C6989A2000C20CD /* GlobalConstants.m in Sources */,
+				BE8E37200D2A283C0046893F /* UKFileWatcher.m in Sources */,
+				BE8E37210D2A283C0046893F /* UKFNSubscribeFileWatcher.m in Sources */,
+				BE8E37230D2A283C0046893F /* UKKQueue.m in Sources */,
+				BE8E37240D2A283C0046893F /* UKMainThreadProxy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE446AED0D2F411500632D02 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518CB70D0CC452001DD0A2 /* lighttpd */;
+			targetProxy = BE446AEC0D2F411500632D02 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BE8E36830D2A0D2B0046893F /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE8E36840D2A0D2B0046893F /* English */,
+			);
+			name = Preferences.xib;
+			sourceTree = "<group>";
+		};
+		BE8E36850D2A0D2B0046893F /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BE8E36860D2A0D2B0046893F /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BE518CB80D0CC452001DD0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = lighttpd;
+			};
+			name = Debug;
+		};
+		BE518CB90D0CC452001DD0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = lighttpd;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)/third-party/lighttpd/build/Release\"";
+				PRODUCT_NAME = Clutch;
+				WRAPPER_EXTENSION = app;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(FRAMEWORK_SEARCH_PATHS_QUOTED_1)",
+				);
+				FRAMEWORK_SEARCH_PATHS_QUOTED_1 = "\"$(SRCROOT)\"";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
+				);
+				LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_1 = "\"$(SRCROOT)/third-party/lighttpd/build/Release\"";
+				PRODUCT_NAME = Clutch;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					i384,
+					ppc,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BE518CBC0D0CC473001DD0A2 /* Build configuration list for PBXAggregateTarget "lighttpd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE518CB80D0CC452001DD0A2 /* Debug */,
+				BE518CB90D0CC452001DD0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Clutch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Clutch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

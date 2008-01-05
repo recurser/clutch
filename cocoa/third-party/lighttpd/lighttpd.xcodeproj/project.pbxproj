@@ -1,0 +1,1153 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BE4926290D14F1B0006DAF8F /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4926250D14F14C006DAF8F /* libssl.dylib */; };
+		BE49263E0D14F2C0006DAF8F /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4926370D14F202006DAF8F /* libcrypto.dylib */; };
+		BE4926420D14F2D8006DAF8F /* libssl.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4926250D14F14C006DAF8F /* libssl.dylib */; };
+		BE4926430D14F2DA006DAF8F /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4926370D14F202006DAF8F /* libcrypto.dylib */; };
+		BE518D180D0CC8A9001DD0A2 /* array.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF10D0CC8A9001DD0A2 /* array.c */; };
+		BE518D190D0CC8A9001DD0A2 /* bitset.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF20D0CC8A9001DD0A2 /* bitset.c */; };
+		BE518D1A0D0CC8A9001DD0A2 /* buffer.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF30D0CC8A9001DD0A2 /* buffer.c */; };
+		BE518D1B0D0CC8A9001DD0A2 /* chunk.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF40D0CC8A9001DD0A2 /* chunk.c */; };
+		BE518D1C0D0CC8A9001DD0A2 /* configfile-glue.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF50D0CC8A9001DD0A2 /* configfile-glue.c */; };
+		BE518D1D0D0CC8A9001DD0A2 /* connections-glue.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF60D0CC8A9001DD0A2 /* connections-glue.c */; };
+		BE518D1E0D0CC8A9001DD0A2 /* crc32.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF70D0CC8A9001DD0A2 /* crc32.c */; };
+		BE518D1F0D0CC8A9001DD0A2 /* data_array.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF80D0CC8A9001DD0A2 /* data_array.c */; };
+		BE518D200D0CC8A9001DD0A2 /* data_count.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CF90D0CC8A9001DD0A2 /* data_count.c */; };
+		BE518D210D0CC8A9001DD0A2 /* data_config.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CFA0D0CC8A9001DD0A2 /* data_config.c */; };
+		BE518D220D0CC8A9001DD0A2 /* data_fastcgi.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CFB0D0CC8A9001DD0A2 /* data_fastcgi.c */; };
+		BE518D230D0CC8A9001DD0A2 /* data_integer.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CFC0D0CC8A9001DD0A2 /* data_integer.c */; };
+		BE518D240D0CC8A9001DD0A2 /* data_string.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CFD0D0CC8A9001DD0A2 /* data_string.c */; };
+		BE518D250D0CC8A9001DD0A2 /* etag.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CFE0D0CC8A9001DD0A2 /* etag.c */; };
+		BE518D260D0CC8A9001DD0A2 /* fdevent.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518CFF0D0CC8A9001DD0A2 /* fdevent.c */; };
+		BE518D270D0CC8A9001DD0A2 /* fdevent_freebsd_kqueue.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D000D0CC8A9001DD0A2 /* fdevent_freebsd_kqueue.c */; };
+		BE518D280D0CC8A9001DD0A2 /* fdevent_linux_rtsig.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D010D0CC8A9001DD0A2 /* fdevent_linux_rtsig.c */; };
+		BE518D290D0CC8A9001DD0A2 /* fdevent_linux_sysepoll.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D020D0CC8A9001DD0A2 /* fdevent_linux_sysepoll.c */; };
+		BE518D2A0D0CC8A9001DD0A2 /* fdevent_poll.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D030D0CC8A9001DD0A2 /* fdevent_poll.c */; };
+		BE518D2B0D0CC8A9001DD0A2 /* fdevent_select.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D040D0CC8A9001DD0A2 /* fdevent_select.c */; };
+		BE518D2C0D0CC8A9001DD0A2 /* fdevent_solaris_devpoll.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D050D0CC8A9001DD0A2 /* fdevent_solaris_devpoll.c */; };
+		BE518D2D0D0CC8A9001DD0A2 /* http-header-glue.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D060D0CC8A9001DD0A2 /* http-header-glue.c */; };
+		BE518D2E0D0CC8A9001DD0A2 /* http_chunk.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D070D0CC8A9001DD0A2 /* http_chunk.c */; };
+		BE518D2F0D0CC8A9001DD0A2 /* inet_ntop_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D080D0CC8A9001DD0A2 /* inet_ntop_cache.c */; };
+		BE518D300D0CC8A9001DD0A2 /* joblist.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D090D0CC8A9001DD0A2 /* joblist.c */; };
+		BE518D310D0CC8A9001DD0A2 /* keyvalue.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D0A0D0CC8A9001DD0A2 /* keyvalue.c */; };
+		BE518D320D0CC8A9001DD0A2 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D0B0D0CC8A9001DD0A2 /* log.c */; };
+		BE518D330D0CC8A9001DD0A2 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D0C0D0CC8A9001DD0A2 /* md5.c */; };
+		BE518D340D0CC8A9001DD0A2 /* network_write.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D0D0D0CC8A9001DD0A2 /* network_write.c */; };
+		BE518D350D0CC8A9001DD0A2 /* network_writev.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D0E0D0CC8A9001DD0A2 /* network_writev.c */; };
+		BE518D360D0CC8A9001DD0A2 /* network_openssl.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D0F0D0CC8A9001DD0A2 /* network_openssl.c */; };
+		BE518D370D0CC8A9001DD0A2 /* network_solaris_sendfilev.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D100D0CC8A9001DD0A2 /* network_solaris_sendfilev.c */; };
+		BE518D380D0CC8A9001DD0A2 /* network_linux_sendfile.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D110D0CC8A9001DD0A2 /* network_linux_sendfile.c */; };
+		BE518D390D0CC8A9001DD0A2 /* network_freebsd_sendfile.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D120D0CC8A9001DD0A2 /* network_freebsd_sendfile.c */; };
+		BE518D3A0D0CC8A9001DD0A2 /* plugin.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D130D0CC8A9001DD0A2 /* plugin.c */; };
+		BE518D3B0D0CC8A9001DD0A2 /* splaytree.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D140D0CC8A9001DD0A2 /* splaytree.c */; };
+		BE518D3C0D0CC8A9001DD0A2 /* stat_cache.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D150D0CC8A9001DD0A2 /* stat_cache.c */; };
+		BE518D3D0D0CC8A9001DD0A2 /* status_counter.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D160D0CC8A9001DD0A2 /* status_counter.c */; };
+		BE518D3E0D0CC8A9001DD0A2 /* stream.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D170D0CC8A9001DD0A2 /* stream.c */; };
+		BE518D5F0D0CC9DE001DD0A2 /* mod_auth.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D5E0D0CC9DE001DD0A2 /* mod_auth.c */; };
+		BE518D610D0CC9E8001DD0A2 /* liblightcomp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */; };
+		BE518D690D0CCA5B001DD0A2 /* http_auth_digest.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D670D0CCA5B001DD0A2 /* http_auth_digest.c */; };
+		BE518D6A0D0CCA5B001DD0A2 /* http_auth.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D680D0CCA5B001DD0A2 /* http_auth.c */; };
+		BE518D950D0CCB0D001DD0A2 /* mod_fastcgi.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518D940D0CCB0D001DD0A2 /* mod_fastcgi.c */; };
+		BE518D980D0CCB16001DD0A2 /* liblightcomp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */; };
+		BE518DAC0D0CCB39001DD0A2 /* mod_indexfile.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DAB0D0CCB39001DD0A2 /* mod_indexfile.c */; };
+		BE518DB00D0CCB59001DD0A2 /* liblightcomp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */; };
+		BE518DC50D0CCBAA001DD0A2 /* mod_staticfile.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DC40D0CCBAA001DD0A2 /* mod_staticfile.c */; };
+		BE518DC60D0CCBB2001DD0A2 /* liblightcomp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */; };
+		BE518DD80D0CCC3B001DD0A2 /* liblightcomp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */; };
+		BE518DF20D0CCCB7001DD0A2 /* server.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DEB0D0CCCB7001DD0A2 /* server.c */; };
+		BE518DF30D0CCCB7001DD0A2 /* response.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DEC0D0CCCB7001DD0A2 /* response.c */; };
+		BE518DF40D0CCCB7001DD0A2 /* connections.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DED0D0CCCB7001DD0A2 /* connections.c */; };
+		BE518DF50D0CCCB7001DD0A2 /* configfile.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DEE0D0CCCB7001DD0A2 /* configfile.c */; };
+		BE518DF60D0CCCB7001DD0A2 /* network.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DEF0D0CCCB7001DD0A2 /* network.c */; };
+		BE518DF70D0CCCB7001DD0A2 /* request.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DF00D0CCCB7001DD0A2 /* request.c */; };
+		BE518DF80D0CCCB7001DD0A2 /* proc_open.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518DF10D0CCCB7001DD0A2 /* proc_open.c */; };
+		BE518DFE0D0CCD39001DD0A2 /* liblightcomp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */; };
+		BE518E020D0CCD5A001DD0A2 /* configparser.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518E010D0CCD5A001DD0A2 /* configparser.c */; };
+		BE518E0E0D0CD222001DD0A2 /* mod_dirlisting.c in Sources */ = {isa = PBXBuildFile; fileRef = BE518E0D0D0CD222001DD0A2 /* mod_dirlisting.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BE518D6C0D0CCA71001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518CEA0D0CC6CD001DD0A2;
+			remoteInfo = lightcomp;
+		};
+		BE518DD60D0CCC2F001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518CEA0D0CC6CD001DD0A2;
+			remoteInfo = lightcomp;
+		};
+		BE518DDA0D0CCC47001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518DBE0D0CCB91001DD0A2;
+			remoteInfo = staticfile;
+		};
+		BE518DDC0D0CCC47001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518DA50D0CCB32001DD0A2;
+			remoteInfo = indexfile;
+		};
+		BE518DDE0D0CCC47001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518D8D0D0CCAEA001DD0A2;
+			remoteInfo = fastcgi;
+		};
+		BE518DE00D0CCC47001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518DD20D0CCC10001DD0A2;
+			remoteInfo = dirlisting;
+		};
+		BE518DE20D0CCC47001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518D570D0CC9B1001DD0A2;
+			remoteInfo = auth;
+		};
+		BE518DE40D0CCC47001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518CEA0D0CC6CD001DD0A2;
+			remoteInfo = lightcomp;
+		};
+		BE518E100D0CD29A001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518CEA0D0CC6CD001DD0A2;
+			remoteInfo = lightcomp;
+		};
+		BE518E120D0CD2B1001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518CEA0D0CC6CD001DD0A2;
+			remoteInfo = lightcomp;
+		};
+		BE518E140D0CD2B7001DD0A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE518CEA0D0CC6CD001DD0A2;
+			remoteInfo = lightcomp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76FAF0486AB0100D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		8DD76FB20486AB0100D96B5E /* lighttpd */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lighttpd; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE4926250D14F14C006DAF8F /* libssl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libssl.dylib; path = /usr/lib/libssl.dylib; sourceTree = "<absolute>"; };
+		BE4926370D14F202006DAF8F /* libcrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcrypto.dylib; path = /usr/lib/libcrypto.dylib; sourceTree = "<absolute>"; };
+		BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = liblightcomp.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE518CF10D0CC8A9001DD0A2 /* array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = array.c; path = src/array.c; sourceTree = "<group>"; };
+		BE518CF20D0CC8A9001DD0A2 /* bitset.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitset.c; path = src/bitset.c; sourceTree = "<group>"; };
+		BE518CF30D0CC8A9001DD0A2 /* buffer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = buffer.c; path = src/buffer.c; sourceTree = "<group>"; };
+		BE518CF40D0CC8A9001DD0A2 /* chunk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = chunk.c; path = src/chunk.c; sourceTree = "<group>"; };
+		BE518CF50D0CC8A9001DD0A2 /* configfile-glue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "configfile-glue.c"; path = "src/configfile-glue.c"; sourceTree = "<group>"; };
+		BE518CF60D0CC8A9001DD0A2 /* connections-glue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "connections-glue.c"; path = "src/connections-glue.c"; sourceTree = "<group>"; };
+		BE518CF70D0CC8A9001DD0A2 /* crc32.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = crc32.c; path = src/crc32.c; sourceTree = "<group>"; };
+		BE518CF80D0CC8A9001DD0A2 /* data_array.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_array.c; path = src/data_array.c; sourceTree = "<group>"; };
+		BE518CF90D0CC8A9001DD0A2 /* data_count.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_count.c; path = src/data_count.c; sourceTree = "<group>"; };
+		BE518CFA0D0CC8A9001DD0A2 /* data_config.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_config.c; path = src/data_config.c; sourceTree = "<group>"; };
+		BE518CFB0D0CC8A9001DD0A2 /* data_fastcgi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_fastcgi.c; path = src/data_fastcgi.c; sourceTree = "<group>"; };
+		BE518CFC0D0CC8A9001DD0A2 /* data_integer.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_integer.c; path = src/data_integer.c; sourceTree = "<group>"; };
+		BE518CFD0D0CC8A9001DD0A2 /* data_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = data_string.c; path = src/data_string.c; sourceTree = "<group>"; };
+		BE518CFE0D0CC8A9001DD0A2 /* etag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = etag.c; path = src/etag.c; sourceTree = "<group>"; };
+		BE518CFF0D0CC8A9001DD0A2 /* fdevent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdevent.c; path = src/fdevent.c; sourceTree = "<group>"; };
+		BE518D000D0CC8A9001DD0A2 /* fdevent_freebsd_kqueue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdevent_freebsd_kqueue.c; path = src/fdevent_freebsd_kqueue.c; sourceTree = "<group>"; };
+		BE518D010D0CC8A9001DD0A2 /* fdevent_linux_rtsig.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdevent_linux_rtsig.c; path = src/fdevent_linux_rtsig.c; sourceTree = "<group>"; };
+		BE518D020D0CC8A9001DD0A2 /* fdevent_linux_sysepoll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdevent_linux_sysepoll.c; path = src/fdevent_linux_sysepoll.c; sourceTree = "<group>"; };
+		BE518D030D0CC8A9001DD0A2 /* fdevent_poll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdevent_poll.c; path = src/fdevent_poll.c; sourceTree = "<group>"; };
+		BE518D040D0CC8A9001DD0A2 /* fdevent_select.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdevent_select.c; path = src/fdevent_select.c; sourceTree = "<group>"; };
+		BE518D050D0CC8A9001DD0A2 /* fdevent_solaris_devpoll.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdevent_solaris_devpoll.c; path = src/fdevent_solaris_devpoll.c; sourceTree = "<group>"; };
+		BE518D060D0CC8A9001DD0A2 /* http-header-glue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "http-header-glue.c"; path = "src/http-header-glue.c"; sourceTree = "<group>"; };
+		BE518D070D0CC8A9001DD0A2 /* http_chunk.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = http_chunk.c; path = src/http_chunk.c; sourceTree = "<group>"; };
+		BE518D080D0CC8A9001DD0A2 /* inet_ntop_cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = inet_ntop_cache.c; path = src/inet_ntop_cache.c; sourceTree = "<group>"; };
+		BE518D090D0CC8A9001DD0A2 /* joblist.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = joblist.c; path = src/joblist.c; sourceTree = "<group>"; };
+		BE518D0A0D0CC8A9001DD0A2 /* keyvalue.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = keyvalue.c; path = src/keyvalue.c; sourceTree = "<group>"; };
+		BE518D0B0D0CC8A9001DD0A2 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = log.c; path = src/log.c; sourceTree = "<group>"; };
+		BE518D0C0D0CC8A9001DD0A2 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = md5.c; path = src/md5.c; sourceTree = "<group>"; };
+		BE518D0D0D0CC8A9001DD0A2 /* network_write.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = network_write.c; path = src/network_write.c; sourceTree = "<group>"; };
+		BE518D0E0D0CC8A9001DD0A2 /* network_writev.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = network_writev.c; path = src/network_writev.c; sourceTree = "<group>"; };
+		BE518D0F0D0CC8A9001DD0A2 /* network_openssl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = network_openssl.c; path = src/network_openssl.c; sourceTree = "<group>"; };
+		BE518D100D0CC8A9001DD0A2 /* network_solaris_sendfilev.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = network_solaris_sendfilev.c; path = src/network_solaris_sendfilev.c; sourceTree = "<group>"; };
+		BE518D110D0CC8A9001DD0A2 /* network_linux_sendfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = network_linux_sendfile.c; path = src/network_linux_sendfile.c; sourceTree = "<group>"; };
+		BE518D120D0CC8A9001DD0A2 /* network_freebsd_sendfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = network_freebsd_sendfile.c; path = src/network_freebsd_sendfile.c; sourceTree = "<group>"; };
+		BE518D130D0CC8A9001DD0A2 /* plugin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = plugin.c; path = src/plugin.c; sourceTree = "<group>"; };
+		BE518D140D0CC8A9001DD0A2 /* splaytree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = splaytree.c; path = src/splaytree.c; sourceTree = "<group>"; };
+		BE518D150D0CC8A9001DD0A2 /* stat_cache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stat_cache.c; path = src/stat_cache.c; sourceTree = "<group>"; };
+		BE518D160D0CC8A9001DD0A2 /* status_counter.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = status_counter.c; path = src/status_counter.c; sourceTree = "<group>"; };
+		BE518D170D0CC8A9001DD0A2 /* stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = stream.c; path = src/stream.c; sourceTree = "<group>"; };
+		BE518D4B0D0CC8E9001DD0A2 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		BE518D580D0CC9B1001DD0A2 /* mod_auth.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mod_auth.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE518D5E0D0CC9DE001DD0A2 /* mod_auth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mod_auth.c; path = src/mod_auth.c; sourceTree = "<group>"; };
+		BE518D670D0CCA5B001DD0A2 /* http_auth_digest.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = http_auth_digest.c; path = src/http_auth_digest.c; sourceTree = "<group>"; };
+		BE518D680D0CCA5B001DD0A2 /* http_auth.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = http_auth.c; path = src/http_auth.c; sourceTree = "<group>"; };
+		BE518D8E0D0CCAEA001DD0A2 /* mod_fastcgi.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mod_fastcgi.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE518D940D0CCB0D001DD0A2 /* mod_fastcgi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mod_fastcgi.c; path = src/mod_fastcgi.c; sourceTree = "<group>"; };
+		BE518DA60D0CCB32001DD0A2 /* mod_indexfile.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mod_indexfile.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE518DAB0D0CCB39001DD0A2 /* mod_indexfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mod_indexfile.c; path = src/mod_indexfile.c; sourceTree = "<group>"; };
+		BE518DBF0D0CCB91001DD0A2 /* mod_staticfile.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mod_staticfile.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE518DC40D0CCBAA001DD0A2 /* mod_staticfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mod_staticfile.c; path = src/mod_staticfile.c; sourceTree = "<group>"; };
+		BE518DD30D0CCC10001DD0A2 /* mod_dirlisting.so */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mod_dirlisting.so; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE518DEB0D0CCCB7001DD0A2 /* server.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = server.c; path = src/server.c; sourceTree = "<group>"; };
+		BE518DEC0D0CCCB7001DD0A2 /* response.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = response.c; path = src/response.c; sourceTree = "<group>"; };
+		BE518DED0D0CCCB7001DD0A2 /* connections.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = connections.c; path = src/connections.c; sourceTree = "<group>"; };
+		BE518DEE0D0CCCB7001DD0A2 /* configfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = configfile.c; path = src/configfile.c; sourceTree = "<group>"; };
+		BE518DEF0D0CCCB7001DD0A2 /* network.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = network.c; path = src/network.c; sourceTree = "<group>"; };
+		BE518DF00D0CCCB7001DD0A2 /* request.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = request.c; path = src/request.c; sourceTree = "<group>"; };
+		BE518DF10D0CCCB7001DD0A2 /* proc_open.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = proc_open.c; path = src/proc_open.c; sourceTree = "<group>"; };
+		BE518E010D0CCD5A001DD0A2 /* configparser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = configparser.c; path = src/configparser.c; sourceTree = "<group>"; };
+		BE518E0D0D0CD222001DD0A2 /* mod_dirlisting.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mod_dirlisting.c; path = src/mod_dirlisting.c; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76FAD0486AB0100D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518DFE0D0CCD39001DD0A2 /* liblightcomp.dylib in Frameworks */,
+				BE4926420D14F2D8006DAF8F /* libssl.dylib in Frameworks */,
+				BE4926430D14F2DA006DAF8F /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518CE90D0CC6CD001DD0A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE4926290D14F1B0006DAF8F /* libssl.dylib in Frameworks */,
+				BE49263E0D14F2C0006DAF8F /* libcrypto.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518D560D0CC9B1001DD0A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518D610D0CC9E8001DD0A2 /* liblightcomp.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518D8C0D0CCAEA001DD0A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518D980D0CCB16001DD0A2 /* liblightcomp.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DA40D0CCB32001DD0A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518DB00D0CCB59001DD0A2 /* liblightcomp.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DBD0D0CCB91001DD0A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518DC60D0CCBB2001DD0A2 /* liblightcomp.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DD10D0CCC10001DD0A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518DD80D0CCC3B001DD0A2 /* liblightcomp.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* lighttpd */ = {
+			isa = PBXGroup;
+			children = (
+				BE4926250D14F14C006DAF8F /* libssl.dylib */,
+				BE4926370D14F202006DAF8F /* libcrypto.dylib */,
+				BE518D4B0D0CC8E9001DD0A2 /* config.h */,
+				BE518DE70D0CCC54001DD0A2 /* lighttpd */,
+				BE518CF00D0CC89B001DD0A2 /* lightcomp */,
+				BE518D500D0CC91D001DD0A2 /* modules */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+			);
+			name = lighttpd;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76FB20486AB0100D96B5E /* lighttpd */,
+				BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */,
+				BE518D580D0CC9B1001DD0A2 /* mod_auth.so */,
+				BE518DD30D0CCC10001DD0A2 /* mod_dirlisting.so */,
+				BE518D8E0D0CCAEA001DD0A2 /* mod_fastcgi.so */,
+				BE518DA60D0CCB32001DD0A2 /* mod_indexfile.so */,
+				BE518DBF0D0CCB91001DD0A2 /* mod_staticfile.so */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BE518CF00D0CC89B001DD0A2 /* lightcomp */ = {
+			isa = PBXGroup;
+			children = (
+				BE518CF10D0CC8A9001DD0A2 /* array.c */,
+				BE518CF20D0CC8A9001DD0A2 /* bitset.c */,
+				BE518CF30D0CC8A9001DD0A2 /* buffer.c */,
+				BE518CF40D0CC8A9001DD0A2 /* chunk.c */,
+				BE518CF50D0CC8A9001DD0A2 /* configfile-glue.c */,
+				BE518CF60D0CC8A9001DD0A2 /* connections-glue.c */,
+				BE518CF70D0CC8A9001DD0A2 /* crc32.c */,
+				BE518CF80D0CC8A9001DD0A2 /* data_array.c */,
+				BE518CF90D0CC8A9001DD0A2 /* data_count.c */,
+				BE518CFA0D0CC8A9001DD0A2 /* data_config.c */,
+				BE518CFB0D0CC8A9001DD0A2 /* data_fastcgi.c */,
+				BE518CFC0D0CC8A9001DD0A2 /* data_integer.c */,
+				BE518CFD0D0CC8A9001DD0A2 /* data_string.c */,
+				BE518CFE0D0CC8A9001DD0A2 /* etag.c */,
+				BE518CFF0D0CC8A9001DD0A2 /* fdevent.c */,
+				BE518D000D0CC8A9001DD0A2 /* fdevent_freebsd_kqueue.c */,
+				BE518D010D0CC8A9001DD0A2 /* fdevent_linux_rtsig.c */,
+				BE518D020D0CC8A9001DD0A2 /* fdevent_linux_sysepoll.c */,
+				BE518D030D0CC8A9001DD0A2 /* fdevent_poll.c */,
+				BE518D040D0CC8A9001DD0A2 /* fdevent_select.c */,
+				BE518D050D0CC8A9001DD0A2 /* fdevent_solaris_devpoll.c */,
+				BE518D060D0CC8A9001DD0A2 /* http-header-glue.c */,
+				BE518D070D0CC8A9001DD0A2 /* http_chunk.c */,
+				BE518D080D0CC8A9001DD0A2 /* inet_ntop_cache.c */,
+				BE518D090D0CC8A9001DD0A2 /* joblist.c */,
+				BE518D0A0D0CC8A9001DD0A2 /* keyvalue.c */,
+				BE518D0B0D0CC8A9001DD0A2 /* log.c */,
+				BE518D0C0D0CC8A9001DD0A2 /* md5.c */,
+				BE518D0D0D0CC8A9001DD0A2 /* network_write.c */,
+				BE518D0E0D0CC8A9001DD0A2 /* network_writev.c */,
+				BE518D0F0D0CC8A9001DD0A2 /* network_openssl.c */,
+				BE518D100D0CC8A9001DD0A2 /* network_solaris_sendfilev.c */,
+				BE518D110D0CC8A9001DD0A2 /* network_linux_sendfile.c */,
+				BE518D120D0CC8A9001DD0A2 /* network_freebsd_sendfile.c */,
+				BE518D130D0CC8A9001DD0A2 /* plugin.c */,
+				BE518D140D0CC8A9001DD0A2 /* splaytree.c */,
+				BE518D150D0CC8A9001DD0A2 /* stat_cache.c */,
+				BE518D160D0CC8A9001DD0A2 /* status_counter.c */,
+				BE518D170D0CC8A9001DD0A2 /* stream.c */,
+			);
+			name = lightcomp;
+			sourceTree = "<group>";
+		};
+		BE518D500D0CC91D001DD0A2 /* modules */ = {
+			isa = PBXGroup;
+			children = (
+				BE518DCC0D0CCC08001DD0A2 /* dirlisting */,
+				BE518D5B0D0CC9D3001DD0A2 /* auth */,
+				BE518D910D0CCAFE001DD0A2 /* fastcgi */,
+				BE518D9E0D0CCB21001DD0A2 /* indexfile */,
+				BE518DB60D0CCB78001DD0A2 /* staticfile */,
+			);
+			name = modules;
+			sourceTree = "<group>";
+		};
+		BE518D5B0D0CC9D3001DD0A2 /* auth */ = {
+			isa = PBXGroup;
+			children = (
+				BE518D5E0D0CC9DE001DD0A2 /* mod_auth.c */,
+				BE518D670D0CCA5B001DD0A2 /* http_auth_digest.c */,
+				BE518D680D0CCA5B001DD0A2 /* http_auth.c */,
+			);
+			name = auth;
+			sourceTree = "<group>";
+		};
+		BE518D910D0CCAFE001DD0A2 /* fastcgi */ = {
+			isa = PBXGroup;
+			children = (
+				BE518D940D0CCB0D001DD0A2 /* mod_fastcgi.c */,
+			);
+			name = fastcgi;
+			sourceTree = "<group>";
+		};
+		BE518D9E0D0CCB21001DD0A2 /* indexfile */ = {
+			isa = PBXGroup;
+			children = (
+				BE518DAB0D0CCB39001DD0A2 /* mod_indexfile.c */,
+			);
+			name = indexfile;
+			sourceTree = "<group>";
+		};
+		BE518DB60D0CCB78001DD0A2 /* staticfile */ = {
+			isa = PBXGroup;
+			children = (
+				BE518DC40D0CCBAA001DD0A2 /* mod_staticfile.c */,
+			);
+			name = staticfile;
+			sourceTree = "<group>";
+		};
+		BE518DCC0D0CCC08001DD0A2 /* dirlisting */ = {
+			isa = PBXGroup;
+			children = (
+				BE518E0D0D0CD222001DD0A2 /* mod_dirlisting.c */,
+			);
+			name = dirlisting;
+			sourceTree = "<group>";
+		};
+		BE518DE70D0CCC54001DD0A2 /* lighttpd */ = {
+			isa = PBXGroup;
+			children = (
+				BE518E010D0CCD5A001DD0A2 /* configparser.c */,
+				BE518DEB0D0CCCB7001DD0A2 /* server.c */,
+				BE518DEC0D0CCCB7001DD0A2 /* response.c */,
+				BE518DED0D0CCCB7001DD0A2 /* connections.c */,
+				BE518DEE0D0CCCB7001DD0A2 /* configfile.c */,
+				BE518DEF0D0CCCB7001DD0A2 /* network.c */,
+				BE518DF00D0CCCB7001DD0A2 /* request.c */,
+				BE518DF10D0CCCB7001DD0A2 /* proc_open.c */,
+			);
+			name = lighttpd;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BE518CE70D0CC6CD001DD0A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518D540D0CC9B1001DD0A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518D8A0D0CCAEA001DD0A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DA20D0CCB32001DD0A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DBB0D0CCB91001DD0A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DCF0D0CCC10001DD0A2 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		8DD76FA90486AB0100D96B5E /* lighttpd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB928508733DD80010E9CD /* Build configuration list for PBXNativeTarget "lighttpd" */;
+			buildPhases = (
+				8DD76FAB0486AB0100D96B5E /* Sources */,
+				8DD76FAD0486AB0100D96B5E /* Frameworks */,
+				8DD76FAF0486AB0100D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE518DE50D0CCC47001DD0A2 /* PBXTargetDependency */,
+				BE518DE30D0CCC47001DD0A2 /* PBXTargetDependency */,
+				BE518DE10D0CCC47001DD0A2 /* PBXTargetDependency */,
+				BE518DDF0D0CCC47001DD0A2 /* PBXTargetDependency */,
+				BE518DDD0D0CCC47001DD0A2 /* PBXTargetDependency */,
+				BE518DDB0D0CCC47001DD0A2 /* PBXTargetDependency */,
+			);
+			name = lighttpd;
+			productInstallPath = "$(HOME)/bin";
+			productName = lighttpd;
+			productReference = 8DD76FB20486AB0100D96B5E /* lighttpd */;
+			productType = "com.apple.product-type.tool";
+		};
+		BE518CEA0D0CC6CD001DD0A2 /* lightcomp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE518CEE0D0CC6DC001DD0A2 /* Build configuration list for PBXNativeTarget "lightcomp" */;
+			buildPhases = (
+				BE518CE70D0CC6CD001DD0A2 /* Headers */,
+				BE518CE80D0CC6CD001DD0A2 /* Sources */,
+				BE518CE90D0CC6CD001DD0A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = lightcomp;
+			productName = lightcomp;
+			productReference = BE518CEB0D0CC6CD001DD0A2 /* liblightcomp.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		BE518D570D0CC9B1001DD0A2 /* auth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE518D5C0D0CC9D3001DD0A2 /* Build configuration list for PBXNativeTarget "auth" */;
+			buildPhases = (
+				BE518D540D0CC9B1001DD0A2 /* Headers */,
+				BE518D550D0CC9B1001DD0A2 /* Sources */,
+				BE518D560D0CC9B1001DD0A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE518D6D0D0CCA71001DD0A2 /* PBXTargetDependency */,
+			);
+			name = auth;
+			productName = auth;
+			productReference = BE518D580D0CC9B1001DD0A2 /* mod_auth.so */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		BE518D8D0D0CCAEA001DD0A2 /* fastcgi */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE518D920D0CCAFE001DD0A2 /* Build configuration list for PBXNativeTarget "fastcgi" */;
+			buildPhases = (
+				BE518D8A0D0CCAEA001DD0A2 /* Headers */,
+				BE518D8B0D0CCAEA001DD0A2 /* Sources */,
+				BE518D8C0D0CCAEA001DD0A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE518E110D0CD29A001DD0A2 /* PBXTargetDependency */,
+			);
+			name = fastcgi;
+			productName = fastcgi;
+			productReference = BE518D8E0D0CCAEA001DD0A2 /* mod_fastcgi.so */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		BE518DA50D0CCB32001DD0A2 /* indexfile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE518DAA0D0CCB34001DD0A2 /* Build configuration list for PBXNativeTarget "indexfile" */;
+			buildPhases = (
+				BE518DA20D0CCB32001DD0A2 /* Headers */,
+				BE518DA30D0CCB32001DD0A2 /* Sources */,
+				BE518DA40D0CCB32001DD0A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE518E150D0CD2B7001DD0A2 /* PBXTargetDependency */,
+			);
+			name = indexfile;
+			productName = indexfile;
+			productReference = BE518DA60D0CCB32001DD0A2 /* mod_indexfile.so */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		BE518DBE0D0CCB91001DD0A2 /* staticfile */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE518DC30D0CCBA2001DD0A2 /* Build configuration list for PBXNativeTarget "staticfile" */;
+			buildPhases = (
+				BE518DBB0D0CCB91001DD0A2 /* Headers */,
+				BE518DBC0D0CCB91001DD0A2 /* Sources */,
+				BE518DBD0D0CCB91001DD0A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE518E130D0CD2B1001DD0A2 /* PBXTargetDependency */,
+			);
+			name = staticfile;
+			productName = staticfile;
+			productReference = BE518DBF0D0CCB91001DD0A2 /* mod_staticfile.so */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		BE518DD20D0CCC10001DD0A2 /* dirlisting */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE518DE80D0CCC54001DD0A2 /* Build configuration list for PBXNativeTarget "dirlisting" */;
+			buildPhases = (
+				BE518DCF0D0CCC10001DD0A2 /* Headers */,
+				BE518DD00D0CCC10001DD0A2 /* Sources */,
+				BE518DD10D0CCC10001DD0A2 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE518DD70D0CCC2F001DD0A2 /* PBXTargetDependency */,
+			);
+			name = dirlisting;
+			productName = dirlisting;
+			productReference = BE518DD30D0CCC10001DD0A2 /* mod_dirlisting.so */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "lighttpd" */;
+			compatibilityVersion = "Xcode 3.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* lighttpd */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76FA90486AB0100D96B5E /* lighttpd */,
+				BE518CEA0D0CC6CD001DD0A2 /* lightcomp */,
+				BE518D570D0CC9B1001DD0A2 /* auth */,
+				BE518DD20D0CCC10001DD0A2 /* dirlisting */,
+				BE518D8D0D0CCAEA001DD0A2 /* fastcgi */,
+				BE518DA50D0CCB32001DD0A2 /* indexfile */,
+				BE518DBE0D0CCB91001DD0A2 /* staticfile */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76FAB0486AB0100D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518DF20D0CCCB7001DD0A2 /* server.c in Sources */,
+				BE518DF30D0CCCB7001DD0A2 /* response.c in Sources */,
+				BE518DF40D0CCCB7001DD0A2 /* connections.c in Sources */,
+				BE518DF50D0CCCB7001DD0A2 /* configfile.c in Sources */,
+				BE518DF60D0CCCB7001DD0A2 /* network.c in Sources */,
+				BE518DF70D0CCCB7001DD0A2 /* request.c in Sources */,
+				BE518DF80D0CCCB7001DD0A2 /* proc_open.c in Sources */,
+				BE518E020D0CCD5A001DD0A2 /* configparser.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518CE80D0CC6CD001DD0A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518D180D0CC8A9001DD0A2 /* array.c in Sources */,
+				BE518D190D0CC8A9001DD0A2 /* bitset.c in Sources */,
+				BE518D1A0D0CC8A9001DD0A2 /* buffer.c in Sources */,
+				BE518D1B0D0CC8A9001DD0A2 /* chunk.c in Sources */,
+				BE518D1C0D0CC8A9001DD0A2 /* configfile-glue.c in Sources */,
+				BE518D1D0D0CC8A9001DD0A2 /* connections-glue.c in Sources */,
+				BE518D1E0D0CC8A9001DD0A2 /* crc32.c in Sources */,
+				BE518D1F0D0CC8A9001DD0A2 /* data_array.c in Sources */,
+				BE518D200D0CC8A9001DD0A2 /* data_count.c in Sources */,
+				BE518D210D0CC8A9001DD0A2 /* data_config.c in Sources */,
+				BE518D220D0CC8A9001DD0A2 /* data_fastcgi.c in Sources */,
+				BE518D230D0CC8A9001DD0A2 /* data_integer.c in Sources */,
+				BE518D240D0CC8A9001DD0A2 /* data_string.c in Sources */,
+				BE518D250D0CC8A9001DD0A2 /* etag.c in Sources */,
+				BE518D260D0CC8A9001DD0A2 /* fdevent.c in Sources */,
+				BE518D270D0CC8A9001DD0A2 /* fdevent_freebsd_kqueue.c in Sources */,
+				BE518D280D0CC8A9001DD0A2 /* fdevent_linux_rtsig.c in Sources */,
+				BE518D290D0CC8A9001DD0A2 /* fdevent_linux_sysepoll.c in Sources */,
+				BE518D2A0D0CC8A9001DD0A2 /* fdevent_poll.c in Sources */,
+				BE518D2B0D0CC8A9001DD0A2 /* fdevent_select.c in Sources */,
+				BE518D2C0D0CC8A9001DD0A2 /* fdevent_solaris_devpoll.c in Sources */,
+				BE518D2D0D0CC8A9001DD0A2 /* http-header-glue.c in Sources */,
+				BE518D2E0D0CC8A9001DD0A2 /* http_chunk.c in Sources */,
+				BE518D2F0D0CC8A9001DD0A2 /* inet_ntop_cache.c in Sources */,
+				BE518D300D0CC8A9001DD0A2 /* joblist.c in Sources */,
+				BE518D310D0CC8A9001DD0A2 /* keyvalue.c in Sources */,
+				BE518D320D0CC8A9001DD0A2 /* log.c in Sources */,
+				BE518D330D0CC8A9001DD0A2 /* md5.c in Sources */,
+				BE518D340D0CC8A9001DD0A2 /* network_write.c in Sources */,
+				BE518D350D0CC8A9001DD0A2 /* network_writev.c in Sources */,
+				BE518D360D0CC8A9001DD0A2 /* network_openssl.c in Sources */,
+				BE518D370D0CC8A9001DD0A2 /* network_solaris_sendfilev.c in Sources */,
+				BE518D380D0CC8A9001DD0A2 /* network_linux_sendfile.c in Sources */,
+				BE518D390D0CC8A9001DD0A2 /* network_freebsd_sendfile.c in Sources */,
+				BE518D3A0D0CC8A9001DD0A2 /* plugin.c in Sources */,
+				BE518D3B0D0CC8A9001DD0A2 /* splaytree.c in Sources */,
+				BE518D3C0D0CC8A9001DD0A2 /* stat_cache.c in Sources */,
+				BE518D3D0D0CC8A9001DD0A2 /* status_counter.c in Sources */,
+				BE518D3E0D0CC8A9001DD0A2 /* stream.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518D550D0CC9B1001DD0A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518D5F0D0CC9DE001DD0A2 /* mod_auth.c in Sources */,
+				BE518D690D0CCA5B001DD0A2 /* http_auth_digest.c in Sources */,
+				BE518D6A0D0CCA5B001DD0A2 /* http_auth.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518D8B0D0CCAEA001DD0A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518D950D0CCB0D001DD0A2 /* mod_fastcgi.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DA30D0CCB32001DD0A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518DAC0D0CCB39001DD0A2 /* mod_indexfile.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DBC0D0CCB91001DD0A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518DC50D0CCBAA001DD0A2 /* mod_staticfile.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE518DD00D0CCC10001DD0A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE518E0E0D0CD222001DD0A2 /* mod_dirlisting.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BE518D6D0D0CCA71001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518CEA0D0CC6CD001DD0A2 /* lightcomp */;
+			targetProxy = BE518D6C0D0CCA71001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518DD70D0CCC2F001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518CEA0D0CC6CD001DD0A2 /* lightcomp */;
+			targetProxy = BE518DD60D0CCC2F001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518DDB0D0CCC47001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518DBE0D0CCB91001DD0A2 /* staticfile */;
+			targetProxy = BE518DDA0D0CCC47001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518DDD0D0CCC47001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518DA50D0CCB32001DD0A2 /* indexfile */;
+			targetProxy = BE518DDC0D0CCC47001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518DDF0D0CCC47001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518D8D0D0CCAEA001DD0A2 /* fastcgi */;
+			targetProxy = BE518DDE0D0CCC47001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518DE10D0CCC47001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518DD20D0CCC10001DD0A2 /* dirlisting */;
+			targetProxy = BE518DE00D0CCC47001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518DE30D0CCC47001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518D570D0CC9B1001DD0A2 /* auth */;
+			targetProxy = BE518DE20D0CCC47001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518DE50D0CCC47001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518CEA0D0CC6CD001DD0A2 /* lightcomp */;
+			targetProxy = BE518DE40D0CCC47001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518E110D0CD29A001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518CEA0D0CC6CD001DD0A2 /* lightcomp */;
+			targetProxy = BE518E100D0CD29A001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518E130D0CD2B1001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518CEA0D0CC6CD001DD0A2 /* lightcomp */;
+			targetProxy = BE518E120D0CD2B1001DD0A2 /* PBXContainerItemProxy */;
+		};
+		BE518E150D0CD2B7001DD0A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE518CEA0D0CC6CD001DD0A2 /* lightcomp */;
+			targetProxy = BE518E140D0CD2B7001DD0A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB928608733DD80010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = lighttpd;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		1DEB928708733DD80010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = lighttpd;
+			};
+			name = Release;
+		};
+		1DEB928A08733DD80010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_CFLAGS = (
+					"-DHAVE_CONFIG_H",
+					"-D_REENTRANT",
+					"-D__EXTENSIONS__",
+					"-DLIBRARY_DIR=\"\\\"/usr/local/lib\\\"\"",
+					"-DOPENSSL_NO_KRB5",
+				);
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Debug;
+		};
+		1DEB928B08733DD80010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				OTHER_CFLAGS = (
+					"-DHAVE_CONFIG_H",
+					"-D_REENTRANT",
+					"-D__EXTENSIONS__",
+					"-DLIBRARY_DIR=\"\\\"/usr/local/lib\\\"\"",
+					"-DOPENSSL_NO_KRB5",
+				);
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+		BE518CEC0D0CC6CD001DD0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_PREFIX = lib;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = lightcomp;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		BE518CED0D0CC6CD001DD0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = lightcomp;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BE518D590D0CC9B1001DD0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Release\"",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = auth;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		BE518D5A0D0CC9B1001DD0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/build/Release\"",
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = auth;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BE518D8F0D0CCAEB001DD0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = fastcgi;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		BE518D900D0CCAEB001DD0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = fastcgi;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BE518DA70D0CCB33001DD0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = indexfile;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		BE518DA80D0CCB33001DD0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = indexfile;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BE518DC00D0CCB91001DD0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = staticfile;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		BE518DC10D0CCB91001DD0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = staticfile;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		BE518DD40D0CCC11001DD0A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = dirlisting;
+				ZERO_LINK = YES;
+			};
+			name = Debug;
+		};
+		BE518DD50D0CCC11001DD0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EXECUTABLE_EXTENSION = so;
+				EXECUTABLE_PREFIX = mod_;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = dirlisting;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB928508733DD80010E9CD /* Build configuration list for PBXNativeTarget "lighttpd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB928608733DD80010E9CD /* Debug */,
+				1DEB928708733DD80010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "lighttpd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB928A08733DD80010E9CD /* Debug */,
+				1DEB928B08733DD80010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE518CEE0D0CC6DC001DD0A2 /* Build configuration list for PBXNativeTarget "lightcomp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE518CEC0D0CC6CD001DD0A2 /* Debug */,
+				BE518CED0D0CC6CD001DD0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE518D5C0D0CC9D3001DD0A2 /* Build configuration list for PBXNativeTarget "auth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE518D590D0CC9B1001DD0A2 /* Debug */,
+				BE518D5A0D0CC9B1001DD0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE518D920D0CCAFE001DD0A2 /* Build configuration list for PBXNativeTarget "fastcgi" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE518D8F0D0CCAEB001DD0A2 /* Debug */,
+				BE518D900D0CCAEB001DD0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE518DAA0D0CCB34001DD0A2 /* Build configuration list for PBXNativeTarget "indexfile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE518DA70D0CCB33001DD0A2 /* Debug */,
+				BE518DA80D0CCB33001DD0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE518DC30D0CCBA2001DD0A2 /* Build configuration list for PBXNativeTarget "staticfile" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE518DC00D0CCB91001DD0A2 /* Debug */,
+				BE518DC10D0CCB91001DD0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE518DE80D0CCC54001DD0A2 /* Build configuration list for PBXNativeTarget "dirlisting" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE518DD40D0CCC11001DD0A2 /* Debug */,
+				BE518DD50D0CCC11001DD0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}
