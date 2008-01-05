@@ -46,17 +46,13 @@
 		BE518E4D0D0CD42C001DD0A2 /* mod_staticfile.so in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E240D0CD312001DD0A2 /* mod_staticfile.so */; };
 		BE518E5D0D0CD4FD001DD0A2 /* etc in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E510D0CD4D4001DD0A2 /* etc */; };
 		BE518E620D0CD562001DD0A2 /* lighttpd in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518E1E0D0CD312001DD0A2 /* lighttpd */; };
-		BE518FBA0D0CD771001DD0A2 /* javascript in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518F4C0D0CD75C001DD0A2 /* javascript */; };
-		BE518FBB0D0CD771001DD0A2 /* images in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518F600D0CD75C001DD0A2 /* images */; };
-		BE518FBC0D0CD771001DD0A2 /* index.html in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518FA20D0CD75C001DD0A2 /* index.html */; };
-		BE518FBD0D0CD771001DD0A2 /* remote in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518FA30D0CD75C001DD0A2 /* remote */; };
-		BE518FBE0D0CD771001DD0A2 /* stylesheets in CopyFiles */ = {isa = PBXBuildFile; fileRef = BE518FB70D0CD75C001DD0A2 /* stylesheets */; };
 		BE8E36870D2A0D2B0046893F /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE8E36830D2A0D2B0046893F /* Preferences.xib */; };
 		BE8E36880D2A0D2B0046893F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE8E36850D2A0D2B0046893F /* MainMenu.xib */; };
 		BE8E37200D2A283C0046893F /* UKFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E37180D2A283C0046893F /* UKFileWatcher.m */; };
 		BE8E37210D2A283C0046893F /* UKFNSubscribeFileWatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E371A0D2A283C0046893F /* UKFNSubscribeFileWatcher.m */; };
 		BE8E37230D2A283C0046893F /* UKKQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E371D0D2A283C0046893F /* UKKQueue.m */; };
 		BE8E37240D2A283C0046893F /* UKMainThreadProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8E371F0D2A283C0046893F /* UKMainThreadProxy.m */; };
+		BEF04CD10D2F493700705F69 /* web in CopyFiles */ = {isa = PBXBuildFile; fileRef = BEF04C5B0D2F48DF00705F69 /* web */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +60,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BE518CB70D0CC452001DD0A2 /* lighttpd */;
+			remoteGlobalIDString = BE518CB70D0CC452001DD0A2;
 			remoteInfo = lighttpd;
 		};
 /* End PBXContainerItemProxy section */
@@ -111,6 +107,7 @@
 			dstPath = binary;
 			dstSubfolderSpec = 7;
 			files = (
+				BEF04CD10D2F493700705F69 /* web in CopyFiles */,
 				BE518E5D0D0CD4FD001DD0A2 /* etc in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -131,11 +128,6 @@
 			dstPath = binary/www;
 			dstSubfolderSpec = 7;
 			files = (
-				BE518FBA0D0CD771001DD0A2 /* javascript in CopyFiles */,
-				BE518FBB0D0CD771001DD0A2 /* images in CopyFiles */,
-				BE518FBC0D0CD771001DD0A2 /* index.html in CopyFiles */,
-				BE518FBD0D0CD771001DD0A2 /* remote in CopyFiles */,
-				BE518FBE0D0CD771001DD0A2 /* stylesheets in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,11 +167,6 @@
 		BE518E230D0CD312001DD0A2 /* mod_indexfile.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = mod_indexfile.so; path = "third-party/lighttpd/build/Release/mod_indexfile.so"; sourceTree = "<group>"; };
 		BE518E240D0CD312001DD0A2 /* mod_staticfile.so */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = mod_staticfile.so; path = "third-party/lighttpd/build/Release/mod_staticfile.so"; sourceTree = "<group>"; };
 		BE518E510D0CD4D4001DD0A2 /* etc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = etc; path = Data/etc; sourceTree = "<group>"; };
-		BE518F4C0D0CD75C001DD0A2 /* javascript */ = {isa = PBXFileReference; lastKnownFileType = folder; name = javascript; path = ../../trunk/javascript; sourceTree = SOURCE_ROOT; };
-		BE518F600D0CD75C001DD0A2 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = ../../trunk/images; sourceTree = SOURCE_ROOT; };
-		BE518FA20D0CD75C001DD0A2 /* index.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = index.html; path = ../../trunk/index.html; sourceTree = SOURCE_ROOT; };
-		BE518FA30D0CD75C001DD0A2 /* remote */ = {isa = PBXFileReference; lastKnownFileType = folder; name = remote; path = ../../trunk/remote; sourceTree = SOURCE_ROOT; };
-		BE518FB70D0CD75C001DD0A2 /* stylesheets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = stylesheets; path = ../../trunk/stylesheets; sourceTree = SOURCE_ROOT; };
 		BE8E36840D2A0D2B0046893F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
 		BE8E36860D2A0D2B0046893F /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		BE8E37170D2A283C0046893F /* UKFileWatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKFileWatcher.h; sourceTree = "<group>"; };
@@ -190,6 +177,7 @@
 		BE8E371D0D2A283C0046893F /* UKKQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKKQueue.m; sourceTree = "<group>"; };
 		BE8E371E0D2A283C0046893F /* UKMainThreadProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UKMainThreadProxy.h; sourceTree = "<group>"; };
 		BE8E371F0D2A283C0046893F /* UKMainThreadProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UKMainThreadProxy.m; sourceTree = "<group>"; };
+		BEF04C5B0D2F48DF00705F69 /* web */ = {isa = PBXFileReference; lastKnownFileType = folder; name = web; path = ../web; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,7 +252,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				BE518F4A0D0CD747001DD0A2 /* Clutch-www */,
+				BEF04C5B0D2F48DF00705F69 /* web */,
 				BE518E510D0CD4D4001DD0A2 /* etc */,
 				BE518CAB0D0CC3C4001DD0A2 /* Backend */,
 				BE130E2A0C6B5F020029E462 /* Clutch.icns */,
@@ -313,18 +301,6 @@
 				BE518E240D0CD312001DD0A2 /* mod_staticfile.so */,
 			);
 			name = lighttpd;
-			sourceTree = "<group>";
-		};
-		BE518F4A0D0CD747001DD0A2 /* Clutch-www */ = {
-			isa = PBXGroup;
-			children = (
-				BE518F4C0D0CD75C001DD0A2 /* javascript */,
-				BE518F600D0CD75C001DD0A2 /* images */,
-				BE518FA20D0CD75C001DD0A2 /* index.html */,
-				BE518FA30D0CD75C001DD0A2 /* remote */,
-				BE518FB70D0CD75C001DD0A2 /* stylesheets */,
-			);
-			name = "Clutch-www";
 			sourceTree = "<group>";
 		};
 		BE8E37160D2A283C0046893F /* UKKQueue */ = {

@@ -12,7 +12,7 @@
 #import "PrefController.h"
 #import "GlobalConstants.h"
 #include <signal.h>
-#import "UKKQueue.h"
+#import "third-party/UKKQueue/UKKQueue.h"
 
 
 @interface MainController (Private)
@@ -276,7 +276,7 @@ bool                transmissionDetected;
     NSString *rootPath = [[NSBundle mainBundle] resourcePath];
     NSString *theFile = [rootPath stringByAppendingString: @"/binary/etc/lighttpd-plain.user"];        
     NSFileHandle *theFileHandle = [NSFileHandle fileHandleForWritingAtPath:theFile];
-    [theFileHandle writeData:[theScript dataUsingEncoding:NSUnicodeStringEncoding]];
+    [theFileHandle writeData:[theScript dataUsingEncoding:NSProprietaryStringEncoding]];
     [theFileHandle truncateFileAtOffset:[theScript length]];
     [theFileHandle closeFile];
 }
@@ -507,7 +507,7 @@ bool                transmissionDetected;
 
 - (void) updateSocketLocation
 {
-    NSString *theFile = [NSString stringWithFormat: @"%@/binary/www/remote/data/socket.txt", [[NSBundle mainBundle] resourcePath]];
+    NSString *theFile = [NSString stringWithFormat: @"%@/binary/web/remote/data/socket.txt", [[NSBundle mainBundle] resourcePath]];
     NSFileHandle *theFileHandle = [NSFileHandle fileHandleForWritingAtPath:theFile];
     NSString *theSocketLocation = [@"~/Library/Application Support/Transmission/socket" stringByExpandingTildeInPath];
     [theFileHandle writeData:[theSocketLocation dataUsingEncoding:NSProprietaryStringEncoding]];
