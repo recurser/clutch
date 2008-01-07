@@ -207,18 +207,7 @@ Math.formatTimestamp = function(seconds) {
  *   @returns float
  */
 Math.roundWithPrecision = function(floatnum, precision) {
-    
-    // Round float to desired precision and
-    var result = floatnum.toFixed(precision).toString();
-    
-    // Strip trailing zeros
-    var last_char = result.substr(result.length-1, 1);
-    while (result.length > 1 && (last_char == '0' || last_char == '.')) {
-        result = result.substr(0, result.length-1);
-        last_char = result.substr(result.length-1, 1);
-    }
-    
-    return result;
+    return Math.round ( floatnum * Math.pow ( 10, precision ) ) / Math.pow ( 10, precision );
 }
 
 /*

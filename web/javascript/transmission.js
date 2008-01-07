@@ -956,12 +956,14 @@ Transmission.prototype = {
 
 				$('#torrent_inspector_hash')[0].innerHTML			= torrent._hash;
 				$('#torrent_inspector_state')[0].innerHTML			= torrent._state;
+				$('#torrent_inspector_download_speed')[0].innerHTML			= Math.formatBytes( torrent._download_speed ) + '/s';
+				$('#torrent_inspector_upload_speed')[0].innerHTML			= Math.formatBytes( torrent._upload_speed ) + '/s';
 				$('#torrent_inspector_ratio')[0].innerHTML			= torrent.ratio();
 				$('#torrent_inspector_uploaded')[0].innerHTML		= Math.formatBytes(torrent._upload_total);
 				$('#torrent_inspector_downloaded')[0].innerHTML		= Math.formatBytes(torrent._download_total);
-				$('#torrent_inspector_upload_to')[0].innerHTML		= torrent._peers_downloading;
-				$('#torrent_inspector_download_from')[0].innerHTML	= torrent._peers_uploading;
-				$('#torrent_inspector_swarm_speed')[0].innerHTML	= torrent._swarm_speed;
+				$('#torrent_inspector_upload_to')[0].innerHTML		= torrent._peers_uploading;
+				$('#torrent_inspector_download_from')[0].innerHTML	= torrent._peers_downloading;
+				$('#torrent_inspector_swarm_speed')[0].innerHTML	= Math.formatBytes( torrent._swarm_speed ) + '/s';
 				$('#torrent_inspector_total_seeders')[0].innerHTML	= torrent._total_seeders;
 				$('#torrent_inspector_total_leechers')[0].innerHTML	= torrent._total_leechers;		
 		
@@ -993,27 +995,59 @@ Transmission.prototype = {
 			} else {
 				var total_upload = 0;
 				var total_download = 0;
-				for (i=0; i<torrent_count; i++) {
-					total_upload += this._selected_torrents.itemByIndex(i)._upload_total;
-					total_download += this._selected_torrents.itemByIndex(i)._download_total;
-				}
+				var total_upload_speed = 0;
+				var total_download_speed = 0;
+				var total_seeders = 0;
+				var total_leechers = 0;
+				var total_upload_to = 0;
+				var total_download_from = 0;
+				var total_swarm_speed = 0;
+				var total_state = '';
+				var total_tracker = '';
+
 				if (torrent_count == 0) {
 					$('#torrent_inspector_name')[0].innerHTML			= 'No Torrent Selected';
 				} else {
 					$('#torrent_inspector_name')[0].innerHTML			= torrent_count + ' Torrents Selected';
+					total_state = this._selected_torrents.first()._state; 
+					total_tracker = this._selected_torrents.first()._tracker['address']+':'+this._selected_torrents.first()._tracker['port']+this._selected_torrents.first()._tracker['announce']; 
 				}
+				for (i=0; i<torrent_count; i++) {
+					total_upload += this._selected_torrents.itemByIndex(i)._upload_total;
+					total_download += this._selected_torrents.itemByIndex(i)._download_total;
+					total_upload_speed += this._selected_torrents.itemByIndex(i)._upload_speed;
+					total_download_speed += this._selected_torrents.itemByIndex(i)._download_speed;
+					total_seeders += this._selected_torrents.itemByIndex(i)._total_seeders;
+					total_leechers += this._selected_torrents.itemByIndex(i)._total_leechers;
+					total_upload_to += this._selected_torrents.itemByIndex(i)._peers_uploading;
+					total_download_from += this._selected_torrents.itemByIndex(i)._peers_downloading;
+					total_swarm_speed += this._selected_torrents.itemByIndex(i)._swarm_speed;
+					if ( total_state.search ( this._selected_torrents.itemByIndex(i)._state ) == -1 )
+						total_state += '/' + this._selected_torrents.itemByIndex(i)._state;
+					var tracker = this._selected_torrents.itemByIndex(i)._tracker['address']+':'+this._selected_torrents.itemByIndex(i)._tracker['port']+this._selected_torrents.itemByIndex(i)._tracker['announce'];
+					if ( total_tracker.search ( tracker ) == -1 )  
+						total_tracker += '/' + tracker;
+				}
+
+				var total_ratio = 0;
+				if ( total_upload > 0 && total_download > 0 ) {
+					total_ratio = total_upload / total_download;		
+				}
+
 				$('#torrent_inspector_size')[0].innerHTML			= '';
-				$('#torrent_inspector_tracker')[0].innerHTML		= 'N/A';
+				$('#torrent_inspector_tracker')[0].innerHTML		= total_tracker;
 				$('#torrent_inspector_hash')[0].innerHTML			= 'N/A';
-				$('#torrent_inspector_state')[0].innerHTML			= 'N/A';
-				$('#torrent_inspector_ratio')[0].innerHTML			= 'N/A';
+				$('#torrent_inspector_state')[0].innerHTML			= total_state;
+				$('#torrent_inspector_ratio')[0].innerHTML			= Math.roundWithPrecision ( total_ratio, 2 );
 				$('#torrent_inspector_uploaded')[0].innerHTML		= Math.formatBytes(total_upload);
+				$('#torrent_inspector_download_speed')[0].innerHTML		= Math.formatBytes(total_download_speed) + '/s';
+				$('#torrent_inspector_upload_speed')[0].innerHTML		= Math.formatBytes(total_upload_speed) + '/s';
 				$('#torrent_inspector_downloaded')[0].innerHTML		= Math.formatBytes(total_download);
-				$('#torrent_inspector_upload_to')[0].innerHTML		= 'N/A';
-				$('#torrent_inspector_download_from')[0].innerHTML	= 'N/A';
-				$('#torrent_inspector_swarm_speed')[0].innerHTML	= 'N/A';
-				$('#torrent_inspector_total_seeders')[0].innerHTML	= 'N/A';
-				$('#torrent_inspector_total_leechers')[0].innerHTML	= 'N/A';
+				$('#torrent_inspector_upload_to')[0].innerHTML		= total_upload_to;
+				$('#torrent_inspector_download_from')[0].innerHTML	= total_download_from;
+				$('#torrent_inspector_swarm_speed')[0].innerHTML	= Math.formatBytes(total_swarm_speed) + '/s';
+				$('#torrent_inspector_total_seeders')[0].innerHTML	= total_seeders;
+				$('#torrent_inspector_total_leechers')[0].innerHTML	= total_leechers;
 				$('#torrent_inspector_creator')[0].innerHTML		= 'N/A';
 				$('#torrent_inspector_comment')[0].innerHTML		= 'N/A';
 				$('#torrent_inspector_creator_date')[0].innerHTML	= 'N/A';
@@ -1278,10 +1312,10 @@ Transmission.prototype = {
     setGlobalSpeeds: function(num_torrents, global_up_speed, global_down_speed) {
 		$('#torrent_global_transfer')[0].innerHTML = num_torrents + ' Transfers';
 		if (global_up_speed != null) {
-			$('#torrent_global_upload')[0].innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed, true) + '/s';
+			$('#torrent_global_upload')[0].innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed) + '/s';
 		}
 		if (global_down_speed != null) {
-			$('#torrent_global_download')[0].innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed, true) + '/s';
+			$('#torrent_global_download')[0].innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed) + '/s';
 		}
     },
     

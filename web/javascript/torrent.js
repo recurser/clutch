@@ -410,7 +410,7 @@ Torrent.prototype = {
 			peer_details += this._peers_total + ' peers - UL: ';
 			peer_details += Math.formatBytes(this._upload_speed) + '/s';
 		}
-		
+
 		// Update the progress details
 		this._progress_details_container[0].innerHTML = progress_details;
 		
@@ -428,7 +428,7 @@ Torrent.prototype = {
 			this._pause_resume_button_image[0].src = 'images/buttons/pause_off.png';
 		}
 		
-		if (this._error_message && this._error_message != '') {
+		if (this._error_message && this._error_message != '' && this._error_message != 'other' ) {
 			peer_details = this._error_message;
 		}
 		
