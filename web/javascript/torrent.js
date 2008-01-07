@@ -378,7 +378,7 @@ Torrent.prototype = {
 				peer_details = 'Waiting to check existing files';
 				
 			} else {
-				peer_details = 'Downloading from ' + this._peers_uploading + ' of ';
+				peer_details = 'Downloading from ' + this._peers_downloading + ' of ';
 				peer_details += this._peers_total + ' peers - DL: ';
 				peer_details += Math.formatBytes(this._download_speed) + '/s UL: ';
 				peer_details += Math.formatBytes(this._upload_speed) + '/s';			
@@ -406,7 +406,7 @@ Torrent.prototype = {
 			
 			// Create the 'peer details' label
 			// Eg: 'Seeding to 13 of 22 peers - UL: 36.2 KB/s'
-			peer_details = 'Seeding to ' + this._peers_downloading + ' of ';
+			peer_details = 'Seeding to ' + this._peers_uploading + ' of ';
 			peer_details += this._peers_total + ' peers - UL: ';
 			peer_details += Math.formatBytes(this._upload_speed) + '/s';
 		}
