@@ -13,7 +13,8 @@ most stable and complete daemon version available at the time of
 this writing.
 
 2. Your httpd / php needs read-write access to the /remote/data 
-folder, as this is where it will store your preferences.
+folder, as this is where it will store your preferences. It also 
+needs read-write to the transmission socket and the folder it is in.
 
 3. Edit the socket.txt file in the above folder to point to your 
 transmission-daemon socket file. On Linux, this will most likely 
@@ -25,6 +26,6 @@ be able to access the WebUI in the browser of your choice, as long
 as it is not Internet Explorer.
 
 Please see #transmission on irc.freenode.net for support, or the
-forums at http://transmissionbt.com/forums/
+forums at http://forum.transmissionbt.com/
 
 Thank you from the developers for using Transmission and Clutch.
