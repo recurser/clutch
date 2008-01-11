@@ -250,7 +250,7 @@ bool                transmissionDetected;
 	else if (enabled && !found) // add it
 	{
 		myEntry = [NSDictionary dictionaryWithObjectsAndKeys: myCurrentPath, @"Path",
-                   [NSNumber numberWithbool: NO], @"Hide", nil];
+                   [NSNumber numberWithBool: NO], @"Hide", nil];
 		[startupItems addObject: myEntry];
 	}
 	else if (enabled && found)
@@ -291,11 +291,11 @@ bool                transmissionDetected;
 {
     NSUserDefaults* theDefaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary* defaultsDic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithbool: NO], startOnLoginKeyName,
-                                 [NSNumber numberWithbool:YES], SUCheckAtStartupKey,
+                                 [NSNumber numberWithBool: NO], startOnLoginKeyName,
+                                 [NSNumber numberWithBool:YES], SUCheckAtStartupKey,
                                  [NSNumber numberWithInt:9091], serverPortKeyName,
-                                 [NSNumber numberWithbool: NO], sslEnabledKeyName,
-                                 [NSNumber numberWithbool: NO], enableLoginKeyName,
+                                 [NSNumber numberWithBool: NO], sslEnabledKeyName,
+                                 [NSNumber numberWithBool: NO], enableLoginKeyName,
                                  [NSString stringWithString:@"admin"], loginUsernameKeyName,
                                  [NSString stringWithString:@"password"], loginPasswordKeyName,
                                  nil
@@ -338,30 +338,33 @@ bool                transmissionDetected;
 
 - (void) generateSll
 {
-    openssl = [[NSTask alloc] init];
-    NSString *rootPath = [[NSBundle mainBundle] resourcePath];
-    NSString *pathToBinary = [rootPath stringByAppendingString: @"/binary"];
-    NSString *pathToEtc = [pathToBinary stringByAppendingString: @"/etc"];
-    NSString *pathToOpenSll = @"/usr/bin/openssl";
-    [openssl setLaunchPath: pathToOpenSll];
-    [openssl setCurrentDirectoryPath: pathToEtc];
-    [openssl setArguments:
-     [NSArray arrayWithObjects:
-      @"req", 
-      @"-new",
-      @"-x509", 
-      @"-keyout", @"server.pem",
-      @"-out", @"server.pem",
-      @"-days", @"3650",
-      @"-nodes",
-      @"-config", @"openssl-autogen.conf",
-      nil
-      ]
-     ];
-    [openssl launch];
-    [openssl waitUntilExit];
-    [openssl release];
-    openssl = nil;
+    if ( ! [[NSFileManager defaultManager] fileExistsAtPath:[NSString stringWithFormat: @"%@/binary/etc/server.pem", [[NSBundle mainBundle] resourcePath]]] )
+    {
+        openssl = [[NSTask alloc] init];
+        NSString *rootPath = [[NSBundle mainBundle] resourcePath];
+        NSString *pathToBinary = [rootPath stringByAppendingString: @"/binary"];
+        NSString *pathToEtc = [pathToBinary stringByAppendingString: @"/etc"];
+        NSString *pathToOpenSll = @"/usr/bin/openssl";
+        [openssl setLaunchPath: pathToOpenSll];
+        [openssl setCurrentDirectoryPath: pathToEtc];
+        [openssl setArguments:
+         [NSArray arrayWithObjects:
+          @"req", 
+          @"-new",
+          @"-x509", 
+          @"-keyout", @"server.pem",
+          @"-out", @"server.pem",
+          @"-days", @"3650",
+          @"-nodes",
+          @"-config", @"openssl-autogen.conf",
+          nil
+          ]
+         ];
+        [openssl launch];
+        [openssl waitUntilExit];
+        [openssl release];
+        openssl = nil;
+    }
 }
 
 - (void) startLighttpd
