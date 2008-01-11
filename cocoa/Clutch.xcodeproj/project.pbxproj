@@ -204,7 +204,6 @@
 				BE0A1CB10C6951FC00BE8D83 /* PrefController.m */,
 				BE284DF10C6989A2000C20CD /* GlobalConstants.h */,
 				BE284DF20C6989A2000C20CD /* GlobalConstants.m */,
-				BE8E37160D2A283C0046893F /* UKKQueue */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -231,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
+				BE8E37160D2A283C0046893F /* UKKQueue */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,

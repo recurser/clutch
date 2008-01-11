@@ -20,7 +20,7 @@
 - (void) startLighttpd;
 - (void) stopLighttpd;
 - (bool) isTransmissionDetected;
-- (void) setLoginItemEnabled:(BOOL) enabled;
+- (void) setLoginItemEnabled:(bool) enabled;
 
 
 @end

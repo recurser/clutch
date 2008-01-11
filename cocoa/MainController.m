@@ -63,8 +63,8 @@ bool                transmissionDetected;
     
     [self registerDefaults];
     [self readDefaults];
-    [self checkForTransmission];
     [self updateSocketLocation];
+    [self checkForTransmission];
     
     //set up file watcher
     [[UKKQueue sharedFileWatcher] setDelegate: self];
@@ -218,7 +218,7 @@ bool                transmissionDetected;
 	[[NSApplication sharedApplication] activateIgnoringOtherApps: YES];
 }
 
-- (void) setLoginItemEnabled:(BOOL)enabled
+- (void) setLoginItemEnabled:(bool)enabled
 {
 	NSString* myCurrentPath = [[NSBundle mainBundle] bundlePath];
 	
@@ -231,7 +231,7 @@ bool                transmissionDetected;
 	if (!startupItems)
 		startupItems = [[NSMutableDictionary alloc] init];
 	
-	BOOL found = NO;
+	bool found = NO;
 	NSDictionary *d, *myEntry;
 	NSEnumerator* e = [startupItems objectEnumerator];
 	while (d = [e nextObject])
@@ -250,7 +250,7 @@ bool                transmissionDetected;
 	else if (enabled && !found) // add it
 	{
 		myEntry = [NSDictionary dictionaryWithObjectsAndKeys: myCurrentPath, @"Path",
-                   [NSNumber numberWithBool: NO], @"Hide", nil];
+                   [NSNumber numberWithbool: NO], @"Hide", nil];
 		[startupItems addObject: myEntry];
 	}
 	else if (enabled && found)
@@ -291,11 +291,11 @@ bool                transmissionDetected;
 {
     NSUserDefaults* theDefaults = [NSUserDefaults standardUserDefaults];
 	NSDictionary* defaultsDic = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithBool: NO], startOnLoginKeyName,
-                                 [NSNumber numberWithBool:YES], SUCheckAtStartupKey,
+                                 [NSNumber numberWithbool: NO], startOnLoginKeyName,
+                                 [NSNumber numberWithbool:YES], SUCheckAtStartupKey,
                                  [NSNumber numberWithInt:9091], serverPortKeyName,
-                                 [NSNumber numberWithBool: NO], sslEnabledKeyName,
-                                 [NSNumber numberWithBool: NO], enableLoginKeyName,
+                                 [NSNumber numberWithbool: NO], sslEnabledKeyName,
+                                 [NSNumber numberWithbool: NO], enableLoginKeyName,
                                  [NSString stringWithString:@"admin"], loginUsernameKeyName,
                                  [NSString stringWithString:@"password"], loginPasswordKeyName,
                                  nil
@@ -455,7 +455,7 @@ bool                transmissionDetected;
     }
 }
 
-- (bool) killPidFromFile:(NSString*) theFile
+- (bool) killPidFromFile :(NSString*) theFile
 {
     
     NSFileManager *theFileManageer = [NSFileManager defaultManager];
