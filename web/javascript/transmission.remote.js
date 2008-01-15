@@ -166,19 +166,19 @@ TransmissionRemote.prototype = {
 	 */
 	removeSelectedTorrents: function(confirmed) {
 		
-		var num_torrents = this._controller.numSelectedTorrents();
+		var num_torrents = transmission.numSelectedTorrents();
 		if (num_torrents > 0) {
 			
 			if (confirmed !== true) {
 				var dialog_heading		 = 'Confirm Removal of ' + num_torrents + ' Transfers';
-				var dialog_message = 'There are ' + num_torrents + ' transfers (' + this._controller.numSelectedActiveTorrents();
+				var dialog_message = 'There are ' + num_torrents + ' transfers (' + transmission.numSelectedActiveTorrents();
 				dialog_message	  += ' active). Once Removed,<br />continuing the transfers will require the torrent files.';
 				dialog_message	  += '<br />Do you really want to remove them?';
 				dialog.confirm(dialog_heading, dialog_message, 'Remove', 'transmission.remote.removeSelectedTorrents(true)');
 			
 			} else {	
 				// Send an ajax request to perform the action
-				this.request('removeTorrents', this._controller.selectedTorrents().keys().json());			
+				this.request('removeTorrents', transmission.selectedTorrents().keys().json());			
 			}
 		}
 	}
