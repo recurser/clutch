@@ -436,7 +436,7 @@
 				$TorrentData = $this->mergeTorrentData($TorrentInfoData, $TorrentStatusData);
 				
 				// Set 'completed' as a percentage
-				$TorrentData[0]['percent_completed'] = round($TorrentData[0]['completed'] / $TorrentData[0]['size'] * 100, 2);
+				$TorrentData[0]['percent_completed'] = round($TorrentData[0]['download_total'] / $TorrentData[0]['size'] * 100, 2);
 				array_push($Result, $TorrentData[0]);
 			}		
 			
