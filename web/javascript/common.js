@@ -168,19 +168,30 @@ Math.formatBytes = function(bytes) {
  */
 Math.formatSeconds = function(seconds) {
     var result;
+    var days;
     var hours;
     var minutes;
     var seconds;
     
-    hours = Math.floor(seconds / 3600);
+    days = Math.floor(seconds / 86400);
+    hours = Math.floor((seconds % 86400) / 3600);
     minutes = Math.floor((seconds % 3600) / 60);
-    seconds = Math.floor((seconds % 3600) % 60);
+    seconds = Math.floor((seconds % 3600) % 60);    
     
-    // Only show seconds if hours and minutes are zero
-    if (minutes == 0 && hours == 0) {
-        result = seconds + ' seconds';    
-    } else {
+    if (days > 0 && hours == 0) {
+        result = days + ' days';    
+    } else if (days > 0 && hours > 0) {
+        result = days + ' days ' + hours + ' hr';
+    } else if (hours > 0 && minutes == 0) {
+        result = hours + ' hr';   
+    } else if (hours > 0 && minutes > 0) {
         result = hours + ' hr ' + minutes + ' min';
+    } else if (minutes > 0 && seconds == 0) {
+        result = minutes + ' min';
+    } else if (minutes > 0 && seconds > 0) {
+        result = minutes + ' min ' + seconds + ' seconds';
+    } else {
+        result = seconds + ' seconds';  
     }
     
     return result;
