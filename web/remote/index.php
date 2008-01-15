@@ -104,6 +104,11 @@
 					$Actions = array('transmission.updatePrefs' => $ArgList);
 					break;
 				
+				case 'displayPrefs' :
+					$ArgList = $Instance->getInitialSettings();
+					$Actions = array('transmission.displayPrefs' => $ArgList);
+					break;
+				
 				case 'setOverRide' :
 					$Instance->setOverRide($_GET['param']);
 					break;

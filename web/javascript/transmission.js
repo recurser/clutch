@@ -598,6 +598,14 @@ Transmission.prototype = {
     },
     
     /*
+     * Display the preference dialog
+     */
+    displayPrefs: function(settings) {
+		this.updatePrefs(settings);
+		$('#prefs_container').show();
+    },
+    
+    /*
      * Process the preferences window with the provided values
      */
 	updatePrefs: function(settings) {
@@ -794,7 +802,7 @@ Transmission.prototype = {
 				if ($(element)[0].id == 'preferences') {
 					$('div#prefs_container div#pref_error').hide();
 					$('div#prefs_container h2.dialog_heading').show();
-					$('#prefs_container').show();
+					transmission.remote.request('displayPrefs');
 				}
 				break;
 			
