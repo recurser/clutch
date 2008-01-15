@@ -83,14 +83,14 @@
 					break;
 
 				case 'requestSettings' :
-					$ArgList = $Instance->getInitialSettings();
+					$ArgList = $Instance->GetInitialSettings();
 					$Actions = array('transmission.initializeSettings' => $ArgList);
 					break;
 				
 				case 'savePrefs' :
 					if ($Instance->savePrefs()) 
 					{
-						$ArgList = $Instance->getInitialSettings();
+						$ArgList = $Instance->GetInitialSettings();
 						$Actions = array('transmission.updatePrefs' => $ArgList);
 					}
 					else
@@ -100,12 +100,12 @@
 					break;
 				
 				case 'resetPrefs' :
-					$ArgList = $Instance->getInitialSettings();
+					$ArgList = $Instance->GetInitialSettings();
 					$Actions = array('transmission.updatePrefs' => $ArgList);
 					break;
 				
 				case 'displayPrefs' :
-					$ArgList = $Instance->getInitialSettings();
+					$ArgList = $Instance->GetInitialSettings();
 					$Actions = array('transmission.displayPrefs' => $ArgList);
 					break;
 				

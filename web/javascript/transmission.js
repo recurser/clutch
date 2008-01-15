@@ -207,6 +207,20 @@ Transmission.prototype = {
     },
     
     /*
+     * Return the number of active torrents
+     */
+    numActiveTorrents: function() {
+		return this._num_active_torrents;
+    },
+    
+    /*
+     * Return the number of paused torrents
+     */
+    numPausedTorrents: function() {
+		return this._num_paused_torrents;
+    },
+    
+    /*
      * Return the number of selected torrents
      */
     numSelectedTorrents: function() {
@@ -368,28 +382,36 @@ Transmission.prototype = {
 	 * Process a mouse-up event on the 'pause all' button
 	 */
 	releasePauseAllButton: function(event) {
-		event.data.transmission.remote.pauseTorrents([]);
+	    if (transmission.numActiveTorrents() > 0) {
+			event.data.transmission.remote.pauseTorrents([]);
+		}
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume all' button
 	 */
 	releaseResumeAllButton: function(event) {
-		event.data.transmission.remote.resumeTorrents([]);
+	    if (transmission.numPausedTorrents() > 0) {
+			event.data.transmission.remote.resumeTorrents([]);
+		}
 	},
 
 	/*
 	 * Process a mouse-up event on the 'pause selected' button
 	 */
 	releasePauseSelectedButton: function(event) {
-		event.data.transmission.pauseSelectedTorrents();
+	    if (transmission.numSelectedActiveTorrents() > 0) {
+		    event.data.transmission.pauseSelectedTorrents();
+	    }
 	},
 
 	/*
 	 * Process a mouse-up event on the 'resume selected' button
 	 */
 	releaseResumeSelectedButton: function(event) {
-		event.data.transmission.resumeSelectedTorrents();
+	    if (transmission.numSelectedActiveTorrents() == 0) {
+		    event.data.transmission.resumeSelectedTorrents();
+	    }
 	},
 
 	/*
