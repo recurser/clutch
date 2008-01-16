@@ -1151,7 +1151,7 @@ Transmission.prototype = {
      * Turn the speed limit on
      */
 	activateSpeedLimit: function(informServer) {
-		$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button_blue.png')");
+		$('#speed_limit_button').css('backgroundImage', "url('images/buttons/footer_speed_limit_button_blue.png')");
 		transmission._speed_limit_active = true;
 		$('form#prefs_form input#over_ride_rate')[0].value = 1;
 		
@@ -1164,7 +1164,7 @@ Transmission.prototype = {
      * Turn the speed limit off
      */
 	deactivateSpeedLimit: function(informServer) {
-		$('#speed_limit_button').css('backgroundImage', "url('/images/buttons/footer_speed_limit_button.png')");
+		$('#speed_limit_button').css('backgroundImage', "url('images/buttons/footer_speed_limit_button.png')");
 		transmission._speed_limit_active = false;
 		$('form#prefs_form input#over_ride_rate')[0].value = 0;
 		
