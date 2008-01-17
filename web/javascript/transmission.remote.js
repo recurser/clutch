@@ -47,7 +47,7 @@ TransmissionRemote.prototype = {
 		
 		$.ajax({
 			type: 'GET',
-			url: 'remote/?action=' + action + 
+			url: 'remote/index.php?action=' + action + 
 				'&param=' + param + 
 				'&filter=' + filter + 
 				'&sort_method=' + sort_method + 
@@ -140,7 +140,7 @@ TransmissionRemote.prototype = {
 		$('div#prefs_container h2.dialog_heading').show();
 					
 		// Set the form action with the appropriate params
-		$('#prefs_form')[0].action = 'remote/?action=savePrefs&param=[]' + 
+		$('#prefs_form')[0].action = 'remote/index.php?action=savePrefs&param=[]' + 
 				'&filter=' + this._controller.currentFilter() +
 				'&sort_method=' + this._controller.currentSortMethod() +
 				'&sort_direction=' + this._controller.currentSortDirection() +
@@ -152,7 +152,7 @@ TransmissionRemote.prototype = {
 	 * Upload Torrent by URL
 	 */
 	addTorrentByURL: function() {
-		$('#torrent_upload_form')[0].action = 'remote/?action=addTorrentByURL&param=[]' + 
+		$('#torrent_upload_form')[0].action = 'remote/index.php?action=addTorrentByURL&param=[]' + 
 				'&filter=' + this._controller.currentFilter() +
 				'&sort_method=' + this._controller.currentSortMethod() +
 				'&sort_direction=' + this._controller.currentSortDirection() +

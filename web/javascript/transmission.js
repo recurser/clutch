@@ -1365,7 +1365,7 @@ Transmission.prototype = {
 		// Submit the upload form			
 		} else {
 			// Set the form action with the appropriate params
-			$('#torrent_upload_form')[0].action = 'remote/?action=uploadTorrent&param=[]' + 
+			$('#torrent_upload_form')[0].action = 'remote/index.php?action=uploadTorrent&param=[]' + 
 					'&filter=' + transmission._current_filter +
 					'&sort_method=' + transmission._current_sort_method +
 					'&sort_direction=' + transmission._current_sort_direction +
