@@ -338,9 +338,23 @@ Torrent.prototype = {
 		// Figure out the percent completed
 		var css_percent_completed = Math.ceil(this._percent_completed * 100 / this._MaxProgressBarWidth);
 		var int_percent_completed = Math.ceil(this._percent_completed);
-
+		
+		// Sometimes get figures
+		if (css_percent_completed > this._MaxProgressBarWidth) {
+		    css_percent_completed = this._MaxProgressBarWidth;
+		}
+        
+        // If the entire download is completed...
+	    if (css_percent_completed >= this._MaxProgressBarWidth) {
+		    // Hide the 'incomplete' bar
+			this._progress_incomplete_container.hide();
+		
+			// Set progress to maximum
+			this._progress_complete_container.css('width', this._MaxProgressBarWidth + '%');			
+		}
+		
 		// Add the progress bar
-		if (css_percent_completed < this._MaxProgressBarWidth) {
+		if (this._state != this._StatusSeeding) {
 			
 			// Create the 'progress details' label
 			// Eg: '101 MB of 631 MB (16.02%) - 2 hr 30 min remaining'
@@ -361,13 +375,15 @@ Torrent.prototype = {
 			this._progress_complete_container.css('width', css_percent_completed + '%');
 			
 			// Update the 'incomplete' bar
-			if (! this._progress_incomplete_container.is('.incomplete')) {
-				this._progress_incomplete_container.removeClass();
-				this._progress_incomplete_container.addClass('torrent_progress_bar');
-				this._progress_incomplete_container.addClass('in_progress');
+			if (css_percent_completed < this._MaxProgressBarWidth) {
+    			if (! this._progress_incomplete_container.is('.incomplete')) {
+    				this._progress_incomplete_container.removeClass();
+    				this._progress_incomplete_container.addClass('torrent_progress_bar');
+    				this._progress_incomplete_container.addClass('in_progress');
+    			}
+    			this._progress_incomplete_container.css('width', (this._MaxProgressBarWidth - css_percent_completed) + '%');
+    			this._progress_incomplete_container.show();
 			}
-			this._progress_incomplete_container.css('width', (this._MaxProgressBarWidth - css_percent_completed) + '%');
-			this._progress_incomplete_container.show();
 			
 			// Create the 'peer details' label
 			// Eg: 'Downloading from 36 of 40 peers - DL: 60.2 KB/s UL: 4.3 KB/s'
@@ -398,11 +414,11 @@ Torrent.prototype = {
 			progress_details += Math.formatBytes(this._upload_total) + ' (Ratio ';
 			progress_details += this.ratio() + ')';
 			
-			// Hide the 'incomplete' bar
-			this._progress_incomplete_container.hide();
-			
-			// Set progress to maximum
-			this._progress_complete_container.css('width', this._MaxProgressBarWidth + '%');
+		    if (css_percent_completed < this._MaxProgressBarWidth) {
+    		    this._progress_incomplete_container.css('width', (this._MaxProgressBarWidth - css_percent_completed) + '%');
+			    this._progress_incomplete_container.show();
+    		    this._progress_complete_container.css('width', css_percent_completed + '%');
+			}
 			
 			// Create the 'peer details' label
 			// Eg: 'Seeding to 13 of 22 peers - UL: 36.2 KB/s'
