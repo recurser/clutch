@@ -173,7 +173,7 @@
 				case 'uploadTorrent' :
 					$IsUpload = true;
 					$Response = $Instance->AddTorrentByUpload('torrent_file', null);
-					if (isset($Response[1][0]['id'])) 
+					if (isset($Response[1][0]['id']) && strtolower($Response[0]) == 'succeeded') 
 					{
 						$ArgList = $Instance->filterTorrents($InfoFields, 
 									$StatusFields, 
