@@ -9,7 +9,7 @@
 			 
 			$(document).ready( function() {
 <?php
-			foreach ($Actions as $Command => $Arguments) {
+			foreach ($Result as $Command => $Arguments) {
 				echo "top." . $Command . "(" . $Arguments . ");";
 			}
 ?>
