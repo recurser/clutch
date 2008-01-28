@@ -27,13 +27,10 @@ define('DefaultSortMethod',            SortByQueueOrder);
 define('DefaultSortDirection',         SortAscending);
 define('DefaultFilterVisible',         true);
 define('DefaultInspectorVisible',      false);
-define('DefaultOverRideRate',          false);
 define('DefaultLimitDownload',         false);
 define('DefaultLimitUpload',           false);
 define('DefaultDownloadRate',          10);
 define('DefaultUploadRate',            10);
-define('DefaultOverRideDownloadRate',  10);
-define('DefaultOverRideUploadRate',    10);
 define('DefaultRefreshRate',           5);
 define('DefaultEncryptionState',       EncryptionRequired);
 
@@ -44,13 +41,10 @@ $CONST['default_preferences'] = array(
 	'sort_direction'           => DefaultSortDirection,
 	'show_inspector'           => DefaultInspectorVisible,
 	'show_filter'              => DefaultFilterVisible,
-	'over_ride_rate'           => DefaultOverRideRate,
 	'limit_download'           => DefaultLimitDownload,
 	'limit_upload'             => DefaultLimitUpload,
 	'download_rate'            => DefaultDownloadRate,
 	'upload_rate'              => DefaultUploadRate,
-	'over_ride_download_rate'  => DefaultOverRideDownloadRate,
-	'over_ride_upload_rate'    => DefaultOverRideUploadRate,
 	'refresh_rate'             => DefaultRefreshRate,
 	'refresh_rate'             => DefaultRefreshRate
 );

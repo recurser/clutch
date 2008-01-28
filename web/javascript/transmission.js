@@ -46,7 +46,6 @@ Transmission.prototype = {
          */
 		this._filter_visible     = false;
 		this._inspector_visible  = false;
-		this._speed_limit_active = false;
 		
 		// Initialise the torrent lists
         this._torrents            = new Hash();
@@ -82,7 +81,6 @@ Transmission.prototype = {
 		$('#upload_cancel_button').bind('click', {transmission: this}, this.releaseUploadCancelButton);
 		$('#prefs_save_button').bind('click', {transmission: this}, this.releasePrefsSaveButton);
 		$('#prefs_cancel_button').bind('click', {transmission: this}, this.releasePrefsCancelButton);
-		$('#speed_limit_button').bind('click', {transmission: this}, this.releaseSpeedLimitButton);
 		
 		// Inspector tabs
 		$('#inspector_tab_info').bind('click', {transmission: this}, this.releaseInspectorTab);
@@ -532,13 +530,6 @@ Transmission.prototype = {
 	},
 
 	/*
-	 * Process a mouse-up event on the 'filter paused' button
-	 */
-	releaseSpeedLimitButton: function(event) {
-		event.data.transmission.toggleSpeedLimit();
-	},
-
-	/*
 	 * Turn the periodic ajax-refresh on & off
 	 */
 	togglePeriodicRefresh: function(state) {
@@ -639,9 +630,6 @@ Transmission.prototype = {
 		$('input#download_rate')[0].value              = settings.download_rate;
 		$('input#limit_upload')[0].checked             = settings.limit_upload;
 		$('input#upload_rate')[0].value                = settings.upload_rate;
-		$('form#prefs_form input#over_ride_rate')[0].value = settings.over_ride_rate;
-		$('input#over_ride_download_rate')[0].value    = settings.over_ride_download_rate;
-		$('input#over_ride_upload_rate')[0].value      = settings.over_ride_upload_rate;
 		$('input#refresh_rate')[0].value               = settings.refresh_rate;
 		$('div#encryption input')[0].checked           = (settings.encryption == transmission._EncryptionRequired);
 		
@@ -659,13 +647,6 @@ Transmission.prototype = {
 			$('#limited_upload_rate').deselectMenuSiblings().selectMenuItem();			
 		} else {
 			$('#unlimited_upload_rate').deselectMenuSiblings().selectMenuItem();
-		}
-		
-		// Turn on speed-limit over-ride if necessary
-		if (settings.over_ride_rate) {
-			transmission.activateSpeedLimit(false);
-		} else {
-			transmission.deactivateSpeedLimit(false);
 		}
 		
 		// Update the refresh rate and force the new value to be used next refresh
@@ -1135,43 +1116,6 @@ Transmission.prototype = {
 		// Tell the server about this action
 		transmission.remote.setPreference('show_inspector', false);
 	},
-    
-    /*
-     * Toggle the speed limit switch
-     */
-	toggleSpeedLimit: function() {
-		if (transmission._speed_limit_active) {
-			transmission.deactivateSpeedLimit(true);
-		} else {
-			transmission.activateSpeedLimit(true);
-		}
-	},
-    
-    /*
-     * Turn the speed limit on
-     */
-	activateSpeedLimit: function(informServer) {
-		$('#speed_limit_button').css('backgroundImage', "url('images/buttons/footer_speed_limit_button_blue.png')");
-		transmission._speed_limit_active = true;
-		$('form#prefs_form input#over_ride_rate')[0].value = 1;
-		
-		if (informServer) {
-        	transmission.remote.request('setOverRide', 1);
-		}
-	},
-    
-    /*
-     * Turn the speed limit off
-     */
-	deactivateSpeedLimit: function(informServer) {
-		$('#speed_limit_button').css('backgroundImage', "url('images/buttons/footer_speed_limit_button.png')");
-		transmission._speed_limit_active = false;
-		$('form#prefs_form input#over_ride_rate')[0].value = 0;
-		
-		if (informServer) {
-        	transmission.remote.request('setOverRide', 0);
-		}
-	},
 	
     /*
      * Toggle the visibility of the filter bar
@@ -1405,10 +1349,6 @@ Transmission.prototype = {
 			'images/buttons/filter.png',
 			'images/buttons/filter_on.png',
 			'images/buttons/footer_action_button.png',
-			'images/buttons/footer_speed_limit_button.png',
-			'images/buttons/footer_speed_limit_button_blue.png',
-			'images/buttons/footer_speed_limit_button_graphite.png',
-			'images/buttons/footer_speed_limit_button_on.png',
 			'images/buttons/info.png',
 			'images/buttons/info_off.png',
 			'images/buttons/info_on.png',

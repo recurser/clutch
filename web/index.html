@@ -125,8 +125,7 @@
 			</div>
 		</div>
 		
-		<div class="torrent_footer">
-			<a href="#speed_limit" id="speed_limit_button"></a>			
+		<div class="torrent_footer">		
 			<ul id="settings_menu">
 				<li id='button'>&nbsp;
 					<ul id='footer_super_menu'>
@@ -201,7 +200,6 @@
 				<h2 class="dialog_heading">Preferences</h2>
 				<div id="pref_error"></div>
 				<form id="prefs_form" action="remote/index.php?action=savePrefs">
-					<input type='hidden' name='over_ride_rate' id='over_ride_rate'/>
 					<div class="preference" id='download_location'>
 						<label class='category'>Add transfers:</label>
 						<label class='item'>Download to:</label>
@@ -231,15 +229,6 @@
 						<input type='checkbox' name='limit_upload' id='limit_upload'/>
 						<label class='item'>Upload Rate:</label>
 						<input type='text' name='upload_rate' id='upload_rate'/>
-						<label class='suffix'>KB/s</label>
-					</div>
-					<div class="preference" id='over_ride_limit'>
-						<label class='category'>Speed Limit mode:</label>
-						<label class='item'>Download Rate:</label>
-						<input type='text' name='over_ride_download_rate' id='over_ride_download_rate'/>
-						<label class='suffix'>KB/s</label>
-						<label class='item'>Upload Rate:</label>
-						<input type='text' name='over_ride_upload_rate' id='over_ride_upload_rate'/>
 						<label class='suffix'>KB/s</label>
 					</div>
 					<div class="preference" id='web_gui'>

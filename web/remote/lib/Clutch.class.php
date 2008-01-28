@@ -108,46 +108,18 @@
 				$this->Preferences->SetPreference($Key, $Value);
 			}
 			
-			// Set the appropriate down & up rates
-			if ($Prefs['over_ride_rate']) {
-				$this->M->SetDownloadLimit($Prefs['over_ride_download_rate']);
-				$this->M->SetUploadLimit($Prefs['over_ride_upload_rate']);
-				
+			if ($Prefs['limit_download']) {
+				$this->M->SetDownloadLimit($Prefs['download_rate']);
 			} else {
-				if ($Prefs['limit_download']) {
-					$this->M->SetDownloadLimit($Prefs['download_rate']);
-				} else {
-					$this->M->SetDownloadLimit(-1);
-				}
-				if ($Prefs['limit_upload']) {
-					$this->M->SetUploadLimit($Prefs['upload_rate']);
-				} else {
-					$this->M->SetUploadLimit(-1);
-				}
+				$this->M->SetDownloadLimit(-1);
+			}
+			if ($Prefs['limit_upload']) {
+				$this->M->SetUploadLimit($Prefs['upload_rate']);
+			} else {
+				$this->M->SetUploadLimit(-1);
 			}
 			
 			return true;
-		}
-
-		/* public setOverRide([(bool) $OverRide])
-		 * Set the speed-limit over-ride
-		 * Ex. setOverRide(true)
-		 *
-		 */
-		public function setOverRide($OverRide = false)
-		{
-			// Set the up and down limits
-			if ($OverRide) {
-				$this->M->SetDownloadLimit($this->Preferences->GetPreference('over_ride_download_rate'));
-				$this->M->SetUploadLimit($this->Preferences->GetPreference('over_ride_upload_rate'));
-			} else {
-				$this->M->SetDownloadLimit($this->Preferences->GetPreference('download_rate'));
-				$this->M->SetUploadLimit($this->Preferences->GetPreference('upload_rate'));
-			}
-			
-			// Store the $OverRide value in the preferences
-			$this->Preferences->SetPreference('over_ride_rate', intval($OverRide));
-						
 		}
 
 		/* public TorrentSort((array) $Torrents, [(string) $SortMethod, [(int) $SortOrder]])
@@ -211,9 +183,7 @@
 		 */
 		public function setDownloadRate($Rate = -1)
 		{
-			if (! $this->Preferences->GetPreference('over_ride_rate')) {
-				$this->M->SetDownloadLimit(intval($Rate));
-			}
+			$this->M->SetDownloadLimit(intval($Rate));
 			
 			if ($Rate == -1) {
 				$this->Preferences->SetPreference('limit_download', false);	
@@ -232,9 +202,7 @@
 		 */
 		public function setUploadRate($Rate = -1)
 		{
-			if (! $this->Preferences->GetPreference('over_ride_rate')) {
-				$this->M->SetUploadLimit(intval($Rate));
-			}
+			$this->M->SetUploadLimit(intval($Rate));
 			
 			if ($Rate == -1) {
 				$this->Preferences->SetPreference('limit_upload', false);	

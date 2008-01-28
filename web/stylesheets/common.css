@@ -530,22 +530,6 @@ div#torrent_inspector div.torrent_inspector_section div {
 	bottom: -1px; 
 	z-index: 2;
  	}
-
-div.torrent_footer a#speed_limit_button {
- 	border-right: 1px solid #979797;
- 	margin: 0 1px 0 0;
- 	padding: 0;
-	float: left;
-	height: 22px;
- 	width: 30px;
-	position: relative;
-	left: 32px;
-	background: transparent url('../images/buttons/footer_speed_limit_button.png') no-repeat top left;
-	}
-
-div.torrent_footer a#speed_limit_button:active {
-	background: transparent url('../images/buttons/footer_speed_limit_button_on.png') no-repeat top left;
-	}
 	
 div.torrent_footer ul#settings_menu li#button {
 	height: 22px;
@@ -555,8 +539,6 @@ div.torrent_footer ul#settings_menu li#button {
  	margin: 0 1px 0 0;
  	padding: 0;
  	float: left;
-	position: relative;
-	left: -32px;
 	}
 
 
@@ -599,7 +581,7 @@ div.dialog_container div.dialog_window {
 	
 div#prefs_container div.dialog_window {
 	width: 410px;
-	height: 478px;
+	height: 400px;
 	padding: 5px;
 	}
 	
@@ -707,7 +689,6 @@ div#prefs_container label.suffix {
 
 div#prefs_container div#download_location label.item,
 div#prefs_container div#port label.item,
-div#prefs_container div#over_ride_limit label.item,
 div#prefs_container div#web_gui label.item {
 	width: 112px;
 	clear: left;

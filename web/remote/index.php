@@ -122,10 +122,6 @@
 					$Result = array('transmission.displayPrefs' => $ArgList);
 					break;
 				
-				case 'setOverRide' :
-					$Instance->setOverRide($_GET['param']);
-					break;
-				
 				case 'refreshTorrents' :
 					$ArgList = $Instance->filterTorrents($InfoFields, 
 									$StatusFields, 
