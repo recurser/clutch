@@ -60,6 +60,32 @@
 
 			$Result = array_merge($Result, $this->Preferences->GetAllPreferences());
 			
+			// Down/Up rate is a bit fiddly - remember the last up/down speed
+			// if it's not set by transmission			
+			$DownloadRate = $this->M->GetDownloadLimit();
+			if (isset($DownloadRate[1]) && intval($DownloadRate[1]) >= 0)
+			{
+				$Result['download_rate'] = $DownloadRate[1];
+				$Result['limit_download'] = true;
+			}
+			$UploadRate = $this->M->GetUploadLimit();
+			if (isset($UploadRate[1]) && intval($UploadRate[1]) >= 0)
+			{
+				$Result['upload_rate'] = $UploadRate[1];
+				$Result['limit_upload'] = true;			
+			}
+			
+			if (is_null($Result['download_rate'])) 
+			{
+				$Result['download_rate'] = 0;
+				$Result['limit_download'] = false;
+			}
+			if (is_null($Result['upload_rate']))
+			{
+				$Result['upload_rate'] = 0;
+				$Result['limit_upload'] = false;
+			}
+			
 			return json_encode($Result);
 		}
 
