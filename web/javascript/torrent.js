@@ -457,6 +457,21 @@ Torrent.prototype = {
 	select: function() {
 		this._element.addClass('selected');
 		
+        // Make sure it's visible in the torrent list (i.e. not too far down with the scrollbar all the way up)
+        var container = $('#torrent_container'),
+        offsetTop = this._element.position().top,
+        scrollTop = container.scrollTop(),
+        offsetHeight = this._element.outerHeight(),
+        innerHeight = container.innerHeight();
+        if (offsetTop < scrollTop) { // torrent is too far up
+            container.scrollTop(offsetTop);
+        } else if (innerHeight + scrollTop < offsetTop + offsetHeight) { // torrent is too far down
+            container.scrollTop(offsetTop + offsetHeight - innerHeight);
+        }
+
+        // Highlight it as selected
+        this._element.addClass('selected');
+  
 		// Inform the controller
 		this._controller.selectTorrent(this);
 	},
