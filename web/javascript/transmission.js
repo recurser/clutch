@@ -442,9 +442,6 @@ Transmission.prototype = {
 	 */
 	releasePrefsCancelButton: function(event) {
 		$('#prefs_container').hide();
-		
-		// Reset all the settings
-		transmission.remote.request('resetPrefs');
 	},
 
 	/*

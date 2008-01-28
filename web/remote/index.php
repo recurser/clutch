@@ -112,11 +112,6 @@
 					}
 					break;
 				
-				case 'resetPrefs' :
-					$ArgList = $Instance->GetInitialSettings();
-					$Result = array('transmission.updatePrefs' => $ArgList);
-					break;
-				
 				case 'displayPrefs' :
 					$ArgList = $Instance->GetInitialSettings();
 					$Result = array('transmission.displayPrefs' => $ArgList);
