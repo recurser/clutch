@@ -379,14 +379,14 @@
 			return json_encode($Result);
 		}
 
-		/* 	public function filterTorrents([(array)$InfoFields], [(array)$StatusFields], [(string)$FlterType], [(string)$sortMethod], [(string)$sortDirection], [(string)$Search])
+		/* 	public function filterTorrents([(array)$InfoFields], [(array)$StatusFields], [(string)$FilterType], [(string)$sortMethod], [(string)$sortDirection], [(string)$Search])
 		 * Returns a JSON array of torrent data for the specified filter type
 		 * Ex. filterTorrents(FilterSeeding)
 		 *
 		 * @access public
 		 * @param array $InfoFields Array of torrent info fields to return
 		 * @param array $StatusFields Array of torrent status fields to return
-		 * @param array $FlterType Type of torrents to return (FilterAll, FilterDownloading, FilterSeeding, FilterPaused)
+		 * @param array $FilterType Type of torrents to return (FilterAll, FilterDownloading, FilterSeeding, FilterPaused)
 		 * @param string $sortMethod Method to sort the torrents (name, progress etc)
 		 * @param string $sortDirection Direction to sort the torrents (SortAscending or SortDescending)
 		 * @param string $Search Only return torrents whose name contains the search string
@@ -395,7 +395,7 @@
 		public function filterTorrents(
 			$InfoFields = array(), 
 			$StatusFields = array(), 
-			$FlterType = FilterAll, 
+			$FilterType = FilterAll, 
 			$sortMethod = SortByQueueOrder, 
 			$sortDirection = SortAscending, 
 			$Search = '')
@@ -413,7 +413,7 @@
 			foreach ($TempTorrentList as $Row) {
 				$TotalDownloadRate += $Row['download_speed'];
 				$TotalUploadRate   += $Row['upload_speed'];
-				if ($FlterType == $Row['state'] || $FlterType == FilterAll) { 
+				if ($FilterType == $Row['state'] || $FilterType == FilterAll) { 
 					$IdList[] = (int) $Row['id'];
 				}
 				
@@ -435,7 +435,7 @@
 			}		
 			
 			// Remember the current filter type
-			$_SESSION['filterType'] = $FlterType;
+			$_SESSION['filterType'] = $FilterType;
 			
 			if ($sortMethod == SortByQueueOrder && $sortDirection == SortDescending)
 				$Result = array_reverse($Result);
@@ -457,15 +457,23 @@
 				$Result = array_values($Result);
 			}
 			
+			// Figure out the disk space remaining
+			$Response        = $this->M->GetDefaultDirectory();
+			$TotalSpace      = disk_total_space($Response[1]);
+			$FreeSpaceBytes  = disk_free_space($Response[1]);
+			$FreeSpacePercent = round($FreeSpaceBytes * 100 / $TotalSpace, 1);
+				
 			// Include total down and up rates in the result
 			$Result = array(
+						'free_space_bytes'    => $FreeSpaceBytes,
+						'free_space_percent'  => $FreeSpacePercent,
 						'total_download_rate' => $TotalDownloadRate,
 						'total_upload_rate'   => $TotalUploadRate,
 						'torrent_list'        => $Result
 					);
 			
 			// Store these settings for the future
-			$this->Preferences->SetPreference('filter', $FlterType);
+			$this->Preferences->SetPreference('filter', $FilterType);
 			$this->Preferences->SetPreference('sort_method', $sortMethod);
 			$this->Preferences->SetPreference('sort_direction', $sortDirection);
 			

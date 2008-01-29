@@ -1226,6 +1226,10 @@ Transmission.prototype = {
 		// Update global upload and download speed display
 		transmission.setGlobalSpeeds(torrent_list.length,  data.total_upload_rate, data.total_download_rate);
 		
+		// Update the disk space remaining
+		var disk_space_msg = 'Free Space : ' + Math.formatBytes(data.free_space_bytes) + ' (' + data.free_space_percent + '% )';
+		$('div#disk_space_container')[0].innerHTML = disk_space_msg;
+		
 		// Update the button states
 		transmission.updateButtonStates();
 		

@@ -540,6 +540,15 @@ div.torrent_footer ul#settings_menu li#button {
  	padding: 0;
  	float: left;
 	}
+	
+div.torrent_footer div#disk_space_container {
+    float: right;
+    font-size: 1.1em;
+    line-height: 22px;
+    vertical-align: middle;
+    margin: 0 20px 0 0;
+    padding: 0px;
+    }
 
 
 /*--------------------------------------
