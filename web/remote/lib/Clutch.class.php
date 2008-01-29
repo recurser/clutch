@@ -172,7 +172,13 @@
 						$SortCriteria[$TorrentID] = strtolower($SortCriteria[$TorrentID]);
 					}
 				}
-				array_multisort($SortCriteria, $SortOrder, SORT_STRING, $Torrents);
+				
+				$SortType = SORT_STRING;
+				if ($SortMethod == SortByCompleted) 
+				{
+					$SortType = SORT_NUMERIC;
+				}
+				array_multisort($SortCriteria, $SortOrder, $SortType, $Torrents);
 			}
 		}
 
