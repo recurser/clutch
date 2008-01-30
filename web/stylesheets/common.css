@@ -539,6 +539,7 @@ div.torrent_footer ul#settings_menu li#button {
  	margin: 0 1px 0 0;
  	padding: 0;
  	float: left;
+	position: relative; 
 	}
 	
 div.torrent_footer div#disk_space_container {
