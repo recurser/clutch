@@ -620,15 +620,15 @@ Transmission.prototype = {
      */
 	updatePrefs: function(settings) {
 		
-		$('div#download_location input')[0].value      = settings.download_location;
-		$('div#port input')[0].value                   = settings.port;
-		$('div#auto_start input')[0].checked           = settings.auto_start;
+		$('div.download_location input')[0].value      = settings.download_location;
+		$('div.port input')[0].value                   = settings.port;
+		$('div.auto_start input')[0].checked           = settings.auto_start;
 		$('input#limit_download')[0].checked           = settings.limit_download;
 		$('input#download_rate')[0].value              = settings.download_rate;
 		$('input#limit_upload')[0].checked             = settings.limit_upload;
 		$('input#upload_rate')[0].value                = settings.upload_rate;
 		$('input#refresh_rate')[0].value               = settings.refresh_rate;
-		$('div#encryption input')[0].checked           = (settings.encryption == transmission._EncryptionRequired);
+		$('div.encryption input')[0].checked           = (settings.encryption == transmission._EncryptionRequired);
 		
 		// Set the download rate
 		$('#limited_download_rate')[0].innerHTML = 'Limit (' + settings.download_rate + ' KB/s)';

@@ -696,20 +696,20 @@ div#prefs_container label.suffix {
 	float: left;
 	}
 
-div#prefs_container div#download_location label.item,
-div#prefs_container div#port label.item,
-div#prefs_container div#web_gui label.item {
+div#prefs_container div.download_location label.item,
+div#prefs_container div.port label.item,
+div#prefs_container div.web_gui label.item {
 	width: 112px;
 	clear: left;
 	}
 	
-div#prefs_container div#auto_start label.item,
-div#prefs_container div#encryption label.item,
-div#prefs_container div#limit_total label.item {
+div#prefs_container div.auto_start label.item,
+div#prefs_container div.encryption label.item,
+div#prefs_container div.limit_total label.item {
 	margin: 0 5px 0 0;
 	}
 	
-div#prefs_container div#limit_total label.item {
+div#prefs_container div.limit_total label.item {
 	width: 92px;
 	}
 	
@@ -726,7 +726,7 @@ div#prefs_container div.preference input {
 	float: left;
 	}
 
-div#prefs_container div#download_location input {
+div#prefs_container div.download_location input {
 	width: 261px;
 	}
 

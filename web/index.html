@@ -56,13 +56,13 @@
 		
 		<div id="torrent_container">
 			<ul class="torrent_list" id="torrent_list"></ul>
-		</div>
+	</div>
 		
 		<div id="torrent_inspector" style="display:none;">
 			
 			<ul class="torrent_inspector_tabs">
-				<li><a href="#info" id="inspector_tab_info" class="inspector_tab selected"><img src="images/buttons/info_general.png"></a></li>
-				<li><a href="#activity" id="inspector_tab_activity" class="inspector_tab"><img src="images/buttons/info_activity.png"></a></li>
+				<li><a href="#info" id="inspector_tab_info" class="inspector_tab selected"><img src="images/buttons/info_general.png" alt="Information"/></a></li>
+				<li><a href="#activity" id="inspector_tab_activity" class="inspector_tab"><img src="images/buttons/info_activity.png" alt="Activity"/></a></li>
 			</ul>
 			
 			<div class="torrent_inspector_header">
@@ -187,12 +187,12 @@
 		<div class='dialog_container' id="dialog_container" style="display:none;">
 			<div class="dialog_top_bar"></div>
 			<div class="dialog_window">
-				<img src='images/graphics/logo.png' />
+				<img src='images/graphics/logo.png' alt="Transmission Logo" />
 				<h2 class="dialog_heading" id="dialog_heading"></h2>
 				<div class="dialog_message" id="dialog_message"></div>
 				<a href="#confirm" id="dialog_confirm_button">Confirm</a>
-				<a href="#cancel" id="dialog_cancel_button">Cancel</a>				
-			</div>
+				<a href="#cancel" id="dialog_cancel_button">Cancel</a>			
+        	</div>
 		</div>
 		
 		<div class='dialog_container' id="prefs_container" style="display:none;">
@@ -201,27 +201,27 @@
 				<h2 class="dialog_heading">Preferences</h2>
 				<div id="pref_error"></div>
 				<form id="prefs_form" action="remote/index.php?action=savePrefs">
-					<div class="preference" id='download_location'>
+					<div class="preference download_location">
 						<label class='category'>Add transfers:</label>
 						<label class='item'>Download to:</label>
 						<input type='text' name='download_location' id='download_location'/>
 					</div>
-					<div class="preference" id='port'>
+					<div class="preference port">
 						<label class='category'>Network:</label>
 						<label class='item'>Incoming TCP Port:</label>
 						<input type='text' name='port'/>
 					</div>
-					<div class="preference" id='auto_start'>
+					<div class="preference auto_start">
 						<label class='category'>Transfers:</label>
 						<input type='checkbox' name='auto_start' id='auto_start'/>
 						<label class='item'>Start transfers when added</label>
 					</div>
-					<div class="preference" id='encryption'>
+					<div class="preference encryption">
 						<label class='category'>Encryption:</label>
 						<input type='checkbox' name='encryption' id='encryption'/>
 						<label class='item'>Ignore unencrypted peers</label>
 					</div>
-					<div class="preference" id='limit_total'>
+					<div class="preference limit_total">
 						<label class='category'>Limit total bandwidth:</label>
 						<input type='checkbox' name='limit_download' id='limit_download'/>
 						<label class='item'>Download Rate:</label>
@@ -232,7 +232,7 @@
 						<input type='text' name='upload_rate' id='upload_rate'/>
 						<label class='suffix'>KB/s</label>
 					</div>
-					<div class="preference" id='web_gui'>
+					<div class="preference web_gui">
 						<label class='category'>Web Client:</label>
 						<label class='item'>Refresh Rate:</label>
 						<input type='text' name='refresh_rate' id='refresh_rate'/>
@@ -241,14 +241,13 @@
 					<a href="#save" id="prefs_save_button">Save</a>
 					<a href="#cancel" id="prefs_cancel_button">Cancel</a>
 				</form>
-				
 			</div>
 		</div>
 		
 		<div class='dialog_container' id="upload_container" style="display:none;">
 			<div class="dialog_top_bar"></div>
 			<div class="dialog_window">
-				<img src='images/graphics/logo.png' />
+				<img src='images/graphics/logo.png' alt="Transmission Logo" />
 				<h2 class="dialog_heading">Torrent Upload</h2>
 				<form action='#' method='post' id='torrent_upload_form' 
 					enctype='multipart/form-data' target='torrent_upload_frame'>  
@@ -267,16 +266,15 @@
 		<div id='unsupported_browser' style="display:none;">
 			<div class="dialog_top_bar"></div>
 			<div class="dialog_window">
-				<img class='logo' src='images/graphics/logo.png' />
+				<img class='logo' src='images/graphics/logo.png' alt="Transmission Logo" />
 				<h2>Sorry, your browser is not supported</h2>
 				<p>We currently support the following browsers:</p>
-				<a href="http://www.mozilla.com/en-US/firefox/"><img src="images/graphics/browser_firefox.gif"></a>
-				<a href="http://www.apple.com/safari/"><img src="images/graphics/browser_safari.gif"></a>
-				<a href="http://www.opera.com/download/"><img src="images/graphics/browser_opera.gif"></a>
-			</div>
+				<a href="http://www.mozilla.com/en-US/firefox/"><img src="images/graphics/browser_firefox.gif" alt="Firefox" /></a>
+				<a href="http://www.apple.com/safari/"><img src="images/graphics/browser_safari.gif" alt="Safari" /></a>
+				<a href="http://www.opera.com/download/"><img src="images/graphics/browser_opera.gif" alt="Opera" /></a>			</div>
 		</div>
 		
-		<div class="contextMenu" id="torrent_context_menu">
+<div class="contextMenu" id="torrent_context_menu">
 			<ul>
 				<li id="context_pause_selected" class="disabled context_pause_selected">Pause Selected</li>
 				<li id="context_resume_selected" class="disabled context_resume_selected">Resume Selected</li>
@@ -286,5 +284,5 @@
 		</div>
 		
 		<iframe name="torrent_upload_frame" id="torrent_upload_frame" src="about:blank" />
-	</body>
+</body>
 </html>
