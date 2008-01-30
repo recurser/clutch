@@ -1,1 +1,1 @@
-/Users/dave/Library/Application Support/Transmission/socket
+/tmp/transmission-socket
