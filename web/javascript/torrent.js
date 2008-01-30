@@ -174,7 +174,14 @@ Torrent.prototype = {
 	 * Return the ratio for this torrent
 	 */
 	ratio: function() {
-		return Math.roundWithPrecision((this._upload_total / this._size), 2);
+		var result = Math.roundWithPrecision((this._upload_total / this._size), 2);
+	
+    	// Add the decimals if this is an integer
+    	if ((result % 1) == 0) {
+    		result = result + '.00';
+    	}
+    	
+    	return result;
 	},
 
 
@@ -326,7 +333,7 @@ Torrent.prototype = {
 		this._swarm_speed           = data.swarm_speed;	
 		this._total_leechers       	= data.scrape_leechers;	
 		this._total_seeders        	= data.scrape_seeders;
-		
+    	
 		// Get -1 returned sometimes (maybe torrents with errors?)
 		if (this._total_leechers < 0) {
 			this._total_leechers = 0;
@@ -346,10 +353,14 @@ Torrent.prototype = {
 		
 		// Add the progress bar
 		if (css_percent_completed < this._MaxProgressBarWidth) {
-			
+		
+    	    // Add the decimals if the percentage is an integer
+        	if ((this._percent_completed % 1) == 0) {
+        		this._percent_completed = this._percent_completed + '.00';
+        	}
 			// Create the 'progress details' label
 			// Eg: '101 MB of 631 MB (16.02%) - 2 hr 30 min remaining'
-			progress_details = Math.formatBytes(this._completed) + ' of ';
+			progress_details = Math.formatBytes(this._download_total) + ' of ';
 			progress_details += Math.formatBytes(this._size) + ' (';
 			progress_details += this._percent_completed + '%)';
 			if ((this._eta < 0 || this._eta >= this._InfiniteTimeRemaining) && this.isActive()) {

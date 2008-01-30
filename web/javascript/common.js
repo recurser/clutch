@@ -127,33 +127,40 @@ Math.formatBytes = function(bytes) {
     
     // Terabytes (TB).
     if ( bytes >= 1099511627776 ) { 
-        size = Math.roundWithPrecision(bytes / 1099511627776, 2);
+        size = bytes / 1099511627776;
 		unit = ' TB'; 
     
     // Gigabytes (GB).
     } else if ( bytes >= 1073741824 ) { 
-        size = Math.roundWithPrecision(bytes / 1073741824, 2);
+        size = bytes / 1073741824;
 		unit = ' GB';
 
     // Megabytes (MB).
     } else if ( bytes >= 1048576 ) { 
-        size = Math.roundWithPrecision(bytes / 1048576, 2);
+        size = bytes / 1048576;
 		unit = ' MB';
 
     // Kilobytes (KB).
     } else if ( bytes >= 1024 ) { 
-        size = Math.roundWithPrecision(bytes / 1024, 2);
+        size = bytes / 1024;
 		unit = ' KB';
 
     // The file is less than one KB
     } else {
         size = bytes;
-		unit = ' B';
+		unit = ' bytes';
     }
+	
+	// Single-digit numbers have greater precision
+	var precision = 1; 
+	if (size < 10) {
+	    precision = 2;
+	}
+	size = Math.roundWithPrecision(size, precision);
     
 	// Add the decimal if this is an integer
-	if ((size % 1) == 0 && unit != ' B') {
-		size = size +'.0';
+	if ((size % 1) == 0 && unit != ' bytes') {
+		size = size + '.0';
 	}
 
     return size + unit;
