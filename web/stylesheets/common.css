@@ -677,7 +677,7 @@ iframe#torrent_upload_frame {
 div#prefs_container label {
 	font-size: 1.1em;
 	line-height: 25px;
-	vertical-align: center;
+	vertical-align: middle;
 	display: block;
 	}
 
@@ -728,7 +728,7 @@ div#prefs_container div.preference input {
 	}
 
 div#prefs_container div.download_location input {
-	width: 261px;
+	width: 261px !important;
 	}
 
 div#prefs_container a {
