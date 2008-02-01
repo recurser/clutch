@@ -266,9 +266,19 @@
 			{
 				$parts = pathinfo($_FILES[$FormName]['name']);
 				if ($parts['extension'] != 'torrent')
+				{
 					return $this->Error('Uploaded file was not a .torrent file');
+				}
 				else
-					return $this->M->AddFileDetailed(file_get_contents($_FILES[$FormName]['tmp_name']), $Directory);
+				{
+					$result = $this->M->AddFileDetailed(file_get_contents($_FILES[$FormName]['tmp_name']), $Directory);
+					// Daemon and Transmission.app return different results after adding torrents
+					if (isset($result[1][0]['id']))
+                        		{
+                                		$result[0] = 'succeeded';
+                        		}
+					return $result;
+				}
 			}
 		}
 
@@ -287,7 +297,13 @@
 				$Directory = $Response[1];
 			}
 
-			return $this->M->AddFileDetailed(file_get_contents($URL), $Directory);
+			$result = $this->M->AddFileDetailed(file_get_contents($URL), $Directory);
+			// Daemon and Transmission.app return different results after adding torrents
+			if (isset($result[1][0]['id']))
+			{
+				$result[0] = 'succeeded';
+			}
+			return $result;
 		}
 
 		/* public function removeTorrents([(string) $JsonArray], [(array)$InfoFields], [(array)$status_fields])
