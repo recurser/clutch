@@ -360,7 +360,7 @@ Torrent.prototype = {
         	}
 			// Create the 'progress details' label
 			// Eg: '101 MB of 631 MB (16.02%) - 2 hr 30 min remaining'
-			progress_details = Math.formatBytes(this._download_total) + ' of ';
+			progress_details = Math.formatBytes(this._completed) + ' of ';
 			progress_details += Math.formatBytes(this._size) + ' (';
 			progress_details += this._percent_completed + '%)';
 			if ((this._eta < 0 || this._eta >= this._InfiniteTimeRemaining) && this.isActive()) {
