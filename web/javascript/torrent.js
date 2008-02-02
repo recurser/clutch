@@ -344,7 +344,7 @@ Torrent.prototype = {
 		
 		// Figure out the percent completed
 		var css_percent_completed = Math.ceil(this._percent_completed * 100 / this._MaxProgressBarWidth);
-		var int_percent_completed = Math.ceil(this._percent_completed);
+		var int_percent_completed = Math.floor(this._percent_completed);
 		
 		// Sometimes get figures greater that the max
 		if (css_percent_completed > this._MaxProgressBarWidth) {
@@ -352,7 +352,7 @@ Torrent.prototype = {
 		}
 		
 		// Add the progress bar
-		if (css_percent_completed < this._MaxProgressBarWidth) {
+		if (int_percent_completed < 100) {
 		
     	    // Add the decimals if the percentage is an integer
         	if ((this._percent_completed % 1) == 0) {
