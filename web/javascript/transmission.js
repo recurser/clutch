@@ -336,7 +336,7 @@ Transmission.prototype = {
 			// May need to re-calculate the controllers highest selected torrent :
 			// work down the list until the next selected torrent
 			if (torrent == transmission._highestSelected) {
-				temp_torrent = torrent._next_torrent;
+				temp_torrent = torrent.nextTorrent();
 				found = false;
 				while (found == false && temp_torrent != null) {
 					if 	(temp_torrent.isSelected()) {
@@ -350,7 +350,7 @@ Transmission.prototype = {
 			// May need to re-calculate the controllers lowest selected torrent :
 			// work down the list until the next selected torrent
 			if (torrent == transmission._lowestSelected) {
-				temp_torrent = torrent._previous_torrent;
+				temp_torrent = torrent.previousTorrent();
 				found = false;
 				while (found == false && temp_torrent != null) {
 					if 	(temp_torrent.isSelected()) {
@@ -956,39 +956,39 @@ Transmission.prototype = {
 			// If only one torrent is selected, update all fields
 			if (torrent_count == 1) {
 				torrent = this._selected_torrents.first();
-				$('#torrent_inspector_name')[0].innerHTML			= torrent._name;
-				$('#torrent_inspector_size')[0].innerHTML			= Math.formatBytes(torrent._size);
+				$('#torrent_inspector_name')[0].innerHTML			= torrent.name();
+				$('#torrent_inspector_size')[0].innerHTML			= Math.formatBytes(torrent.size());
 				$('#torrent_inspector_tracker')[0].innerHTML		= torrent._tracker['address']+
 															  		':'+torrent._tracker['port']+
 															  		torrent._tracker['announce'];
 
-				$('#torrent_inspector_hash')[0].innerHTML			= torrent._hash;
-				$('#torrent_inspector_state')[0].innerHTML			= torrent._state;
-				$('#torrent_inspector_download_speed')[0].innerHTML			= Math.formatBytes( torrent._download_speed ) + '/s';
-				$('#torrent_inspector_upload_speed')[0].innerHTML			= Math.formatBytes( torrent._upload_speed ) + '/s';
+				$('#torrent_inspector_hash')[0].innerHTML			= torrent.hash();
+				$('#torrent_inspector_state')[0].innerHTML			= torrent.state();
+				$('#torrent_inspector_download_speed')[0].innerHTML	= Math.formatBytes(torrent.downloadSpeed()) + '/s';
+				$('#torrent_inspector_upload_speed')[0].innerHTML	= Math.formatBytes(torrent.uploadSpeed()) + '/s';
 				$('#torrent_inspector_ratio')[0].innerHTML			= torrent.ratio();
-				$('#torrent_inspector_uploaded')[0].innerHTML		= Math.formatBytes(torrent._upload_total);
-				$('#torrent_inspector_downloaded')[0].innerHTML		= Math.formatBytes(torrent._download_total);
-				$('#torrent_inspector_have')[0].innerHTML		= Math.formatBytes(torrent._download_total) + ' (' + Math.formatBytes(torrent._completed) + ' verified)';
-				$('#torrent_inspector_progress')[0].innerHTML		= torrent._percent_completed + '% (' + torrent._percent_completed + '% selected)';
-				$('#torrent_inspector_upload_to')[0].innerHTML		= torrent._peers_uploading;
-				$('#torrent_inspector_download_from')[0].innerHTML	= torrent._peers_downloading;
-				$('#torrent_inspector_swarm_speed')[0].innerHTML	= Math.formatBytes( torrent._swarm_speed ) + '/s';
-				$('#torrent_inspector_total_seeders')[0].innerHTML	= torrent._total_seeders;
-				$('#torrent_inspector_total_leechers')[0].innerHTML	= torrent._total_leechers;		
+				$('#torrent_inspector_uploaded')[0].innerHTML		= Math.formatBytes(torrent.uploadTotal());
+				$('#torrent_inspector_downloaded')[0].innerHTML		= Math.formatBytes(torrent.downloadTotal());
+				$('#torrent_inspector_have')[0].innerHTML		    = Math.formatBytes(torrent.downloadTotal()) + ' (' + Math.formatBytes(torrent.completed()) + ' verified)';
+				$('#torrent_inspector_progress')[0].innerHTML		= torrent.percentCompleted() + '% (' + torrent.percentCompleted() + '% selected)';
+				$('#torrent_inspector_upload_to')[0].innerHTML		= torrent.peersUploading();
+				$('#torrent_inspector_download_from')[0].innerHTML	= torrent.peersDownloading();
+				$('#torrent_inspector_swarm_speed')[0].innerHTML	= Math.formatBytes( torrent.swarmSpeed()) + '/s';
+				$('#torrent_inspector_total_seeders')[0].innerHTML	= torrent.totalSeeders();
+				$('#torrent_inspector_total_leechers')[0].innerHTML	= torrent.totalLeechers();		
 		
 				if (torrent._error_message && torrent._error_message != '') {
-					$('#torrent_inspector_error')[0].innerHTML		= torrent._error_message;
+					$('#torrent_inspector_error')[0].innerHTML		= torrent.errorMessage();
 				} else {
 					$('#torrent_inspector_error')[0].innerHTML		= 'N/A';
 				}
 				if (torrent._comment && torrent._comment != '') {
-					$('#torrent_inspector_comment')[0].innerHTML	= torrent._comment;
+					$('#torrent_inspector_comment')[0].innerHTML	= torrent.comment();
 				} else {
 					$('#torrent_inspector_comment')[0].innerHTML	= 'N/A';
 				}
 				if (torrent._creator && torrent._creator != '') {
-					$('#torrent_inspector_creator')[0].innerHTML	= torrent._creator;
+					$('#torrent_inspector_creator')[0].innerHTML	= torrent.creator();
 				} else {
 					$('#torrent_inspector_creator')[0].innerHTML	= 'N/A';
 				}
@@ -1019,21 +1019,21 @@ Transmission.prototype = {
 					$('#torrent_inspector_name')[0].innerHTML			= 'No Torrent Selected';
 				} else {
 					$('#torrent_inspector_name')[0].innerHTML			= torrent_count + ' Torrents Selected';
-					total_state = this._selected_torrents.first()._state; 
+					total_state = this._selected_torrents.first().state(); 
 					total_tracker = this._selected_torrents.first()._tracker['address']+':'+this._selected_torrents.first()._tracker['port']+this._selected_torrents.first()._tracker['announce']; 
 				}
 				for (i=0; i<torrent_count; i++) {
-					total_upload += this._selected_torrents.itemByIndex(i)._upload_total;
-					total_download += this._selected_torrents.itemByIndex(i)._download_total;
-					total_upload_speed += this._selected_torrents.itemByIndex(i)._upload_speed;
-					total_download_speed += this._selected_torrents.itemByIndex(i)._download_speed;
-					total_seeders += this._selected_torrents.itemByIndex(i)._total_seeders;
-					total_leechers += this._selected_torrents.itemByIndex(i)._total_leechers;
-					total_upload_to += this._selected_torrents.itemByIndex(i)._peers_uploading;
-					total_download_from += this._selected_torrents.itemByIndex(i)._peers_downloading;
-					total_swarm_speed += this._selected_torrents.itemByIndex(i)._swarm_speed;
-					if ( total_state.search ( this._selected_torrents.itemByIndex(i)._state ) == -1 )
-						total_state += '/' + this._selected_torrents.itemByIndex(i)._state;
+					total_upload += this._selected_torrents.itemByIndex(i).uploadTotal();
+					total_download += this._selected_torrents.itemByIndex(i).downloadTotal();
+					total_upload_speed += this._selected_torrents.itemByIndex(i).uploadSpeed();
+					total_download_speed += this._selected_torrents.itemByIndex(i).downloadSpeed();
+					total_seeders += this._selected_torrents.itemByIndex(i).totalSeeders();
+					total_leechers += this._selected_torrents.itemByIndex(i).totalLeechers();
+					total_upload_to += this._selected_torrents.itemByIndex(i).peersUploading();
+					total_download_from += this._selected_torrents.itemByIndex(i).peersDownloading();
+					total_swarm_speed += this._selected_torrents.itemByIndex(i).swarmSpeed();
+					if ( total_state.search ( this._selected_torrents.itemByIndex(i).state() ) == -1 )
+						total_state += '/' + this._selected_torrents.itemByIndex(i).state();
 					var tracker = this._selected_torrents.itemByIndex(i)._tracker['address']+':'+this._selected_torrents.itemByIndex(i)._tracker['port']+this._selected_torrents.itemByIndex(i)._tracker['announce'];
 					if ( total_tracker.search ( tracker ) == -1 )  
 						total_tracker += '/' + tracker;

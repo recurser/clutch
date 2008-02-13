@@ -171,6 +171,132 @@ Torrent.prototype = {
 	},
 	
 	/*
+	 * Return the name of this torrent
+	 */
+	name: function() {
+		return this._name;
+	},
+	
+	/*
+	 * Return the error message for this torrent
+	 */
+	errorMessage: function() {
+		return this._error_message;
+	},
+	
+	/*
+	 * Return the creator of this torrent
+	 */
+	creator: function() {
+		return this._creator;
+	},
+	
+	/*
+	 * Return the comment for this torrent
+	 */
+	comment: function() {
+		return this._comment;
+	},
+	
+	/*
+	 * Return the swarm speed of this torrent
+	 */
+	swarmSpeed: function() {
+		return this._swarm_speed;
+	},
+	
+	/*
+	 * Return the size of this torrent
+	 */
+	size: function() {
+		return this._size;
+	},
+	
+	/*
+	 * Return the hash of this torrent
+	 */
+	hash: function() {
+		return this._hash;
+	},
+	
+	/*
+	 * Return the state of this torrent
+	 */
+	state: function() {
+		return this._state;
+	},
+	
+	/*
+	 * Return the download speed of this torrent
+	 */
+	downloadSpeed: function() {
+		return this._download_speed;
+	},
+	
+	/*
+	 * Return the upload speed of this torrent
+	 */
+	uploadSpeed: function() {
+		return this._upload_speed;
+	},
+	
+	/*
+	 * Return the download total of this torrent
+	 */
+	downloadTotal: function() {
+		return this._download_total;
+	},
+	
+	/*
+	 * Return the bytes completed of this torrent
+	 */
+	completed: function() {
+		return this._completed;
+	},
+	
+	/*
+	 * Return the percent completed of this torrent
+	 */
+	percentCompleted: function() {
+		return this._percent_completed;
+	},
+	
+	/*
+	 * Return the upload total of this torrent
+	 */
+	uploadTotal: function() {
+		return this._upload_total;
+	},
+	
+	/*
+	 * Return the total number of seeders for this torrent
+	 */
+	totalSeeders: function() {
+		return ((this._total_seeders == '') ? 0 : this._total_seeders);
+	},
+	
+	/*
+	 * Return the total number of leechers for this torrent
+	 */
+	totalLeechers: function() {
+		return ((this._total_leechers == '') ? 0 : this._total_leechers);
+	},
+	
+	/*
+	 * Return the total number of peers downloading for this torrent
+	 */
+	peersDownloading: function() {
+		return ((this._peers_downloading == '') ? 0 : this._peers_downloading);
+	},
+	
+	/*
+	 * Return the total number of peers uploading for this torrent
+	 */
+	peersUploading: function() {
+		return ((this._peers_uploading == '') ? 0 : this._peers_uploading);
+	},
+	
+	/*
 	 * Return the ratio for this torrent
 	 */
 	ratio: function() {
