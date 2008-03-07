@@ -487,7 +487,7 @@
 				
 			// Include total down and up rates in the result
 			$Result = array(
-						'free_space_bytes'    => $FreeSpaceBytes,
+						'free_space_bytes'    => (string) $FreeSpaceBytes,
 						'free_space_percent'  => $FreeSpacePercent,
 						'total_download_rate' => $TotalDownloadRate,
 						'total_upload_rate'   => $TotalUploadRate,
