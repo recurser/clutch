@@ -408,12 +408,15 @@ ul.torrent_list li.torrent div.torrent_progress_bar {
 	width: 100%;
 	}	
 
-ul.torrent_list li.torrent a {
+ul.torrent_list li.torrent a div{
 	float: right;
 	position: relative;
 	right: -12px;
 	top: -16px;
 	padding: 0 0px 0 2px;
+	background:url('../images/buttons/pause_resume_buttons.png');
+	height:14px;
+	width:12px;
 	}
   
   

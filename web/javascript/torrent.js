@@ -61,7 +61,7 @@ Torrent.prototype = {
 		// Add the pause/resume button - don't specify the image or alt text until 
 		// the 'refresh()' function (depends on torrent state)
 		this._pause_resume_button = $('<a/>');
-		this._pause_resume_button_image = $('<img/>');
+		this._pause_resume_button_image = $('<div/>');
 		this._pause_resume_button.append(this._pause_resume_button_image);
 		this._element.append(this._pause_resume_button);
 			
@@ -385,9 +385,9 @@ Torrent.prototype = {
 		var torrent = event.data.torrent;
 			
 		if (torrent._state == torrent._StatusPaused) {
-			torrent._pause_resume_button_image[0].src = 'images/buttons/resume_on.png';
+			torrent._pause_resume_button_image[0].style.backgroundPosition = "top right";
 		} else {
-			torrent._pause_resume_button_image[0].src = 'images/buttons/pause_on.png';
+			torrent._pause_resume_button_image[0].style.backgroundPosition = "top left";
 		}
 	},
 
@@ -401,10 +401,10 @@ Torrent.prototype = {
 		var action;	
 		if (torrent._state == torrent._StatusPaused) {
 			action = 'resumeTorrents';
-			torrent._pause_resume_button_image[0].src = 'images/buttons/resume_off.png';
+			torrent._pause_resume_button_image[0].style.backgroundPosition = "bottom right";
 		} else {
 			action = 'pauseTorrents';
-			torrent._pause_resume_button_image[0].src = 'images/buttons/pause_off.png';
+			torrent._pause_resume_button_image[0].style.backgroundPosition = "bottom left";
 		}
 		
 		// Send an ajax request to perform the action
@@ -564,10 +564,10 @@ Torrent.prototype = {
 				peer_details = 'Stopping...';
 			}
 			this._pause_resume_button_image[0].alt = 'Resume';
-			this._pause_resume_button_image[0].src = 'images/buttons/resume_off.png';
+			this._pause_resume_button_image[0].style.backgroundPosition = "bottom right";
 		} else {
 			this._pause_resume_button_image[0].alt = 'Pause';
-			this._pause_resume_button_image[0].src = 'images/buttons/pause_off.png';
+			this._pause_resume_button_image[0].style.backgroundPosition = "bottom left";
 		}
 		
 		if (this._error_message && this._error_message != '' && this._error_message != 'other' ) {
