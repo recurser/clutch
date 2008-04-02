@@ -94,92 +94,93 @@ div.torrent_global_menu ul li a.disabled {
 	}
 
 div.torrent_global_menu ul li#open a {
-	background: transparent url('../images/buttons/open.png') no-repeat 10px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat 10px 0px;
 	}
 
 div.torrent_global_menu ul li#open a:active {
-	background: transparent url('../images/buttons/open_on.png') no-repeat 10px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -50px 0px;
 	}
 
 div.torrent_global_menu ul li#remove a {
-	background: transparent url('../images/buttons/remove.png') no-repeat 16px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -102px 2px;
 	}
 
+
 div.torrent_global_menu ul li#remove a:active {
-	background: transparent url('../images/buttons/remove_on.png') no-repeat 16px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -222px 2px;
 	}
 
 div.torrent_global_menu ul li#remove a.disabled,
 div.torrent_global_menu ul li#remove a.disabled:active {
-	background: transparent url('../images/buttons/remove_disabled.png') no-repeat 16px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -162px 2px;
 	}
 
-div.torrent_global_menu ul li#resume_selected a{
-	background: transparent url('../images/buttons/resume_selected.png') no-repeat 19px 0px ;
+div.torrent_global_menu ul li#resume_selected a {
+	background: transparent url('../images/buttons/icons.png') no-repeat 19px -115px;
 	}
 
 div.torrent_global_menu ul li#resume_selected a:active {
-	background: transparent url('../images/buttons/resume_selected_on.png') no-repeat 19px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -101px -115px;
 	}
 
 div.torrent_global_menu ul li#resume_selected a.disabled,
 div.torrent_global_menu ul li#resume_selected a.disabled:active {
-	background: transparent url('../images/buttons/resume_selected_disabled.png') no-repeat 19px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -41px -115px;
 	}
 
 div.torrent_global_menu ul li#pause_selected a {
-	background: transparent url('../images/buttons/pause_selected.png') no-repeat 10px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat 14px -55px;
 	}
 
 div.torrent_global_menu ul li#pause_selected a:active {
-	background: transparent url('../images/buttons/pause_selected_on.png') no-repeat 10px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -108px -55px;
 	}
 
 div.torrent_global_menu ul li#pause_selected a.disabled,
 div.torrent_global_menu ul li#pause_selected a.disabled:active {
-	background: transparent url('../images/buttons/pause_selected_disabled.png') no-repeat 10px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -48px -55px;
 	}
 
 div.torrent_global_menu ul li#pause_all a {
-	background: transparent url('../images/buttons/pause_all.png') no-repeat 19px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -160px -55px;
 	}
 
 div.torrent_global_menu ul li#pause_all a:active {
-	background: transparent url('../images/buttons/pause_all_on.png') no-repeat 19px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -279px -55px;
 	}
 
 div.torrent_global_menu ul li#pause_all a.disabled,
 div.torrent_global_menu ul li#pause_all a.disabled:active {
-	background: transparent url('../images/buttons/pause_all_disabled.png') no-repeat 19px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -220px -55px;
 	}
 
 div.torrent_global_menu ul li#resume_all a {
-	background: transparent url('../images/buttons/resume_all.png') no-repeat 25px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -155px -116px;
 	}
 
 div.torrent_global_menu ul li#resume_all a:active {
-	background: transparent url('../images/buttons/resume_all_on.png') no-repeat 25px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -275px -116px;
 	}
 
 div.torrent_global_menu ul li#resume_all a.disabled,
 div.torrent_global_menu ul li#resume_all a.disabled:active {
-	background: transparent url('../images/buttons/resume_all_disabled.png') no-repeat 25px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -215px -116px;
 	}
 
 div.torrent_global_menu ul li#filter a {
-	background: transparent url('../images/buttons/filter.png') no-repeat 8px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -351px -55px;
 	}
 
 div.torrent_global_menu ul li#filter a:active {
-	background: transparent url('../images/buttons/filter_on.png') no-repeat 8px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -352px -116px;
 	}
 
 div.torrent_global_menu ul li#inspector a {
-	background: transparent url('../images/buttons/info.png') no-repeat 18px 0px ;
+	background: transparent url('../images/buttons/icons.png') no-repeat -280px 2px;
 	}
 
 div.torrent_global_menu ul li#inspector a:active {
-	background: transparent url('../images/buttons/info_toolbar_on.png') no-repeat 18px 0px;
+	background: transparent url('../images/buttons/icons.png') no-repeat -340px 2px;
 	}
 
 div.torrent_global_menu ul li.divider {
@@ -324,14 +325,14 @@ div#torrent_container {
 	padding:0px;
 	margin: 0px;
 	overflow: auto;
-}
+	}
 
 ul.torrent_list {
 	width: 100%;
 	margin: 0;
 	padding: 0;
 	text-align: left;
-}
+	}
 
 ul.torrent_list li {
 	list-style-type: none;
