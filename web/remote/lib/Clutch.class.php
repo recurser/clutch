@@ -481,6 +481,9 @@
 			
 			// Figure out the disk space remaining
 			$Response        = $this->M->GetDefaultDirectory();
+			if (! file_exists($Response[1]) || ! is_dir($Response[1])) {
+				$Response[1] = '/';
+			}
 			$TotalSpace      = disk_total_space($Response[1]);
 			$FreeSpaceBytes  = disk_free_space($Response[1]);
 			$FreeSpacePercent = round($FreeSpaceBytes * 100 / $TotalSpace, 1);
