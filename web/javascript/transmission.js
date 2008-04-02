@@ -1305,6 +1305,8 @@ Transmission.prototype = {
 	
 		// Display the upload dialog
 		if (! confirmed) {
+		    $('input#torrent_upload_file').attr('value', '');
+		    $('input#torrent_upload_url').attr('value', ''); 
 			$('#upload_container').show();
 			
 		// Submit the upload form			
