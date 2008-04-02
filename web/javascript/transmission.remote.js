@@ -62,7 +62,7 @@ TransmissionRemote.prototype = {
 	 * Display an error if an ajax request fails, and stop sending requests
 	 */
 	ajaxError: function(request, error_string, exception) {
-		transmission.remote._error = request.responseText.trim().replace(/(<([^>]+)>)/ig,"");
+		request.responseText ? transmission.remote._error = request.responseText.trim().replace(/(<([^>]+)>)/ig,"") : transmission.remote._error = ""; 
 		if (transmission.remote._error == '') {
 			transmission.remote._error = 'Server not responding';
 		}
