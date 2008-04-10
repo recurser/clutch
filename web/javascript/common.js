@@ -8,6 +8,28 @@
 
 var transmission;
 var dialog;
+// Safari 3 includes the "Version" string for the first time. Also true for iPhone. We actually
+// need 3.1 for CSS animation (dialog sheets) but as it degrades gracefully let's not worry too much.
+var Safari3 = $.browser.safari ? RegExp("Version").test(navigator.userAgent) ? true : false : false;
+var iPhone = RegExp("(iPhone|iPod)").test(navigator.userAgent);
+if (iPhone) var scroll_timeout;
+function updateLayout()
+{
+	if (iPhone) {
+		switch(window.orientation) {
+			case -90:
+				$('body').addClass('landscape');
+				break;
+			case 90:
+				$('body').addClass('landscape');
+				break;
+			default:
+				$('body.landscape').removeClass('landscape');
+				break;
+		} 
+		scroll_timeout = setTimeout("window.scrollTo(0,1)",50);
+	}
+};
 
 $(document).ready( function() {
 	// Initialise a torrent controller to handle events
@@ -27,10 +49,32 @@ $(document).ready( function() {
 		// Set Filter input to type search (nicely styled input field)
 		$('#torrent_search')[0].type = 'search';
 		$('#torrent_search')[0].placeholder = 'Filter';
-		$('#torrent_search').css('margin-top', 3);
+		$('#torrent_search').css('margin-top', 3);		
+	}
+	if (!Safari3) {
+		// Fix for non-Safari-3 browsers, to give borders to replace missing shadow.
+		// Opera messes up the menu if we use a border on .trans_menu div.outerbox
+		// so use ul instead
+		$('.trans_menu ul, div#jqContextMenu, div.dialog_container div.dialog_window').css('border', '1px solid #777');
+		// and this kills the border we used to have
+		$('.trans_menu div.outerbox').css('border', 'none');
+	} else if (!iPhone) {
+		// Used for Safari 3.1 CSS animation. Degrades gracefully (so Safari 3 test is
+		// good enough) but we delay our hide/unhide to wait for the scrolling - no
+		// point making other browsers wait.
+		$('div#upload_container div.dialog_window').css('top', '-205px');
+		$('div#prefs_container div.dialog_window').css('top', '-425px');
+		$('div#dialog_container div.dialog_window').css('top', '-425px');
+		$('div.dialog_container div.dialog_window').css('-webkit-transition', 'top 0.3s');
+		// -webkit-appearance makes some links into buttons, but needs different padding.
+		$('div.dialog_container div.dialog_window a').css('padding', '2px 10px 3px');
+	}
+	if ($.browser.mozilla) {
+		$('div#prefs_container div.preference input').css('height', 'auto');
+		$('div#prefs_container div.preference input').css('padding', '1px');
+		$('div#prefs_container div.preference input').css('margin-top', '2px');
 	}
 });
-
 
 /**
  *   Array convenience method to clear membership.

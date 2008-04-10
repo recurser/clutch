@@ -15,7 +15,7 @@ function Torrent(data) {
 	this._StatusChecking        = 'checking';
 	this._StatusWaitingToCheck  = 'waiting to checking';
 	this._InfiniteTimeRemaining = 215784000; // 999 Hours - may as well be infinite
-	this._MaxProgressBarWidth   = 99; // reduce this to make the progress bar shorter (%)
+	this._MaxProgressBarWidth   = 100; // reduce this to make the progress bar shorter (%)
 
     this.initialize(data);
 } 
@@ -62,12 +62,12 @@ Torrent.prototype = {
 		// the 'refresh()' function (depends on torrent state)
 		this._pause_resume_button = $('<a/>');
 		this._pause_resume_button_image = $('<div/>');
+		this._pause_resume_button_image.addClass('torrent_pause');
 		this._pause_resume_button.append(this._pause_resume_button_image);
 		this._element.append(this._pause_resume_button);
 			
-		// Set the pause button click observer
-		this._pause_resume_button.bind('mousedown', {torrent: this}, this.clickPauseResumeButton);
-		this._pause_resume_button.bind('mouseup', {torrent: this}, this.releasePauseResumeButton);
+		// Set the pause button click observer (not shown on iPhone)
+		if (!iPhone) this._pause_resume_button.bind('click', {torrent: this}, this.clickPauseResumeButton);
 		
 		// Create the 'peer details' <div>
 		this._peer_details_container = $('<div/>');
@@ -76,7 +76,7 @@ Torrent.prototype = {
 			
 		// Set the torrent click observer
 		this._element.bind('click', {torrent: this}, this.clickTorrent);
-		this._element.bind('contextmenu', {torrent: this}, this.rightClickTorrent);		
+		if (!iPhone) this._element.bind('contextmenu', {torrent: this}, this.rightClickTorrent);		
 		
 		// Safari hack - first torrent needs to be moved down for some reason. Seems to be ok when
 		// using <li>'s in straight html, but adding through the DOM gets a bit odd.
@@ -336,7 +336,9 @@ Torrent.prototype = {
 	 * Process a click event on this torrent
 	 */
 	clickTorrent: function(event) {
-		
+		// Prevents click carrying to parent element
+		// which deselects all on click
+		event.stopPropagation();
 		var torrent = event.data.torrent;
 			
 		// 'Apple' button emulation on PC :
@@ -349,7 +351,10 @@ Torrent.prototype = {
 		}
 		
 		// Shift-Click - Highlight a range between this torrent and the last-clicked torrent
-		if (event.shiftKey) {
+		if (iPhone) {
+			torrent._controller.deselectAll();
+			torrent.select();
+		} else if (event.shiftKey) {
 			torrent._controller.selectRange(torrent);
 			// Need to deselect any selected text
 			window.focus();
@@ -381,30 +386,17 @@ Torrent.prototype = {
 	 * Process a click event on the pause/resume button
 	 */
 	clickPauseResumeButton: function(event) {
-		
-		var torrent = event.data.torrent;
-			
-		if (torrent._state == torrent._StatusPaused) {
-			torrent._pause_resume_button_image[0].style.backgroundPosition = "top right";
-		} else {
-			torrent._pause_resume_button_image[0].style.backgroundPosition = "top left";
-		}
-	},
-
-	/*
-	 * Process a mouse-up event on the pause/resume button
-	 */
-	releasePauseResumeButton: function(event) {	
-		
+		// Prevents click event resulting in selection of torrent
+		event.stopPropagation();
 		var torrent = event.data.torrent;
 		
 		var action;	
 		if (torrent._state == torrent._StatusPaused) {
 			action = 'resumeTorrents';
-			torrent._pause_resume_button_image[0].style.backgroundPosition = "bottom right";
+			torrent._pause_resume_button_image[0].style.className = "torrent_resume";
 		} else {
 			action = 'pauseTorrents';
-			torrent._pause_resume_button_image[0].style.backgroundPosition = "bottom left";
+			torrent._pause_resume_button_image[0].style.className = "torrent_pause";
 		}
 		
 		// Send an ajax request to perform the action
@@ -564,10 +556,10 @@ Torrent.prototype = {
 				peer_details = 'Stopping...';
 			}
 			this._pause_resume_button_image[0].alt = 'Resume';
-			this._pause_resume_button_image[0].style.backgroundPosition = "bottom right";
+			this._pause_resume_button_image[0].className = "torrent_resume";
 		} else {
 			this._pause_resume_button_image[0].alt = 'Pause';
-			this._pause_resume_button_image[0].style.backgroundPosition = "bottom left";
+			this._pause_resume_button_image[0].className = "torrent_pause";
 		}
 		
 		if (this._error_message && this._error_message != '' && this._error_message != 'other' ) {
@@ -583,16 +575,19 @@ Torrent.prototype = {
 	select: function() {
 		this._element.addClass('selected');
 		
-        // Make sure it's visible in the torrent list (i.e. not too far down with the scrollbar all the way up)
-        var container = $('#torrent_container'),
-        offsetTop = this._element.position().top,
-        scrollTop = container.scrollTop(),
-        offsetHeight = this._element.outerHeight(),
-        innerHeight = container.innerHeight();
-        if (offsetTop < scrollTop) { // torrent is too far up
-            container.scrollTop(offsetTop);
-        } else if (innerHeight + scrollTop < offsetTop + offsetHeight) { // torrent is too far down
-            container.scrollTop(offsetTop + offsetHeight - innerHeight);
+		// skipping height stuff on iPhone lets us omit dimensions.js; needs watching just in case
+		if (!iPhone) {
+			// Make sure it's visible in the torrent list (i.e. not too far down with the scrollbar all the way up)
+			var container = $('#torrent_container'),
+			offsetTop = this._element.position().top,
+			scrollTop = container.scrollTop(),
+			offsetHeight = this._element.outerHeight(),
+			innerHeight = container.innerHeight();
+			if (offsetTop < scrollTop) { // torrent is too far up
+				container.scrollTop(offsetTop);
+			} else if (innerHeight + scrollTop < offsetTop + offsetHeight) { // torrent is too far down
+				container.scrollTop(offsetTop + offsetHeight - innerHeight);
+			}
         }
 
         // Highlight it as selected

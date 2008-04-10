@@ -12,34 +12,31 @@ Menu = {
 		
 		menu_style: {
 			width: '210px',
-			backgroundColor: '#F4F5EB',
-			borderTop: '1px solid #ddd',
-			borderLeft: '1px solid #ddd',
-			borderRight: '1px solid #666',
-			borderBottom: '1px solid #666',
-			padding: '2px 0 2px 0',
+			backgroundColor: '#fff',
+			border: 'none',
+			padding: '5px 0',
 			textAlign: 'left'},
 		
 		item_style: {
-			backgroundColor: '#F4F5EB',
-			margin: '0 2px',
-			padding: '5px 15px',
-			color: '#555',
-			fontSize: '11px',
+			backgroundColor: 'transparent',
+			margin: '0',
+			padding: '0 10px 2px 20px',
+			color: '#000',
+			fontSize: '14px',
 			cursor: 'default',
 			border: 'none'},
 		
 		item_hover_style: {
-			backgroundColor: '#3875D7',
-			color: '#ddd',
+			backgroundColor: '#24e',
+			color: '#fff',
 			border: 'none'},
 		
 		item_disabled_style: {
-			backgroundColor: '#F4F5EB',
-			margin: '0 2px',
-			padding: '5px 15px',
-			color: '#999',
-			fontSize: '11px',
+			backgroundColor: 'transparent',
+			margin: '0',
+			padding: '0 10px 2px 20px',
+			color: '#aaa',
+			fontSize: '1.5em',
 			cursor: 'default',
 			border: 'none'}
 	}

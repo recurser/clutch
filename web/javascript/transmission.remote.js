@@ -62,7 +62,7 @@ TransmissionRemote.prototype = {
 	 * Display an error if an ajax request fails, and stop sending requests
 	 */
 	ajaxError: function(request, error_string, exception) {
-		request.responseText ? transmission.remote._error = request.responseText.trim().replace(/(<([^>]+)>)/ig,"") : transmission.remote._error = ""; 
+		request.responseText ? transmission.remote._error = request.responseText.trim().replace(/(<([^>]+)>)/ig,"") : transmission.remote._error = "";
 		if (transmission.remote._error == '') {
 			transmission.remote._error = 'Server not responding';
 		}
@@ -97,6 +97,7 @@ TransmissionRemote.prototype = {
 			this._controller.setCurrentFilter(filter_type);
 			this.request('filterTorrents', null, filter_type);
 		}
+		if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
 	},
 	
 	/*
@@ -146,6 +147,14 @@ TransmissionRemote.prototype = {
 				'&sort_direction=' + this._controller.currentSortDirection() +
 				'&search=' + this._controller.currentSearch();
 		$('#prefs_form').ajaxSubmit({dataType: 'script', type: 'POST'});
+		$('body.prefs_showing').removeClass('prefs_showing');
+		if (iPhone) {
+			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			$('#prefs_container').hide();
+		} else if (Safari3)  {
+			$('div#prefs_container div.dialog_window').css('top', '-425px');
+			setTimeout("$('#prefs_container').hide();",500);
+		}
 	},
 
 	/*
@@ -168,15 +177,22 @@ TransmissionRemote.prototype = {
 		
 		var num_torrents = transmission.numSelectedTorrents();
 		if (num_torrents > 0) {
-			
 			if (confirmed !== true) {
+				if (iPhone && num_torrents==1) {
+				var torrent = transmission._selected_torrents.first();
+				var dialog_heading = 'Confirm Torrent Removal';
+				var dialog_message = 'The torrent \"' + torrent._name + '\" is currently ' + torrent._state;
+				if (torrent._error_message && torrent._error_message != '') dialog_message += ', but reporting an error';
+				dialog_message += '. Are you sure you want to remove this torrent? ';
+				dialog.confirm(dialog_heading, dialog_message, 'Remove', 'transmission.remote.removeSelectedTorrents(true)');
+				} else {
 				var dialog_heading		 = 'Confirm Removal of ' + num_torrents + ' Transfers';
 				var dialog_message = 'There are ' + num_torrents + ' transfers (' + transmission.numSelectedActiveTorrents();
-				dialog_message	  += ' active). Once Removed,<br />continuing the transfers will require the torrent files.';
+				dialog_message	  += ' active). Once removed,<br />continuing the transfers will require the torrent files.';
 				dialog_message	  += '<br />Do you really want to remove them?';
 				dialog.confirm(dialog_heading, dialog_message, 'Remove', 'transmission.remote.removeSelectedTorrents(true)');
-			
-			} else {	
+				}		
+			} else {
 				// Send an ajax request to perform the action
 				this.request('removeTorrents', transmission.selectedTorrents().keys().json());			
 			}

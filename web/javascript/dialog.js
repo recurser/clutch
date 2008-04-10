@@ -8,7 +8,7 @@
 
 function Dialog(){
     this.initialize();
-} 
+}
  
 Dialog.prototype = {
 
@@ -47,9 +47,18 @@ Dialog.prototype = {
 	 */
 	releaseCancelButton: function(event) {
 		dialog = event.data.dialog;
-		dialog._container.hide();	
-		dialog._callback_function = '';	
-		
+		$('body.dialog_showing').removeClass('dialog_showing');
+		if (iPhone) {
+			dialog._container.hide();	
+			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+		} else if (Safari3) {
+			$('div#dialog_container div.dialog_window').css('top', '-150px');
+			setTimeout("dialog._container.hide();",500);	
+		} else {
+			dialog._container.hide();	
+		}
+		transmission.updateButtonStates();
+		dialog._callback_function = '';
 	},
 
 	/*
@@ -57,7 +66,17 @@ Dialog.prototype = {
 	 */
 	releaseConfirmButton: function(event) {
 		dialog = event.data.dialog;
-		dialog._container.hide();
+		$('body.dialog_showing').removeClass('dialog_showing');
+		if (iPhone) {
+			dialog._container.hide();	
+			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+		} else if (Safari3) {
+			$('div#dialog_container div.dialog_window').css('top', '-150px');
+			setTimeout("dialog._container.hide();",500);	
+		} else {
+			dialog._container.hide();	
+		}
+		transmission.updateButtonStates();
 		eval(dialog._callback_function);
 	},
 	
@@ -73,29 +92,69 @@ Dialog.prototype = {
      * Display a confirm dialog
      */
     confirm: function(dialog_heading, dialog_message, confirm_button_label, callback_function, cancel_button_label) {
-		$('.dialog_container').hide();
+		if (!iPhone && Safari3) {
+			$('div#upload_container div.dialog_window').css('top', '-205px');
+			$('div#prefs_container div.dialog_window').css('top', '-425px');
+			setTimeout("$('#upload_container').hide();",500);
+			setTimeout("$('#prefs_container').hide();",500);
+		} else if (!iPhone) {
+			$('.dialog_container').hide();
+		}
 		this._heading[0].innerHTML = dialog_heading;
 		this._message[0].innerHTML = dialog_message;
 		this._cancel_button[0].innerHTML = (cancel_button_label == null) ? 'Cancel' : cancel_button_label;
 		this._confirm_button[0].innerHTML = confirm_button_label;
 		this._confirm_button.show();
 		this._callback_function = callback_function;
+		$('body').addClass('dialog_showing');
 		this._container.show();
+		transmission.updateButtonStates();
+		if (iPhone) {
+			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+		} else if (Safari3) {
+			setTimeout("$('div#dialog_container div.dialog_window').css('top', '0px');",10);
+		}
 	},
     
     /*
      * Display an alert dialog
      */
     alert: function(dialog_heading, dialog_message, cancel_button_label) {
-		$('.dialog_container').hide();
+		if (!iPhone && Safari3) {
+			$('div#upload_container div.dialog_window').css('top', '-205px');
+			$('div#prefs_container div.dialog_window').css('top', '-425px');
+			setTimeout("$('#upload_container').hide();",500);
+			setTimeout("$('#prefs_container').hide();",500);
+		} else if (!iPhone) {
+			$('.dialog_container').hide();
+		}
 		this._heading[0].innerHTML = dialog_heading;
 		this._message[0].innerHTML = dialog_message;
 		// jquery::hide() doesn't work here in Safari for some odd reason
 		this._confirm_button.css('display', 'none');
 		this._cancel_button[0].innerHTML = cancel_button_label;
-		$('upload_container').hide(); // Just in case
-		this._container.show();
+		// Just in case
+		if (!iPhone && Safari3) {
+			$('div#upload_container div.dialog_window').css('top', '-205px');
+			setTimeout("$('#upload_container').hide();",500);
+		} else {
+			$('#upload_container').hide();
+		}
+		$('body').addClass('dialog_showing');
+		transmission.updateButtonStates();
+		if (iPhone) {
+			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			this._container.show();
+		} else if (Safari3) {
+			// long pause as we just hid all the dialogs on a timeout - we'll get the error
+			// scrolling in and immediately disappearing if we're not careful!
+			//dialogTimeout = null;
+			this._container.show();
+			setTimeout("$('div#dialog_container div.dialog_window').css('top', '0px');",500);
+		} else {
+			this._container.show();
+		}
 	}
 	
-	
+
 }
