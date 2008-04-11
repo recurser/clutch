@@ -405,7 +405,7 @@ Transmission.prototype = {
 			if (transmission.numActiveTorrents() > 0) {
 				event.data.transmission.remote.pauseTorrents([]);
 			}
-			if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			if (iPhone) transmission.hideiPhoneAddressbar();
 		}
 	},
 
@@ -417,7 +417,7 @@ Transmission.prototype = {
 			if (transmission.numPausedTorrents() > 0) {
 				event.data.transmission.remote.resumeTorrents([]);
 			}
-			if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			if (iPhone) transmission.hideiPhoneAddressbar();
 		}
 	},
 
@@ -428,7 +428,7 @@ Transmission.prototype = {
 			if (transmission.numSelectedActiveTorrents() > 0) {
 				event.data.transmission.pauseSelectedTorrents();
 			}
-			if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			if (iPhone) transmission.hideiPhoneAddressbar();
 		}
 	},
 
@@ -439,7 +439,7 @@ Transmission.prototype = {
 		if (transmission.checkButtonDisabled(event)) {
 			if (transmission.numSelectedActiveTorrents() == 0) {
 				event.data.transmission.resumeSelectedTorrents();
-			if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			if (iPhone) transmission.hideiPhoneAddressbar();
 			}
 	    }
 	},
@@ -495,7 +495,7 @@ Transmission.prototype = {
 		$('body.prefs_showing').removeClass('prefs_showing');
 		transmission.updateButtonStates();
 		if (iPhone) {
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 			$('#prefs_container').hide();
 		} else if (Safari3) {
 			$('div#prefs_container div.dialog_window').css('top', '-425px');
@@ -519,7 +519,7 @@ Transmission.prototype = {
 	releaseRemoveButton: function(event) {	
 		if (transmission.checkButtonDisabled(event)) {
 			event.data.transmission.remote.removeSelectedTorrents();
-			if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			if (iPhone) transmission.hideiPhoneAddressbar();
 		}
 	},
 
@@ -550,7 +550,7 @@ Transmission.prototype = {
 				$('#' + tab_ids[i] + '_container').hide();
 			}
 		}
-		if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+		if (iPhone) transmission.hideiPhoneAddressbar();
 	},
 	
     /*
@@ -702,7 +702,7 @@ Transmission.prototype = {
 		$('body').addClass('prefs_showing');
 		$('#prefs_container').show();
 		if (iPhone) {
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 		} else if (Safari3) {
 			setTimeout("$('div#prefs_container div.dialog_window').css('top', '0px');",10);
 		}
@@ -1199,7 +1199,7 @@ Transmission.prototype = {
 		$('#torrent_inspector').show();
 		if (iPhone) {
 			$('body').addClass('inspector_showing');
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 		} else {
 			$('#torrent_filter_bar')[0].style.right = $('#torrent_inspector').width() + 1 + 'px';
 			$('#torrent_container')[0].style.right = $('#torrent_inspector').width() + 1 + 'px';
@@ -1231,7 +1231,7 @@ Transmission.prototype = {
 				}
 			}
 			$('body.inspector_showing').removeClass('inspector_showing');
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 		} else {
 			$('#torrent_filter_bar')[0].style.right = '0px';
 			$('#torrent_container')[0].style.right = '0px';
@@ -1524,5 +1524,16 @@ Transmission.prototype = {
 	checkButtonDisabled: function(e) {
 		target_parent = e.target ? e.target.parentNode : e.srcElement.parentNode;
 		return (target_parent.className == "disabled" || target_parent.parentNode.className == "disabled") ? false : true;
+	},
+	hideiPhoneAddressbar: function(timeInSeconds) {
+		var delayLength = timeInSeconds ? timeInSeconds*1000 : 10;
+		// not supported on iPhone? check this.
+		if(/*document.body.scrollTop!=1 && */scroll_timeout==null) {
+			scroll_timeout = setTimeout("transmission.doToolbarHide()", delayLength);
+		}
+	},
+	doToolbarHide: function() {
+		window.scrollTo(0,1);
+		scroll_timeout=null;
 	}
 }

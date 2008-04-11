@@ -62,7 +62,7 @@ TransmissionRemote.prototype = {
 	 * Display an error if an ajax request fails, and stop sending requests
 	 */
 	ajaxError: function(request, error_string, exception) {
-		request.responseText ? transmission.remote._error = request.responseText.trim().replace(/(<([^>]+)>)/ig,"") : transmission.remote._error = "";
+		transmission.remote._error = request.responseText ? request.responseText.trim().replace(/(<([^>]+)>)/ig,"") : "";
 		if (transmission.remote._error == '') {
 			transmission.remote._error = 'Server not responding';
 		}
@@ -97,7 +97,7 @@ TransmissionRemote.prototype = {
 			this._controller.setCurrentFilter(filter_type);
 			this.request('filterTorrents', null, filter_type);
 		}
-		if (iPhone) scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+		if (iPhone) transmission.hideiPhoneAddressbar();
 	},
 	
 	/*
@@ -149,7 +149,7 @@ TransmissionRemote.prototype = {
 		$('#prefs_form').ajaxSubmit({dataType: 'script', type: 'POST'});
 		$('body.prefs_showing').removeClass('prefs_showing');
 		if (iPhone) {
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 			$('#prefs_container').hide();
 		} else if (Safari3)  {
 			$('div#prefs_container div.dialog_window').css('top', '-425px');

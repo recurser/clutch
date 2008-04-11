@@ -27,7 +27,7 @@ function updateLayout()
 				$('body.landscape').removeClass('landscape');
 				break;
 		} 
-		scroll_timeout = setTimeout("window.scrollTo(0,1)",50);
+		transmission.hideiPhoneAddressbar();
 	}
 };
 

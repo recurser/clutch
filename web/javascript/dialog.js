@@ -50,7 +50,7 @@ Dialog.prototype = {
 		$('body.dialog_showing').removeClass('dialog_showing');
 		if (iPhone) {
 			dialog._container.hide();	
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 		} else if (Safari3) {
 			$('div#dialog_container div.dialog_window').css('top', '-150px');
 			setTimeout("dialog._container.hide();",500);	
@@ -69,7 +69,7 @@ Dialog.prototype = {
 		$('body.dialog_showing').removeClass('dialog_showing');
 		if (iPhone) {
 			dialog._container.hide();	
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 		} else if (Safari3) {
 			$('div#dialog_container div.dialog_window').css('top', '-150px');
 			setTimeout("dialog._container.hide();",500);	
@@ -110,7 +110,7 @@ Dialog.prototype = {
 		this._container.show();
 		transmission.updateButtonStates();
 		if (iPhone) {
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 		} else if (Safari3) {
 			setTimeout("$('div#dialog_container div.dialog_window').css('top', '0px');",10);
 		}
@@ -143,7 +143,7 @@ Dialog.prototype = {
 		$('body').addClass('dialog_showing');
 		transmission.updateButtonStates();
 		if (iPhone) {
-			scroll_timeout = setTimeout("window.scrollTo(0,1)",20);
+			transmission.hideiPhoneAddressbar();
 			this._container.show();
 		} else if (Safari3) {
 			// long pause as we just hid all the dialogs on a timeout - we'll get the error
