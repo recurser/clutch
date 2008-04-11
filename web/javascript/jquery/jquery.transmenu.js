@@ -21,13 +21,15 @@
 		direction: 'down',
 		mainDelay: 10
 	};
+	
+	var transMenuSettings;
 
 	$.fn.transMenu = function(options) 
 	{
 		var shown = false;
 		var liOffset = 2;
 
-		var settings = $.extend({}, defaults, options);
+		transMenuSettings = $.extend({}, defaults, options);
 
 		var hideDIV = function(div, delay) {
 			//a timer running to show the div?
@@ -39,7 +41,7 @@
 			if ( div.isVisible ) {
 				div.timer = setTimeout( function() {
 					//remove events
-					$(div).find('ul li').unbind('mouseover', liHoverIn).unbind('mouseout', liHoverOut).unbind('click', settings.onClick);
+					$(div).find('ul li').unbind('mouseover', liHoverIn).unbind('mouseout', liHoverOut).unbind('click', transMenuSettings.onClick);
 					$(div).hide();
 					div.isVisible = false;
 					div.timer = null;
@@ -58,13 +60,13 @@
 						return;
 					}
 					//assign events to all div>ul>li-elements
-					$(div).find('ul li').mouseover(liHoverIn).mouseout(liHoverOut).click(settings.onClick);
+					$(div).find('ul li').mouseover(liHoverIn).mouseout(liHoverOut).click(transMenuSettings.onClick);
 					//positioning
 					if (! $(div).parent().is('.main')) {
 						$(div).css('left', $(div).parent().parent().width() - liOffset);
 					}
 					
-					if (settings.direction == 'up') {
+					if (transMenuSettings.direction == 'up') {
 						$(div).css('top', ($(div).height() * -1) + $(div).parent().parent().height());
 					}
 					
@@ -97,7 +99,7 @@
 		var mainHoverIn = function(e) {
 			$(this).addClass('hover').siblings('li.hover').removeClass('hover');
 			if ( shown ) {
-				hoverIn(this, settings.mainDelay);
+				hoverIn(this, transMenuSettings.mainDelay);
 			}
 		};
 
@@ -111,7 +113,7 @@
 					return;
 				}
 			}
-			hoverIn(this, settings.subDelay);
+			hoverIn(this, transMenuSettings.subDelay);
 		};
 
 		var hoverIn = function(li, delay) {
@@ -217,7 +219,7 @@
 				clean();
 				$(this).addClass('hover');
 			} else {
-				hoverIn(this, settings.mainDelay);
+				hoverIn(this, transMenuSettings.mainDelay);
 				shown = true;
 				$(document).bind('mousedown', checkMouse);
 			}
@@ -250,7 +252,7 @@
 			});
 			$('ul.trans_menu li').removeClass('hover');
 			//remove events
-			$('ul.trans_menu>li li').unbind('mouseover', liHoverIn).unbind('mouseout', liHoverOut).unbind('click', settings.onClick);
+			$('ul.trans_menu>li li').unbind('mouseover', liHoverIn).unbind('mouseout', liHoverOut).unbind('click', transMenuSettings.onClick);
 			$(document).unbind('mousedown', checkMouse);
 			shown = false;
 		};
@@ -303,8 +305,8 @@
 			//add hover event handling and assign classes
 			$(liElems).hover(mainHoverIn, mainHoverOut).addClass('main').find('>div').addClass('inner');
 			//add the little arrow before each submenu
-			if ( settings.arrow_char ) {
-				var arrow_markup = $("<span class='arrow'>" + settings.arrow_char + '</span>');
+			if ( transMenuSettings.arrow_char ) {
+				var arrow_markup = $("<span class='arrow'>" + transMenuSettings.arrow_char + '</span>');
 				// Mozilla float/position hack
 				if ($.browser.mozilla) {
 					arrow_markup.css('margin-top', '-13px');
@@ -320,9 +322,7 @@
 	$.fn.transMenu.setDefaults = function(o) {
 		$.extend(defaults, o);
 	};
-})(jQuery);
 
-(function($) {
 	$.fn.shadowBox = function() {
 	    return this.each(function() {
 			var outer = $('<div class="outerbox"></div>').get(0);
@@ -341,7 +341,7 @@
 	
 	$.fn.selectMenuItem = function() {
 		if (this.find('span.selected').length == 0) {
-			this.prepend($("<span class='selected'>&#x2713;</span>"));
+			this.prepend($("<span class='selected'>" + transMenuSettings.selected_char + "</span>"));
 		}
 	    return this;
 	};

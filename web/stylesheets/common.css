@@ -960,9 +960,9 @@ div#unsupported_browser div.dialog_window p {
 }
 
 .trans_menu span.selected {
-	margin: 0 3px 0 -14px;
+	margin: 0 3px 0 -15px;
 	font-size: 14px;
-	opacity: 0.75;
+	color: #666;
 	float: left;
 }
 

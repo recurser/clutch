@@ -838,6 +838,7 @@ Transmission.prototype = {
      */
 	createSettingsMenu: function() {
 		$('#settings_menu').transMenu({
+			selected_char: '&#x2714;',
 			direction: 'up',
 			onClick: this.processSettingsMenuEvent
 		});
