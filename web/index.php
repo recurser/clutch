@@ -1,40 +1,46 @@
+<?php $iPhone = (ereg("(iPhone|iPod)",$_SERVER['HTTP_USER_AGENT']))?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<title>Clutch</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta http-equiv="cache-control" content="Private" />
+		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+		<link rel="apple-touch-icon" href="./images/webclip-icon.png"/>
 		<link href="./images/favicon.ico" rel="SHORTCUT ICON" />
-		<link rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
 		<script type="text/javascript" src="./javascript/jquery/jquery.js"></script>
+<?php if ($iPhone) { ?>
+		<link media="screen" href="./stylesheets/iphone.css" type="text/css" rel="stylesheet" />
+<?php } else { ?>
+		<link media="screen" rel="stylesheet" type="text/css" href="./stylesheets/common.css" />
+		<script type="text/javascript" src="./javascript/jquery/jquery.transmenu.js"></script>
+		<script type="text/javascript" src="./javascript/jquery/jquery.contextmenu.js"></script>
+		<script type="text/javascript" src="./javascript/menu.js"></script>
+		<script type="text/javascript" src="./javascript/jquery/jquery.dimensions.pack.js"></script>
+<?php } ?>
 		<script type="text/javascript" src="./javascript/jquery/jquery.form.js"></script>
 		<script type="text/javascript" src="./javascript/jquery/json.js"></script>
-		<script type="text/javascript" src="./javascript/jquery/jquery.dimensions.pack.js"></script>
-		<script type="text/javascript" src="./javascript/jquery/jquery.contextmenu.js"></script>
-		<script type="text/javascript" src="./javascript/jquery/jquery.transmenu.js"></script>
-		<script type="text/javascript" src="./javascript/jquery/jquery.preloadImages.js"></script>
 		<script type="text/javascript" src="./javascript/hash.js"></script>
-		<script type="text/javascript" src="./javascript/menu.js"></script>
 		<script type="text/javascript" src="./javascript/transmission.remote.js"></script>
 		<script type="text/javascript" src="./javascript/transmission.js"></script>
 		<script type="text/javascript" src="./javascript/torrent.js"></script>
 		<script type="text/javascript" src="./javascript/dialog.js"></script>
 		<script type="text/javascript" src="./javascript/common.js"></script>
 	</head>
-	<body id='transmission_body'>
+	<body id="transmission_body"<?php if ($iPhone) { ?> onorientationchange="updateLayout();"<?php } ?>>
 
 		<div class="torrent_global_menu">
 			 <ul>    
-				 <li id="open"><a href="#open" id="open_link">Open</a></li>
-				 <li id="remove"><a href="#remove" id="remove_link" class="disabled">Remove</a></li>
+				 <li id="open"><div id="open_link"><div class="toolbar_image"></div>Open</div></li>
+				 <li id="remove" class="disabled"><div id="remove_link"><div class="toolbar_image"></div>Remove</div></li>
 				 <li class="divider">&nbsp;</li>
-				 <li id="pause_selected"><a href="#pause_selected" id="pause_selected_link" class="disabled">Pause</a></li>
-				 <li id="resume_selected"><a href="#resume_selected" id="resume_selected_link" class="disabled">Resume</a></li>
+				 <li id="pause_selected" class="disabled"><div id="pause_selected_link"><div class="toolbar_image"></div>Pause</div></li>
+				 <li id="resume_selected" class="disabled"><div id="resume_selected_link"><div class="toolbar_image"></div>Resume</div></li>
 				 <li class="divider">&nbsp;</li>
-				 <li id="pause_all"><a href="#pause_all" id="pause_all_link" class="disabled">Pause All</a></li>
-				 <li id="resume_all"><a href="#resume_all" id="resume_all_link" class="disabled">Resume All</a></li>
-				 <li id="inspector"><a href="#inspector" id="inspector_link">Inspector</a></li>
-				 <li id="filter"><a href="#filter" id="filter_toggle_link">Filter</a></li>
+				 <li id="pause_all" class="disabled"><div id="pause_all_link"><div class="toolbar_image"></div>Pause All</div></li>
+				 <li id="resume_all" class="disabled"><div id="resume_all_link"><div class="toolbar_image"></div>Resume All</div></li>
+				 <li id="inspector"><div id="inspector_link"><div class="toolbar_image"></div>Inspector</div></li>
+				 <li id="filter"><div id="filter_toggle_link"><div class="toolbar_image"></div>Filter</div></li>
 			 </ul>
 		</div>
 		
@@ -53,11 +59,6 @@
 			</ul>
 			<input type='text' id='torrent_search' class='blur' />		
 		</div>
-		
-		<div id="torrent_container">
-			<ul class="torrent_list" id="torrent_list"></ul>
-	</div>
-		
 		<div id="torrent_inspector" style="display:none;">
 			
 			<ul class="torrent_inspector_tabs">
@@ -123,64 +124,11 @@
 			</div>
 		</div>
 		
-		<div class="torrent_footer">	
-			<div id='disk_space_container'></div>	
-			<ul id="settings_menu">
-				<li id='button'>&nbsp;
-					<ul id='footer_super_menu'>
-						<li id='preferences'>Preferences</li>
-						<li class='separator'></li>
-						<li>Total Download Rate
-							<ul id='footer_download_rate_menu'>
-								<li id='unlimited_download_rate'>Unlimited</li>
-								<li id='limited_download_rate'>Limit (10 KB/s)</li>
-								<li class='separator'></li>
-								<li>5 KB/s</li>
-								<li>10 KB/s</li>
-								<li>20 KB/s</li>
-								<li>30 KB/s</li>
-								<li>40 KB/s</li>
-								<li>50 KB/s</li>
-								<li>75 KB/s</li>
-								<li>100 KB/s</li>
-								<li>150 KB/s</li>
-								<li>200 KB/s</li>
-							</ul>
-						</li>
-						<li>Total Upload Rate
-							<ul id='footer_upload_rate_menu'>
-								<li id='unlimited_upload_rate'>Unlimited</li>
-								<li id='limited_upload_rate'>Limit (10 KB/s)</li>
-								<li class='separator'></li>
-								<li>5 KB/s</li>
-								<li>10 KB/s</li>
-								<li>20 KB/s</li>
-								<li>30 KB/s</li>
-								<li>40 KB/s</li>
-								<li>50 KB/s</li>
-								<li>75 KB/s</li>
-								<li>100 KB/s</li>
-								<li>150 KB/s</li>
-								<li>200 KB/s</li>
-							</ul>
-						</li>
-						<li class='separator'></li>
-						<li>Sort Transfers By
-							<ul id='footer_sort_menu'>
-								<li id='sort_by_queue_order'>Queue Order</li>
-								<li id='sort_by_date'>Date Added</li>
-								<li id='sort_by_name'>Name</li>
-								<li id='sort_by_percent_completed'>Progress</li>
-								<li id='sort_by_state'>State</li>
-								<li id='sort_by_tracker'>Tracker</li>
-								<li class='separator'></li>
-								<li id='reverse_sort_order'>Reverse Sort Order</li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</div>
+		<div id="torrent_container">
+			<ul class="torrent_list" id="torrent_list"></ul>
+	</div>
+		
+		
 		
 		<div class='dialog_container' id="dialog_container" style="display:none;">
 			<div class="dialog_top_bar"></div>
@@ -250,9 +198,9 @@
 				<form action='#' method='post' id='torrent_upload_form' 
 					enctype='multipart/form-data' target='torrent_upload_frame'>  
 					<div class="dialog_message">
-						Please select a .torrent file OR a URL to upload:
+						Please select a .torrent file to upload:
 							<input type='file' name='torrent_file' id='torrent_upload_file'/>
-						<label>URL:</label>
+						<label>Alternatively, you may specify a URL:</label>
 							<input type='text' name='torrent_url' id='torrent_upload_url' />
 					</div>
 					<a href="#upload" id="upload_confirm_button">Upload</a>
@@ -260,17 +208,81 @@
 				</form>
 			</div>
 		</div>
-		
+		<div class="torrent_footer">	
+			<div id="disk_space_container"></div>	
+<?php if ($iPhone) { ?>
+			<a id="preferences_link">Clutch Preferences...</a>	
+<?php } else { ?>
+			<ul id="settings_menu">
+				<li id='button'>&nbsp;
+					<ul id='footer_super_menu'>
+						<li id='preferences'>Preferences</li>
+						<li class='separator'></li>
+						<li>Total Download Rate
+							<ul id='footer_download_rate_menu'>
+								<li id='unlimited_download_rate'>Unlimited</li>
+								<li id='limited_download_rate'>Limit (10 KB/s)</li>
+								<li class='separator'></li>
+								<li>5 KB/s</li>
+								<li>10 KB/s</li>
+								<li>20 KB/s</li>
+								<li>30 KB/s</li>
+								<li>40 KB/s</li>
+								<li>50 KB/s</li>
+								<li>75 KB/s</li>
+								<li>100 KB/s</li>
+								<li>150 KB/s</li>
+								<li>200 KB/s</li>
+							</ul>
+						</li>
+						<li>Total Upload Rate
+							<ul id='footer_upload_rate_menu'>
+								<li id='unlimited_upload_rate'>Unlimited</li>
+								<li id='limited_upload_rate'>Limit (10 KB/s)</li>
+								<li class='separator'></li>
+								<li>5 KB/s</li>
+								<li>10 KB/s</li>
+								<li>20 KB/s</li>
+								<li>30 KB/s</li>
+								<li>40 KB/s</li>
+								<li>50 KB/s</li>
+								<li>75 KB/s</li>
+								<li>100 KB/s</li>
+								<li>150 KB/s</li>
+								<li>200 KB/s</li>
+							</ul>
+						</li>
+						<li class='separator'></li>
+						<li>Sort Transfers By
+							<ul id='footer_sort_menu'>
+								<li id='sort_by_queue_order'>Queue Order</li>
+								<li id='sort_by_date'>Date Added</li>
+								<li id='sort_by_name'>Name</li>
+								<li id='sort_by_percent_completed'>Progress</li>
+								<li id='sort_by_state'>State</li>
+								<li id='sort_by_tracker'>Tracker</li>
+								<li class='separator'></li>
+								<li id='reverse_sort_order'>Reverse Sort Order</li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+			</ul>
+<?php } ?>
+		</div>
+
+<?php if (!$iPhone) { ?>
 		<div id='unsupported_browser' style="display:none;">
-			<div class="dialog_top_bar"></div>
 			<div class="dialog_window">
 				<img class='logo' src='images/graphics/logo.png' alt="Transmission Logo" />
-				<h2>Sorry, your browser is not supported</h2>
+				<h2>Sorry, your browser is not supported.</h2>
 				<p>We currently support the following browsers:</p>
-				<a href="http://www.mozilla.com/en-US/firefox/"><img src="images/graphics/browser_firefox.gif" alt="Firefox" /></a>
-				<a href="http://www.apple.com/safari/"><img src="images/graphics/browser_safari.gif" alt="Safari" /></a>
-				<a href="http://www.opera.com/download/"><img src="images/graphics/browser_opera.gif" alt="Opera" /></a>			</div>
+				<a href="http://www.mozilla.com/en-US/firefox/" title="Firefox"><img src="images/graphics/browser_firefox.gif" alt="Firefox" /></a>
+				<a href="http://www.apple.com/safari/" title="Safari"><img src="images/graphics/browser_safari.gif" alt="Safari" /></a>
+				<a href="http://www.opera.com/download/" title="Opera"><img src="images/graphics/browser_opera.gif" alt="Opera" /></a>
+			</div>
 		</div>
+<?php } ?>
 		
 <div class="contextMenu" id="torrent_context_menu">
 			<ul>
