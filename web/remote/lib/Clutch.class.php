@@ -522,20 +522,14 @@
 				$Result[$Torrent['id']] = array();
 				foreach ($Torrent as $Key => $Value) :
 					$Key = str_replace('-', '_', $Key);
-					// >4GB jscript support hack for PHP <=5.2.3
-					$Result[$Torrent['id']][$Key] = ($Key == "size") ? (string)$Value : $Value; 
+					$Result[$Torrent['id']][$Key] = $Value; 
 				endforeach;
 			endforeach;
 
 			foreach ($Torrent_status_data[1] as $Torrent) :
 				foreach ($Torrent as $Key => $Value) :
 					$Key = str_replace('-', '_', $Key);
-					// >4GB jscript support hack for PHP <=5.2.3
-					if (in_array($Key, array('completed', 'size', 'upload_total', 'download_total'))) {
-						$Result[$Torrent['id']][$Key] = (string)$Value;
-					} else {
-						$Result[$Torrent['id']][$Key] = $Value;
-					}
+					$Result[$Torrent['id']][$Key] = $Value; 
 				endforeach;
 			endforeach;
 
