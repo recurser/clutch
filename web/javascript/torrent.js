@@ -300,7 +300,7 @@ Torrent.prototype = {
 	 * Return the ratio for this torrent
 	 */
 	ratio: function() {
-		var result = Math.roundWithPrecision((this._upload_total / this._size), 2);
+		var result = Math.roundWithPrecision((this._upload_total / this._download_total), 2);
 	
     	// Add the decimals if this is an integer
     	if ((result % 1) == 0) {
@@ -470,7 +470,7 @@ Torrent.prototype = {
 		}
 		
 		// Add the progress bar
-		if (int_percent_completed < 100) {
+		if (int_percent_completed < 100 && this.state() != "seeding") {
 		
     	    // Add the decimals if the percentage is an integer
         	if ((this._percent_completed % 1) == 0) {
