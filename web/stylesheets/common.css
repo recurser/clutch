@@ -955,7 +955,7 @@ div#unsupported_browser div.dialog_window p {
 	text-shadow: none;
 }
 
-.trans_menu li.hover li.hover span.arrow {
+.trans_menu li.hover li.hover span.arrow, .trans_menu li.hover li.hover li.hover span.selected {
 	color: #fff;
 }
 
