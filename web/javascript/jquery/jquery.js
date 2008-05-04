@@ -1934,8 +1934,11 @@ jQuery.extend({
 	httpSuccess: function( r ) {
 		try {
 			return !r.status && location.protocol == "file:" ||
-				( r.status >= 200 && r.status < 300 ) || r.status == 304 ||
-				jQuery.browser.safari && r.status == undefined;
+				( r.status >= 200 && r.status < 300 ) || r.status == 304 /*||
+				jQuery.browser.safari && r.status == undefined*/;
+				// Mobile Safari reports "undefined" if the server is down,
+				// so skip that check (some desktop Safari versions report
+				// "undefined" if response text = "", which is useless anyway).
 		} catch(e){}
 		return false;
 	},
