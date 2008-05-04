@@ -54,6 +54,8 @@ Transmission.prototype = {
         this._num_active_torrents = 0;
         this._num_selected_paused_torrents = 0;
         this._num_selected_active_torrents = 0;
+        this._global_active_torrents = false;
+        this._global_paused_torrents = false;
 		
 		// Pre-load the images
 		this.preloadImages();
@@ -880,13 +882,13 @@ Transmission.prototype = {
 				$('li#remove.disabled').removeClass('disabled');
 			}
 			
-			if (this._num_active_torrents == 0) {
+			if (this._global_active_torrents == false) {
 				$('li#pause_all').addClass('disabled');
 			} else {
 				$('li#pause_all.disabled').removeClass('disabled');
 			}
 			
-			if (this._num_paused_torrents == 0) {
+			if (this._global_paused_torrents == false) {
 				$('li#resume_all').addClass('disabled');
 			} else {
 				$('li#resume_all.disabled').removeClass('disabled');
@@ -1302,6 +1304,12 @@ Transmission.prototype = {
 		this._num_paused_torrents = 0;
 		this._num_selected_active_torrents = 0;
 		this._num_selected_paused_torrents = 0;
+		this._global_active_torrents = false;
+		this._global_paused_torrents = false;
+		
+		// set bools for whether Transmission has active/paused torrents *anywhere*
+		this._global_active_torrents = data.active_torrents;
+		this._global_paused_torrents = data.paused_torrents;
 
 		// If the length of the new torrent_list isn't equal to the number of torrents in
 		// the browser (if a torrent has been added/deleted/filtered for example), we

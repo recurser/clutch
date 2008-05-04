@@ -432,11 +432,18 @@
 			$IdList            = array();
 			$TotalDownloadRate = 0;
 			$TotalUploadRate   = 0;
+			$ActiveTorrents = false;
+			$PausedTorrents = false;
 			foreach ($TempTorrentList as $Row) {
 				$TotalDownloadRate += $Row['download_speed'];
 				$TotalUploadRate   += $Row['upload_speed'];
 				if ($FilterType == $Row['state'] || $FilterType == FilterAll) { 
 					$IdList[] = (int) $Row['id'];
+				}
+				if ($Row['state'] != 'paused') { 
+					$ActiveTorrents = true;
+				} else if ($Row['state'] == 'paused') { 
+					$PausedTorrents = true;
 				}
 				
 				// Add the torrent ID if we have a match
@@ -494,7 +501,9 @@
 						'free_space_percent'  => $FreeSpacePercent,
 						'total_download_rate' => $TotalDownloadRate,
 						'total_upload_rate'   => $TotalUploadRate,
-						'torrent_list'        => $Result
+						'torrent_list'        => $Result,
+						'active_torrents'     => $ActiveTorrents,
+						'paused_torrents'     => $PausedTorrents
 					);
 			
 			// Store these settings for the future
