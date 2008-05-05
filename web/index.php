@@ -46,8 +46,8 @@
 		
 		<div class="torrent_global_details">
 			<div id="torrent_global_transfer">0 Transfers</div>
-			<div id="torrent_global_upload">Total UL: 0 B/s</div>
-			<div id="torrent_global_download">Total DL: 0 B/s</div>
+			<div id="torrent_global_upload">0 B/s</div>
+			<div id="torrent_global_download">0 B/s</div>
 		</div>
 		
 		<div id="torrent_filter_bar">

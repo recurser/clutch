@@ -1444,10 +1444,10 @@ Transmission.prototype = {
 			}
 		} else {
 			if (global_up_speed != null) {
-				$('#torrent_global_upload')[0].innerHTML = 'Total UL: ' + Math.formatBytes(global_up_speed) + '/s';
+				$('#torrent_global_upload')[0].innerHTML = Math.formatBytes(global_up_speed) + '/s';
 			}
 			if (global_down_speed != null) {
-				$('#torrent_global_download')[0].innerHTML = 'Total DL: ' + Math.formatBytes(global_down_speed) + '/s';
+				$('#torrent_global_download')[0].innerHTML = Math.formatBytes(global_down_speed) + '/s';
 			}
 		}
     },
