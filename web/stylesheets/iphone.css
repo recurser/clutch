@@ -708,7 +708,7 @@ div.torrent_footer a#preferences_link {
 	margin: 1px 0 0 6px;
 }
 
-body.prefs_showing div.torrent_footer a#preferences_link {
+body.prefs_showing div.torrent_footer a#preferences_link, body.dialog_showing div.torrent_footer a#preferences_link {
 	display: none;
 }
 
