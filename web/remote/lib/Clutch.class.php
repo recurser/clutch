@@ -434,9 +434,11 @@
 			$TotalUploadRate   = 0;
 			$ActiveTorrents = false;
 			$PausedTorrents = false;
+			$TotalTorrents = 0;
 			foreach ($TempTorrentList as $Row) {
 				$TotalDownloadRate += $Row['download_speed'];
 				$TotalUploadRate   += $Row['upload_speed'];
+				$TotalTorrents += 1;
 				if ($FilterType == $Row['state'] || $FilterType == FilterAll) { 
 					$IdList[] = (int) $Row['id'];
 				}
@@ -501,9 +503,10 @@
 						'free_space_percent'  => $FreeSpacePercent,
 						'total_download_rate' => $TotalDownloadRate,
 						'total_upload_rate'   => $TotalUploadRate,
-						'torrent_list'        => $Result,
+						'total_torrents'     => $TotalTorrents,
 						'active_torrents'     => $ActiveTorrents,
-						'paused_torrents'     => $PausedTorrents
+						'paused_torrents'     => $PausedTorrents,
+						'torrent_list'        => $Result
 					);
 			
 			// Store these settings for the future

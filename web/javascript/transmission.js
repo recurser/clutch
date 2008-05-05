@@ -56,6 +56,7 @@ Transmission.prototype = {
         this._num_selected_active_torrents = 0;
         this._global_active_torrents = false;
         this._global_paused_torrents = false;
+        this._total_torrents = 0;
 		
 		// Pre-load the images
 		this.preloadImages();
@@ -1306,10 +1307,13 @@ Transmission.prototype = {
 		this._num_selected_paused_torrents = 0;
 		this._global_active_torrents = false;
 		this._global_paused_torrents = false;
+		this._total_torrents = 0;
 		
 		// set bools for whether Transmission has active/paused torrents *anywhere*
 		this._global_active_torrents = data.active_torrents;
 		this._global_paused_torrents = data.paused_torrents;
+		// and the number of torrents Transmission currently has
+		this._total_torrents = data.total_torrents;
 
 		// If the length of the new torrent_list isn't equal to the number of torrents in
 		// the browser (if a torrent has been added/deleted/filtered for example), we
@@ -1430,7 +1434,7 @@ Transmission.prototype = {
      * Set the global up and down speed in the interface
      */
     setGlobalSpeeds: function(num_torrents, global_up_speed, global_down_speed) {
-		$('#torrent_global_transfer')[0].innerHTML = num_torrents + ' Transfers';
+		$('#torrent_global_transfer')[0].innerHTML = num_torrents + ' of ' + this._total_torrents + ' Transfers';
 		if (iPhone) {
 			if (global_up_speed != null) {
 				$('#torrent_global_upload')[0].innerHTML = 'UL: ' + Math.formatBytes(global_up_speed) + '/s';
