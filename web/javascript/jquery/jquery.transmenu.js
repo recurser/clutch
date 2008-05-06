@@ -221,6 +221,7 @@
 			} else {
 				hoverIn(this, transMenuSettings.mainDelay);
 				shown = true;
+				$('ul.trans_menu li').addClass('active');
 				$(document).bind('mousedown', checkMouse);
 			}
 		};
@@ -255,6 +256,7 @@
 			$('ul.trans_menu>li li').unbind('mouseover', liHoverIn).unbind('mouseout', liHoverOut).unbind('click', transMenuSettings.onClick);
 			$(document).unbind('mousedown', checkMouse);
 			shown = false;
+			$('ul.trans_menu li').removeClass('active');
 		};
 
 		var getOneChild = function(elem, name) {

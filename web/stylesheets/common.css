@@ -609,6 +609,8 @@ div.torrent_footer ul#settings_menu li#button {
 	padding: 0;
 	float: left;
 	position: relative;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
 
 div.torrent_footer ul#settings_menu li#button:active {
@@ -994,6 +996,10 @@ div#unsupported_browser div.dialog_window p {
 	min-width: 78px;
 }
 
+.trans_menu li.main.active {
+	background: transparent url('../images/graphics/chrome.png') right -75px no-repeat !important;
+}
+
 .trans_menu a {
 	text-decoration: none;
 	cursor: default;
@@ -1008,6 +1014,8 @@ div#unsupported_browser div.dialog_window p {
 div#jqContextMenu {
 	-webkit-border-radius: 5px;
 	border: 1px solid rgba(0,0,0,0.1);
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
 
 div#jqContextMenu ul {
