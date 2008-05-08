@@ -70,22 +70,23 @@ $(document).ready( function() {
 		$('#torrent_search')[0].placeholder = 'Filter';
 		$('#torrent_search').css('margin-top', 3);		
 	}
-	if (!Safari3) {
-		// Fix for non-Safari-3 browsers, to give borders to replace missing shadow.
-		// Opera messes up the menu if we use a border on .trans_menu div.outerbox
-		// so use ul instead
+	if (!Safari3 && !iPhone) {
+		// Fix for non-Safari-3 browsers: dark borders to replace shadows.
+		// Opera messes up the menu if we use a border on .trans_menu
+		// div.outerbox so use ul instead
 		$('.trans_menu ul, div#jqContextMenu, div.dialog_container div.dialog_window').css('border', '1px solid #777');
 		// and this kills the border we used to have
 		$('.trans_menu div.outerbox').css('border', 'none');
 	} else if (!iPhone) {
-		// Used for Safari 3.1 CSS animation. Degrades gracefully (so Safari 3 test is
-		// good enough) but we delay our hide/unhide to wait for the scrolling - no
-		// point making other browsers wait.
+		// Used for Safari 3.1 CSS animation. Degrades gracefully (so Safari 3
+		// test is good enough) but we delay our hide/unhide to wait for the
+		// scrolling - no point making other browsers wait.
 		$('div#upload_container div.dialog_window').css('top', '-205px');
 		$('div#prefs_container div.dialog_window').css('top', '-425px');
 		$('div#dialog_container div.dialog_window').css('top', '-425px');
 		$('div.dialog_container div.dialog_window').css('-webkit-transition', 'top 0.3s');
-		// -webkit-appearance makes some links into buttons, but needs different padding.
+		// -webkit-appearance makes some links into buttons, but needs
+		// different padding.
 		$('div.dialog_container div.dialog_window a').css('padding', '2px 10px 3px');
 	}
 	if ($.browser.mozilla) {
