@@ -1539,7 +1539,7 @@ Transmission.prototype = {
 		return (target_parent.className == "disabled" || target_parent.parentNode.className == "disabled") ? false : true;
 	},
 	hideiPhoneAddressbar: function(timeInSeconds) {
-		var delayLength = timeInSeconds ? timeInSeconds*1000 : 10;
+		var delayLength = timeInSeconds ? timeInSeconds*1000 : 150;
 		// not supported on iPhone? check this.
 		if(/*document.body.scrollTop!=1 && */scroll_timeout==null) {
 			scroll_timeout = setTimeout("transmission.doToolbarHide()", delayLength);

@@ -8,11 +8,13 @@
 
 var transmission;
 var dialog;
-// Safari 3 includes the "Version" string for the first time. Also true for iPhone. We actually
-// need 3.1 for CSS animation (dialog sheets) but as it degrades gracefully let's not worry too much.
-var Safari3 = $.browser.safari ? RegExp("Version").test(navigator.userAgent) ? true : false : false;
+// Test for a Webkit build that supports box-shadow: 521+ (release Safari 3 is
+// actually 523.10.3). We need 3.1 for CSS animation (dialog sheets) but as it
+// degrades gracefully let's not worry too much.
+var Safari3 = testSafari3();
 var iPhone = RegExp("(iPhone|iPod)").test(navigator.userAgent);
 if (iPhone) var scroll_timeout;
+
 function updateLayout()
 {
 	if (iPhone) {
@@ -29,6 +31,23 @@ function updateLayout()
 		} 
 		transmission.hideiPhoneAddressbar();
 	}
+};
+
+function testSafari3()
+{
+    var minimum = new Array(521,0);
+    var webKitFields = RegExp("( AppleWebKit/)([^ ]+)").exec(navigator.userAgent);
+    if (!webKitFields || webKitFields.length < 3) return false;
+    var version = webKitFields[2].split(".");
+    for (var i = 0; i < minimum.length; i++) {
+        var toInt = parseInt(version[i]);
+        var versionField = isNaN(toInt) ? 0 : toInt;
+        var minimumField = minimum[i];
+        
+        if (versionField > minimumField) return true;
+        if (versionField < minimumField) return false;
+    }
+    return true;
 };
 
 $(document).ready( function() {
