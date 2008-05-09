@@ -1354,15 +1354,16 @@ Transmission.prototype = {
 		// Add any torrents that aren't already being displayed
 		if (new_torrents.length > 0) {
 			transmission.addTorrents(new_torrents, last_torrent);
-			// Run the hide addressbar/scroll to top function for iPhone every
-			// time the torrent list is reset (including first load)
-			updateLayout();
+			// Hide addressbar/scroll to top every time we add torrents
+			if (iPhone) transmission.hideiPhoneAddressbar();
 		}
 
 		// Remove any torrents that are displayed but not in the refresh list
 		// The 'update_only' flag is sent went pausing/resuming torrents
 		if (torrent_ids.length > 0) {
 			transmission.removeTorrents(torrent_ids);
+			// Hide addressbar/scroll to top every time we remove torrents
+			if (iPhone) transmission.hideiPhoneAddressbar();
 		}
 		
 		// Update the alternating torrent background colors
@@ -1525,6 +1526,7 @@ Transmission.prototype = {
 			'images/buttons/tab_backgrounds.png',
 			'images/graphics/chrome.png',
 			'images/graphics/logo.png',
+			'images/graphics/transfer_arrows.png',
 			'images/progress/progress.png'
 		);
 		}
@@ -1540,7 +1542,7 @@ Transmission.prototype = {
 	},
 	hideiPhoneAddressbar: function(timeInSeconds) {
 		var delayLength = timeInSeconds ? timeInSeconds*1000 : 150;
-		// not supported on iPhone? check this.
+		// not currently supported on iPhone
 		if(/*document.body.scrollTop!=1 && */scroll_timeout==null) {
 			scroll_timeout = setTimeout("transmission.doToolbarHide()", delayLength);
 		}

@@ -29,7 +29,7 @@ function updateLayout()
 				$('body.landscape').removeClass('landscape');
 				break;
 		} 
-		transmission.hideiPhoneAddressbar();
+		transmission.hideiPhoneAddressbar(0.4);
 	}
 };
 

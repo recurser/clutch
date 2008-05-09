@@ -27,7 +27,7 @@
 		<script type="text/javascript" src="./javascript/dialog.js"></script>
 		<script type="text/javascript" src="./javascript/common.js"></script>
 	</head>
-	<body id="transmission_body"<?php if ($iPhone) { ?> onorientationchange="updateLayout();"<?php } ?>>
+	<body id="transmission_body"<?php if ($iPhone) { ?> onorientationchange="updateLayout();" onload="updateLayout();"<?php } ?>>
 
 		<div class="torrent_global_menu">
 			 <ul>    
