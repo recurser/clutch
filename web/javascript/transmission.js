@@ -1070,10 +1070,14 @@ Transmission.prototype = {
 				torrent = this._selected_torrents.first();
 				$('#torrent_inspector_name')[0].innerHTML			= torrent.name();
 				$('#torrent_inspector_size')[0].innerHTML			= Math.formatBytes(torrent.size());
-				$('#torrent_inspector_tracker')[0].innerHTML		= torrent._tracker['address']+
-															  		':'+torrent._tracker['port']+
-															  		torrent._tracker['announce'];
-
+				if (torrent._tracker['address']) {
+					var thisTracker = torrent._tracker['address']+
+					':'+torrent._tracker['port']+
+					torrent._tracker['announce'];
+				} else {
+					var thisTracker = torrent._tracker['announce'];
+				}
+				$('#torrent_inspector_tracker')[0].innerHTML		= thisTracker;
 				$('#torrent_inspector_hash')[0].innerHTML			= torrent.hash();
 				$('#torrent_inspector_state')[0].innerHTML			= torrent.state();
 				$('#torrent_inspector_download_speed')[0].innerHTML	= Math.formatBytes(torrent.downloadSpeed()) + '/s';
