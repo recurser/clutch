@@ -302,6 +302,10 @@ Torrent.prototype = {
 	ratio: function() {
 		var result = Math.roundWithPrecision((this._upload_total / this._download_total), 2);
 	
+		// check for special cases
+    	if (isNaN(result)) result = 0;
+    	if (result=="Infinity") result = "&infin;";
+
     	// Add the decimals if this is an integer
     	if ((result % 1) == 0) {
     		result = result + '.00';
