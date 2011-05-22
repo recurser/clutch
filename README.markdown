@@ -1,4 +1,4 @@
-**Clutch has now been integrated into the [Transmission project](http://transmissionbt.com). The code is now hosted on in official Transmission svn repository, and further development will be done from there. This repository targets Transmission 1.2.2 and below only.**
+**Clutch has now been integrated into the [Transmission project](http://transmissionbt.com). The code is now hosted in the official Transmission svn repository, and further development will be done from there. This repository targets Transmission 1.2.2 and below only.**
 
 
 What Is Clutch?
