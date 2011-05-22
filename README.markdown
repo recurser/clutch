@@ -188,7 +188,7 @@ public $DebugToLogFile = false;
 
 to 
 
-```
+```php
 public $Debug = true;
 public $DebugToLogFile = true;
 ```
