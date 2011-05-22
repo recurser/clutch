@@ -83,7 +83,7 @@ Web UI
   ![Interface](http://recursive-design.com/images/projects/clutch/WebGeneral.png)
 * Preferences, transfer rate control and torrent sorting can be accessed via the menu button on the bottom left of the screen:<br/>
   ![preferences](http://recursive-design.com/images/projects/clutch/WebFooterMenu.png)
-* The remote download folder, port etc can be set in the preferences:
+* The remote download folder, port etc can be set in the preferences:<br/>
   ![Preferences](http://recursive-design.com/images/projects/clutch/WebPreferences.png)
 * Each torrent also has it's own individual menu to pause/resume/delete individual torrents or groups of torrents (Opera doesn't support this):<br/>
   ![Context Menu](http://recursive-design.com/images/projects/clutch/WebContextMenu.png)
