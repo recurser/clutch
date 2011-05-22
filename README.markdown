@@ -5,7 +5,7 @@ What Is Clutch?
 ===============
 
 Clutch is a WebUI for the [Transmission BitTorrent client](http://transmissionbt.com).
-It allows you to manage your torrents from anywhere you can access the internet, and runs on OS X and various flavors of *nix.
+It allows you to manage your torrents from anywhere you can access the internet, and runs on OS X and various flavors of \*nix.
 
 Clutch provides most of the basic features of the desktop client, including torrent upload, torrent start/stop, file path selection, speed limiting etc.
 
@@ -56,7 +56,7 @@ Installation (Linux)
   * The socket extension for PHP
   * Transmission Daemon (there are various packages floating around for different linux distributions, or alternatively you can build it yourself)
 * Download the [Clutch Web UI](http://clutchbt.com/Files/Clutch-0.4.tar.gz) bundle, unpack it and put it somewhere inside your web server's document root (for example in */var/www/clutch* for a typical Ubuntu installation).
-* Edit the *remote/data/socket.txt* file in your WebUI folder, making sure it points to the location of your transmission-daemon socket file (this can vary depending on your linux distribution and the package you installed - for ubuntu the default location is */home/[your user name]/.transmission/daemon/socket*).
+* Edit the *remote/data/socket.txt* file in your WebUI folder, making sure it points to the location of your transmission-daemon socket file (this can vary depending on your linux distribution and the package you installed - for ubuntu the default location is */home/your-user-name/.transmission/daemon/socket*).
 * Make sure the socket file is readable and writable by the web server (_chmod -R 777 ~/.transmission/daemon/socket_ for Ubuntu - the location may vary with other distributions).
 * Make sure the *remote/data/* folder and it's contents are readable and writable by the web server (*chmod -R 777 /var/www/clutch/remote/data*). Your preferences will be stored here.
 * Make sure the folder you intend to download to is readable and writable by the web server (*chmod -R 777 path/to/your/download/folder/*).
@@ -167,7 +167,7 @@ Clutch does not currently support scheduling, although it may in the future.
 My linux GUI version of Transmission won't communicate with Clutch!
 -------------------------------------------------------------------
 
-Clutch is currently only guaranteed to work with either the daemon on *nix systems, or the OS X Transmission.app client. The GTK GUI version of Transmission does not yet contain enough functionality to work 100% with Clutch, although you may get limited functionality.
+Clutch is currently only guaranteed to work with either the daemon on \*nix systems, or the OS X Transmission.app client. The GTK GUI version of Transmission does not yet contain enough functionality to work 100% with Clutch, although you may get limited functionality.
 
 
 Clutch on OS X has stopped working since i upgraded from the daemon-compatible version to the Transmission.app-compatible version
