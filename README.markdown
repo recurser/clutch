@@ -41,10 +41,10 @@ Starting Clutch (OS X)
 
 * Start Transmission.app and Clutch.app (you can start them in either order, but the WebUI won't be available until ''both'' are running).
 * Clutch will put a new menu item in your top menu bar. All the relevant server-side options can be set here : 
-  ![Options](http://recursive-design.com/images/projects/clutch/DesktopMenu.png)
+![Options](http://recursive-design.com/images/projects/clutch/DesktopMenu.png)
 * Select ''Open URL'' to open up the Clutch WebUI in your browser. If your browser can't display the page, your ports may be blocked - try changing the IP address in the address bar to http://127.0.0.1:9091/ .
 * If you want to alter any of the settings, there are various preferences available from the menu :
-  ![Preferences](http://recursive-design.com/images/projects/clutch/DesktopPrefs.png)
+![Preferences](http://recursive-design.com/images/projects/clutch/DesktopPrefs.png)
 
 
 Installation (Linux)
@@ -80,13 +80,13 @@ Web UI
 
 * OS X users will be prompted for a password when they first open Clutch (Linux users will need to use a *.htaccess* file to control access). The default user/pass is admin/password. This can be changed in Clutch.app's preferences.
 * The web application works in much the same way as the desktop client, with a few limitations. It is designed to be as similar as possible to the desktop experience, so things like arrow key scrolling, Apple-select for selecting multiple torrents etc are provided :
-  ![Interface](http://recursive-design.com/images/projects/clutch/WebGeneral.png)
+![Interface](http://recursive-design.com/images/projects/clutch/WebGeneral.png)
 * Preferences, transfer rate control and torrent sorting can be accessed via the menu button on the bottom left of the screen : 
-  ![preferences](http://recursive-design.com/images/projects/clutch/WebFooterMenu.png)
+![preferences](http://recursive-design.com/images/projects/clutch/WebFooterMenu.png)
 * The remote download folder, port etc can be set in the preferences :
-  ![Preferences](http://recursive-design.com/images/projects/clutch/WebPreferences.png)
+![Preferences](http://recursive-design.com/images/projects/clutch/WebPreferences.png)
 * Each torrent also has it's own individual menu to pause/resume/delete individual torrents or groups of torrents (Opera doesn't support this):
-  ![Context Menu](http://recursive-design.com/images/projects/clutch/WebContextMenu.png)
+![Context Menu](http://recursive-design.com/images/projects/clutch/WebContextMenu.png)
 
 
 Frequently Asked Questions
@@ -129,9 +129,9 @@ What ports do i need to forward?
 There are 2 ports you need to forward :
 
 * The web server port in the Clutch.app preferences:
-  ![Desktop Preferences](http://recursive-design.com/images/projects/clutch/DesktopPrefs.png)
+![Desktop Preferences](http://recursive-design.com/images/projects/clutch/DesktopPrefs.png)
 * The bittorrent port in the web interface preferences:
-  ![Web Preferences](http://recursive-design.com/images/projects/clutch/WebPreferences.png)
+![Web Preferences](http://recursive-design.com/images/projects/clutch/WebPreferences.png)
 
 In the example above you'd access the web interface on http://your.ip:9091/, and bittorrent traffic would hit your machine on port 28456. You can set either of these ports to whatever you want.
 
